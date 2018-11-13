@@ -1,4 +1,4 @@
-const { user } = require('./db_index');
+const { user } = require('./dbIndex');
 
 module.exports = {
   Query: {
