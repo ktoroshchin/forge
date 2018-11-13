@@ -8,3 +8,15 @@ db.authenticate().then(() => {
 }).catch(err => {
   console.log(`Unable to connect to the database`, err)
 })
+
+const user = db.define('user', {
+  id: {
+    type: Sequelize.UUIDV4,
+    primaryKey: true,
+  },
+  first_name: Sequelize.TEXT,
+  last_name: Sequelize.TEXT,
+  email: Sequelize.TEXT,
+});
+
+module.exports.user = user;
