@@ -1,8 +1,10 @@
 # Forge
 
-A a user-friendly web application for all Dungeon Masters/Game Masters who would like to organize their homebrew campaigns
+A a user-friendly web application for all Dungeon Masters/Game Masters who would like to organize their homebrew campaigns.
 
 ## Setup
+
+Based on create-react-app
 
 1. Clone this repo
 2. Create a Postgres database with any appropriate name
