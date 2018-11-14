@@ -11,8 +11,8 @@ Based on create-react-app
 3. Go to the server folder: `cd server`
 4. Following the .env.example, create a .env file `cp .env.example .env`, replace the field by the link of your database
 5. Install the dependencies: `npm i`
-6. Run migrations: `knex migrate:latest`
-7. Run the seed: `knex seed:run`
+6. Run migrations: `node_modules/.bin/sequelize db:migrate`
+7. Run the seed: `node_modules/.bin/sequelize db:seed:all`
 8. Open up the server: `node server.js`
 9. Go to the client folder: `cd client`
 10. Install the dependencies: `npm i`
