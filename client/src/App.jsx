@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import './App.css';
+import '../styles/App.css';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import BasicExample from './components/basic-example.js'
