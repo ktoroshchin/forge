@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
-import '../styles/App.css';
+import './styles/App.css';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import BasicExample from './components/basic-example.js'
+import BasicExample from './components/basic-example'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
