@@ -10,6 +10,13 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
+    user_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'user', key: 'id'
+      }
+    }
   }, {});
   world.associate = function (models) {
     // associations can be defined here
