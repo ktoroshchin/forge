@@ -1,10 +1,10 @@
 const typeDefs = `
   type Query {
     allUsers: [User!]!
-    findUserById(id: Int!): User!
+    findUserById(id: ID!): User!
   }
   type User {
-    id: Int!
+    id: ID!
     first_name: String!
     last_name: String!
     email: String!
