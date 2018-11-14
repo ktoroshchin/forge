@@ -5,6 +5,9 @@ module.exports = {
     allUsers: () => Models.user.findAll({
       attributes: ['id', 'first_name', 'last_name', 'email']
     }),
+    allWorlds: () => Models.world.findAll({
+      attributes: ['id', 'name', 'description', 'user_id']
+    }),
     findUserById: (root, args) => Modles.user.findOne({
       where: { id: args.id },
       attributes: ['id', 'first_name', 'last_name', 'email']
