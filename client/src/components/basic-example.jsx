@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import SimpleExample from './map-view'
+import Login from './login'
 
 
 function BasicExample() {
@@ -17,6 +18,9 @@ function BasicExample() {
           <li>
             <Link to="/map">Map</Link>
           </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
         </ul>
 
         <hr />
@@ -24,6 +28,7 @@ function BasicExample() {
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/map" component={Map} />
+        <Route path="/login" component={Login} />
       </div>
     </BrowserRouter>
   );
