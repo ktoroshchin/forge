@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import SimpleExample from './map-view'
 import Login from './login'
+import Register from './register'
 
 
 function BasicExample() {
@@ -21,6 +22,9 @@ function BasicExample() {
           <li>
             <Link to="/login">Login</Link>
           </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
         </ul>
 
         <hr />
@@ -29,6 +33,8 @@ function BasicExample() {
         <Route path="/about" component={About} />
         <Route path="/map" component={Map} />
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+
       </div>
     </BrowserRouter>
   );
