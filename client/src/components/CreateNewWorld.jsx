@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import CreateNewCity from './CreateNewCity'
 
 function CreateNewWorld() {
   return (
@@ -17,6 +18,7 @@ function CreateNewWorld() {
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <CreateNewCity />
     </div>
     )
 }
