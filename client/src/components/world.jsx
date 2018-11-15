@@ -1,10 +1,10 @@
 import React from "react";
 
-function World() {
+function World({name, description}) {
   return (
-    <div class="world">
-      <h4>World 1</h4>
-      <p>Description</p>
+    <div>
+      <p>World Name: {name}</p>
+      <p>Description: {description} </p>
     </div>
   );
 }
