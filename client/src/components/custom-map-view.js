@@ -12,27 +12,22 @@ Leaflet.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
-type Position = { lat: number, lng: number }
-
-type State = {
-  center: Position,
-  marker: Position,
-  zoom: number,
-  draggable: boolean,
-}
-
-export default class CustomMapExample extends Component<{}, State> {
-  state = {
-    center: {
-      lat: 512,
-      lng: 1024,
-    },
-    marker: {
-      lat: 512,
-      lng: 1024,
-    },
-    zoom: 1,
-    draggable: true,
+export default class CustomMapExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: {
+        lat: 512,
+        lng: 1024,
+      },
+      marker: {
+        lat: 512,
+        lng: 1024,
+      },
+      zoom: 1,
+      draggable: true,
+      dimensions: [],
+    };
   }
 
   refmarker = createRef()
@@ -51,9 +46,12 @@ export default class CustomMapExample extends Component<{}, State> {
   }
 
   render () {
-    const bounds = [[0, 0], [1024, 2048]];
+    const boundOrigin = [0, 0];
+    const imageSize = [1024, 2048];
+    const bounds = [boundOrigin, imageSize];
     const position = [this.state.center.lat, this.state.center.lng]
     const markerPosition = [this.state.marker.lat, this.state.marker.lng]
+
 
     return (
       <div>
@@ -65,7 +63,10 @@ export default class CustomMapExample extends Component<{}, State> {
           center={position}
           zoom={this.state.zoom}
           >
-          <ImageOverlay url='http://www.online-tabletop.com/wp-content/uploads/2017/01/tutoriala.jpg' bounds={ bounds } />
+          <ImageOverlay
+            url='http://www.online-tabletop.com/wp-content/uploads/2017/01/tutoriala.jpg'
+            bounds={bounds}
+            />
           <Marker
             draggable={this.state.draggable}
             onDragend={this.updatePosition}
