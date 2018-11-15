@@ -31,3 +31,4 @@ export default class BasicMap extends Component<{}, State> {
     )
   }
 }
+

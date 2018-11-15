@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Link } from "react-router-dom";
 import BasicMap from './BasicMap'
 import HomePage from './HomePage'
+import CustomMapExample from './CustomMapView.jsx'
 
 function BasicExample() {
   return (
@@ -17,11 +18,15 @@ function BasicExample() {
           <li>
             <Link to="/map">Map</Link>
           </li>
+          <li>
+            <Link to="/custommap">Custom Map</Link>
+          </li>
         </ul>
         <hr />
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={About} />
         <Route path="/map" component={Map} />
+        <Route path="/custommap" component={CustomMap} />
       </div>
     </BrowserRouter>
   );
@@ -37,11 +42,18 @@ function About() {
 
 function Map() {
   return (
-    <div id="map">
+    <div>
       <BasicMap />
-    </div>
+    <div>
   );
 }
 
+function CustomMap() {
+  return (
+    <div>
+      <CustomMapExample />
+    </div>
+  );
+}
 
 export default BasicExample;
