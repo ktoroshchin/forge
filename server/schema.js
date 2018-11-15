@@ -42,6 +42,42 @@ const typeDefs = `
     longitude: Float!
     name: String!
   }
+
+  type City implements Marker {
+    id: ID!
+    map_id: ID!
+    latitude: Float!
+    longitude: Float!
+    name: String!
+    population: Int
+    governement: String
+    importantPeople: [importantPerson!]
+    description: String
+    interestingPlaces: [interestingPlaces!]
+  }
+
+  type Town implements Marker {
+    id: ID!
+    map_id: ID!
+    latitude: Float!
+    longitude: Float!
+    name: String!
+    population: Int
+    governement: String
+    important_people: [importantPerson!]
+    description: String
+    places_of_interest: [interestingPlaces!]
+  }
+
+  type Location implements Marker {
+    id: ID!
+    map_id: ID!
+    latitude: Float!
+    longitude: Float!
+    name: String!
+    description: String
+    places_of_interest: [interestingPlaces!]
+  }
 `;
 
 module.exports = typeDefs
