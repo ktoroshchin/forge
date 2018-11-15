@@ -3,6 +3,8 @@ const typeDefs = `
     allUsers: [User!]!
     findUserById(id: ID!): User!
     allWorlds: [World!]!
+    findWorldById(id: ID!): World!
+    findWorldByName(name: String!): World!
   }
   type User {
     id: ID!
@@ -14,7 +16,7 @@ const typeDefs = `
     id: ID!
     name: String!
     description: String!
-    user_id: ID!
+    creator_id: ID!
   }
 `;
 
