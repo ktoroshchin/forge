@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -35,23 +36,19 @@ class Register extends Component {
     return (
       <div>
         <h2>Register</h2>
-        <form>
-          <label>
-            Username:
-            <input onChange={this.handleUsernameChange} type="text" name="username" />
-          </label>
-          <label>
-            Email:
-            <input onChange={this.handleEmailChange} type="text" name="email" />
-          </label>
-          <label>
-            Password:
-            <input onChange={this.handlePasswordChange} type="password" name="password" />
-          </label>
-          <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
-            {postMutation => <button onClick={postMutation}>Submit</button>}
-          </Mutation>
-        </form>
+        <Form>
+          <FormGroup>
+            <Label>Username</Label>
+            <Input onChange={this.handleUsernameChange} type="text" name="username" />
+            <Label>Email</Label>
+            <Input onChange={this.handleEmailChange} type="text" name="email" />
+            <Label>Password</Label>
+            <Input onChange={this.handlePasswordChange} type="password" name="password" />
+            <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
+              {postMutation => <Button onClick={postMutation}>Submit</Button>}
+            </Mutation>
+          </FormGroup>
+        </Form>
       </div>
     )
   }
