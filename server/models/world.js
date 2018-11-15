@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE,
-    creator: {
+    creator_id: {
       type: DataTypes.UUID,
       allowNull: false,
       references: {
