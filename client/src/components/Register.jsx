@@ -44,8 +44,9 @@ class Register extends Component {
             <Input onChange={this.handleEmailChange} type="text" name="email" />
             <Label>Password</Label>
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
+            <br />
             <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
-              {postMutation => <Button onClick={postMutation}>Submit</Button>}
+              {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
             </Mutation>
           </FormGroup>
         </Form>
