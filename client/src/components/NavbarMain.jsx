@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
+import { Link } from "react-router-dom";
+import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
 
 
 class NavbarMain extends Component {
@@ -27,11 +28,11 @@ class NavbarMain extends Component {
                 </DropdownToggle>
                 <DropdownMenu right>
 
-                  <DropdownItem>
+                  <DropdownItem tag={Link} to="/login">
                     Login
                   </DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>
+                  <DropdownItem tag={Link} to="/register">
                     Register
                   </DropdownItem>
                 </DropdownMenu>
