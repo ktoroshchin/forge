@@ -12,14 +12,6 @@ function CreateNewLocation() {
           <input type="text" name="name" />
         </label>
         <label>
-          Population:
-          <input type="text" name="population" />
-        </label>
-        <label>
-          Government:
-          <input type="text" name="government" />
-        </label>
-        <label>
           Description:
           <input type="text" name="description" />
         </label>
