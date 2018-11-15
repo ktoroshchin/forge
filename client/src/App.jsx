@@ -13,7 +13,7 @@ const client = new ApolloClient({
 const App = () => (
   <ApolloProvider client={client}>
     <NavbarMain />
-
+    <BasicExample />
 
   </ApolloProvider>
 )
