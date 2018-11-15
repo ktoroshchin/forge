@@ -1,0 +1,18 @@
+.listGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  width: 50%;
+  text-align: center;
+}
+
+.wrapper {
+  margin-top: 1em;
+}
+
+.world-name-container {
+  display: flex;
+  text-align: center;
+  padding-bottom: 5px;
+}
+

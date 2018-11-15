@@ -4,7 +4,7 @@ import SimpleExample from './map-view'
 import Homepage from './homepage'
 import Login from './login'
 import Register from './register'
-
+import DisplayWorldDetails from './DisplayWorldDetails'
 
 function BasicExample() {
   return (
@@ -26,6 +26,9 @@ function BasicExample() {
           <li>
             <Link to="/register">Register</Link>
           </li>
+          <li>
+            <Link to="/world">World Details</Link>
+          </li>
         </ul>
 
         <hr />
@@ -35,6 +38,7 @@ function BasicExample() {
         <Route path="/map" component={Map} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/world" component={DisplayWorldDetails} />
 
       </div>
     </BrowserRouter>
