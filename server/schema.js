@@ -51,9 +51,6 @@ const typeDefs = `
     name: String!
     population: Int
     governement: String
-    importantPeople: [importantPerson!]
-    description: String
-    interestingPlaces: [interestingPlaces!]
   }
 
   type Town implements Marker {
@@ -64,9 +61,6 @@ const typeDefs = `
     name: String!
     population: Int
     governement: String
-    important_people: [importantPerson!]
-    description: String
-    places_of_interest: [interestingPlaces!]
   }
 
   type Location implements Marker {
@@ -76,7 +70,6 @@ const typeDefs = `
     longitude: Float!
     name: String!
     description: String
-    places_of_interest: [interestingPlaces!]
   }
 `;
 
