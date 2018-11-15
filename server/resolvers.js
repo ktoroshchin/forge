@@ -24,6 +24,11 @@ module.exports = {
       where: { username: username },
       attributes: worldAttributes,
     }),
+    login: (root, { username, password }) => Models.user.findOne({
+      where: { username, password },
+      attributes: userAttributes
+    })
+
   },
   Mutation: {
     createNewWorld: (root, { name, creator_id }) => Models.world.build({
