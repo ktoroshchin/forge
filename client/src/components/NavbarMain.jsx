@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
-import login from './login'
-import register from './register'
+import { Link } from "react-router-dom";
+import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
+
 
 class NavbarMain extends Component {
   state = {
