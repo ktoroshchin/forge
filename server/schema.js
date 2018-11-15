@@ -5,6 +5,7 @@ const typeDefs = `
     allWorlds: [World!]!
     findWorldById(id: ID!): World!
     findWorldByUsername(username: String!): World!
+    login(username: String!, password: String!): User
   }
 
   type Mutation {
