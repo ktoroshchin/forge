@@ -1,5 +1,5 @@
 import React from "react";
-import WorldList from "./world-list"
+import WorldList from "./WorldList"
 
 function Homepage() {
   return (

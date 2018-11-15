@@ -4,9 +4,9 @@ import './styles/App.css';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import NavbarMain from './components/NavbarMain.jsx'
-import Homepage from './components/homepage.jsx'
-import login from './components/login'
-import register from './components/register'
+import HomePage from './components/HomePage.jsx'
+import Login from './components/Login'
+import Register from './components/Register'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -17,9 +17,9 @@ const App = () => (
     <Router>
       <div>
         <NavbarMain />
-        <Route exact path="/" component={Homepage}/>
-        <Route path="/login" component={login} />
-        <Route path="/register" component={register} />
+        <Route exact path="/" component={HomePage}/>
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </div>
     </Router>
   </ApolloProvider>

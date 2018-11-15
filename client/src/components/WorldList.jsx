@@ -1,5 +1,5 @@
 import React from "react";
-import World from "./world"
+import World from "./World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 

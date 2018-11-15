@@ -7,7 +7,7 @@ type State = {
   zoom: number,
 }
 
-export default class SimpleExample extends Component<{}, State> {
+export default class BasicMap extends Component<{}, State> {
   state = {
     lat: 51.505,
     lng: -0.09,
