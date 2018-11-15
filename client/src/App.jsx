@@ -8,6 +8,8 @@ import HomePage from './components/HomePage.jsx'
 import Login from './components/Login'
 import Register from './components/Register'
 import CustomMapExample from './components/CustomMapView'
+import CreateNewWorld from './components/CreateNewWorld'
+
 
 
 const client = new ApolloClient({
@@ -23,6 +25,8 @@ const App = () => (
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/custommap" component={CustomMapExample} />
+        <Route path="/new-world" component={CreateNewWorld} />
+
       </div>
     </Router>
   </ApolloProvider>
