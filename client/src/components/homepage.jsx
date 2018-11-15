@@ -1,7 +1,13 @@
-import React, {Component} from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React from "react";
+import WorldList from "./world-list"
 
+function Homepage() {
+  return (
+    <div>
+      <WorldList />
+    </div>
+  );
+}
 
 
 const findAllUsers =

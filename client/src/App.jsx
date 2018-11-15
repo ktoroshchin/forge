@@ -20,7 +20,6 @@ const App = () => (
         <Route exact path="/" component={Homepage}/>
         <Route path="/login" component={login} />
         <Route path="/register" component={register} />
-
       </div>
     </Router>
   </ApolloProvider>
