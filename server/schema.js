@@ -4,7 +4,7 @@ const typeDefs = `
     findUserById(id: ID!): User!
     allWorlds: [World!]!
     findWorldById(id: ID!): World!
-    findWorldByName(name: String!): World!
+    findWorldByUsername(username: String!): World!
   }
 
   type Mutation {
@@ -19,6 +19,7 @@ const typeDefs = `
     username: String!
     email: String!
   }
+
   type World {
     id: ID!
     name: String!
