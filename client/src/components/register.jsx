@@ -37,14 +37,6 @@ class Register extends Component {
         <h2>Register</h2>
         <form>
           <label>
-            First Name:
-            <input type="text" name="first_name" />
-          </label>
-          <label>
-            Last Name:
-            <input type="text" name="last_name" />
-          </label>
-          <label>
             Username:
             <input onChange={this.handleUsernameChange} type="text" name="username" />
           </label>
