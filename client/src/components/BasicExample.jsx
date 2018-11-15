@@ -44,7 +44,7 @@ function Map() {
   return (
     <div>
       <BasicMap />
-    <div>
+    </div>
   );
 }
 
