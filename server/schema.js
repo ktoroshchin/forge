@@ -34,6 +34,14 @@ const typeDefs = `
     widht: Int!
     height: Int!
   }
+
+  interface Marker {
+    id: ID!
+    map_id: ID!
+    latitude: Float!
+    longitude: Float!
+    name: String!
+  }
 `;
 
 module.exports = typeDefs
