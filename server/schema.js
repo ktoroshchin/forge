@@ -26,6 +26,14 @@ const typeDefs = `
     description: String!
     creator_id: ID!
   }
+
+  type Map {
+    id: ID!
+    world_id: ID!
+    url: String!
+    widht: Int!
+    height: Int!
+  }
 `;
 
 module.exports = typeDefs
