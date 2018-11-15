@@ -1,7 +1,7 @@
 const Models = require('./models');
 const uuid = require('uuid/v4')
 
-const userAttributes = ['id', 'first_name', 'last_name', 'email'];
+const userAttributes = ['id', 'first_name', 'last_name', 'email', 'username'];
 const worldAttributes = ['id', 'name', 'description', 'creator_id'];
 
 module.exports = {
@@ -30,6 +30,12 @@ module.exports = {
       id: uuid(),
       name: name,
       creator_id: creator_id,
+    }).save(),
+    createNewUser: (root, { username, email, password }) => Models.user.build({
+      id: uuid(),
+      username: username,
+      email: email,
+      password: password //(NEED TO ENCRYPT THE PASSWORD)
     }).save(),
   }
 }

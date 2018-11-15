@@ -9,12 +9,14 @@ const typeDefs = `
 
   type Mutation {
     createNewWorld(name: String!, creator_id: ID!): World!
+    createNewUser(username: String!, email: String!, password: String!): User!
   }
 
   type User {
     id: ID!
-    first_name: String!
-    last_name: String!
+    first_name: String
+    last_name: String
+    username: String!
     email: String!
   }
   type World {
