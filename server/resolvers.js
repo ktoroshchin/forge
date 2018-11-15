@@ -1,4 +1,5 @@
 const Models = require('./models');
+const uuid = require('uuid/v4')
 
 const userAttributes = ['id', 'first_name', 'last_name', 'email'];
 const worldAttributes = ['id', 'name', 'description', 'creator_id'];
@@ -23,5 +24,12 @@ module.exports = {
       where: { name: name },
       attributes: worldAttributes,
     }),
+  },
+  Mutation: {
+    createNewWorld: (root, { name, creator_id }) => Models.world.build({
+      id: uuid(),
+      name: name,
+      creator_id: creator_id,
+    }).save(),
   }
 }

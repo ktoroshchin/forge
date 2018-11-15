@@ -6,6 +6,11 @@ const typeDefs = `
     findWorldById(id: ID!): World!
     findWorldByName(name: String!): World!
   }
+
+  type Mutation {
+    createNewWorld(name: String!, creator_id: ID!): World!
+  }
+
   type User {
     id: ID!
     first_name: String!

@@ -5,6 +5,8 @@ module.exports = {
     use_env_variable: "DB_URL",
     dialect: 'postgres',
     operatorsAliases: false,
-    underscored: true,
+    define: {
+      underscored: true,
+    }
   },
 }
