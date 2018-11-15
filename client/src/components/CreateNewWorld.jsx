@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import CreateNewCity from './CreateNewCity'
 import CreateNewTown from './CreateNewTown'
+import CreateNewLocation from './CreateNewLocation'
 
 function CreateNewWorld() {
   return (
@@ -21,6 +22,7 @@ function CreateNewWorld() {
       </form>
       <CreateNewCity />
       <CreateNewTown/>
+      <CreateNewLocation/>
     </div>
     )
 }
