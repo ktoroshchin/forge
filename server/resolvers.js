@@ -1,24 +1,27 @@
 const Models = require('./models');
 
+const userAttributes = ['id', 'first_name', 'last_name', 'email'];
+const worldAttributes = ['id', 'name', 'description', 'creator_id'];
+
 module.exports = {
   Query: {
     allUsers: () => Models.user.findAll({
-      attributes: ['id', 'first_name', 'last_name', 'email']
+      attributes: userAttributes,
     }),
     allWorlds: () => Models.world.findAll({
-      attributes: ['id', 'name', 'description', 'creator_id']
+      attributes: worldAttributes,
     }),
-    findUserById: (root, args) => Models.user.findOne({
-      where: { id: args.id },
-      attributes: ['id', 'first_name', 'last_name', 'email']
+    findUserById: (root, { id }) => Models.user.findOne({
+      where: { id: id },
+      attributes: userAttributes,
     }),
-    findWorldById: (root, args) => Models.world.findOne({
-      where: { id: args.id },
-      attributes: ['id', 'name', 'description', 'creator_id']
+    findWorldById: (root, { id }) => Models.world.findOne({
+      where: { id: id },
+      attributes: worldAttributes,
     }),
-    findWorldByName: (root, args) => Models.world.findOne({
-      where: { name: args.name },
-      attributes: ['id', 'name', 'description', 'creator_id']
+    findWorldByName: (root, { name }) => Models.world.findOne({
+      where: { name: name },
+      attributes: worldAttributes,
     }),
   }
 }
