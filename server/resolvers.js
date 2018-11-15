@@ -20,8 +20,8 @@ module.exports = {
       where: { id: id },
       attributes: worldAttributes,
     }),
-    findWorldByName: (root, { name }) => Models.world.findOne({
-      where: { name: name },
+    findWorldByUsername: (root, { username }) => Models.world.findOne({
+      where: { username: username },
       attributes: worldAttributes,
     }),
   },
