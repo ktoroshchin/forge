@@ -36,10 +36,10 @@ class Register extends Component {
   }
 
   render() {
-    const { username, email, password } = this.state
+    const { first_name, last_name, username, email, password } = this.state
     const POST_MUTATION = gql`
-      mutation ($username: String!, $email: String!, $password: String!){
-        createNewUser(username: $username, email: $email, password: $password) {
+      mutation ($first_name: String, $last_name: String, $username: String!, $email: String!, $password: String!){
+        createNewUser(first_name: $first_name, last_name: $last_name, username: $username, email: $email, password: $password) {
           id
         }
       }`
@@ -59,7 +59,7 @@ class Register extends Component {
             <Label>Password</Label>
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ username, email, password }} onCompleted={() => this.props.history.push('/')}>
+            <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }} onCompleted={() => this.props.history.push('/')}>
               {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
             </Mutation>
           </FormGroup>
