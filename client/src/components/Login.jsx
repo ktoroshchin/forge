@@ -6,7 +6,7 @@ class Login extends Component {
     super(props);
     this.state = {
       username: null,
-      password: null,
+      password: null
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -18,6 +18,8 @@ class Login extends Component {
     this.setState({password: e.target.value});
   }
    render() {
+    const {username} = this.state;
+    const {addUserID} = this.props;
     return (
       <div>
         <h2>Login</h2>
@@ -28,7 +30,7 @@ class Login extends Component {
             <Label>Password</Label>
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
-            <Button color="success">Submit</Button>
+            <Button color="success" type="submit" onClick={() => {addUserID(username)}}>Submit</Button>
           </FormGroup>
         </Form>
       </div>
