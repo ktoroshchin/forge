@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 class Login extends Component {
   constructor(props) {
@@ -19,6 +21,14 @@ class Login extends Component {
   }
   render() {
     const { username, password } = this.state;
+    const validLogin =
+      gql`
+        query ($username: String!, $password: String!){
+          login(username: $username, password: $password){
+            id,
+            username
+          }
+        }`;
     return (
       <div>
         <h2>Login</h2>
@@ -32,6 +42,14 @@ class Login extends Component {
             <Button color="success">Submit</Button>
           </FormGroup>
         </Form>
+        <Query query={validLogin} variables={{ username, password }}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Fetching</div>
+          if (error) return <div>Error</div>
+          if (data.login == null) return <p>Invalid</p>
+          return <p>{data.login.id}</p>;
+        }}
+      </Query>
       </div>
     )
   }
