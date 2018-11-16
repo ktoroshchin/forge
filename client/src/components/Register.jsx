@@ -56,9 +56,6 @@ class Register extends Component {
           id
         }
       }`
-    const resetForm = function() {
-      alert("Hello!")
-    }
     return (
       <div>
         <h2>Register</h2>
