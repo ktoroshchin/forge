@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
-import GuestNavBar from "./GuestNavBar"
+import NavBarDropDown from "./NavBarDropDown"
 
 class NavbarMain extends Component {
   state = {
@@ -22,7 +22,7 @@ class NavbarMain extends Component {
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <GuestNavBar cookies={this.props.cookies} />
+            <NavBarDropDown cookies={this.props.cookies} />
           </Collapse>
         </Navbar>
       </div>

@@ -2,20 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
 
-function GuestNavBar() {
+function UserNavBar({userID}) {
   return (
     <Nav className="ml-auto" navbar>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          Hello, Guest!
+          Hello, {userID}!
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem tag={Link} to="/login">
-            Login
-          </DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem tag={Link} to="/register">
-            Register
+            Logout
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
@@ -23,4 +19,4 @@ function GuestNavBar() {
   )
 }
 
-export default GuestNavBar;
+export default UserNavBar;

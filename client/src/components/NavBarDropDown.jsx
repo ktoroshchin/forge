@@ -1,44 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
+import GuestNavBar from "./GuestNavBar"
+import UserNavBar from "./UserNavBar"
 
-function GuestNavBar({cookies}) {
+
+function NavBarDropDown({cookies}) {
   const userID = cookies.get('userID')
   if (userID) {
     return (
-      <Nav className="ml-auto" navbar>
-        <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav caret>
-            Hello, {userID}!
-          </DropdownToggle>
-          <DropdownMenu right>
-            <DropdownItem tag={Link} to="/login">
-              Logout
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Nav>
+      <UserNavBar userID={userID}/>
     )
   } else {
     return (
-      <Nav className="ml-auto" navbar>
-        <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav caret>
-            Hello, Guest!
-          </DropdownToggle>
-          <DropdownMenu right>
-            <DropdownItem tag={Link} to="/login">
-              Login
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem tag={Link} to="/register">
-              Register
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Nav>
+      <GuestNavBar />
     )
   }
 }
 
-export default GuestNavBar;
+export default NavBarDropDown;
