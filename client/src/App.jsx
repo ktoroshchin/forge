@@ -12,7 +12,7 @@ import CreateNewWorld from './components/CreateNewWorld'
 import WorldMapSubmit from './components/WorldMapSubmit'
 import DisplayWorldDetails from './components/DisplayWorldDetails'
 import CreateNewCity from './components/CreateNewCity'
-import ChooseCategory from './components/ChooseCategory'
+import ChooseCategoryToUpdate from './components/ChooseCategoryToUpdate'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -30,7 +30,7 @@ const App = () => (
         <Route path="/new-world" component={CreateNewWorld} />
         <Route path="/newworldmap" component={WorldMapSubmit} />
         <Route path="/world-show" component={DisplayWorldDetails} />
-        <Route path="/update-category" component={ChooseCategory} />
+        <Route path="/update-category" component={ChooseCategoryToUpdate} />
         <Route path="/updatecity" component={CreateNewCity} />
       </div>
     </Router>

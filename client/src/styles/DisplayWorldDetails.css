@@ -1,25 +1,24 @@
-.listGroup {
+.btn .btn-success .add-world {
+
+}
+
+.card-body.nopadding {
+  padding: 0;
+}
+
+.add-world {
+  margin-top: 10px;
+}
+
+.row {
   display: flex;
-  flex-direction: column;
-  margin: 0;
-  width: 20%;
-  text-align: center;
+  justify-content: space-around;
 }
-
-.AccordionForWorldPage .card-body {
-  padding: 0px;
-  margin: 0;
-}
-
 
 .btn.btn-link.category {
   width: 100%;
   height: 100%;
   text-decoration: none;
-}
-
-#accordion {
-  margin-top: 20px;
 }
 
 .world-name{
