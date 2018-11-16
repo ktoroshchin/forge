@@ -49,31 +49,27 @@ const typeDefs = `
     name: String!
   }
 
-  type City implements Marker {
+  type City implements MapMarker {
     id: ID!
-    map_id: ID!
-    latitude: Float!
-    longitude: Float!
+    marker_id: ID
     name: String!
     population: Int
-    governement: String
+    government: String
+    description: String
   }
 
-  type Town implements Marker {
+  type Town implements MapMarker {
     id: ID!
-    map_id: ID!
-    latitude: Float!
-    longitude: Float!
+    marker_id: ID
     name: String!
     population: Int
-    governement: String
+    government: String
+    description: String
   }
 
-  type Location implements Marker {
+  type Location implements MapMarker {
     id: ID!
-    map_id: ID!
-    latitude: Float!
-    longitude: Float!
+    marker_id: ID
     name: String!
     description: String
   }

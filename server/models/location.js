@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     marker_id: {
       type: DataTypes.UUID,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'marker', key: 'id'
       }
