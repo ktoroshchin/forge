@@ -27,12 +27,6 @@ class Register extends Component {
   handleLastNameChange(e) {
     this.setState({last_name: e.target.value});
   }
-  handleFirstNameChange(e) {
-    this.setState({first_name: e.target.value});
-  }
-  handleLastNameChange(e) {
-    this.setState({last_name: e.target.value});
-  }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
   }
