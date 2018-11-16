@@ -13,8 +13,11 @@ const typeDefs = `
     createNewUser(username: String!, email: String!, password: String!): User!
     createNewMap(world_id: ID!, url: String!, world_map: Boolean!, width: Int!, height: Int!): Map!
     createNewMarker(map_id: ID!, latitude: Float!, longitude: Float!): Marker!
+    createNewCity(marker_id: ID, name: String!, population: Int, government: String, description: String): City!
+    createNewTown(marker_id: ID, name: String!, population: Int, government: String, description: String): Town!
+    createNewLocation(marker_id: ID, name: String!, description: String): Location!
   }
-
+  
   type User {
     id: ID!
     first_name: String
