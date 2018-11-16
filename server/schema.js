@@ -11,6 +11,10 @@ const typeDefs = `
     findMapsByWorldId(world_id: ID!): [Map!]
     findMarkerById(id: ID!): Marker!
     findMarkersByMapId(map_id: ID!): [Marker!]
+
+    findCityById(id: ID!): City!
+    findCitiesByWorldId(world_id: ID!): [City!]
+    findCitiesByMarkerId(marker_id: ID!): [City!]
   }
 
   type Mutation {
@@ -18,9 +22,7 @@ const typeDefs = `
     createNewUser(username: String!, email: String!, password: String!, first_name: String, last_name: String): User!
     createNewMap(world_id: ID!, url: String!, world_map: Boolean!, width: Int!, height: Int!): Map!
     createNewMarker(map_id: ID!, latitude: Float!, longitude: Float!): Marker!
-    createNewCity(marker_id: ID, name: String!, population: Int, government: String, description: String): City!
-    createNewTown(marker_id: ID, name: String!, population: Int, government: String, description: String): Town!
-    createNewLocation(marker_id: ID, name: String!, description: String): Location!
+    createNewCity(marker_id: ID, world_id: ID!, name: String!, population: Int, government: String, description: String): City!
   }
   
   type User {
