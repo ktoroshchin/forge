@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-function Login() {
+function Login({addUserID}) {
   return (
     <div>
       <h2>Login</h2>
@@ -12,7 +12,7 @@ function Login() {
           <Label>Password</Label>
           <Input type="password" name="password" />
           <br />
-          <Button color="success">Submit</Button>
+          <Button color="success" onClick={addUserID("PacMan")}>Submit</Button>
         </FormGroup>
       </Form>
     </div>
