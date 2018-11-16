@@ -27,6 +27,12 @@ class Register extends Component {
   handleLastNameChange(e) {
     this.setState({last_name: e.target.value});
   }
+  handleFirstNameChange(e) {
+    this.setState({first_name: e.target.value});
+  }
+  handleLastNameChange(e) {
+    this.setState({last_name: e.target.value});
+  }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
   }
@@ -36,6 +42,7 @@ class Register extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
+
   validForm() {
     if (this.state.username == null || this.state.email == null || this.state.password == null) {
       alert("Please fill in required fields")
@@ -50,6 +57,9 @@ class Register extends Component {
           id
         }
       }`
+    const resetForm = function() {
+      alert("Hello!")
+    }
     return (
       <div>
         <h2>Register</h2>
