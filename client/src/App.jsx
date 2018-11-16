@@ -16,13 +16,18 @@ const client = new ApolloClient({
   uri: 'http://localhost:4000/'
 })
 const cookies = new Cookies();
-// cookies.set('userID', 'Pacman', { path: '/' });
+const addUserID = function() {
+  cookies.set('userID', 'Pacman', { path: '/' });
+}
+const deleteUserID = function() {
+  cookies.remove('userID');
+}
 const App = () => (
   <ApolloProvider client={client}>
     <Router>
       <div>
-        <NavbarMain cookies={cookies}/>
-        <Route exact path="/" component={HomePage}/>
+        <NavbarMain cookies={cookies} addUserID={addUserID} deleteUserID={deleteUserID} />
+        <Route exact path="/" component={HomePage} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/custommap" component={CustomMapExample} />

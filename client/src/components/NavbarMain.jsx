@@ -6,7 +6,6 @@ import NavBarDropDown from "./NavBarDropDown"
 class NavbarMain extends Component {
   state = {
     dropdownOpen: false,
-    cookies: this.props.cookies
   }
   toggle = this.toggle.bind(this);
   toggle() {
@@ -22,7 +21,7 @@ class NavbarMain extends Component {
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <NavBarDropDown cookies={this.props.cookies} />
+            <NavBarDropDown cookies={this.props.cookies} addUserID={this.props.addUserID} deleteUserID={this.props.deleteUserID} />
           </Collapse>
         </Navbar>
       </div>
