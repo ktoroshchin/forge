@@ -32,7 +32,7 @@ const typeDefs = `
     id: ID!
     world_id: ID!
     url: String!
-    widht: Int!
+    width: Int!
     height: Int!
   }
 
