@@ -1,4 +1,4 @@
-const typeDefs = `
+module.exports = `
   type Query {
     allUsers: [User!]!
     findUserById(id: ID!): User!
@@ -101,5 +101,3 @@ const typeDefs = `
     description: String
   }
 `;
-
-module.exports = typeDefs
