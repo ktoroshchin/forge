@@ -10,6 +10,7 @@ import Register from './components/Register'
 import CustomMapExample from './components/CustomMapView'
 import CreateNewWorld from './components/CreateNewWorld'
 import WorldMapSubmit from './components/WorldMapSubmit'
+import DisplayWorldDetails from './components/DisplayWorldDetails'
 
 
 const client = new ApolloClient({
@@ -27,6 +28,8 @@ const App = () => (
         <Route path="/custommap" component={CustomMapExample} />
         <Route path="/new-world" component={CreateNewWorld} />
         <Route path="/newworldmap" component={WorldMapSubmit} />
+        <Route path="/world-show" component={DisplayWorldDetails} />
+
       </div>
     </Router>
   </ApolloProvider>

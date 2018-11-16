@@ -1,61 +1,68 @@
 import React, { Component } from 'react';
-import { UncontrolledCollapse, Button, CardBody, Card, ListGroup, ListGroupItem } from 'reactstrap';
+import { UncontrolledCollapse, Button, CardBody, Card, ListGroup, Collapse, ListGroupItem } from 'reactstrap';
 
 class AccordionForWorldPage extends Component {
-
   render(){
     return(
-      <div>
-        <ListGroupItem className="world-name-container">
-          World 1
-        </ListGroupItem>
+      <div className="AccordionForWorldPage">
+        <ListGroupItem className="world-name">World</ListGroupItem>
+        <div id="accordion">
+          <div className="card" className="listGroup">
+            <div className="card-header" id="headingOne">
 
-        <div className="wrapper">
-          <div className="listGroup">
-            <ListGroupItem className="table-of-contents">
-              Table of contents
-            </ListGroupItem>
+                <button className="btn btn-link category"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Cities
+                </button>
+            </div>
 
-            <ListGroupItem color="primary" id="toggler">
-              Cities
-            </ListGroupItem>
-            <UncontrolledCollapse toggler="#toggler">
-              <ListGroup className="listItemContainer">
-                <ListGroupItem tag="a" className="listItem" href="#" action>City1</ListGroupItem>
-                <ListGroupItem tag="a" className="listItem" href="#" action>City2</ListGroupItem>
-                <ListGroupItem tag="a" className="listItem" href="#" action>CIty3</ListGroupItem>
-              </ListGroup>
-            </UncontrolledCollapse>
+            <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+              <div className="card-body">
+                <ListGroup className="listItemContainer">
+                  <ListGroupItem tag="a" className="listItem" href="#" action>City1</ListGroupItem>
+                  <ListGroupItem tag="a" className="listItem" href="#" action>City2</ListGroupItem>
+                  <ListGroupItem tag="a" className="listItem" href="#" action>City3</ListGroupItem>
+                </ListGroup>
+              </div>
+            </div>
           </div>
-
-          <div className="listGroup">
-            <ListGroupItem color="primary" id="toggler2" >
-              Towns
-            </ListGroupItem>
-            <UncontrolledCollapse toggler="#toggler2">
-              <ListGroup className="listItemContainer">
-                <ListGroupItem tag="a" className="listItem" href="#" action>Town1</ListGroupItem>
-                <ListGroupItem tag="a" className="listItem" href="#" action>Town2</ListGroupItem>
-                <ListGroupItem tag="a" className="listItem" href="#" action>Town3</ListGroupItem>
-              </ListGroup>
-            </UncontrolledCollapse>
+          <div className="card" className="listGroup">
+            <div className="card-header" id="headingTwo">
+              <h5 className="mb-0">
+                <button className="btn btn-link category collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Towns
+                </button>
+              </h5>
+            </div>
+            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+              <div className="card-body">
+                <ListGroup className="listItemContainer">
+                  <ListGroupItem tag="a" className="listItem" href="#" action>Town1</ListGroupItem>
+                  <ListGroupItem tag="a" className="listItem" href="#" action>Town2</ListGroupItem>
+                  <ListGroupItem tag="a" className="listItem" href="#" action>Town3</ListGroupItem>
+                </ListGroup>
+              </div>
+            </div>
           </div>
-
-            <div className="listGroup">
-              <ListGroupItem color="primary" id="toggler3">
-                Locations
-              </ListGroupItem>
-              <UncontrolledCollapse toggler="#toggler3">
+          <div className="card" className="listGroup">
+            <div className="card-header" id="headingThree">
+              <h5 className="mb-0">
+                <button className="btn btn-link category collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Locations
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div className="card-body">
                 <ListGroup className="listItemContainer">
                   <ListGroupItem tag="a" className="listItem" href="#" action>Location1</ListGroupItem>
                   <ListGroupItem tag="a" className="listItem" href="#" action>Location2</ListGroupItem>
                   <ListGroupItem tag="a" className="listItem" href="#" action>Location3</ListGroupItem>
                 </ListGroup>
-              </UncontrolledCollapse>
             </div>
           </div>
-
+        </div>
       </div>
+    </div>
     );
   }
 };
