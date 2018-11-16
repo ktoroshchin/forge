@@ -2,13 +2,15 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Redirect } from 'react-router-dom'
+import HomePage from "./HomePage"
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: null,
-      password: null
+      password: null,
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -46,11 +48,9 @@ class Login extends Component {
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
-          if (data.login == null) {
-            return <div>Invalid</div>
+          if (data.login != null) {
+            return <div>Valid!</div>
           }
-          return (<p>{data.login.id}</p>
-          );
         }}
       </Query>
       </div>
