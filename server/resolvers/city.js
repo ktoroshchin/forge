@@ -6,27 +6,27 @@ const cityAttributes = ['id', 'marker_id', 'world_id', 'name', 'population', 'go
 module.exports = {
   Queries: {
     findCityById: (root, { id }) => city.findOne({
-      where: { id: id },
+      where: { id },
       attributes: cityAttributes,
     }),
     findCitiesByWorldId: (root, { world_id }) => city.findAll({
-      where: { world_id: world_id },
+      where: { world_id },
       attributes: cityAttributes,
     }),
     findCitiesByMarkerId: (root, { marker_id }) => city.findAll({
-      where: { marker_id: marker_id },
+      where: { marker_id },
       attributes: cityAttributes,
     })
   },
   Mutations: {
     createNewCity: (root, { marker_id, world_id, name, population, government, description }) => city.build({
       id: uuid(),
-      marker_id: marker_id,
-      world_id: world_id,
-      name: name,
-      population: population,
-      government: government,
-      description: description,
+      marker_id,
+      world_id,
+      name,
+      population,
+      government,
+      description,
     }).save()
   }
 }
