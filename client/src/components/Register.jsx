@@ -19,6 +19,7 @@ class Register extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.validForm = this.validForm.bind(this);
   }
   handleFirstNameChange(e) {
     this.setState({first_name: e.target.value});
@@ -35,6 +36,11 @@ class Register extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
+  validForm() {
+    if (this.state.username == null || this.state.email == null || this.state.password == null) {
+      alert("Please fill in required fields")
+    }
+  }
 
   render() {
     const { username, email, password } = this.state
@@ -44,9 +50,6 @@ class Register extends Component {
           id
         }
       }`
-    const resetForm = function() {
-      alert("Hello!")
-    }
     return (
       <div>
         <h2>Register</h2>
