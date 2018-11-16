@@ -42,5 +42,19 @@ module.exports = {
       email: email,
       password: password //(NEED TO ENCRYPT THE PASSWORD)
     }).save(),
+    createNewMap: (root, { world_id, url, world_map, width, height }) => Models.map.build({
+      id: uuid(),
+      world_id: world_id,
+      url: url,
+      world_map: world_map,
+      width: width,
+      height: height
+    }).save(),
+    createNewMarker: (root, { map_id, latitude, longitude }) => Models.marker.build({
+      id: uuid(),
+      map_id: map_id,
+      latitude: latitude,
+      longitude: longitude
+    }).save()
   }
 }
