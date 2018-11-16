@@ -11,7 +11,8 @@ import CustomMapExample from './components/CustomMapView'
 import CreateNewWorld from './components/CreateNewWorld'
 import WorldMapSubmit from './components/WorldMapSubmit'
 import DisplayWorldDetails from './components/DisplayWorldDetails'
-
+import CreateNewCity from './components/CreateNewCity'
+import ChooseCategory from './components/ChooseCategory'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -29,7 +30,8 @@ const App = () => (
         <Route path="/new-world" component={CreateNewWorld} />
         <Route path="/newworldmap" component={WorldMapSubmit} />
         <Route path="/world-show" component={DisplayWorldDetails} />
-
+        <Route path="/update-category" component={ChooseCategory} />
+        <Route path="/updatecity" component={CreateNewCity} />
       </div>
     </Router>
   </ApolloProvider>
