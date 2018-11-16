@@ -46,7 +46,7 @@ const typeDefs = `
   type World {
     id: ID!
     name: String!
-    description: String!
+    description: String
     creator_id: ID!
   }
 
