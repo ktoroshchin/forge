@@ -5,6 +5,7 @@ const userAttributes = ['id', 'first_name', 'last_name', 'email', 'username'];
 const worldAttributes = ['id', 'name', 'description', 'creator_id'];
 const mapAttributes = ['id', 'world_id', 'url', 'width', 'height', 'world_map'];
 const markerAttributes = ['id', 'map_id', 'latitude', 'longitude'];
+const cityAttributes = ['id', 'marker_id', 'world_id', 'name', 'population', 'government', 'description'];
 
 module.exports = {
   Query: {
@@ -45,6 +46,18 @@ module.exports = {
     findMarkersByMapId: (root, { map_id }) => Models.map.findAll({
       where: { map_id: map_id },
       attributes: markerAttributes,
+    }),
+    findCityById: (root, { id }) => Models.city.findOne({
+      where: { id: id },
+      attributes: cityAttributes,
+    }),
+    findCitiesByWorldId: (root, { world_id }) => Models.city.findAll({
+      where: { world_id: world_id },
+      attributes: cityAttributes,
+    }),
+    findCitiesByMarkerId: (root, { marker_id }) => Models.city.findAll({
+      where: { marker_id: marker_id },
+      attributes: cityAttributes,
     })
 
   },
