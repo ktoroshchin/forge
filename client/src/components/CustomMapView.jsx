@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import { ImageOverlay, Map, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
@@ -23,8 +23,39 @@ export default class CustomMapExample extends Component {
       zoom: 1,
       draggable: true,
       dimensions: [1024, 2048],
-      markerData: [],
+      activeMarker: null,
+      markerData: [
+      {
+        id: 1,
+        coords: {
+          lat: 471.5,
+          lng: 396.5,
+        },
+      },
+      {
+        id: 2,
+        coords: {
+          lat: 675,
+          lng: 379,
+        },
+      },
+      {
+        id: 3,
+        coords: {
+          lat: 640,
+          lng: 478,
+        },
+      },
+      {
+        id: 4,
+        coords: {
+          lat: 688.5,
+          lng: 1037.5,
+        },
+      },
+      ],
     };
+    this.refMarker = createRef()
   }
 
   toggleDraggable = () => {
@@ -32,20 +63,36 @@ export default class CustomMapExample extends Component {
   }
 
   addMarker = (event) => {
-    const {markerData} = this.state
-    const coords = event.latlng
-    markerData.push(coords)
-    this.setState({markerData})
+    this.setState({activeMarker: this.state.center})
   }
 
-  updateMarker = (event) => {
-    console.log(event)
+  updateMarker = () => {
+    const marker = this.refMarker.current
+    if (marker != null) {
+      this.setState({
+        activeMarker: marker.leafletElement.getLatLng(),
+      })
+    }
   }
 
-  submitMarkers = () => {
-    console.log('Hello!')
+  submitMarker = () => {
+    const marker = this.refMarker.current
+    if (marker != null) {
+      const markerID = marker.leafletElement._leaflet_id
+      const coords = marker.leafletElement._latlng
+      const newMarker = {
+        id: markerID,
+        coords: coords,
+      }
+      const {markerData} = this.state
+      markerData.push(newMarker)
+      this.setState({
+        activeMarker: null,
+        markerData,
+      })
+      console.log('Marker Submitted')
+    }
   }
-
 
   render () {
     const boundOrigin = [0, 0];
@@ -61,30 +108,44 @@ export default class CustomMapExample extends Component {
           bounds={bounds}
           center={position}
           zoom={this.state.zoom}
-          onClick={this.addMarker}
           >
           <ImageOverlay
             url='http://www.online-tabletop.com/wp-content/uploads/2017/01/tutoriala.jpg'
             bounds={bounds}
             />
-          {this.state.markerData.map((element, index) =>
+          {this.state.activeMarker !== null &&
             <Marker
-              key={index}
-              position={element}
               draggable={this.state.draggable}
               onDragend={this.updateMarker}
+              position={this.state.activeMarker}
+              ref={this.refMarker}
+              >
+              <Popup minWidth={90}>
+                <button onClick={this.submitMarker}>
+                  Submit Marker
+                </button>
+              </Popup>
+            </Marker>
+          }
+
+          {this.state.markerData.map((element) =>
+            <Marker
+              key={element.id}
+              position={element.coords}
               >
               <Popup>
-                <span onClick={this.toggleDraggable}>
-                  {this.state.draggable ? `Hello` : 'MARKER FIXED'}
+                <span>
+                  {element.id}
                 </span>
               </Popup>
             </Marker>
           )}
         </Map>
-        <button onClick={this.submitMarkers}>
-          Submit
+      {this.state.activeMarker === null &&
+        <button onClick={this.addMarker}>
+          New Marker
         </button>
+      }
       </div>
     );
   }
