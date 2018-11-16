@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
-
 class Register extends Component {
   constructor(props) {
     super(props);
@@ -35,18 +34,6 @@ class Register extends Component {
   }
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
-  }
-  validForm() {
-    if (this.state.username == null || this.state.email == null || this.state.password == null) {
-      alert("Please fill in required fields")
-    }
-  }
-
-
-  validForm() {
-    if (this.state.username == null || this.state.email == null || this.state.password == null) {
-      alert("Please fill in required fields")
-    }
   }
 
   render() {
