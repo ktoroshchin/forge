@@ -8,13 +8,23 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      email: '',
-      password: ''
+      first_name: null,
+      last_name: null,
+      username: null,
+      email: null,
+      password: null
     }
+    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
+    this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+  }
+  handleFirstNameChange(e) {
+    this.setState({first_name: e.target.value});
+  }
+  handleLastNameChange(e) {
+    this.setState({last_name: e.target.value});
   }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
@@ -25,6 +35,7 @@ class Register extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
+
   render() {
     const { username, email, password } = this.state
     const POST_MUTATION = gql`
@@ -33,11 +44,18 @@ class Register extends Component {
           id
         }
       }`
+    const resetForm = function() {
+      alert("Hello!")
+    }
     return (
       <div>
         <h2>Register</h2>
         <Form>
           <FormGroup>
+            <Label>First Name (optional)</Label>
+            <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
+            <Label>Last Name (optional)</Label>
+            <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
             <Label>Username</Label>
             <Input onChange={this.handleUsernameChange} type="text" name="username" />
             <Label>Email</Label>
