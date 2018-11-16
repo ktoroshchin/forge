@@ -4,7 +4,7 @@ const typeDefs = `
     findUserById(id: ID!): User!
     allWorlds: [World!]!
     findWorldById(id: ID!): World!
-    findWorldByUsername(username: String!): World!
+    findWorldByName(name: String!): World!
     login(username: String!, password: String!): User
   }
 
