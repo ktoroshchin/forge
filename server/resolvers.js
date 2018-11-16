@@ -49,10 +49,11 @@ module.exports = {
 
   },
   Mutation: {
-    createNewWorld: (root, { name, creator_id }) => Models.world.build({
+    createNewWorld: (root, { name, creator_id, description }) => Models.world.build({
       id: uuid(),
       name: name,
       creator_id: creator_id,
+      description: description
     }).save(),
     createNewUser: (root, { username, email, password, first_name, last_name }) => Models.user.build({
       id: uuid(),
