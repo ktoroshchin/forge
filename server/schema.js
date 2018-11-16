@@ -9,6 +9,8 @@ const typeDefs = `
 
     findMapById(id: ID!): Map!
     findMapsByWorldId(world_id: ID!): [Map!]
+    findMarkerById(id: ID!): Marker!
+    findMarkersByMapId(map_id: ID!): [Marker!]
   }
 
   type Mutation {
