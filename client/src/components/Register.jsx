@@ -18,7 +18,6 @@ class Register extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.validForm = this.validForm.bind(this);
   }
   handleFirstNameChange(e) {
     this.setState({first_name: e.target.value});
