@@ -20,29 +20,34 @@ export default class CustomMapExample extends Component {
         lat: 512,
         lng: 1024,
       },
-      marker: {
-        lat: 512,
-        lng: 1024,
-      },
       zoom: 1,
       draggable: true,
       dimensions: [],
+      markerData: [],
     };
   }
-
-  refmarker = createRef()
 
   toggleDraggable = () => {
     this.setState({ draggable: !this.state.draggable })
   }
 
-  updatePosition = () => {
-    const marker = this.refmarker.current
-    if (marker != null) {
-      this.setState({
-        marker: marker.leafletElement.getLatLng(),
-      })
+  addMarker = (event) => {
+    const {markerData} = this.state
+    const markerID = event.target._leaflet_id
+    const coords = event.latlng
+    const newMarker = {
+      id: markerID,
+      coords: coords,
     }
+    markerData.push(newMarker)
+    this.setState({markerData})
+  }
+
+  updateMarker = (event) => {
+    console.log(event.target)
+    console.log(event.target._latlng)
+
+    console.log(event.target._leaflet_id)
   }
 
   render () {
@@ -50,7 +55,6 @@ export default class CustomMapExample extends Component {
     const imageSize = [1024, 2048];
     const bounds = [boundOrigin, imageSize];
     const position = [this.state.center.lat, this.state.center.lng]
-    const markerPosition = [this.state.marker.lat, this.state.marker.lng]
 
     return (
       <div>
@@ -61,23 +65,27 @@ export default class CustomMapExample extends Component {
           bounds={bounds}
           center={position}
           zoom={this.state.zoom}
+          onClick={this.addMarker}
           >
           <ImageOverlay
             url='http://www.online-tabletop.com/wp-content/uploads/2017/01/tutoriala.jpg'
             bounds={bounds}
             />
-          <Marker
-            draggable={this.state.draggable}
-            onDragend={this.updatePosition}
-            position={markerPosition}
-            ref={this.refmarker}
-            >
-            <Popup minWidth={90}>
-            <span onClick={this.toggleDraggable}>
-              {this.state.draggable ? `${markerPosition}` : 'MARKER FIXED'}
-            </span>
-            </Popup>
-          </Marker>
+          {this.state.markerData.map((element) =>
+            <Marker
+              key={element.id}
+              position={element.coords}
+              draggable={this.state.draggable}
+              onDragend={this.updateMarker}
+              ref={element.id}
+              >
+              <Popup>
+                <span onClick={this.toggleDraggable}>
+                  {this.state.draggable ? `Hello` : 'MARKER FIXED'}
+                </span>
+              </Popup>
+            </Marker>
+          )}
         </Map>
       </div>
     );
