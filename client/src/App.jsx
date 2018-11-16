@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, {Component}  from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import './styles/App.css';
 import ApolloClient from 'apollo-boost';
@@ -26,23 +26,26 @@ const addUserID = function(username) {
 const deleteUserID = function() {
   cookies.remove('userID');
 }
-const App = () => (
-  <ApolloProvider client={client}>
-    <Router>
-      <div>
-        <NavbarMain cookies={cookies} deleteUserID={deleteUserID} />
-        <Route exact path="/" component={HomePage} />
-        <Route path="/login" render={() => <Login addUserID={addUserID} />} />
-        <Route path="/register" render={() => <Register addUserID={addUserID}/>} />
-        <Route path="/custommap" component={CustomMapExample} />
-        <Route path="/new-world" component={CreateNewWorld} />
-        <Route path="/newworldmap" component={WorldMapSubmit} />
-        <Route path="/world-show" component={DisplayWorldDetails} />
-        <Route path="/update-category" component={ChooseCategoryToUpdate} />
-        <Route path="/updatecity" component={CreateNewCity} />
-      </div>
-    </Router>
-  </ApolloProvider>
-)
 
-export default App;
+export default class App extends Component {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <Router>
+          <div>
+            <NavbarMain cookies={cookies} addUserID={addUserID} deleteUserID={deleteUserID} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/custommap" component={CustomMapExample} />
+            <Route path="/new-world" component={CreateNewWorld} />
+            <Route path="/newworldmap" component={WorldMapSubmit} />
+            <Route path="/world-show" component={DisplayWorldDetails} />
+            <Route path="/update-category" component={ChooseCategoryToUpdate} />
+            <Route path="/updatecity" component={CreateNewCity} />
+          </div>
+        </Router>
+      </ApolloProvider>
+      )
+  }
+}
