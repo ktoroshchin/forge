@@ -4,18 +4,35 @@ const typeDefs = `
     findUserById(id: ID!): User!
     allWorlds: [World!]!
     findWorldById(id: ID!): World!
-    findWorldByUsername(username: String!): World!
+    findWorldByName(name: String!): World!
     login(username: String!, password: String!): User
+
+    findMapById(id: ID!): Map!
+    findMapsByWorldId(world_id: ID!): [Map!]
+    findMarkerById(id: ID!): Marker!
+    findMarkersByMapId(map_id: ID!): [Marker!]
+
+    findCityById(id: ID!): City!
+    findCitiesByWorldId(world_id: ID!): [City!]
+    findCitiesByMarkerId(marker_id: ID!): [City!]
+
+    findLocationById(id: ID!): Location!
+    findLocationsByWorldId(world_id: ID!): [Location!]
+    findLocationsByMarkerId(marker_id: ID!): [Location!]
+
+    findTownById(id: ID!): Town!
+    findTownsByWorldId(world_id: ID!): [Town!]
+    findTownsByMarkerId(marker_id: ID!): [Town!]
   }
 
   type Mutation {
-    createNewWorld(name: String!, creator_id: ID!): World!
+    createNewWorld(name: String!, creator_id: ID!, description: String): World!
     createNewUser(username: String!, email: String!, password: String!, first_name: String, last_name: String): User!
     createNewMap(world_id: ID!, url: String!, world_map: Boolean!, width: Int!, height: Int!): Map!
     createNewMarker(map_id: ID!, latitude: Float!, longitude: Float!): Marker!
-    createNewCity(marker_id: ID, name: String!, population: Int, government: String, description: String): City!
-    createNewTown(marker_id: ID, name: String!, population: Int, government: String, description: String): Town!
-    createNewLocation(marker_id: ID, name: String!, description: String): Location!
+    createNewCity(marker_id: ID, world_id: ID!, name: String!, population: Int, government: String, description: String): City!
+    createNewTown(marker_id: ID, world_id: ID!, name: String!, population: Int, government: String, description: String): Town!
+    createNewLocation(marker_id: ID, world_id: ID!, name: String!, description: String): Location!
   }
   
   type User {
@@ -39,6 +56,7 @@ const typeDefs = `
     url: String!
     width: Int!
     height: Int!
+    world_map: Boolean!
   }
 
   type Marker {
@@ -51,12 +69,14 @@ const typeDefs = `
   interface MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
   }
 
   type City implements MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
     population: Int
     government: String
@@ -66,6 +86,7 @@ const typeDefs = `
   type Town implements MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
     population: Int
     government: String
@@ -75,6 +96,7 @@ const typeDefs = `
   type Location implements MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
     description: String
   }
