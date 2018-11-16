@@ -8,9 +8,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     marker_id: {
       type: DataTypes.UUID,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'marker', key: 'id'
+      }
+    },
+    world_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'world', key: 'id'
       }
     },
     name: DataTypes.STRING,
