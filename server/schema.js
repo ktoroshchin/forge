@@ -57,12 +57,14 @@ const typeDefs = `
   interface MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
   }
 
   type City implements MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
     population: Int
     government: String
@@ -72,6 +74,7 @@ const typeDefs = `
   type Town implements MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
     population: Int
     government: String
@@ -81,6 +84,7 @@ const typeDefs = `
   type Location implements MapMarker {
     id: ID!
     marker_id: ID
+    world_id: ID!
     name: String!
     description: String
   }

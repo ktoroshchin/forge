@@ -77,25 +77,28 @@ module.exports = {
       latitude: latitude,
       longitude: longitude
     }).save(),
-    createNewCity: (root, { marker_id, name, population, government, description }) => Models.city.build({
+    createNewCity: (root, { marker_id, world_id, name, population, government, description }) => Models.city.build({
       id: uuid(),
       marker_id: marker_id,
+      world_id: world_id,
       name: name,
       population: population,
       government: government,
       description: description,
     }).save(),
-    createNewTown: (root, { marker_id, name, population, government, description }) => Models.town.build({
+    createNewTown: (root, { marker_id, world_id, name, population, government, description }) => Models.town.build({
       id: uuid(),
       marker_id: marker_id,
+      world_id: world_id,
       name: name,
       population: population,
       government: government,
       description: description,
     }).save(),
-    createNewLocation: (root, { marker_id, name, description }) => Models.location.build({
+    createNewLocation: (root, { marker_id, world_id, name, description }) => Models.location.build({
       id: uuid(),
       marker_id: marker_id,
+      world_id: world_id,
       name: name,
       description: description,
     }).save(),
