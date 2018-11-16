@@ -3,7 +3,7 @@ import { ImageOverlay, Map, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
-
+import NewMarkerForm from './NewMarkerForm'
 delete L.Icon.Default.prototype._getIconUrl;
 
 L.Icon.Default.mergeOptions({
@@ -105,6 +105,7 @@ export default class CustomMapExample extends Component {
           id="map"
           crs={L.CRS.Simple}
           minZoom={-1}
+          maxZoom={2}
           bounds={bounds}
           center={position}
           zoom={this.state.zoom}
@@ -121,9 +122,7 @@ export default class CustomMapExample extends Component {
               ref={this.refMarker}
               >
               <Popup minWidth={90}>
-                <button onClick={this.submitMarker}>
-                  Submit Marker
-                </button>
+                <NewMarkerForm submitMarker={this.submitMarker} />
               </Popup>
             </Marker>
           }

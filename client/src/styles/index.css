@@ -20,3 +20,15 @@ code {
 #map {
   height: 400px;
 }
+
+.leaflet-popup-content-wrapper {
+  width: 400px;
+}
+
+.btn-group {
+  width: 100%;
+}
+
+.btn-group .btn {
+  width: 100%;
+}
