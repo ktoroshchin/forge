@@ -1,12 +1,12 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import { ImageOverlay, Map, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
-import Leaflet from 'leaflet';
+import L from 'leaflet';
 
-delete Leaflet.Icon.Default.prototype._getIconUrl;
+delete L.Icon.Default.prototype._getIconUrl;
 
-Leaflet.Icon.Default.mergeOptions({
+L.Icon.Default.mergeOptions({
     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
     iconUrl: require('leaflet/dist/images/marker-icon.png'),
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
@@ -22,7 +22,7 @@ export default class CustomMapExample extends Component {
       },
       zoom: 1,
       draggable: true,
-      dimensions: [],
+      dimensions: [1024, 2048],
       markerData: [],
     };
   }
@@ -33,34 +33,30 @@ export default class CustomMapExample extends Component {
 
   addMarker = (event) => {
     const {markerData} = this.state
-    const markerID = event.target._leaflet_id
     const coords = event.latlng
-    const newMarker = {
-      id: markerID,
-      coords: coords,
-    }
-    markerData.push(newMarker)
+    markerData.push(coords)
     this.setState({markerData})
   }
 
   updateMarker = (event) => {
-    console.log(event.target)
-    console.log(event.target._latlng)
-
-    console.log(event.target._leaflet_id)
+    console.log(event)
   }
+
+  submitMarkers = () => {
+    console.log('Hello!')
+  }
+
 
   render () {
     const boundOrigin = [0, 0];
-    const imageSize = [1024, 2048];
-    const bounds = [boundOrigin, imageSize];
+    const bounds = [boundOrigin, this.state.dimensions];
     const position = [this.state.center.lat, this.state.center.lng]
 
     return (
       <div>
         <Map
           id="map"
-          crs={Leaflet.CRS.Simple}
+          crs={L.CRS.Simple}
           minZoom={-1}
           bounds={bounds}
           center={position}
@@ -71,13 +67,12 @@ export default class CustomMapExample extends Component {
             url='http://www.online-tabletop.com/wp-content/uploads/2017/01/tutoriala.jpg'
             bounds={bounds}
             />
-          {this.state.markerData.map((element) =>
+          {this.state.markerData.map((element, index) =>
             <Marker
-              key={element.id}
-              position={element.coords}
+              key={index}
+              position={element}
               draggable={this.state.draggable}
               onDragend={this.updateMarker}
-              ref={element.id}
               >
               <Popup>
                 <span onClick={this.toggleDraggable}>
@@ -87,6 +82,9 @@ export default class CustomMapExample extends Component {
             </Marker>
           )}
         </Map>
+        <button onClick={this.submitMarkers}>
+          Submit
+        </button>
       </div>
     );
   }
