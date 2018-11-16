@@ -3,31 +3,69 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-function CreateNewCity() {
+class CreateNewCity extends Component {
+  state = {
+    name: null,
+    population: null,
+    government: null,
+    description: null,
+    world_id: "3d4f3bc5-a4c9-46a2-a16b-20e039730842",
+    marker_id: null
+  }
+
+handleCityName = this.handleCityName.bind(this);
+handlePopulation = this.handlePopulation.bind(this);
+handleGovernment = this.handleGovernment.bind(this);
+handleDescription = this.handleDescription.bind(this);
+
+handleCityName(e) {
+  this.setState({name: e.target.value});
+}
+handlePopulation(e) {
+  this.setState({population: Number(e.target.value)});
+}
+handleGovernment(e) {
+  this.setState({government: e.target.value});
+}
+handleDescription(e) {
+  this.setState({description: e.target.value});
+}
+
+  render(){
+    const { name, population, government, description, marker_id, world_id } = this.state
+    const POST_MUTATION = gql`
+      mutation ($name: String!, $population: Int, $government: String, $description: String, $world_id: ID!, $marker_id: ID){
+        createNewCity(name: $name, population: $population, government: $government, description: $description, world_id: $world_id, marker_id: $marker_id) {
+          id
+        }
+      }`
   return (
     <div>
       <Form>
         <Label for="form">Create a new city</Label>
         <FormGroup>
           <Label for="city">City</Label>
-          <Input type="text" name="city" placeholder="city"/>
+          <Input onChange={this.handleCityName} type="text" name="name" placeholder="city"/>
         </FormGroup>
         <FormGroup>
           <Label for="population">Population</Label>
-          <Input type="text" name="population" placeholder="population" />
+          <Input onChange={this.handlePopulation} type="text" name="population" placeholder="population" />
         </FormGroup>
         <FormGroup>
           <Label for="government">Government</Label>
-          <Input type="text" name="government" placeholder="government" />
+          <Input onChange={this.handleGovernment} type="text" name="government" placeholder="government" />
         </FormGroup>
         <FormGroup>
           <Label for="description">Description</Label>
-          <Input type="textarea" name="description" placeholder="description" />
+          <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
         </FormGroup>
-        <Button>Submit</Button>
+        <Mutation mutation={POST_MUTATION} variables={{ name, population, description, marker_id, world_id }}>
+          {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
+        </Mutation>
       </Form>
     </div>
     )
+  }
 }
 
 export default CreateNewCity;

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button,ListGroup, ListGroupItem } from 'reactstrap';
-import ChooseCategoryToUpdate from './ChooseCategoryToUpdate'
+import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
 
 class DisplayWorldDetails extends Component {
   state = {
@@ -20,7 +20,7 @@ handleClick() {
     return(
       <div className="AccordionForWorldPage "  >
         <ListGroupItem className="world-name ">World</ListGroupItem>
-        <div class="row">
+        <div className="row">
           <div id="accordion" className="page-align col-md-3">
             <div className="card" className="listGroup">
               <div className="card-header" id="headingOne">
