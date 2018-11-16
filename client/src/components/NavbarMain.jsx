@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
 import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
+import GuestNavBar from "./GuestNavBar"
 
 
 class NavbarMain extends Component {
@@ -21,23 +22,7 @@ class NavbarMain extends Component {
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Hello, Guest!
-                </DropdownToggle>
-                <DropdownMenu right>
-
-                  <DropdownItem tag={Link} to="/login">
-                    Login
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem tag={Link} to="/register">
-                    Register
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
+            <GuestNavBar />
           </Collapse>
         </Navbar>
       </div>
