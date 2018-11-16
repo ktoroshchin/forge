@@ -6,6 +6,9 @@ const typeDefs = `
     findWorldById(id: ID!): World!
     findWorldByName(name: String!): World!
     login(username: String!, password: String!): User
+
+    findMapById(id: ID!): Map!
+    findMapsByWorldId(world_id: ID!): [Map!]
   }
 
   type Mutation {
@@ -39,6 +42,7 @@ const typeDefs = `
     url: String!
     width: Int!
     height: Int!
+    world_map: Boolean!
   }
 
   type Marker {

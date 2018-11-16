@@ -3,6 +3,7 @@ const uuid = require('uuid/v4')
 
 const userAttributes = ['id', 'first_name', 'last_name', 'email', 'username'];
 const worldAttributes = ['id', 'name', 'description', 'creator_id'];
+const mapAttributes = ['id', 'world_id', 'url', 'width', 'height', 'world_map'];
 
 module.exports = {
   Query: {
@@ -27,6 +28,14 @@ module.exports = {
     login: (root, { username, password }) => Models.user.findOne({
       where: { username, password },
       attributes: userAttributes
+    }),
+    findMapById: (root, { id }) => Models.map.findOne({
+      where: { id: id },
+      attributes: mapAttributes,
+    }),
+    findMapsByWorldId: (root, { world_id }) => Models.map.findAll({
+      where: { world_id: world_id },
+      attributes: mapAttributes,
     })
 
   },
