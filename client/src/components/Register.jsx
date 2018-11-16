@@ -40,7 +40,6 @@ class Register extends Component {
     const POST_MUTATION = gql`
       mutation ($first_name: String, $last_name: String, $username: String!, $email: String!, $password: String!){
         createNewUser(first_name: $first_name, last_name: $last_name, username: $username, email: $email, password: $password) {
-          id
         }
       }`
     return (
