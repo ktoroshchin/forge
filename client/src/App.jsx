@@ -10,17 +10,18 @@ import Register from './components/Register'
 import CustomMapExample from './components/CustomMapView'
 import CreateNewWorld from './components/CreateNewWorld'
 import WorldMapSubmit from './components/WorldMapSubmit'
-
+import Cookies from 'universal-cookie';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
 })
-
+const cookies = new Cookies();
+// cookies.set('userID', 'Pacman', { path: '/' });
 const App = () => (
   <ApolloProvider client={client}>
     <Router>
       <div>
-        <NavbarMain />
+        <NavbarMain cookies={cookies}/>
         <Route exact path="/" component={HomePage}/>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
