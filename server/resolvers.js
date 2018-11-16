@@ -39,11 +39,11 @@ module.exports = {
       where: { world_id: world_id },
       attributes: mapAttributes,
     }),
-    findMarkerById: (root, { id }) => Models.map.findOne({
+    findMarkerById: (root, { id }) => Models.marker.findOne({
       where: { id: id },
       attributes: markerAttributes,
     }),
-    findMarkersByMapId: (root, { map_id }) => Models.map.findAll({
+    findMarkersByMapId: (root, { map_id }) => Models.marker.findAll({
       where: { map_id: map_id },
       attributes: markerAttributes,
     }),
