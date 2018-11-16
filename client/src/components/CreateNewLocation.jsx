@@ -8,26 +8,25 @@ class CreateNewLocation extends Component {
     name: null,
     description: null,
     marker_id: null,
-    world_id: "3d4f3bc5-a4c9-46a2-a16b-20e039730842",
-    id: "1"
+    world_id: "2fd0df5b-5623-497a-bb21-3d5d9144f618",
   }
 
-handleLocation = this.handleLocation.bind(this);
+handleLocationName = this.handleLocationName.bind(this);
 handleDescription = this.handleDescription.bind(this);
 
 
-handleLocation(e) {
-  this.setState({population: Number(e.target.value)});
+handleLocationName(e) {
+  this.setState({name: e.target.value});
 }
 handleDescription(e) {
   this.setState({description: e.target.value});
 }
 
 render(){
-  const { name, description, marker_id, world_id, id } = this.state
+  const { name, description, marker_id, world_id } = this.state
   const POST_MUTATION = gql`
-    mutation ($name: String!, $description: String, $world_id: ID!, $marker_id: ID, $id: ID!){
-      createNewLocation(name: $name, description: $description, world_id: $world_id, marker_id: $marker_id, id: $id) {
+    mutation ($name: String!, $description: String, $world_id: ID!, $marker_id: ID ){
+      createNewLocation(name: $name, description: $description, world_id: $world_id, marker_id: $marker_id ) {
         id
       }
     }`
@@ -38,13 +37,13 @@ render(){
         <Label for="form">Create a new Location</Label>
         <FormGroup>
           <Label for="Name">Name</Label>
-          <Input onChange={this.handleLocation} type="text" name="name" placeholder="location name"/>
+          <Input onChange={this.handleLocationName} type="text" name="name" placeholder="location name"/>
         </FormGroup>
         <FormGroup>
           <Label for="description">Description</Label>
           <Input onChange={this.handleDescription} type="text" name="description" placeholder="description" />
         </FormGroup>
-        <Mutation mutation={POST_MUTATION} variables={{ name, description, marker_id, world_id, id }}>
+        <Mutation mutation={POST_MUTATION} variables={{ name, description, marker_id, world_id }}>
           {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
         </Mutation>
       </Form>

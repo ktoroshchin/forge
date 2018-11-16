@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
-import { Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
-
+import { Collapse,Navbar,NavbarToggler,NavbarBrand } from 'reactstrap';
+import NavBarDropDown from "./NavBarDropDown"
 
 class NavbarMain extends Component {
   state = {
-    dropdownOpen: false
+    dropdownOpen: false,
   }
   toggle = this.toggle.bind(this);
   toggle() {
@@ -21,23 +20,7 @@ class NavbarMain extends Component {
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Hello, Guest!
-                </DropdownToggle>
-                <DropdownMenu right>
-
-                  <DropdownItem tag={Link} to="/login">
-                    Login
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem tag={Link} to="/register">
-                    Register
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
+            <NavBarDropDown cookies={this.props.cookies} addUserID={this.props.addUserID} deleteUserID={this.props.deleteUserID} />
           </Collapse>
         </Navbar>
       </div>
