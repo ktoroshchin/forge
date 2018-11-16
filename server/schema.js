@@ -10,7 +10,7 @@ const typeDefs = `
 
   type Mutation {
     createNewWorld(name: String!, creator_id: ID!): World!
-    createNewUser(username: String!, email: String!, password: String!): User!
+    createNewUser(username: String!, email: String!, password: String!, first_name: String, last_name: String): User!
     createNewMap(world_id: ID!, url: String!, world_map: Boolean!, width: Int!, height: Int!): Map!
     createNewMarker(map_id: ID!, latitude: Float!, longitude: Float!): Marker!
     createNewCity(marker_id: ID, name: String!, population: Int, government: String, description: String): City!

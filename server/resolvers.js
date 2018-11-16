@@ -36,11 +36,13 @@ module.exports = {
       name: name,
       creator_id: creator_id,
     }).save(),
-    createNewUser: (root, { username, email, password }) => Models.user.build({
+    createNewUser: (root, { username, email, password, first_name, last_name }) => Models.user.build({
       id: uuid(),
       username: username,
       email: email,
-      password: password //(NEED TO ENCRYPT THE PASSWORD)
+      password: password, //(NEED TO ENCRYPT THE PASSWORD)
+      first_name: first_name,
+      last_name: last_name
     }).save(),
     createNewMap: (root, { world_id, url, world_map, width, height }) => Models.map.build({
       id: uuid(),
