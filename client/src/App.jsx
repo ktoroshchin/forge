@@ -33,7 +33,7 @@ const App = () => (
         <NavbarMain cookies={cookies} deleteUserID={deleteUserID} />
         <Route exact path="/" component={HomePage} />
         <Route path="/login" render={() => <Login addUserID={addUserID} />} />
-        <Route path="/register" component={Register} />
+        <Route path="/register" render={() => <Register addUserID={addUserID}/>} />
         <Route path="/custommap" component={CustomMapExample} />
         <Route path="/new-world" component={CreateNewWorld} />
         <Route path="/newworldmap" component={WorldMapSubmit} />
