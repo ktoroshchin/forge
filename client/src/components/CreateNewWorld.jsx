@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import CreateNewCity from './CreateNewCity'
@@ -33,20 +34,18 @@ class CreateNewWorld extends Component {
     return (
       <div>
         <h2>Create A New World</h2>
-        <form>
-          <label>
-            Name:
-            <input onChange={this.handleNameChange} type="text" name="name" />
-          </label>
-          <label>
-            Description:
-            <input onChange={this.handleDescriptionChange} type="text" name="description" />
-          </label>
-          <br />
-          <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }} onCompleted={() => this.props.history.push('/')}>
-            {postMutation => <button color="success" onClick={postMutation}>Submit</button>}
-          </Mutation>
-        </form>
+        <Form>
+          <FormGroup>
+            <Label>Name</Label>
+            <Input onChange={this.handleNameChange} type="text" name="name" />
+            <Label>Description</Label>
+            <Input onChange={this.handleDescriptionChange} type="text" name="description" />
+            <br />
+            <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }} onCompleted={() => this.props.history.push('/')}>
+              {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
+            </Mutation>
+          </FormGroup>
+        </Form>
         <CreateNewCity />
         <CreateNewTown/>
         <CreateNewLocation/>
