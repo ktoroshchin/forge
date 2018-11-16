@@ -36,11 +36,16 @@ const typeDefs = `
     height: Int!
   }
 
-  interface Marker {
+  type Marker {
     id: ID!
     map_id: ID!
     latitude: Float!
     longitude: Float!
+  }
+
+  interface MapMarker {
+    id: ID!
+    marker_id: ID
     name: String!
   }
 
