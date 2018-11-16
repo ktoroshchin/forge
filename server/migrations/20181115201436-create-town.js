@@ -9,7 +9,7 @@ module.exports = {
       },
       marker_id: {
         type: Sequelize.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'markers', key: 'id'
         }
