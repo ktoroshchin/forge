@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import HomePage from "./HomePage"
 
 class Login extends Component {
@@ -14,6 +14,7 @@ class Login extends Component {
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.setUsername = this.setUsername.bind(this);
   }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
@@ -21,16 +22,15 @@ class Login extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
+  setUsername(e) {
+    e.preventDefault();
+    if (this.state.username && this.state.password) {
+      this.props.addUserID(this.state.username);
+    } else {
+      alert("Please fill in required fields")
+    }
+  }
    render() {
-    const {username, password} = this.state;
-    const {addUserID} = this.props;
-    const searchForUsername =
-      gql`
-        query ($username: String!, $password: String!){
-          login (username: $username, password: $password) {
-            id
-          }
-        }`;
     return (
       <div>
         <h2>Login</h2>
@@ -41,18 +41,9 @@ class Login extends Component {
             <Label>Password</Label>
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
-            <Button color="success" type="submit" onClick={() => {addUserID(username)}}>Submit</Button>
+            <Button color="success" type="submit" onClick={this.setUsername}>Submit</Button>
           </FormGroup>
         </Form>
-        <Query query={searchForUsername} variables={{ username, password }}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Fetching</div>
-          if (error) return <div>Error</div>
-          if (data.login != null) {
-            return <div>Valid!</div>
-          }
-        }}
-      </Query>
       </div>
     )
   }
