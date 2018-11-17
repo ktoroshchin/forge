@@ -3,6 +3,7 @@ import { Button,ListGroup, ListGroupItem } from 'reactstrap';
 import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
 import CityList from './CityList'
 import TownList from './TownList'
+import LocationList from './LocationList'
 
 class DisplayWorldDetails extends Component {
   state = {
@@ -65,9 +66,7 @@ handleClick() {
               <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <ListGroupItem tag="a" className="listItem" href="#" action>Location1</ListGroupItem>
-                    <ListGroupItem tag="a" className="listItem" href="#" action>Location2</ListGroupItem>
-                    <ListGroupItem tag="a" className="listItem" href="#" action>Location3</ListGroupItem>
+                    <LocationList />
                   </ListGroup>
               </div>
             </div>
