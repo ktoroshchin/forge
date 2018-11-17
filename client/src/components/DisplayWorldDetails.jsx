@@ -7,6 +7,7 @@ import LocationList from './LocationList'
 import City from './City'
 import Town from './Town'
 import Location from './Location'
+import ShowMap from './ShowMap'
 
 class DisplayWorldDetails extends Component {
   state = {
@@ -97,6 +98,7 @@ setLocationID(id) {
           <Town  townID={this.state.locationID}/>
           <Location locationID={this.state.locationID}/>
         </div>
+        <ShowMap worldID={worldID} />
       </div>
     )
   }
