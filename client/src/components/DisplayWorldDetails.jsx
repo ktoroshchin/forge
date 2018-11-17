@@ -20,6 +20,7 @@ handleClick() {
 
 
   render() {
+    const worldID = this.props.location.state.id;
     return(
       <div className="AccordionForWorldPage "  >
         <ListGroupItem className="world-name ">World</ListGroupItem>
@@ -34,7 +35,7 @@ handleClick() {
               <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <CityList />
+                    <CityList worldID={worldID} />
                   </ListGroup>
                 </div>
               </div>
@@ -50,7 +51,7 @@ handleClick() {
               <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <TownList />
+                    <TownList worldID={worldID} />
                   </ListGroup>
                 </div>
               </div>
@@ -66,7 +67,7 @@ handleClick() {
               <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <LocationList />
+                    <LocationList worldID={worldID} />
                   </ListGroup>
               </div>
             </div>
