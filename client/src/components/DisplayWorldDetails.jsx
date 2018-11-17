@@ -4,6 +4,8 @@ import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
 import CityList from './CityList'
 import TownList from './TownList'
 import LocationList from './LocationList'
+import ShowMap from './ShowMap'
+
 
 class DisplayWorldDetails extends Component {
   state = {
@@ -78,6 +80,7 @@ handleClick() {
             {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
           </div>
         </div>
+        <ShowMap worldID={worldID} />
       </div>
     )
   }
