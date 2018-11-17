@@ -94,9 +94,9 @@ setLocationID(id) {
           <div className="col-md-8">
             {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
           </div>
-          <City cityID={this.state.locationID}/>
-          <Town  townID={this.state.locationID}/>
-          <Location locationID={this.state.locationID}/>
+          {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
+          {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
+          {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
         </div>
         <ShowMap worldID={worldID} />
       </div>
