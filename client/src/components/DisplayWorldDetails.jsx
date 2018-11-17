@@ -81,7 +81,7 @@ setLocationID(id) {
               <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <LocationList worldID={worldID} />
+                    <LocationList worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} />
                   </ListGroup>
               </div>
             </div>

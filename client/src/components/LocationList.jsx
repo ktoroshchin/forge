@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import {ListGroupItem} from 'reactstrap';
 
-function LocationList({worldID}) {
+function LocationList({worldID, setValue, setLocationID}) {
   const findLocations =
   gql`
   query {
@@ -19,7 +19,7 @@ function LocationList({worldID}) {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.findLocationsByWorldId.map(({ id, name }) => (
-            <ListGroupItem key={id} tag="a" className="listItem" href="#" action>{name}</ListGroupItem>
+            <ListGroupItem key={id} onClick={()=>{setValue("Location"); setLocationID(id)}} action>{name}</ListGroupItem>
           )));
         }}
       </Query>
