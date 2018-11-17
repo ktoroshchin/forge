@@ -25,6 +25,15 @@ module.exports = {
       password, //(NEED TO ENCRYPT THE PASSWORD)
       first_name,
       last_name
-    }).save()
+    }).save(),
+    bulkEditUser: (root, { id, password, first_name, last_name }) => user.update({
+      id,
+      first_name,
+      last_name
+    }, { where: { id, password } })
+      .then(() => user.findOne({
+        where: { id, password },
+        attributes: userAttributes,
+      }))
   }
 }
