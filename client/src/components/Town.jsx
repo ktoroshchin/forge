@@ -1,8 +1,7 @@
 import React from "react";
-import { Jumbotron } from 'reactstrap';
 import { Link } from "react-router-dom";
 
-function World({name, description}) {
+function City({marker_id, world_id, name, population, government, description}) {
   return (
     <div>
     <Jumbotron>
