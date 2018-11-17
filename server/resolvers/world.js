@@ -24,7 +24,7 @@ module.exports = {
       creator_id,
       description
     }).save(),
-    bulkEditMap: (root, { id, name, creator_id, description }) => world.update({
+    bulkEditWorld: (root, { id, name, creator_id, description }) => world.update({
       id,
       name,
       creator_id,
