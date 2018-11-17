@@ -27,6 +27,16 @@ module.exports = {
       population,
       government,
       description,
-    }).save()
+    }).save(),
+    bulkEditTown: (root, { id, name, population, government, description }) => town.update({
+      name,
+      population,
+      government,
+      description
+    }, { where: { id } })
+      .then(() => town.findOne({
+        where: { id },
+        attributes: townAttributes,
+      }))
   }
 }

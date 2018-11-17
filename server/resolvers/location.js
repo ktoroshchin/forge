@@ -25,6 +25,14 @@ module.exports = {
       world_id,
       name,
       description,
-    }).save()
+    }).save(),
+    bulkEditLocation: (root, { id, name, description }) => location.update({
+      name,
+      description
+    }, { where: { id } })
+      .then(() => location.findOne({
+        where: { id },
+        attributes: locationAttributes,
+      }))
   }
 }

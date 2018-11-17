@@ -5,7 +5,8 @@ const queryType = `
 `;
 
 const mutationType = `
-  createNewTown(marker_id: ID, world_id: ID!, name: String!, population: Int, government: String, description: String): Town!`;
+  createNewTown(marker_id: ID, world_id: ID!, name: String!, population: Int, government: String, description: String): Town!
+  bulkEditTown(id: ID!, name: String!, population: Int, government: String, description: String): Town!`;
 
 const modelType = `
   type Town implements MapMarker {
