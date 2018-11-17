@@ -78,7 +78,7 @@ class Register extends Component {
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
-              {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
+              {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); this.setUsername(event)}}>Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
           </FormGroup>
