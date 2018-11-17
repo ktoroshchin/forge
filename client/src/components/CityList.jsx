@@ -13,7 +13,6 @@ const findCities =
 }`;
 
 
-
 function CityList() {
   return (
     <div>
