@@ -6,20 +6,20 @@ const markerAttributes = ['id', 'map_id', 'latitude', 'longitude'];
 module.exports = {
   Queries: {
     findMarkerById: (root, { id }) => marker.findOne({
-      where: { id: id },
+      where: { id },
       attributes: markerAttributes,
     }),
     findMarkersByMapId: (root, { map_id }) => marker.findAll({
-      where: { map_id: map_id },
+      where: { map_id },
       attributes: markerAttributes,
     })
   },
   Mutations: {
     createNewMarker: (root, { map_id, latitude, longitude }) => marker.build({
       id: uuid(),
-      map_id: map_id,
-      latitude: latitude,
-      longitude: longitude
+      map_id,
+      latitude,
+      longitude
     }).save()
   }
 }
