@@ -5,7 +5,7 @@ import { ListGroupItem } from 'reactstrap';
 
 
 
-function CityList({worldID}) {
+function CityList({worldID, setValue, setLocationID}) {
   const findCities =
   gql`
   query {
@@ -14,10 +14,6 @@ function CityList({worldID}) {
       name
     }
   }`;
-
-
-
-
   return (
     <div>
       <Query query={findCities}>
@@ -25,7 +21,7 @@ function CityList({worldID}) {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.findCitiesByWorldId.map(({ id, name }) => (
-            <ListGroupItem key = {id} tag="a" className="listItem" href="#" action>{name}</ListGroupItem>
+            <ListGroupItem key={id} onClick={()=>{setValue("City"); setLocationID(id)}} action>{name}</ListGroupItem>
           )));
         }}
       </Query>

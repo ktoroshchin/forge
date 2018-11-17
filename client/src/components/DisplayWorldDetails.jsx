@@ -8,17 +8,30 @@ import City from './City'
 
 class DisplayWorldDetails extends Component {
   state = {
-    clicked: false
+    clicked: false,
+    value: "",
+    locationID: ""
   };
 
 handleClick = this.handleClick.bind(this)
+setValue = this.setValue.bind(this);
+setLocationID = this.setLocationID.bind(this);
 
 handleClick() {
   this.setState({
     clicked: true
   });
 }
-
+setValue(value) {
+  this.setState({
+    value: value
+  })
+}
+setLocationID(id) {
+  this.setState({
+    locationID: id
+  })
+}
 
   render() {
     const worldID = this.props.location.state.id;
@@ -36,7 +49,7 @@ handleClick() {
               <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <CityList worldID={worldID} />
+                    <CityList worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} />
                   </ListGroup>
                 </div>
               </div>
@@ -78,7 +91,6 @@ handleClick() {
           <div className="col-md-8">
             {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
           </div>
-          <City />
         </div>
       </div>
     )
