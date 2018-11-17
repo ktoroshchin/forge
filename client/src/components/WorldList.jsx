@@ -22,7 +22,7 @@ function WorldList() {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.allWorlds.map(({ id, name, description }) => (
-            <World key={id} name={name} description={description} />
+            <World key={id} id={id} name={name} description={description} />
           )));
         }}
       </Query>
