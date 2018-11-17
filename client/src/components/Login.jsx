@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from 'react-router-dom'
 import HomePage from "./HomePage"
+import {Route, Redirect} from 'react-router'
 
 class Login extends Component {
   constructor(props) {
@@ -11,10 +11,12 @@ class Login extends Component {
     this.state = {
       username: null,
       password: null,
+      redirect: false
     }
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.setUsername = this.setUsername.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
@@ -26,8 +28,14 @@ class Login extends Component {
     e.preventDefault();
     if (this.state.username && this.state.password) {
       this.props.addUserID(this.state.username);
+      this.setState({redirect: true})
     } else {
       alert("Please fill in required fields")
+    }
+  }
+  renderRedirect() {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
     }
   }
    render() {
@@ -42,6 +50,7 @@ class Login extends Component {
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
             <Button color="success" type="submit" onClick={this.setUsername}>Submit</Button>
+            {this.renderRedirect()}
           </FormGroup>
         </Form>
       </div>
