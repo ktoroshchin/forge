@@ -39,7 +39,7 @@ setLocationID(id) {
     return(
         <div>
         <TableofContents worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
-        <Button onClick={this.handleClick} className="btn btn-success add-world col-md-12">Add World</Button>
+        <Button onClick={this.handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
         <div className="col-md-8">
           {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
         </div>
