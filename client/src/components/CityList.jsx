@@ -15,9 +15,6 @@ function CityList({worldID}) {
     }
   }`;
 
-
-
-
   return (
     <div>
       <Query query={findCities}>
@@ -25,7 +22,7 @@ function CityList({worldID}) {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.findCitiesByWorldId.map(({ id, name }) => (
-            <ListGroupItem key = {id} tag="a" className="listItem" href="#" action>{name}</ListGroupItem>
+            <ListGroupItem key = {id} tag="a" id={id}  className="listItem" href="#" action>{name}</ListGroupItem>
           )));
         }}
       </Query>

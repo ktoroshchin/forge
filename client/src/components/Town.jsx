@@ -1,17 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {ListGroupItem, ListGroup} from 'reactstrap';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
-function City({marker_id, world_id, name, population, government, description}) {
+
+const findTown =
+  gql`
+    query {
+     findTownById(id: "9ffa36a3-0425-42ed-898e-a622267898c4") {
+       id
+       name
+       population
+       government
+       description
+    }
+}`;
+
+function Town() {
   return (
     <div>
-    <Jumbotron>
-      <p>World Name:
-        <Link to='/world-show'> {name}</Link>
-      </p>
-      <p>Description: {description} </p>
-      </Jumbotron>
+      <Query query={findTown}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Fetching</div>
+          if (error) return <div>Error</div>
+          return (
+            <ListGroup>
+              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findTownById.name}</ListGroupItem>
+              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findTownById.population}</ListGroupItem>
+              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findTownById.government}</ListGroupItem>
+              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findTownById.description}</ListGroupItem>
+            </ListGroup>
+          );
+        }}
+      </Query>
     </div>
   );
 }
 
-export default World;
+export default Town

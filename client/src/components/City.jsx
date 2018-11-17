@@ -30,7 +30,7 @@ function City() {
               <ListGroupItem tag="a" className="listItem" href="#" action>{data.findCityById.government}</ListGroupItem>
               <ListGroupItem tag="a" className="listItem" href="#" action>{data.findCityById.description}</ListGroupItem>
             </ListGroup>
-        );
+          );
         }}
       </Query>
     </div>

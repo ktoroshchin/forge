@@ -5,6 +5,8 @@ import CityList from './CityList'
 import TownList from './TownList'
 import LocationList from './LocationList'
 import City from './City'
+import Town from './Town'
+import Location from './Location'
 
 class DisplayWorldDetails extends Component {
   state = {
@@ -79,6 +81,8 @@ handleClick() {
             {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
           </div>
           <City />
+          <Town />
+          <Location />
         </div>
       </div>
     )
