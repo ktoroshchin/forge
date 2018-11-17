@@ -93,12 +93,9 @@ setLocationID(id) {
           <div className="col-md-8">
             {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
           </div>
-<<<<<<< HEAD
           <City />
           <Town />
           <Location />
-=======
->>>>>>> 824fd1f109789096f36c5ab1c9e652b1e2af711f
         </div>
       </div>
     )
