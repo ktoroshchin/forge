@@ -3,16 +3,15 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import {ListGroupItem} from 'reactstrap';
 
-const findTowns =
+function TownList({worldID}) {
+  const findTowns =
   gql`
   query {
-    findTownsByWorldId(world_id: "2fd0df5b-5623-497a-bb21-3d5d9144f618") {
+    findTownsByWorldId(world_id: "${worldID}") {
       id
       name
     }
   }`;
-
-function TownList() {
   return (
     <div>
       <Query query={findTowns}>
