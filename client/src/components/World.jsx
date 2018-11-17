@@ -4,15 +4,10 @@ import { Link } from "react-router-dom";
 
 function World({id, name, description}) {
   return (
-    <Link to={{
-          pathname: "/world-show",
-          state: { id: id  }
-        }}>
+    <Link to={{pathname: "/world-show", state: {id: id}}}>
       <Jumbotron>
-        <p>World Name:
-           {name}
-        </p>
-        <p>Description: {description} </p>
+        <p>World Name: {name}</p>
+        <p>Description: {description}</p>
       </Jumbotron>
     </Link>
   );
