@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Button,ListGroup, ListGroupItem } from 'reactstrap';
 import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
+import CityList from './CityList'
 import TownList from './TownList'
 
 class DisplayWorldDetails extends Component {
@@ -32,9 +33,7 @@ handleClick() {
               <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div className="card-body nopadding">
                   <ListGroup className="listItemContainer">
-                    <ListGroupItem tag="a" className="listItem" href="#" action>City1</ListGroupItem>
-                    <ListGroupItem tag="a" className="listItem" href="#" action>City2</ListGroupItem>
-                    <ListGroupItem tag="a" className="listItem" href="#" action>City3</ListGroupItem>
+                    <CityList />
                   </ListGroup>
                 </div>
               </div>
