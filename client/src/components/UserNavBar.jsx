@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
+import CreateNewWorld from "./CreateNewWorld"
 
 function UserNavBar({userID, deleteUserID}) {
   return (
@@ -10,6 +11,9 @@ function UserNavBar({userID, deleteUserID}) {
           Hello, {userID}!
         </DropdownToggle>
         <DropdownMenu right>
+          <DropdownItem tag={Link} to="/new-world">
+            Create A New World
+          </DropdownItem>
           <DropdownItem tag={Link} to="/login" onClick={deleteUserID}>
             Logout
           </DropdownItem>
