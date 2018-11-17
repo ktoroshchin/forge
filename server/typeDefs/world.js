@@ -5,7 +5,8 @@ const queryType = `
 `;
 
 const mutationType = `
-  createNewWorld(name: String!, creator_id: ID!, description: String): World!`;
+  createNewWorld(name: String!, creator_id: ID!, description: String): World!
+  bulkEditWorld(id: ID!, name: String!, creator_id: ID!, description: String): World!`;
 
 const modelType = `
   type World {

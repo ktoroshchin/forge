@@ -23,6 +23,16 @@ module.exports = {
       name,
       creator_id,
       description
-    }).save()
+    }).save(),
+    bulkEditMap: (root, { id, name, creator_id, description }) => world.update({
+      id,
+      name,
+      creator_id,
+      description 
+    }, { where: { id } })
+      .then(() => world.findOne({
+        where: { id },
+        attributes: worldAttributes,
+      }))
   }
 }

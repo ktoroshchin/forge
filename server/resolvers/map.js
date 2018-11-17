@@ -22,6 +22,18 @@ module.exports = {
       world_map,
       width,
       height
-    }).save()
+    }).save(),
+    bulkEditMap: (root, { id, world_id, url, world_map, width, height }) => map.update({
+      id,
+      world_id,
+      url,
+      world_map,
+      width,
+      height
+    }, { where: { id } })
+      .then(() => map.findOne({
+        where: { id },
+        attributes: mapAttributes,
+      }))
   }
 }

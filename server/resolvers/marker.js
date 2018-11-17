@@ -20,6 +20,16 @@ module.exports = {
       map_id,
       latitude,
       longitude
-    }).save()
+    }).save(),
+    bulkEditMarker: (root, { id, map_id, latitude, longitude }) => marker.update({
+      id,
+      map_id,
+      latitude,
+      longitude
+    }, { where: { id } })
+      .then(() => marker.findOne({
+        where: { id },
+        attributes: markerAttributes,
+      }))
   }
 }
