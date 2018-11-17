@@ -3,7 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import HomePage from "./HomePage"
-import {Route, Redirect} from 'react-router'
+import {Redirect} from 'react-router'
 
 class Login extends Component {
   constructor(props) {
