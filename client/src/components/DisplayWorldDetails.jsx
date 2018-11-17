@@ -93,9 +93,9 @@ setLocationID(id) {
           <div className="col-md-8">
             {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
           </div>
-          <City />
-          <Town />
-          <Location />
+          <City cityID={this.state.locationID}/>
+          <Town  townID={this.state.locationID}/>
+          <Location locationID={this.state.locationID}/>
         </div>
       </div>
     )

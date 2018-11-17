@@ -4,19 +4,19 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
 
-const findLocation =
-  gql`
-    query {
-     findLocationById(id: "1ac24514-5a4c-48ed-a379-797c8865e4fb") {
-       id
-       marker_id
-       world_id
-       name
-       description
-    }
-}`;
 
-function Location() {
+function Location({locationID}) {
+  const findLocation =
+  gql`
+  query {
+    findLocationById(id: "${locationID}") {
+      id
+      marker_id
+      world_id
+      name
+      description
+    }
+  }`;
   return (
     <div>
       <Query query={findLocation}>

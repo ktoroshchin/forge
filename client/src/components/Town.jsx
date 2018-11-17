@@ -4,19 +4,19 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
 
-const findTown =
-  gql`
-    query {
-     findTownById(id: "9ffa36a3-0425-42ed-898e-a622267898c4") {
-       id
-       name
-       population
-       government
-       description
-    }
-}`;
 
-function Town() {
+function Town({townID}) {
+  const findTown =
+  gql`
+  query {
+    findTownById(id: "${townID}") {
+      id
+      name
+      population
+      government
+      description
+    }
+  }`;
   return (
     <div>
       <Query query={findTown}>
