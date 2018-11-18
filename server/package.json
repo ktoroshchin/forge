@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.2.2",
+    "bcrypt-nodejs": "0.0.3",
     "dotenv": "^6.1.0",
     "faker": "^4.1.0",
     "graphql": "^14.0.2",
