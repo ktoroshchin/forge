@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import { Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
 
 class WorldMapSubmit extends Component {
   constructor(props) {
@@ -14,6 +16,13 @@ class WorldMapSubmit extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.getImageSize = this.getImageSize.bind(this)
+
+    this.POST_MUTATION = gql`
+      mutation ($world_id: ID!, $url: String!, $width: Int!, $height: Int!, $world_map: Boolean!){
+        createNewMap(world_id: $world_id, url: $url, world_map: $world_map, width: $width, height: $height){
+          id
+        }
+      }`
   }
 
   handleChange(event) {
