@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import ChooseCity from './ChooseCity'
 
 export default class NewMarkerForm extends Component {
 constructor(props) {
@@ -53,7 +54,7 @@ constructor(props) {
             <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
             <ModalHeader toggle={this.toggleModal}>Choose City</ModalHeader>
             <ModalBody>
-              List of Cities
+              <ChooseCity />
             </ModalBody>
             <ModalFooter>
               <Button color="primary" onClick={() => {submitMarker()}}>
