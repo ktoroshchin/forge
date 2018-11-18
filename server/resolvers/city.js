@@ -39,6 +39,15 @@ module.exports = {
       .then(() => city.findOne({
         where: { id },
         attributes: cityAttributes,
-      }))
+      })),
+    placeCityOnMap: (root, { id, map_id, longitude, latitude }) => city.update({
+      map_id,
+      longitude,
+      latitude
+    }, { where: { id } })
+      .then(() => city.findOne({
+        where: { id },
+        attributes: cityAttributes,
+      })),
   }
 }
