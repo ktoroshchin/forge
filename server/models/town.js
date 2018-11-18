@@ -6,12 +6,20 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    marker_id: {
+    map_id: {
       type: DataTypes.UUID,
       allowNull: true,
       references: {
-        model: 'marker', key: 'id'
+        model: 'maps', key: 'id'
       }
+    },
+    latitude: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    longitude: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     world_id: {
       type: DataTypes.UUID,

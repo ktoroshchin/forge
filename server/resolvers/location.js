@@ -1,7 +1,7 @@
 const { location } = require('../models');
 const uuid = require('uuid/v4')
 
-const locationAttributes = ['id', 'marker_id', 'world_id', 'name', 'description'];
+const locationAttributes = ['id', 'world_id', 'name', 'description', 'map_id', 'latitude', 'longitude'];
 
 module.exports = {
   Queries: {
@@ -13,18 +13,20 @@ module.exports = {
       where: { world_id },
       attributes: locationAttributes,
     }),
-    findLocationsByMarkerId: (root, { marker_id }) => location.findAll({
-      where: { marker_id },
+    findLocationsByMapId: (root, { map_id }) => location.findAll({
+      where: { map_id },
       attributes: locationAttributes,
     })
   },
   Mutations: {
-    createNewLocation: (root, { marker_id, world_id, name, description }) => location.build({
+    createNewLocation: (root, { world_id, name, description, map_id, latitude, longitude }) => location.build({
       id: uuid(),
-      marker_id,
+      map_id,
       world_id,
       name,
       description,
+      longitude,
+      latitude
     }).save(),
     bulkEditLocation: (root, { id, name, description }) => location.update({
       name,
@@ -33,6 +35,15 @@ module.exports = {
       .then(() => location.findOne({
         where: { id },
         attributes: locationAttributes,
-      }))
+      })),
+      placeLocationOnMap: (root, { id, map_id, longitude, latitude }) => location.update({
+        map_id,
+        longitude,
+        latitude
+      }, { where: { id } })
+        .then(() => location.findOne({
+          where: { id },
+          attributes: locationAttributes,
+        })),
   }
 }

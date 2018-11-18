@@ -1,7 +1,7 @@
 const { city } = require('../models');
 const uuid = require('uuid/v4')
 
-const cityAttributes = ['id', 'marker_id', 'world_id', 'name', 'population', 'government', 'description'];
+const cityAttributes = ['id', 'world_id', 'name', 'population', 'government', 'description', 'map_id', 'latitude', 'longitude'];
 
 module.exports = {
   Queries: {
@@ -13,15 +13,17 @@ module.exports = {
       where: { world_id },
       attributes: cityAttributes,
     }),
-    findCitiesByMarkerId: (root, { marker_id }) => city.findAll({
-      where: { marker_id },
+    findCitiesByMapId: (root, { map_id }) => city.findAll({
+      where: { map_id },
       attributes: cityAttributes,
     })
   },
   Mutations: {
-    createNewCity: (root, { marker_id, world_id, name, population, government, description }) => city.build({
+    createNewCity: (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => city.build({
       id: uuid(),
-      marker_id,
+      map_id,
+      latitude,
+      longitude,
       world_id,
       name,
       population,
@@ -37,6 +39,15 @@ module.exports = {
       .then(() => city.findOne({
         where: { id },
         attributes: cityAttributes,
-      }))
+      })),
+    placeCityOnMap: (root, { id, map_id, longitude, latitude }) => city.update({
+      map_id,
+      longitude,
+      latitude
+    }, { where: { id } })
+      .then(() => city.findOne({
+        where: { id },
+        attributes: cityAttributes,
+      })),
   }
 }
