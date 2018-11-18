@@ -1,7 +1,7 @@
 const { town } = require('../models');
 const uuid = require('uuid/v4')
 
-const townAttributes = ['id', 'marker_id', 'world_id', 'name', 'population', 'government', 'description'];
+const townAttributes = ['id', 'world_id', 'name', 'population', 'government', 'description', 'map_id', 'latitude', 'longitude'];
 
 module.exports = {
   Queries: {
@@ -13,15 +13,17 @@ module.exports = {
       where: { world_id },
       attributes: townAttributes,
     }),
-    findTownsByMarkerId: (root, { marker_id }) => town.findAll({
-      where: { marker_id },
+    findTownsByMapId: (root, { map_id }) => town.findAll({
+      where: { map_id },
       attributes: townAttributes,
     })
   },
   Mutations: {
-    createNewTown: (root, { marker_id, world_id, name, population, government, description }) => town.build({
+    createNewTown: (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => town.build({
       id: uuid(),
-      marker_id,
+      map_id,
+      latitude,
+      longitude,
       world_id,
       name,
       population,
