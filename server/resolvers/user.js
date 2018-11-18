@@ -1,4 +1,5 @@
 const { user } = require('../models');
+const bcrypt = require('bcrypt-nodejs');
 const uuid = require('uuid/v4')
 
 const userAttributes = ['id', 'first_name', 'last_name', 'email', 'username'];
@@ -11,10 +12,6 @@ module.exports = {
     findUserById: (root, { id }) => user.findOne({
       where: { id },
       attributes: userAttributes,
-    }),
-    login: (root, { username, password }) => user.findOne({
-      where: { username, password },
-      attributes: userAttributes
     })
   },
   Mutations: {
@@ -34,6 +31,14 @@ module.exports = {
       .then(() => user.findOne({
         where: { id, password },
         attributes: userAttributes,
-      }))
+      })),
+    login: async (root, { username, password }) => {
+      const foundUser = await user.findOne({ where: { username } });
+
+      if (await bcrypt.compareSync(password, foundUser.dataValues.password))
+        return { user_id: foundUser.dataValues.id };
+      else
+        return { error: 'Wrong login credentials' };
+    }
   }
 }

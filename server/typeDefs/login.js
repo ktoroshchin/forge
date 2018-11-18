@@ -1,8 +1,12 @@
-const queryType = `
-  login(username: String!, password: String!): User`;
+const queryType = ``;
 
-const mutationType = ``;
+const mutationType = `
+  login(username: String!, password: String!): Login!`;
 
-const modelType = ``;
+const modelType = `
+type Login {
+  user_id: ID
+  error: String
+}`;
 
 module.exports = { queryType, mutationType, modelType }
