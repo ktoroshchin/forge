@@ -25,13 +25,9 @@ class Login extends Component {
     this.setState({password: e.target.value});
   }
   setUser(data) {
-    if (this.state.username && this.state.password) {
-      this.props.setUsername(this.state.username);
-      this.props.setUserID(data.data.createNewUser.id);
-      this.setState({redirect: true})
-    } else {
-      alert("Please fill in required fields")
-    }
+    this.props.setUsername(this.state.username);
+    this.props.setUserID(data.data.login.id);
+    this.setState({redirect: true})
   }
   renderRedirect() {
     if (this.state.redirect) {
@@ -57,8 +53,10 @@ class Login extends Component {
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
-              {(postMutation, data) =>
-                <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
+              {(postMutation, data, error) =>
+                <Button color="success" onClick={(event)=>{postMutation(event)
+                  .then((data)=>{this.setUser(data);})
+                  .catch((error) => {alert("Wrong login credentials")})}}>
                 Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
