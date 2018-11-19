@@ -5,10 +5,10 @@ import CityList from './CityList'
 import TownList from './TownList'
 import LocationList from './LocationList'
 
-function TableofContents({worldID, setValue, setLocationID}) {
+function TableofContents({worldID, setValue, setLocationID, handleRefresh}) {
   return (
     <div className="AccordionForWorldPage">
-      <ListGroupItem className="world-name">World</ListGroupItem>
+      <ListGroupItem className="world-name" onClick={handleRefresh}>World</ListGroupItem>
       <div className="row">
         <div id="accordion" className="page-align col-md-3">
           <div className="card" className="listGroup">

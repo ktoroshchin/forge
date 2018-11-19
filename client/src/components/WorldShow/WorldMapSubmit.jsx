@@ -15,7 +15,6 @@ class WorldMapSubmit extends Component {
         height: 0,
       },
       worldMap: true,
-      redirect: false,
     }
     console.log(this.props)
     this.handleChange = this.handleChange.bind(this)
