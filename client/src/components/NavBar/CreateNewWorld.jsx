@@ -35,32 +35,36 @@ class CreateNewWorld extends Component {
     }
   }
   render() {
-    const { name, description, creator_id } = this.state;
-    const POST_MUTATION = gql`
-      mutation ($name: String!, $description: String, $creator_id: ID!){
-        createNewWorld(name: $name, description: $description, creator_id: $creator_id) {
-          id
-        }
-      }`
-    return (
-      <div>
-        <h2>Create A New World</h2>
-        <Form>
-          <FormGroup>
-            <Label>Name</Label>
-            <Input onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Description</Label>
-            <Input onChange={this.handleDescriptionChange} type="text" name="description" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
-              {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
-                .then(()=>{this.setRedirect()})}}>Submit</Button>}
-            </Mutation>
-            {this.renderRedirect()}
-          </FormGroup>
-        </Form>
-      </div>
-      )
+    if (this.props.getUserID()) {
+      const { name, description, creator_id } = this.state;
+      const POST_MUTATION = gql`
+        mutation ($name: String!, $description: String, $creator_id: ID!){
+          createNewWorld(name: $name, description: $description, creator_id: $creator_id) {
+            id
+          }
+        }`
+      return (
+        <div>
+          <h2>Create A New World</h2>
+          <Form>
+            <FormGroup>
+              <Label>Name</Label>
+              <Input onChange={this.handleNameChange} type="text" name="name" />
+              <Label>Description</Label>
+              <Input onChange={this.handleDescriptionChange} type="text" name="description" />
+              <br />
+              <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
+                {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
+                  .then(()=>{this.setRedirect()})}}>Submit</Button>}
+              </Mutation>
+              {this.renderRedirect()}
+            </FormGroup>
+          </Form>
+        </div>
+        )
+    } else {
+      return <Redirect to='/login' />
+    }
   }
 }
 
