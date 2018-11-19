@@ -25,14 +25,17 @@ handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
 
+
 handleClick() {
   this.setState({
-    clicked: true
+    clicked: true,
+    value: ""
   });
 }
 setValue(value) {
   this.setState({
-    value: value
+    value: value,
+    clicked: false
   })
 }
 setLocationID(id) {
@@ -53,18 +56,27 @@ componentDidMount() {
   render() {
     const {worldID, worldName, worldDescription, creatorID} = this.props.location.state;
     return(
-        <div>
-        <TableofContents worldID={worldID} worldName={worldName} worldDescription={worldDescription} setValue={this.setValue} setLocationID={this.setLocationID} handleRefresh={this.handleRefresh}/>
-        <Button onClick={this.handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
-        <div className="col-md-8">
-          {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID} /> : null}
-        </div>
-          {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
-          {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
-          {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
-        {this.state.value === '' &&
-          <ShowMap worldID={worldID} />
-        }
+        <div className="container mt-3">
+          <ListGroupItem className="world-name" onClick={this.handleRefresh}>{worldName}</ListGroupItem>
+          <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>
+          <div className="row mt-3">
+            <div className="col-md-4 col-lg-3 col-xl-2">
+              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
+            </div>
+            {this.state.value === '' && !this.state.clicked &&
+              <div className="col-md-8 col-lg-9 col-xl-10">
+                <ShowMap worldID={worldID} />
+              </div>
+            }
+            {(this.state.value !== '' || this.state.clicked) &&
+              <div className="col-md-8 col-lg-9 col-xl-10">
+                {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
+                {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
+                {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
+                {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
+              </div>
+            }
+          </div>
 
         </div>
     )
