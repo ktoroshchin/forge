@@ -13,7 +13,6 @@ import CreateNewWorld from './components/NavBar/CreateNewWorld'
 import MyWorldList from './components/NavBar/MyWorldList'
 
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
-import WorldMapSubmit from './components/WorldShow/WorldMapSubmit'
 import ChooseCategoryToUpdate from './components/WorldShow/ChooseCategoryToUpdate'
 import CreateNewCity from './components/WorldShow/CreateNewCity'
 
@@ -50,7 +49,6 @@ const App = () => (
         <Route path="/custommap" component={CustomMapExample} />
         <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
         <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
-        <Route path="/newworldmap" component={WorldMapSubmit} />
         <Route path="/world-show" component={DisplayWorldDetails} />
         <Route path="/update-category" component={ChooseCategoryToUpdate} />
         <Route path="/updatecity" component={CreateNewCity} />

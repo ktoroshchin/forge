@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ImageOverlay, Map, Marker, Popup } from 'react-leaflet';
+import { ImageOverlay, Map } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
@@ -38,23 +38,23 @@ export default class ShowMap extends Component {
             if (error) return <div>Error</div>
             if (data.findMapsByWorldId.length === 0) return <WorldMapSubmit worldID={worldID} />
             return (
-              data.findMapsByWorldId.map((element) => (
-                <div>
-                {element.world_map === true &&
+              data.findMapsByWorldId.map(({ id, url, height, width, world_map }) => (
+                <div key={id}>
+                {world_map === true &&
                   <Map
                     id="map"
                     crs={L.CRS.Simple}
                     minZoom={-1}
                     maxZoom={2}
-                    bounds={[[0, 0], [element.height, element.width]]}
-                    center={[element.height/2, element.width/2]}
+                    bounds={[[0, 0], [height, width]]}
+                    center={[height/2, width/2]}
                     zoom={1}
                     >
                     <ImageOverlay
-                      url={element.url}
-                      bounds={[[0, 0], [element.height, element.width]]}
+                      url={url}
+                      bounds={[[0, 0], [height, width]]}
                       />
-                    <ShowMarkers mapid={element.id} />
+                    <ShowMarkers mapid={id} />
                   </Map>
                 }
                 </div>
