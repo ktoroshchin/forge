@@ -31,6 +31,7 @@ class CreateNewWorld extends Component {
   }
   renderRedirect() {
     if (this.state.redirect) {
+      window.location.reload();
       return <Redirect to='/my-worlds' />
     }
   }
