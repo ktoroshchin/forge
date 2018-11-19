@@ -6,12 +6,19 @@ import City from './City'
 import Town from './Town'
 import Location from './Location'
 import ShowMap from './MapDisplay/ShowMap'
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
+const getUserID = function() {
+  return cookies.get('userID');
+}
 
 class DisplayWorldDetails extends Component {
   state = {
     clicked: false,
     value: "",
-    locationID: ""
+    locationID: "",
+    isUser: false
   };
 
 handleClick = this.handleClick.bind(this)
@@ -33,12 +40,18 @@ setLocationID(id) {
     locationID: id
   })
 }
-
 handleRefresh() {
   window.location.reload()
 }
+componentDidMount() {
+  if (getUserID() === this.props.location.state.creatorID) {
+    this.setState({
+      isUser: true
+    })
+  }
+}
   render() {
-    const {worldID, worldName, worldDescription} = this.props.location.state;
+    const {worldID, worldName, worldDescription, creatorID} = this.props.location.state;
     return(
         <div>
         <TableofContents worldID={worldID} worldName={worldName} worldDescription={worldDescription} setValue={this.setValue} setLocationID={this.setLocationID} handleRefresh={this.handleRefresh}/>
