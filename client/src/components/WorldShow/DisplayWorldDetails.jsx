@@ -44,7 +44,7 @@ handleRefresh() {
         <TableofContents worldID={worldID} worldName={worldName} worldDescription={worldDescription} setValue={this.setValue} setLocationID={this.setLocationID} handleRefresh={this.handleRefresh}/>
         <Button onClick={this.handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
         <div className="col-md-8">
-          {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
+          {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID} /> : null}
         </div>
           {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
           {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}

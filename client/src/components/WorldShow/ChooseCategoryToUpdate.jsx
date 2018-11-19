@@ -1,12 +1,10 @@
-import React, {Component} from "react";
+import React from "react";
 import { ListGroup,ListGroupItem } from 'reactstrap';
 import CreateNewCity from './CreateNewCity'
 import CreateNewTown from './CreateNewTown'
 import CreateNewLocation from './CreateNewLocation'
 
-
-class ChooseCategoryToUpdate extends Component {
-render() {
+function ChooseCategoryToUpdate ({worldID}) {
   return(
     <div className="ChooseCategoryToUpdate">
       <div className="update-categories">
@@ -61,7 +59,6 @@ render() {
       </div>
     </div>
   </div>
-    )
-  }
+  )
 }
-export default ChooseCategoryToUpdate
+export default ChooseCategoryToUpdate;
