@@ -7,7 +7,7 @@ function World({id, name, description}) {
     <Link to={{pathname: "/world-show", state: {id: id}}}>
       <Jumbotron>
         <p>World Name: {name}</p>
-        <p>Description: {description}</p>
+        {description && <p>Description: {description}</p>}
       </Jumbotron>
     </Link>
   );
