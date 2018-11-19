@@ -20,7 +20,7 @@ class NavbarMain extends Component {
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <NavBarDropDown cookies={this.props.cookies} deleteUsername={this.props.deleteUsername} />
+            <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
           </Collapse>
         </Navbar>
       </div>
