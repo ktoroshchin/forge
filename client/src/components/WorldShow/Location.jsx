@@ -11,7 +11,6 @@ function Location({locationID}) {
   query {
     findLocationById(id: "${locationID}") {
       id
-      marker_id
       world_id
       name
       description
@@ -26,8 +25,7 @@ function Location({locationID}) {
           return (
             <ListGroup>
               <ListGroupItem className="listItem">{data.findLocationById.name}</ListGroupItem>
-              {data.findLocationById.population !== null && <ListGroupItem className="listItem">{data.findLocationById.description}</ListGroupItem>}
-
+              {data.findLocationById.description !== null && <ListGroupItem className="listItem">{data.findLocationById.description}</ListGroupItem>}
             </ListGroup>
           );
         }}
