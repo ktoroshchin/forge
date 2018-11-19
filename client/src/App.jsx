@@ -10,6 +10,7 @@ import NavbarMain from './components/NavBar/NavbarMain.jsx'
 import Login from './components/NavBar/Login'
 import Register from './components/NavBar/Register'
 import CreateNewWorld from './components/NavBar/CreateNewWorld'
+import MyWorldList from './components/NavBar/MyWorldList'
 
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import WorldMapSubmit from './components/WorldShow/WorldMapSubmit'
@@ -24,6 +25,10 @@ const client = new ApolloClient({
   uri: 'http://localhost:4000/'
 })
 const cookies = new Cookies();
+
+const getUserID = function() {
+  return cookies.get('userID');
+}
 const setUsername = function(username) {
   cookies.set('username', username, {path: '/'});
 }
@@ -39,11 +44,12 @@ const App = () => (
     <Router>
       <div>
         <NavbarMain cookies={cookies} deleteUser={deleteUser} />
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
         <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} />} />
         <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} />} />
         <Route path="/custommap" component={CustomMapExample} />
-        <Route path="/new-world" component={CreateNewWorld} />
+        <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
+        <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
         <Route path="/newworldmap" component={WorldMapSubmit} />
         <Route path="/world-show" component={DisplayWorldDetails} />
         <Route path="/update-category" component={ChooseCategoryToUpdate} />

@@ -6,6 +6,7 @@ import L from 'leaflet';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ShowMarkers from './ShowMarkers'
+import WorldMapSubmit from './WorldMapSubmit'
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -26,6 +27,7 @@ export default class ShowMap extends Component {
             url
             width
             height
+            world_map
           }
         }`;
     return (
@@ -34,23 +36,28 @@ export default class ShowMap extends Component {
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
-            return (data.findMapsByWorldId.map(({ id, url, width, height }) => (
-              <Map
-                id="map"
-                crs={L.CRS.Simple}
-                minZoom={-1}
-                maxZoom={2}
-                bounds={[[0, 0], [height, width]]}
-                center={[height/2, width/2]}
-                zoom={1}
-                >
-                <ImageOverlay
-                  url={url}
-                  bounds={[[0, 0], [height, width]]}
-                  />
-                <ShowMarkers mapid={id} />
-              </Map>
-
+            if (data.findMapsByWorldId.length === 0) return <WorldMapSubmit worldID={worldID} />
+            return (
+              data.findMapsByWorldId.map((element) => (
+                <div>
+                {element.world_map === true &&
+                  <Map
+                    id="map"
+                    crs={L.CRS.Simple}
+                    minZoom={-1}
+                    maxZoom={2}
+                    bounds={[[0, 0], [element.height, element.width]]}
+                    center={[element.height/2, element.width/2]}
+                    zoom={1}
+                    >
+                    <ImageOverlay
+                      url={element.url}
+                      bounds={[[0, 0], [element.height, element.width]]}
+                      />
+                    <ShowMarkers mapid={element.id} />
+                  </Map>
+                }
+                </div>
             )));
           }}
         </Query>

@@ -34,13 +34,16 @@ setLocationID(id) {
   })
 }
 
+handleRefresh() {
+  window.location.reload()
+}
   render() {
-    const worldID = this.props.location.state.id;
+    const {worldID, worldName, worldDescription} = this.props.location.state;
     return(
         <div>
           <div className="row">
             <div className="col-md-3">
-              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
+              <TableofContents handleClick={this.handleClick} worldName={worldName} worldDescription={worldDescription}  worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
             </div>
             <div className="col-md-9">
               {this.state.value === 'City' && <City cityID={this.state.locationID}/>}

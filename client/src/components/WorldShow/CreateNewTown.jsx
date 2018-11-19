@@ -9,7 +9,7 @@ class CreateNewTown extends Component {
     population: null,
     government: null,
     description: null,
-    world_id: "3d4f3bc5-a4c9-46a2-a16b-20e039730842",
+    world_id: this.props.worldID,
     marker_id: null
   }
 
@@ -60,7 +60,7 @@ handleDescription(e) {
             <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
           </FormGroup>
           <Mutation mutation={POST_MUTATION} variables={{ name, population, description, marker_id, world_id }}>
-            {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
+            {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
           </Mutation>
         </Form>
       </div>

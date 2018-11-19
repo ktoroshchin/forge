@@ -1,6 +1,7 @@
 const queryType = `
   allWorlds: [World!]!
   findWorldById(id: ID!): World!
+  findWorldsByCreatorId(creator_id: ID!): [World!]
   findWorldByName(name: String!): World!
 `;
 
@@ -12,7 +13,7 @@ const modelType = `
   type World {
     id: ID!
     name: String!
-    description: String!
+    description: String
     creator_id: ID!
   }`;
   

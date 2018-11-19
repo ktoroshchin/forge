@@ -12,6 +12,10 @@ module.exports = {
       where: { id },
       attributes: worldAttributes,
     }),
+    findWorldsByCreatorId: (root, { creator_id }) => world.findAll({
+      where: { creator_id },
+      attributes: worldAttributes,
+    }),
     findWorldByName: (root, { name }) => world.findOne({
       where: { name },
       attributes: worldAttributes,

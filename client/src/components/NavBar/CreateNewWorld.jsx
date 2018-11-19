@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import {Redirect} from 'react-router'
 
 class CreateNewWorld extends Component {
   constructor(props) {
@@ -9,10 +10,13 @@ class CreateNewWorld extends Component {
     this.state = {
       name: null,
       description: null,
-      creator_id: "7597283c-0a43-4be5-bc73-95280f3c0c5f"
+      creator_id: this.props.getUserID(),
+      redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.setRedirect = this.setRedirect.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -20,31 +24,49 @@ class CreateNewWorld extends Component {
   handleDescriptionChange(e) {
     this.setState({description: e.target.value});
   }
+  setRedirect() {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect() {
+    if (this.state.redirect) {
+      return <Redirect to='/my-worlds' />
+    }
+  }
   render() {
-    const { name, description, creator_id } = this.state;
-    const POST_MUTATION = gql`
-      mutation ($name: String!, $description: String, $creator_id: ID!){
-        createNewWorld(name: $name, description: $description, creator_id: $creator_id) {
-          id
-        }
-      }`
-    return (
-      <div>
-        <h2>Create A New World</h2>
-        <Form>
-          <FormGroup>
-            <Label>Name</Label>
-            <Input onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Description</Label>
-            <Input onChange={this.handleDescriptionChange} type="text" name="description" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }} onCompleted={() => this.props.history.push('/')}>
-              {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
-            </Mutation>
-          </FormGroup>
-        </Form>
-      </div>
-      )
+    if (this.props.getUserID()) {
+      const { name, description, creator_id } = this.state;
+      const POST_MUTATION = gql`
+        mutation ($name: String!, $description: String, $creator_id: ID!){
+          createNewWorld(name: $name, description: $description, creator_id: $creator_id) {
+            id
+          }
+        }`
+      return (
+        <div>
+          <h2>Create A New World</h2>
+          <Form>
+            <FormGroup>
+              <Label>Name</Label>
+              <Input onChange={this.handleNameChange} type="text" name="name" />
+              <Label>Description</Label>
+              <Input onChange={this.handleDescriptionChange} type="text" name="description" />
+              <br />
+              <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
+                {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
+                  .then(()=>{this.setRedirect()})
+                  .catch((error) => {alert("Please input required fields")})
+                }}>Submit</Button>}
+              </Mutation>
+              {this.renderRedirect()}
+            </FormGroup>
+          </Form>
+        </div>
+        )
+    } else {
+      return <Redirect to='/login' />
+    }
   }
 }
 

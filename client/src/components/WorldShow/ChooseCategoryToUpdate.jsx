@@ -1,12 +1,10 @@
-import React, {Component} from "react";
+import React from "react";
 import { ListGroup,ListGroupItem } from 'reactstrap';
 import CreateNewCity from './CreateNewCity'
 import CreateNewTown from './CreateNewTown'
 import CreateNewLocation from './CreateNewLocation'
 
-
-class ChooseCategoryToUpdate extends Component {
-render() {
+function ChooseCategoryToUpdate ({worldID}) {
   return(
     <div className="ChooseCategoryToUpdate">
       <div className="update-categories">
@@ -22,7 +20,7 @@ render() {
             <div id="collapseCities" className="collapse" aria-labelledby="headingOne" data-parent="#accordionUpdate">
               <div className="card-body">
                 <ListGroup className="listItemContainer">
-                  <CreateNewCity />
+                  <CreateNewCity worldID={worldID} />
                 </ListGroup>
               </div>
             </div>
@@ -37,7 +35,7 @@ render() {
             <div id="collapseTowns" className="collapse" aria-labelledby="headingOne" data-parent="#accordionUpdate">
               <div className="card-body">
                 <ListGroup className="listItemContainer">
-                  <CreateNewTown />
+                  <CreateNewTown worldID={worldID} />
                 </ListGroup>
               </div>
             </div>
@@ -53,7 +51,7 @@ render() {
             <div id="collapseLocations" className="collapse" aria-labelledby="headingThree" data-parent="#accordionUpdate">
               <div className="card-body">
                 <ListGroup className="listItemContainer">
-                  <CreateNewLocation />
+                  <CreateNewLocation worldID={worldID} />
                 </ListGroup>
             </div>
           </div>
@@ -61,7 +59,6 @@ render() {
       </div>
     </div>
   </div>
-    )
-  }
+  )
 }
-export default ChooseCategoryToUpdate
+export default ChooseCategoryToUpdate;
