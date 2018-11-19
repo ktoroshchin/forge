@@ -27,9 +27,8 @@ const cookies = new Cookies();
 const setUsername = function(username) {
   cookies.set('username', username, {path: '/'});
 }
-const setUserID = function(data) {
-  // cookies.set('userID', userID, {path: '/'})
-  console.log(data)
+const setUserID = function(userID) {
+  cookies.set('userID', userID, {path: '/'})
 }
 const deleteUsername = function() {
   cookies.remove('username');

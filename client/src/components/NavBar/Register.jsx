@@ -38,8 +38,7 @@ class Register extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
-  setUser(event, data) {
-    event.preventDefault();
+  setUser(data) {
     if (this.state.username && this.state.email && this.state.password) {
       this.props.setUsername(this.state.username);
       this.props.setUserID(data.data.createNewUser.id)
@@ -79,7 +78,7 @@ class Register extends Component {
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
               {(postMutation, data) =>
-                <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(event, data);})}}>
+                <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
                 Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
