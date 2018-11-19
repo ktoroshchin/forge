@@ -46,7 +46,10 @@ setLocationID(id) {
           {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
           {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
           {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
-        <ShowMap worldID={worldID} />
+        {this.state.value === '' &&
+          <ShowMap worldID={worldID} />
+        }
+
         </div>
     )
   }
