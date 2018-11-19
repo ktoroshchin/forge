@@ -7,16 +7,27 @@ import Town from './Town'
 import Location from './Location'
 import ShowMap from './MapDisplay/ShowMap'
 
-class DisplayWorldDetails extends Component {
-  state = {
-    clicked: false,
-    value: "",
-    locationID: ""
-  };
+import Cookies from 'universal-cookie';
 
-handleClick = this.handleClick.bind(this)
-setValue = this.setValue.bind(this);
-setLocationID = this.setLocationID.bind(this);
+const cookies = new Cookies();
+
+const getUserID = function() {
+  return cookies.get('userID');
+}
+
+export default class DisplayWorldDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: false,
+      value: "",
+      locationID: ""
+    };
+
+    this.handleClick = this.handleClick.bind(this)
+    this.setValue = this.setValue.bind(this);
+    this.setLocationID = this.setLocationID.bind(this);
+  }
 
 handleClick() {
   this.setState({
@@ -39,6 +50,8 @@ handleRefresh() {
 }
   render() {
     const {worldID, worldName, worldDescription} = this.props.location.state;
+    const userID = getUserID();
+
     return(
         <div>
         <TableofContents worldID={worldID} worldName={worldName} worldDescription={worldDescription} setValue={this.setValue} setLocationID={this.setLocationID} handleRefresh={this.handleRefresh}/>
@@ -50,11 +63,10 @@ handleRefresh() {
           {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
           {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
         {this.state.value === '' &&
-          <ShowMap worldID={worldID} />
+          <ShowMap worldID={worldID} userID={userID} />
         }
 
         </div>
     )
   }
 }
-export default DisplayWorldDetails

@@ -18,7 +18,7 @@ L.Icon.Default.mergeOptions({
 
 export default class ShowMap extends Component {
   render () {
-    const {worldID} = this.props
+    const {worldID, userID} = this.props
     const findMap =
       gql`
         query {
@@ -28,6 +28,14 @@ export default class ShowMap extends Component {
             width
             height
             world_map
+          }
+        }`;
+    const findUserID =
+      gql`
+        query {
+          findWorldById(id: "${worldID}"){
+            id
+            creator_id
           }
         }`;
     return (
@@ -61,7 +69,20 @@ export default class ShowMap extends Component {
             )));
           }}
         </Query>
+        <Query query={findUserID}>
+        {({ loading, error, data }) => {
+          if (loading) return <div>Fetching</div>
+          if (error) return <div>Error</div>
+          return (
+            <div>
+              {userID === data.findWorldById.creator_id &&
+             <span>Edit Button Goes Here</span>
 
+              }
+              </div>
+              );
+        }}
+      </Query>
       </div>
     );
   }
