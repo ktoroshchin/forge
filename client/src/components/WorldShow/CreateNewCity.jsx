@@ -9,7 +9,7 @@ class CreateNewCity extends Component {
     population: null,
     government: null,
     description: null,
-    world_id: "3d4f3bc5-a4c9-46a2-a16b-20e039730842",
+    world_id: this.props.worldID,
     marker_id: null
   }
 
