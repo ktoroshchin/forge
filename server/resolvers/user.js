@@ -19,19 +19,23 @@ module.exports = {
       id: uuid(),
       username,
       email,
-      password, //(NEED TO ENCRYPT THE PASSWORD)
+      password: bcrypt.hashSync(password),
       first_name,
       last_name
     }).save(),
-    bulkEditUser: (root, { id, password, first_name, last_name }) => user.update({
-      id,
+    bulkEditUser: async (root, { id, password, first_name, last_name }) => {
+      const foundUser = await user.findOne({ where: { id } });
+
+      if (await bcrypt.compareSync(password, foundUser.dataValues.password)) {
+        user.update({
       first_name,
       last_name
-    }, { where: { id, password } })
-      .then(() => user.findOne({
-        where: { id, password },
-        attributes: userAttributes,
-      })),
+        }, { where: { id } })
+      } else {
+        throw new Error('UserEdit error: Wrong password')
+      }
+      return user.findOne({ where: { id } });
+    },
     login: async (root, { username, password }) => {
       const foundUser = await user.findOne({ where: { username } });
 
