@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
 import CreateNewWorld from "./CreateNewWorld"
 
-function UserNavBar({username, deleteUserID}) {
+function UserNavBar({username, deleteUsername}) {
   return (
     <Nav className="ml-auto" navbar>
       <UncontrolledDropdown nav inNavbar>
@@ -14,7 +14,7 @@ function UserNavBar({username, deleteUserID}) {
           <DropdownItem tag={Link} to="/new-world">
             Create A New World
           </DropdownItem>
-          <DropdownItem tag={Link} to="/login" onClick={deleteUserID}>
+          <DropdownItem tag={Link} to="/login" onClick={deleteUsername}>
             Logout
           </DropdownItem>
         </DropdownMenu>

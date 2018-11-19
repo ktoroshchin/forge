@@ -3,11 +3,11 @@ import GuestNavBar from "./GuestNavBar"
 import UserNavBar from "./UserNavBar"
 
 
-function NavBarDropDown({cookies, deleteUserID}) {
+function NavBarDropDown({cookies, deleteUsername}) {
   const username = cookies.get('username')
   if (username) {
     return (
-      <UserNavBar username={username} deleteUserID={deleteUserID}/>
+      <UserNavBar username={username} deleteUsername={deleteUsername}/>
     )
   } else {
     return (

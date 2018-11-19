@@ -27,14 +27,14 @@ const cookies = new Cookies();
 const setUsername = function(username) {
   cookies.set('username', username, { path: '/' });
 }
-const deleteUserID = function() {
-  cookies.remove('userID');
+const deleteUsername = function() {
+  cookies.remove('username');
 }
 const App = () => (
   <ApolloProvider client={client}>
     <Router>
       <div>
-        <NavbarMain cookies={cookies} deleteUserID={deleteUserID} />
+        <NavbarMain cookies={cookies} deleteUsername={deleteUsername} />
         <Route exact path="/" component={HomePage} />
         <Route path="/login" render={() => <Login setUsername={setUsername} />} />
         <Route path="/register" render={() => <Register setUsername={setUsername}/>} />
