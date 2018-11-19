@@ -42,7 +42,7 @@ class Register extends Component {
     event.preventDefault();
     if (this.state.username && this.state.email && this.state.password) {
       this.props.setUsername(this.state.username);
-      this.props.setUserID(data)
+      this.props.setUserID(data.data.createNewUser.id)
       this.setState({redirect: true})
     } else {
       alert("Please fill in required fields")
