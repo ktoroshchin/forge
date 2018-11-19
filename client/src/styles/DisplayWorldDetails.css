@@ -16,8 +16,8 @@
 }
 
 .row {
-  /* display: flex; */
-  /* justify-content: flex-star; */
+  display: flex;
+  justify-content: space-between;
   /* justify-content: space-around; */
 }
 
@@ -37,3 +37,6 @@
 }
 
 
+.worldAccordion {
+  width:100%;
+}

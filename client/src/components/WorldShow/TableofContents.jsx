@@ -9,10 +9,9 @@ import LocationList from './LocationList'
 function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh}) {
   return (
     <div className="AccordionForWorldPage">
-      <ListGroupItem className="world-name" onClick={handleRefresh}>{worldName}</ListGroupItem>
-      <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>
+
       <div className="row">
-        <div id="accordion" className="page-align col-md-3">
+        <div id="accordion" className="page-align col">
           <div className="card" className="listGroup">
             <div className="card-header" id="headingOne">
               <button className="btn btn-link category" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
