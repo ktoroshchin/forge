@@ -20,7 +20,7 @@ class Register extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.setUsername = this.setUsername.bind(this);
+    this.setUser = this.setUser.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleFirstNameChange(e) {
@@ -38,10 +38,11 @@ class Register extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
-  setUsername(e) {
-    e.preventDefault();
+  setUser(event, data) {
+    event.preventDefault();
     if (this.state.username && this.state.email && this.state.password) {
       this.props.setUsername(this.state.username);
+      this.props.setUserID(data)
       this.setState({redirect: true})
     } else {
       alert("Please fill in required fields")
@@ -77,7 +78,9 @@ class Register extends Component {
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
-              {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); this.setUsername(event)}}>Submit</Button>}
+              {(postMutation, data) =>
+                <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(event, data);})}}>
+                Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
           </FormGroup>

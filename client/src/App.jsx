@@ -25,7 +25,11 @@ const client = new ApolloClient({
 })
 const cookies = new Cookies();
 const setUsername = function(username) {
-  cookies.set('username', username, { path: '/' });
+  cookies.set('username', username, {path: '/'});
+}
+const setUserID = function(data) {
+  // cookies.set('userID', userID, {path: '/'})
+  console.log(data)
 }
 const deleteUsername = function() {
   cookies.remove('username');
@@ -36,8 +40,8 @@ const App = () => (
       <div>
         <NavbarMain cookies={cookies} deleteUsername={deleteUsername} />
         <Route exact path="/" component={HomePage} />
-        <Route path="/login" render={() => <Login setUsername={setUsername} />} />
-        <Route path="/register" render={() => <Register setUsername={setUsername}/>} />
+        <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} />} />
+        <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} />} />
         <Route path="/custommap" component={CustomMapExample} />
         <Route path="/new-world" component={CreateNewWorld} />
         <Route path="/newworldmap" component={WorldMapSubmit} />
