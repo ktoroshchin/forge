@@ -9,7 +9,7 @@ class CreateNewWorld extends Component {
     this.state = {
       name: null,
       description: null,
-      creator_id: "7597283c-0a43-4be5-bc73-95280f3c0c5f"
+      creator_id: this.props.getUserID()
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
@@ -38,7 +38,7 @@ class CreateNewWorld extends Component {
             <Label>Description</Label>
             <Input onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }} onCompleted={() => this.props.history.push('/')}>
+            <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
               {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
             </Mutation>
           </FormGroup>
