@@ -2,8 +2,6 @@ import React, {Component} from "react";
 import { Button } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Redirect } from 'react-router'
-
 
 class WorldMapSubmit extends Component {
   constructor(props) {
@@ -92,7 +90,7 @@ class WorldMapSubmit extends Component {
               {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
           </Mutation>
           <br />
-          <img onLoad={this.onImgLoad} src={this.state.value} />
+          <img alt="Map" onLoad={this.onImgLoad} src={this.state.value} />
 
           </div>
         }

@@ -5,7 +5,7 @@ import TableofContents from "./TableofContents"
 import City from './City'
 import Town from './Town'
 import Location from './Location'
-import ShowMap from './ShowMap'
+import ShowMap from './MapDisplay/ShowMap'
 
 class DisplayWorldDetails extends Component {
   state = {
