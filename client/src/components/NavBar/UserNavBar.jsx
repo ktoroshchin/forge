@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
-import CreateNewWorld from "./CreateNewWorld"
 
 function UserNavBar({username, deleteUser}) {
   return (
