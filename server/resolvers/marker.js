@@ -17,6 +17,24 @@ module.exports = {
         longitude: null,
         latitude: null
       });
+    },
+    removeAllMarkersOnMap: (root, { map_id }) => {
+      city.update({
+        map_id: null,
+        longitude: null,
+        latitude: null
+      }, { where: { map_id } });
+      town.update({
+        map_id: null,
+        longitude: null,
+        latitude: null
+      }, { where: { map_id } });
+      location.update({
+        map_id: null,
+        longitude: null,
+        latitude: null
+      }, { where: { map_id } });
+
     }
   }
 }
