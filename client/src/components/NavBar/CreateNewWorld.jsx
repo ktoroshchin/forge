@@ -55,7 +55,9 @@ class CreateNewWorld extends Component {
               <br />
               <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
                 {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then(()=>{this.setRedirect()})}}>Submit</Button>}
+                  .then(()=>{this.setRedirect()})
+                  .catch((error) => {alert("Please input required fields")})
+                }}>Submit</Button>}
               </Mutation>
               {this.renderRedirect()}
             </FormGroup>
