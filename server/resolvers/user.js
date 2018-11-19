@@ -28,8 +28,8 @@ module.exports = {
 
       if (await bcrypt.compareSync(password, foundUser.dataValues.password)) {
         user.update({
-      first_name,
-      last_name
+          first_name,
+          last_name
         }, { where: { id } })
       } else {
         throw new Error('UserEdit error: Wrong password')
@@ -42,7 +42,7 @@ module.exports = {
       if (await bcrypt.compareSync(password, foundUser.dataValues.password))
         return { user_id: foundUser.dataValues.id };
       else
-        return { error: 'Wrong login credentials' };
+        throw new Error('Wrong login credentials');
     }
   }
 }
