@@ -25,10 +25,11 @@ function City({cityID}) {
           if (error) return <div>Error</div>
           return (
             <ListGroup>
-              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findCityById.name}</ListGroupItem>
-              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findCityById.population}</ListGroupItem>
-              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findCityById.government}</ListGroupItem>
-              <ListGroupItem tag="a" className="listItem" href="#" action>{data.findCityById.description}</ListGroupItem>
+            <ListGroupItem className="listItem">{data.findCityById.name}</ListGroupItem>
+            {data.findCityById.population !== null && <ListGroupItem className="listItem">{data.findCityById.population}</ListGroupItem> }
+            {data.findCityById.government !== null && <ListGroupItem className="listItem">{data.findCityById.government}</ListGroupItem> }
+            {data.findCityById.description !== null && <ListGroupItem className="listItem">{data.findCityById.description}</ListGroupItem> }
+
             </ListGroup>
           );
         }}

@@ -22,7 +22,7 @@ function CityList({worldID, setValue, setLocationID}) {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.findCitiesByWorldId.map(({ id, name }) => (
-            <ListGroupItem key={id} onClick={()=>{setValue("City"); setLocationID(id)}} action>{name}</ListGroupItem>
+            <ListGroupItem key={id} onClick={()=>{setValue("City"); setLocationID(id)}} action>{name} </ListGroupItem>
           )));
         }}
       </Query>
