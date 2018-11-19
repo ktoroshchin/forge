@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { Nav,UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem } from 'reactstrap';
 import CreateNewWorld from "./CreateNewWorld"
 
-function UserNavBar({userID, deleteUserID}) {
+function UserNavBar({username, deleteUserID}) {
   return (
     <Nav className="ml-auto" navbar>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          Hello, {userID}!
+          Hello, {username}!
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem tag={Link} to="/new-world">

@@ -4,10 +4,10 @@ import UserNavBar from "./UserNavBar"
 
 
 function NavBarDropDown({cookies, deleteUserID}) {
-  const userID = cookies.get('userID')
-  if (userID) {
+  const username = cookies.get('username')
+  if (username) {
     return (
-      <UserNavBar userID={userID} deleteUserID={deleteUserID}/>
+      <UserNavBar username={username} deleteUserID={deleteUserID}/>
     )
   } else {
     return (
