@@ -22,7 +22,8 @@ function MyWorldList({getUserID}) {
         <Query query={findUserWorlds}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
-            if (error) return <div>None</div>
+            if (error) return <div>Error</div>
+            if (data.findWorldsByCreatorId.length === 0) return <div>No Worlds</div>
             return (data.findWorldsByCreatorId.map(({ id, name, description }) => (
               <World key={id} id={id} name={name} description={description} />
             )));
