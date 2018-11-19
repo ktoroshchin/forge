@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import {Redirect} from 'react-router'
 
 class CreateNewWorld extends Component {
   constructor(props) {
@@ -9,16 +10,29 @@ class CreateNewWorld extends Component {
     this.state = {
       name: null,
       description: null,
-      creator_id: this.props.getUserID()
+      creator_id: this.props.getUserID(),
+      redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.setRedirect = this.setRedirect.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
   }
   handleDescriptionChange(e) {
     this.setState({description: e.target.value});
+  }
+  setRedirect() {
+    this.setState({
+      redirect: true
+    })
+  }
+  renderRedirect() {
+    if (this.state.redirect) {
+      return <Redirect to='/' />
+    }
   }
   render() {
     const { name, description, creator_id } = this.state;
@@ -39,8 +53,10 @@ class CreateNewWorld extends Component {
             <Input onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
-              {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
+              {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
+                .then(()=>{this.setRedirect()})}}>Submit</Button>}
             </Mutation>
+            {this.renderRedirect()}
           </FormGroup>
         </Form>
       </div>
