@@ -26,7 +26,7 @@ class Login extends Component {
   }
   setUser(data) {
     this.props.setUsername(this.state.username);
-    this.props.setUserID(data.data.login.id);
+    this.props.setUserID(data.data.login.user_id);
     this.setState({redirect: true})
   }
   renderRedirect() {
