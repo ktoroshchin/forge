@@ -51,7 +51,7 @@ function ChooseCategoryToUpdate ({worldID}) {
             <div id="collapseLocations" className="collapse" aria-labelledby="headingThree" data-parent="#accordionUpdate">
               <div className="card-body">
                 <ListGroup className="listItemContainer">
-                  <CreateNewLocation />
+                  <CreateNewLocation worldID={worldID} />
                 </ListGroup>
             </div>
           </div>

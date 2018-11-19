@@ -8,7 +8,7 @@ class CreateNewLocation extends Component {
     name: null,
     description: null,
     marker_id: null,
-    world_id: "2fd0df5b-5623-497a-bb21-3d5d9144f618",
+    world_id: this.props.worldID,
   }
 
 handleLocationName = this.handleLocationName.bind(this);
@@ -44,7 +44,7 @@ render(){
           <Input onChange={this.handleDescription} type="text" name="description" placeholder="description" />
         </FormGroup>
         <Mutation mutation={POST_MUTATION} variables={{ name, description, marker_id, world_id }}>
-          {postMutation => <Button color="success" onClick={postMutation}>Submit</Button>}
+          {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
         </Mutation>
       </Form>
     </div>
