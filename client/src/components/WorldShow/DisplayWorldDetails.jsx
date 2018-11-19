@@ -34,11 +34,14 @@ setLocationID(id) {
   })
 }
 
+handleRefresh() {
+  window.location.reload()
+}
   render() {
     const {worldID, worldName, worldDescription} = this.props.location.state;
     return(
         <div>
-        <TableofContents worldID={worldID} worldName={worldName} worldDescription={worldDescription} setValue={this.setValue} setLocationID={this.setLocationID}/>
+        <TableofContents worldID={worldID} worldName={worldName} worldDescription={worldDescription} setValue={this.setValue} setLocationID={this.setLocationID} handleRefresh={this.handleRefresh}/>
         <Button onClick={this.handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
         <div className="col-md-8">
           {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
@@ -46,7 +49,10 @@ setLocationID(id) {
           {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
           {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
           {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
-        <ShowMap worldID={worldID} />
+        {this.state.value === '' &&
+          <ShowMap worldID={worldID} />
+        }
+
         </div>
     )
   }

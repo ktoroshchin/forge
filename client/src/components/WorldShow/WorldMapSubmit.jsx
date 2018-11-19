@@ -15,9 +15,8 @@ class WorldMapSubmit extends Component {
         height: 0,
       },
       worldMap: true,
-      redirect: false,
     }
-
+    console.log(this.props)
     this.handleChange = this.handleChange.bind(this)
     this.onImgLoad = this.onImgLoad.bind(this);
   }
@@ -35,17 +34,12 @@ class WorldMapSubmit extends Component {
 
   handleConfirm(event) {
     event.preventDefault();
-    this.setState({redirect: true})
+    window.location.reload();
   }
 
-  renderRedirect() {
-    if (this.state.redirect) {
-      return <Redirect to='/' />
-    }
-  }
 
   render() {
-    const worldID = "944ff09a-db82-4085-8f5a-a1078f61d50b";
+    const {worldID} = this.props;
     const imageURL = this.state.value;
     const width = this.state.imgSize.width;
     const height = this.state.imgSize.height;
@@ -80,10 +74,13 @@ class WorldMapSubmit extends Component {
               onChange={this.handleChange} />
           </label>
         </form>
-        {this.state.value.match(/\.(jpeg|jpg|png)$/) != null &&
+        {this.state.value.match(/\.(jpeg|jpg|png)$/) === null &&
           <div>
-          <img onLoad={this.onImgLoad} src={this.state.value} />
-          <br />
+            <span>Please enter a valid image URL.</span>
+          </div>
+        }
+        {this.state.value.match(/\.(jpeg|jpg|png)$/) !== null &&
+          <div>
           <Mutation
             mutation={POST_MUTATION}
             variables={{
@@ -94,7 +91,9 @@ class WorldMapSubmit extends Component {
               "world_map": worldMap }}>
               {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
           </Mutation>
-          {this.renderRedirect()}
+          <br />
+          <img onLoad={this.onImgLoad} src={this.state.value} />
+
           </div>
         }
       </div>
