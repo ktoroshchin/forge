@@ -41,7 +41,7 @@ class Register extends Component {
   setUsername(e) {
     e.preventDefault();
     if (this.state.username && this.state.email && this.state.password) {
-      this.props.addUserID(this.state.username);
+      this.props.setUsername(this.state.username);
       this.setState({redirect: true})
     } else {
       alert("Please fill in required fields")
@@ -54,7 +54,6 @@ class Register extends Component {
   }
   render() {
     const { first_name, last_name, username, email, password } = this.state;
-    const {addUserID} = this.props;
     const POST_MUTATION = gql`
       mutation ($first_name: String, $last_name: String, $username: String!, $email: String!, $password: String!){
         createNewUser(first_name: $first_name, last_name: $last_name, username: $username, email: $email, password: $password) {

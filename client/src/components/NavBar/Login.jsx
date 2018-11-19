@@ -27,7 +27,7 @@ class Login extends Component {
   setUsername(e) {
     e.preventDefault();
     if (this.state.username && this.state.password) {
-      this.props.addUserID(this.state.username);
+      this.props.setUsername(this.state.username);
       this.setState({redirect: true})
     } else {
       alert("Please fill in required fields")
