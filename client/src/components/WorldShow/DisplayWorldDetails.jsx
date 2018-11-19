@@ -29,21 +29,21 @@ export default class DisplayWorldDetails extends Component {
     this.setLocationID = this.setLocationID.bind(this);
   }
 
-handleClick() {
-  this.setState({
-    clicked: true
-  });
-}
-setValue(value) {
-  this.setState({
-    value: value
-  })
-}
-setLocationID(id) {
-  this.setState({
-    locationID: id
-  })
-}
+  handleClick() {
+    this.setState({
+      clicked: true
+    });
+  }
+  setValue(value) {
+    this.setState({
+      value: value
+    })
+  }
+  setLocationID(id) {
+    this.setState({
+      locationID: id
+    })
+  }
 
 handleRefresh() {
   window.location.reload()

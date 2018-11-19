@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router'
 import { ImageOverlay, Map } from 'react-leaflet';
+import { Button } from 'reactstrap';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
@@ -17,6 +19,32 @@ L.Icon.Default.mergeOptions({
 });
 
 export default class ShowMap extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      redirect: false,
+      worldID: null,
+    }
+  }
+
+  handleEdit = (worldID) => {
+    this.setState({
+      redirect: true,
+      worldID: worldID,
+    })
+  }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/edit-map",
+            state: { worldID: this.state.worldID }
+          }}
+        />)
+    }
+  }
   render () {
     const {worldID, userID} = this.props
     const findMap =
@@ -76,10 +104,10 @@ export default class ShowMap extends Component {
           return (
             <div>
               {userID === data.findWorldById.creator_id &&
-             <span>Edit Button Goes Here</span>
-
+              <Button onClick={() => {this.handleEdit(data.findWorldById.id)}} color="primary">Edit Map</Button>
               }
-              </div>
+              {this.renderRedirect()}
+            </div>
               );
         }}
       </Query>

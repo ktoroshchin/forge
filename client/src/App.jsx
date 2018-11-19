@@ -15,6 +15,7 @@ import MyWorldList from './components/NavBar/MyWorldList'
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import ChooseCategoryToUpdate from './components/WorldShow/ChooseCategoryToUpdate'
 import CreateNewCity from './components/WorldShow/CreateNewCity'
+import EditMap from './components/WorldShow/MapDisplay/EditMap'
 
 import HomePage from './components/HomePage.jsx'
 import CustomMapExample from './components/BasicExample/CustomMapView'
@@ -52,6 +53,7 @@ const App = () => (
         <Route path="/world-show" component={DisplayWorldDetails} />
         <Route path="/update-category" component={ChooseCategoryToUpdate} />
         <Route path="/updatecity" component={CreateNewCity} />
+        <Route path="/edit-map" component={EditMap} />
       </div>
     </Router>
   </ApolloProvider>
