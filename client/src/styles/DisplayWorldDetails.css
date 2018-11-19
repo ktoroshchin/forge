@@ -1,4 +1,9 @@
 .btn .btn-success .add-world {
+  width: 100%;
+}
+.categoryName {
+  font-weight: bolder;
+  text-decoration:underline;
 
 }
 
@@ -11,8 +16,13 @@
 }
 
 .row {
-  display: flex;
-  justify-content: space-around;
+  /* display: flex; */
+  /* justify-content: flex-star; */
+  /* justify-content: space-around; */
+}
+
+.btn.btn-success.add-world {
+  text-align: center;
 }
 
 .btn.btn-link.category {

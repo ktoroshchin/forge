@@ -25,10 +25,10 @@ function Town({townID}) {
           if (error) return <div>Error</div>
           return (
             <ListGroup>
-              <ListGroupItem className="listItem">{data.findTownById.name}</ListGroupItem>
-              {data.findTownById.population !== null && <ListGroupItem className="listItem">{data.findTownById.population}</ListGroupItem> }
-              {data.findTownById.government !== null && <ListGroupItem className="listItem">{data.findTownById.government}</ListGroupItem> }
-              {data.findTownById.description !== null && <ListGroupItem className="listItem">{data.findTownById.description}</ListGroupItem> }
+              <ListGroupItem className="listItem"  action><span className="categoryName">Name</span><span>: </span>{data.findTownById.name}</ListGroupItem>
+              <ListGroupItem className="listItem"  action><span className="categoryName">Population</span><span>: </span>{data.findTownById.population}</ListGroupItem>
+              <ListGroupItem className="listItem"  action><span className="categoryName">Government</span><span>: </span>{data.findTownById.government}</ListGroupItem>
+              <ListGroupItem className="listItem"  action><span className="categoryName">Description</span><span>: </span>{data.findTownById.description}</ListGroupItem>
             </ListGroup>
           );
         }}

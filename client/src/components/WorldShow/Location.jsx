@@ -24,8 +24,8 @@ function Location({locationID}) {
           if (error) return <div>Error</div>
           return (
             <ListGroup>
-              <ListGroupItem className="listItem">{data.findLocationById.name}</ListGroupItem>
-              {data.findLocationById.description !== null && <ListGroupItem className="listItem">{data.findLocationById.description}</ListGroupItem>}
+              <ListGroupItem className="listItem"><span className="categoryName">Name</span><span>: </span>{data.findLocationById.name}</ListGroupItem>
+              <ListGroupItem className="listItem"><span className="categoryName">Description</span><span>: </span>{data.findLocationById.description}</ListGroupItem>
             </ListGroup>
           );
         }}

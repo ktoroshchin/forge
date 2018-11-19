@@ -38,15 +38,18 @@ setLocationID(id) {
     const worldID = this.props.location.state.id;
     return(
         <div>
-        <TableofContents worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
-        <Button onClick={this.handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
-        <div className="col-md-8">
-          {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
-        </div>
-          {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
-          {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
-          {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
-        <ShowMap worldID={worldID} />
+          <div className="row">
+            <div className="col-md-3">
+              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
+            </div>
+            <div className="col-md-9">
+              {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
+              {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
+              {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
+              {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
+            </div>
+          </div>
+          <ShowMap worldID={worldID} />
         </div>
     )
   }

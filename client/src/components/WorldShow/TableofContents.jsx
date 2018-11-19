@@ -5,12 +5,12 @@ import CityList from './CityList'
 import TownList from './TownList'
 import LocationList from './LocationList'
 
-function TableofContents({worldID, setValue, setLocationID}) {
+function TableofContents({worldID, setValue, setLocationID, handleClick}) {
   return (
     <div className="AccordionForWorldPage">
       <ListGroupItem className="world-name">World</ListGroupItem>
-      <div className="row">
-        <div id="accordion" className="page-align col-md-3">
+
+        <div id="accordion" className="page-align ">
           <div className="card" className="listGroup">
             <div className="card-header" id="headingOne">
               <button className="btn btn-link category" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -56,10 +56,11 @@ function TableofContents({worldID, setValue, setLocationID}) {
                 </ListGroup>
               </div>
             </div>
+            <Button onClick={handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
           </div>
         </div>
       </div>
-    </div>
+
   )
 }
 export default TableofContents;
