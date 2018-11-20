@@ -13,6 +13,7 @@ function MyWorldList({getUserID}) {
         id
         name
         description
+        creator_id
       }
     }`;
   if (userID) {
@@ -24,8 +25,8 @@ function MyWorldList({getUserID}) {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
             if (data.findWorldsByCreatorId.length === 0) return <div>No Worlds</div>
-            return (data.findWorldsByCreatorId.map(({ id, name, description }) => (
-              <World key={id} id={id} name={name} description={description} />
+            return (data.findWorldsByCreatorId.map(({ id, name, description, creator_id }) => (
+              <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} />
             )));
           }}
         </Query>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, ListGroupItem, ListGroup } from 'reactstrap';
+import { Button, ListGroupItem } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
