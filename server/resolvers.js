@@ -118,9 +118,10 @@ module.exports = {
     worlds: resolver(db.user.worlds)
   },
   World: {
-    maps: resolver(db.world.maps)
+    maps: resolver(db.world.maps),
+    markers: resolver(db.world.markers)
   },
   Map: {
-
+    markers: resolver(db.map.markers)
   }
 }

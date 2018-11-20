@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     updated_at: DataTypes.DATE
   }, {});
   marker.associate = function (models) {
-    // associations can be defined here
+    marker.belongsTo(models.map, {foreignKey: 'map_id', targetKey: 'id'});
+    marker.belongsTo(models.world, {foreignKey: 'world_id', targetKey: 'id'});
   };
   return marker;
 };

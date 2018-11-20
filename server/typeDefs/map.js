@@ -13,6 +13,7 @@ const modelType = `
     width: Int!
     height: Int!
     world_map: Boolean!
+    markers: [Marker!]
   }`;
   
 module.exports = { queryType, mutationType, modelType }
