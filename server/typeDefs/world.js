@@ -11,6 +11,7 @@ const modelType = `
     name: String!
     description: String
     creator_id: ID!
+    maps: [Map!]
   }`;
   
 module.exports = { queryType, mutationType, modelType }

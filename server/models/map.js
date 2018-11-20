@@ -6,13 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    world_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'world', key: 'id'
-      }
-    },
     url: DataTypes.STRING,
     width: DataTypes.INTEGER,
     height: DataTypes.INTEGER,
@@ -22,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   map.associate = function(models) {
     // associations can be defined here
+    map.belongsTo(models.world, {foreignKey: 'world_id', targetKey: 'id'});
   };
   return map;
 };

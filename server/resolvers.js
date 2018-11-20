@@ -181,10 +181,10 @@ module.exports = {
     worlds: resolver(db.user.worlds)
   },
   World: {
-
+    maps: resolver(db.world.maps)
   },
   Map: {
-
+    markers: resolver([db.map.city, db.map.town, db.map.location])
   },
   City: {
 
