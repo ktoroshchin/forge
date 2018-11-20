@@ -8,25 +8,30 @@ class EditTownForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: this.props.first_name,
-      last_name: this.props.last_name,
-      password: null,
+      name: this.props.name,
+      description: this.props.description,
+      population: this.props.population,
+      government: this.props.government,
       redirect: false
     }
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handlePopulationChange = this.handlePopulationChange.bind(this);
+    this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
-  handleFirstNameChange(e) {
-    this.setState({first_name: e.target.value});
+  handleNameChange(e) {
+    this.setState({name: e.target.value});
   }
-  handleLastNameChange(e) {
-    this.setState({last_name: e.target.value});
+  handleDescriptionChange(e) {
+    this.setState({description: e.target.value});
   }
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+  handlePopulationChange(e) {
+    this.setState({population: e.target.value});
+  }
+  handleGovernmentChange(e) {
+    this.setState({government: e.target.value});
   }
   setRedirect() {
     this.setState({redirect: true});
@@ -37,27 +42,30 @@ class EditTownForm extends Component {
     }
   }
   render() {
-    const { first_name, last_name, password } = this.state;
+    const { name, description, population, government } = this.state;
     const {id} = this.props;
     const POST_MUTATION = gql`
-      mutation ($id: ID!, $password: String!, $first_name: String, $last_name: String){
-        bulkEditUser(id: $id, password: $password, first_name: $first_name, last_name: $last_name) {
+      mutation ($id: ID!, $name: String!, $description: String, $population: Int, $government: String){
+        bulkEditTown(id: $id, name: $name, description: $description, population: $population,
+          government: $government) {
          id
         }
       }`
     return (
       <div>
-        <h2>Edit Profile</h2>
+        <h2>Edit Town</h2>
         <Form>
           <FormGroup>
-            <Label>First Name (optional)</Label>
-            <Input value={this.state.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
-            <Label>Last Name (optional)</Label>
-            <Input value={this.state.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
-            <Label>Password</Label>
-            <Input onChange={this.handlePasswordChange} type="password" name="password" />
+            <Label>Name</Label>
+            <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
+            <Label>Description</Label>
+            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
+            <Label>Population</Label>
+            <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
+            <Label>Government</Label>
+            <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
+            <Mutation mutation={POST_MUTATION} variables={{ id, name, description, population, government }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
                   .then(()=>{this.setRedirect();})
