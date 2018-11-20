@@ -59,7 +59,6 @@ componentDidMount() {
 }
   render() {
     const {worldID, worldName, worldDescription, creatorID} = this.props.location.state;
-    const userID = getUserID();
 
     return(
         <div className="container mt-3">
@@ -71,12 +70,14 @@ componentDidMount() {
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-                <ShowMap worldID={worldID} userID={userID} />
+                <ShowMap worldID={worldID} />
                 {this.state.isUser === true &&
                   <Link
                     to={{
                       pathname: "/edit-map",
-                      state: { worldID: worldID }
+                      state: {
+                        worldID: worldID,
+                      }
                     }}
                   >
                     <Button>Edit Map</Button>

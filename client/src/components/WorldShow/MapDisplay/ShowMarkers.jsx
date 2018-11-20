@@ -42,7 +42,7 @@ export default class ShowMarkers extends Component {
           return (data.cities.map(({ id, latitude, longitude, name }) => (
              <Marker
                   key={id}
-                  position={[longitude, latitude]}
+                  position={[latitude, longitude]}
                   >
                   <Popup>
                     <span>
@@ -65,7 +65,7 @@ export default class ShowMarkers extends Component {
           return (data.towns.map(({ id, latitude, longitude, name }) => (
              <Marker
                   key={id}
-                  position={[longitude, latitude]}
+                  position={[latitude, longitude]}
                   >
                   <Popup>
                     <span>
@@ -88,7 +88,7 @@ export default class ShowMarkers extends Component {
           return (data.locations.map(({ id, latitude, longitude, name }) => (
              <Marker
                   key={id}
-                  position={[longitude, latitude]}
+                  position={[latitude, longitude]}
                   >
                   <Popup>
                     <span>
