@@ -10,7 +10,7 @@ function ChooseCategoryToCreate ({worldID}) {
       <div className="update-categories">
         <ListGroupItem className="category">Category</ListGroupItem>
         <div id="accordionUpdate">
-          <div className="card" className="listCategory">
+          <div className="card">
             <div className="card-header" id="headingOne">
                 <button className="btn btn-link form collapsed"  data-toggle="collapse" data-target="#collapseCities" aria-expanded="false" aria-controls="collapseOne">
                   Cities
@@ -25,7 +25,7 @@ function ChooseCategoryToCreate ({worldID}) {
               </div>
             </div>
           </div>
-          <div className="card" className="listCategory">
+          <div className="card">
             <div className="card-header" id="headingOne">
                 <button className="btn btn-link form collapsed"  data-toggle="collapse" data-target="#collapseTowns" aria-expanded="false" aria-controls="collapseOne">
                   Towns
@@ -40,7 +40,7 @@ function ChooseCategoryToCreate ({worldID}) {
               </div>
             </div>
           </div>
-          <div className="card" className="listCategory">
+          <div className="card">
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
                 <button className="btn btn-link form collapsed" data-toggle="collapse" data-target="#collapseLocations" aria-expanded="false" aria-controls="collapseThree">
