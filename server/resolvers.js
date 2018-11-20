@@ -144,20 +144,23 @@ module.exports = {
     bulkEditUser: async (root, { id, password, first_name, last_name }) => {
       const user = await db.user.findByPk(id);
 
-      if (await bcrypt.compareSync(password, user.dataValues.password)) {
-        user.update({
-          first_name,
-          last_name
-        })
-        return user;
-      } else throw new Error('UserEdit error: Wrong password');
+      if (await !bcrypt.compareSync(password, user.dataValues.password)) {
+        throw new Error('UserEdit error: Wrong password');
+      }
+      user.update({
+        first_name,
+        last_name
+      })
+      return user;
     },
     login: async (root, { username, password }) => {
-      const user = await db.user.findOne(username);
+      const user = await db.user.findOne({ where: { username } });
 
-      if (await bcrypt.compareSync(password, user.dataValues.password))
-        return user;
-      else throw new Error('Wrong login credentials');
+      if (await !bcrypt.compareSync(password, user.dataValues.password)) {
+        throw new Error('Wrong login credentials');
+      }
+
+      return user;
     },
     createNewWorld: async (root, { name, creator_id, description }) => {
       const world = await db.world.build({
