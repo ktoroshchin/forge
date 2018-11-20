@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import { Button,ListGroup, ListGroupItem } from 'reactstrap';
+import React from 'react';
+import { Button,ListGroup } from 'reactstrap';
 import CityList from './CityList'
 import TownList from './TownList'
 import LocationList from './LocationList'
@@ -11,7 +11,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
 
       <div className="row">
         <div id="accordion" className="page-align col">
-          <div className="card" className="listGroup">
+          <div className="card">
             <div className="card-header" id="headingOne">
               <button className="btn btn-link category" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 Cities
@@ -25,7 +25,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
               </div>
             </div>
           </div>
-          <div className="card" className="listGroup">
+          <div className="card">
             <div className="card-header" id="headingTwo">
               <h5 className="mb-0">
                 <button className="btn btn-link category collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -41,7 +41,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
               </div>
             </div>
           </div>
-          <div className="card" className="listGroup">
+          <div className="card">
             <div className="card-header" id="headingThree">
               <h5 className="mb-0">
                 <button className="btn btn-link category collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
