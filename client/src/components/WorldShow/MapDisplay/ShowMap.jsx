@@ -56,7 +56,7 @@ export default class ShowMap extends Component {
                       url={url}
                       bounds={[[0, 0], [height, width]]}
                       />
-                    <ShowMarkers mapid={id} />
+                    <ShowMarkers mapid={id} isUser={false} />
                   </Map>
                 }
                 </div>
