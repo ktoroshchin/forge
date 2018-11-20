@@ -15,7 +15,7 @@ class EditProfile extends Component {
     }
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleFirstNameChange(e) {
@@ -23,12 +23,6 @@ class EditProfile extends Component {
   }
   handleLastNameChange(e) {
     this.setState({last_name: e.target.value});
-  }
-  handleUsernameChange(e) {
-    this.setState({username: e.target.value});
-  }
-  handleEmailChange(e) {
-    this.setState({email: e.target.value});
   }
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
