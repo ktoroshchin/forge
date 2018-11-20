@@ -9,17 +9,11 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE,
-    creator_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'user', key: 'id'
-      }
-    }
+    updated_at: DataTypes.DATE
   }, {});
   world.associate = function (models) {
     // associations can be defined here
+    world.belongsTo(models.user, {foreignKey: 'creator_id', targetKey: 'id'})
   };
   return world;
 };
