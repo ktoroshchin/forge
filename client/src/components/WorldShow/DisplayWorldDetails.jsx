@@ -75,14 +75,16 @@ componentDidMount() {
             }
             {(this.state.value !== '' || this.state.clicked) &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-                {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
-                {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
-                {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
+                {this.state.value === 'City' && <City cityID={this.state.locationID} isUser={this.state.isUser} />}
+                {this.state.value === 'Town' && <Town  townID={this.state.locationID} isUser={this.state.isUser} />}
+                {this.state.value === 'Location' && <Location locationID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID}/> : null}
               </div>
             }
           </div>
-          <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>Edit World</Link>
+          {this.state.isUser && <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
+                <Button className="btn btn-success add-world col-md-12">Edit World</Button>
+                </Link>}
         </div>
     )
   }
