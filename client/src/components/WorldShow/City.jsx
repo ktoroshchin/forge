@@ -30,7 +30,7 @@ function City({cityID}) {
               <ListGroupItem className="listItem" action><span className="categoryName">Population</span><span>: </span>{data.findCityById.population}</ListGroupItem>
               <ListGroupItem className="listItem" action><span className="categoryName">Government</span><span>: </span>{data.findCityById.government}</ListGroupItem>
               <ListGroupItem className="listItem" action><span className="categoryName">Description</span><span>: </span>{data.findCityById.description}</ListGroupItem>
-              <Link to={{pathname: "/edit-city", state: {cityID: cityID}}}>Edit World</Link>
+              <Link to={{pathname: "/edit-city", state: {cityID: cityID}}}>Edit City</Link>
             </ListGroup>
 
           );

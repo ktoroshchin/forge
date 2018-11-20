@@ -39,6 +39,7 @@ class EditCityForm extends Component {
   }
   renderRedirect() {
     if (this.state.redirect) {
+      window.location.reload();
       return <Redirect to='/' />
     }
   }
@@ -61,9 +62,9 @@ class EditCityForm extends Component {
             <Label>Population</Label>
             <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
             <Label>Government</Label>
-            <Input onChange={this.handleGovernmentChange} type="text" name="government" />
+            <Input value={this.state.government}onChange={this.handleGovernmentChange} type="text" name="government" />
             <Label>Description</Label>
-            <Input onChange={this.handleDescriptionChange} type="text" name="description" />
+            <Input value={this.state.description}onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
               {(postMutation) =>
