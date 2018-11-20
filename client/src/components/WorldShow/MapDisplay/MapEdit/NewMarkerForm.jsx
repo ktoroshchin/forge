@@ -39,7 +39,7 @@ constructor(props) {
   }
 
   render() {
-    const {submitMarker} = this.props
+    const {submitMarker, coords, worldID, mapID} = this.props
     return (
       <div>
         <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
@@ -55,15 +55,12 @@ constructor(props) {
           {this.state.value === 'City' &&
             <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
             <ModalHeader toggle={this.toggleModal}>Choose City</ModalHeader>
-            <ModalBody>
-              <ChooseCity />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={() => {submitMarker()}}>
-                Submit
-              </Button>
-              <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
-            </ModalFooter>
+              <ChooseCity
+                submitMarker={submitMarker}
+                coords={coords}
+                worldID={worldID}
+                mapID={mapID}
+              />
             </Modal>
           }
           {this.state.value === 'Town' &&

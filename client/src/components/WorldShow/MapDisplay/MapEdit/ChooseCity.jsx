@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -23,29 +23,45 @@ export default class ChooseCity extends Component {
   }
 
   render() {
+    const {submitMarker, coords, worldID, mapID} = this.props
+    console.log(coords.lat)
+    console.log(coords.lng)
+    console.log(worldID)
+    console.log(mapID)
+
     const listCities = gql`query {
-      findCitiesByWorldId(world_id: "2fd0df5b-5623-497a-bb21-3d5d9144f618"){
+      findCitiesByWorldId(world_id: "${worldID}"){
         id
         name
       }
     }`
     return (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-          <DropdownToggle caret>
-            Select City
-          </DropdownToggle>
-          <DropdownMenu>
-          <Query query={listCities}>
-            {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-            return (data.findCitiesByWorldId.map(({ id, name }) => (
-                <DropdownItem key={id} data-key={id} onClick={this.select}>{name}</DropdownItem>
-            )));
-          }}
-          </Query>
-          </DropdownMenu>
-        </Dropdown>
+      <div>
+            <ModalBody>
+              <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
+                  <DropdownToggle caret>
+                    Select City
+                  </DropdownToggle>
+                  <DropdownMenu>
+                  <Query query={listCities}>
+                    {({ loading, error, data }) => {
+                    if (loading) return <div>Fetching</div>
+                    if (error) return <div>Error</div>
+                    return (data.findCitiesByWorldId.map(({ id, name }) => (
+                        <DropdownItem key={id} data-key={id} onClick={this.select}>{name}</DropdownItem>
+                    )));
+                  }}
+                  </Query>
+                  </DropdownMenu>
+                </Dropdown>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={() => {submitMarker()}}>
+                Submit
+              </Button>
+              <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
+            </ModalFooter>
+            </div>
       )
   }
 }

@@ -34,8 +34,11 @@ export default class EditMap extends Component {
     this.setState({ draggable: !this.state.draggable })
   }
 
-  addMarker = (event) => {
-    this.setState({activeMarker: this.state.center})
+  addMarker = (height, width) => {
+    this.setState({activeMarker: {
+      lat: height/2,
+      lng: width/2,
+    }})
   }
 
   updateMarker = () => {
@@ -59,15 +62,8 @@ export default class EditMap extends Component {
   submitMarker = () => {
     const marker = this.refMarker.current
     if (marker != null) {
-      const coords = marker.leafletElement._latlng
-      const newMarker = {
-        coords: coords,
-      }
-      const {markerData} = this.state
-      markerData.push(newMarker)
-      this.setState({
+     this.setState({
         activeMarker: null,
-        markerData,
       })
       console.log('Marker Submitted')
     }
@@ -115,14 +111,19 @@ export default class EditMap extends Component {
                         ref={this.refMarker}
                         >
                         <Popup minWidth={90}>
-                          <NewMarkerForm submitMarker={this.submitMarker} />
+                          <NewMarkerForm
+                            submitMarker={this.submitMarker}
+                            coords={this.state.activeMarker}
+                            worldID={worldID}
+                            mapID={id}
+                          />
                         </Popup>
                       </Marker>
                     }
                     <ShowMarkers mapid={id} />
                   </Map>
                   {this.state.activeMarker === null &&
-                    <button onClick={this.addMarker}>
+                    <button onClick={() => {this.addMarker(height, width)}}>
                       New Marker
                     </button>
                   }
