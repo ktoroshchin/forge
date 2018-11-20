@@ -6,7 +6,8 @@ import TownList from './TownList'
 import LocationList from './LocationList'
 
 
-function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh}) {
+function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
+console.log("hello", isUser)
   return (
     <div className="AccordionForWorldPage">
 
@@ -57,7 +58,8 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
                 </ListGroup>
               </div>
             </div>
-            <Button onClick={handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>
+            {isUser && <Button onClick={handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>}
+
           </div>
         </div>
       </div>

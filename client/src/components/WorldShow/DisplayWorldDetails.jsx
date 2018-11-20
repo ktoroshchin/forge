@@ -61,7 +61,7 @@ componentDidMount() {
           <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>
           <div className="row mt-3">
             <div className="col-md-4 col-lg-3 col-xl-2">
-              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID}/>
+              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
