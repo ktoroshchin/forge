@@ -1,5 +1,7 @@
 const db = require('./models');
 const { resolver } = require('graphql-sequelize');
+const uuid = require('uuid/v4');
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = {
   Query: {
@@ -11,88 +13,74 @@ module.exports = {
     findLocations: resolver(db.location)
   },
   Mutation: {
-    createNewCity: (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => city.build({
-      id: uuid(),
-      map_id,
-      latitude,
-      longitude,
-      world_id,
-      name,
-      population,
-      government,
-      description,
-    }).save(),
-    bulkEditCity: (root, { id, name, population, government, description }) => city.update({
-      name,
-      population,
-      government,
-      description
-    }, { where: { id } })
-      .then(() => city.findOne({
-        where: { id },
-        attributes: cityAttributes,
-      })),
-    placeCityOnMap: (root, { id, map_id, longitude, latitude }) => city.update({
-      map_id,
-      longitude,
-      latitude
-    }, { where: { id } })
-      .then(() => city.findOne({
-        where: { id },
-        attributes: cityAttributes,
-      })),
-    createNewLocation: (root, { world_id, name, description, map_id, latitude, longitude }) => location.build({
-      id: uuid(),
-      map_id,
-      world_id,
-      name,
-      description,
-      longitude,
-      latitude
-    }).save(),
-    bulkEditLocation: (root, { id, name, description }) => location.update({
-      name,
-      description
-    }, { where: { id } })
-      .then(() => location.findOne({
-        where: { id },
-        attributes: locationAttributes,
-      })),
-    placeLocationOnMap: (root, { id, map_id, longitude, latitude }) => location.update({
-      map_id,
-      longitude,
-      latitude
-    }, { where: { id } })
-      .then(() => location.findOne({
-        where: { id },
-        attributes: locationAttributes,
-      })),
-    createNewMap: (root, { world_id, url, world_map, width, height }) => map.build({
-      id: uuid(),
-      world_id,
-      url,
-      world_map,
-      width,
-      height
-    }).save(),
-    bulkEditMap: (root, { id, world_id, url, world_map, width, height }) => map.update({
-      id,
-      world_id,
-      url,
-      world_map,
-      width,
-      height
-    }, { where: { id } })
-      .then(() => map.findOne({
-        where: { id },
-        attributes: mapAttributes,
-      })),
+    createNewCity: async (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => {
+      const city = await db.city.build({
+        id: uuid(),
+        map_id,
+        latitude,
+        longitude,
+        world_id,
+        name,
+        population,
+        government,
+        description
+      })
+      return city.save()
+    },
+    bulkEditCity: async (root, input) => {
+      const city = await db.city.findByPk(input.id)
+      city.set(input)
+      return city.save()
+    },
+    placeCityOnMap: async (root, input) => {
+      const city = await db.city.findByPk(input.id)
+      city.set(input)
+      return city.save()
+    },
+    createNewLocation: async (root, { world_id, name, description, map_id, latitude, longitude }) => {
+      const location = await db.location.build({
+        id: uuid(),
+        map_id,
+        world_id,
+        name,
+        description,
+        longitude,
+        latitude
+      })
+      return location.save()
+    },
+    bulkEditLocation: async (root, input) => {
+      const location = await db.location.findByPk(input.id)
+      location.set(input)
+      return location.save()
+    },
+    placeLocationOnMap: async (root, input) => {
+      const location = await db.location.findByPk(input.id)
+      location.set(input)
+      return location.save()
+    },
+    createNewMap: async (root, { world_id, url, world_map, width, height }) => {
+      const map = await db.map.build({
+        id: uuid(),
+        world_id,
+        url,
+        world_map,
+        width,
+        height
+      })
+      return map.save()
+    },
+    bulkEditMap: async (root, input) => {
+      const map = await db.map.findByPk(input.id)
+      map.set(input)
+      return map.save()
+    },
     removeMarkerById: async (root, { id }) => {
-      let remove = await city.findOne({ where: { id } });
+      let remove = await db.city.findByPk(id);
       if (!remove) {
-        remove = await town.findOne({ where: { id } });
+        remove = await db.town.findByPk(id);
         if (!remove) {
-          remove = await location.findOne({ where: { id } });
+          remove = await db.location.findByPk(id);
         }
       }
       remove.update({
@@ -118,81 +106,73 @@ module.exports = {
         latitude: null
       }, { where: { map_id } });
     },
-    createNewTown: (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => town.build({
-      id: uuid(),
-      map_id,
-      latitude,
-      longitude,
-      world_id,
-      name,
-      population,
-      government,
-      description,
-    }).save(),
-    bulkEditTown: (root, { id, name, population, government, description }) => town.update({
-      name,
-      population,
-      government,
-      description
-    }, { where: { id } })
-      .then(() => town.findOne({
-        where: { id },
-        attributes: townAttributes,
-      })),
-    placeTownOnMap: (root, { id, map_id, longitude, latitude }) => town.update({
-      map_id,
-      longitude,
-      latitude
-    }, { where: { id } })
-      .then(() => town.findOne({
-        where: { id },
-        attributes: townAttributes,
-      })),
-    createNewUser: (root, { username, email, password, first_name, last_name }) => user.build({
-      id: uuid(),
-      username,
-      email,
-      password: bcrypt.hashSync(password),
-      first_name,
-      last_name
-    }).save(),
+    createNewTown: async (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => {
+      const town = await db.town.build({
+        id: uuid(),
+        map_id,
+        latitude,
+        longitude,
+        world_id,
+        name,
+        population,
+        government,
+        description,
+      })
+      return town.save()
+    },
+    bulkEditTown: async (root, input) => {
+      const town = await db.town.findByPk(input.id)
+      town.set(input)
+      return town.save()
+    },
+    placeTownOnMap: async (root, input) => {
+      const town = await db.town.findByPk(input.id)
+      town.set(input)
+      return town.save()
+    },
+    createNewUser: async (root, { username, email, password, first_name, last_name }) => {
+      const user = await db.user.build({
+        id: uuid(),
+        username,
+        email,
+        password: bcrypt.hashSync(password),
+        first_name,
+        last_name
+      })
+      return user.save()
+    },
     bulkEditUser: async (root, { id, password, first_name, last_name }) => {
-      const foundUser = await user.findOne({ where: { id } });
+      const user = await db.user.findByPk(id);
 
-      if (await bcrypt.compareSync(password, foundUser.dataValues.password)) {
+      if (await bcrypt.compareSync(password, user.dataValues.password)) {
         user.update({
           first_name,
           last_name
-        }, { where: { id } })
-      } else {
-        throw new Error('UserEdit error: Wrong password')
-      }
-      return user.findOne({ where: { id } });
+        })
+        return user;
+      } else throw new Error('UserEdit error: Wrong password');
     },
     login: async (root, { username, password }) => {
-      const foundUser = await user.findOne({ where: { username } });
+      const user = await db.user.findOne(username);
 
-      if (await bcrypt.compareSync(password, foundUser.dataValues.password))
-        return { user_id: foundUser.dataValues.id };
-      else
-        throw new Error('Wrong login credentials');
+      if (await bcrypt.compareSync(password, user.dataValues.password))
+        return user;
+      else throw new Error('Wrong login credentials');
     },
-    createNewWorld: (root, { name, creator_id, description }) => world.build({
-      id: uuid(),
-      name,
-      creator_id,
-      description
-    }).save(),
-    bulkEditWorld: (root, { id, name, creator_id, description }) => world.update({
-      id,
-      name,
-      creator_id,
-      description
-    }, { where: { id } })
-      .then(() => world.findOne({
-        where: { id },
-        attributes: worldAttributes,
-      }))
+    createNewWorld: async (root, { name, creator_id, description }) => {
+      const world = await db.world.build({
+        id: uuid(),
+        name,
+        creator_id,
+        description
+      })
+      return world.save()
+    },
+    bulkEditWorld: async (root, input) => {
+      const world = await db.world.findByPk(input.id)
+      world.set(input)
+      return world.save()
+    }
   },
   User: {
     worlds: resolver(db.user.worlds)
