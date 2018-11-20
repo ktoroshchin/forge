@@ -21,6 +21,7 @@ import EditMap from './components/WorldShow/MapDisplay/EditMap'
 import EditWorld from './components/WorldShow/EditWorld'
 import EditCity from './components/WorldShow/EditCity'
 import EditTown from'./components/WorldShow/EditTown'
+import EditLocation from'./components/WorldShow/EditLocation'
 
 import HomePage from './components/HomePage.jsx'
 import CustomMapExample from './components/BasicExample/CustomMapView'
@@ -63,6 +64,7 @@ const App = () => (
         <Route path="/edit-world" component={EditWorld} />
         <Route path="/edit-town" component={EditTown} />
         <Route path="/edit-city" component={EditCity} />
+        <Route path="/edit-location" component={EditLocation} />
       </div>
     </Router>
   </ApolloProvider>
