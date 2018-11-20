@@ -184,7 +184,7 @@ module.exports = {
     maps: resolver(db.world.maps)
   },
   Map: {
-    markers: resolver([db.map.city, db.map.town, db.map.location])
+
   },
   City: {
 
