@@ -9,29 +9,29 @@ class EditTownForm extends Component {
     super(props);
     this.state = {
       name: this.props.name,
-      description: this.props.description,
       population: this.props.population,
       government: this.props.government,
+      description: this.props.description,
       redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handlePopulationChange = this.handlePopulationChange.bind(this);
     this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
   }
-  handleDescriptionChange(e) {
-    this.setState({description: e.target.value});
-  }
   handlePopulationChange(e) {
     this.setState({population: Number(e.target.value)});
   }
   handleGovernmentChange(e) {
     this.setState({government: e.target.value});
+  }
+  handleDescriptionChange(e) {
+    this.setState({description: e.target.value});
   }
   setRedirect() {
     this.setState({redirect: true});
@@ -59,14 +59,14 @@ class EditTownForm extends Component {
           <FormGroup>
             <Label>Name</Label>
             <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Description</Label>
-            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
             <Label>Population</Label>
             <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
             <Label>Government</Label>
             <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
+            <Label>Description</Label>
+            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, name, description, population, government }}>
+            <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
                   .then(()=>{this.setRedirect();})
