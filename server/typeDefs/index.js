@@ -3,15 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
-let queries = '', mutations = '', 
-  models = `interface MapMarker {
-    id: ID!
-    map_id: ID
-    latitude: Float
-    longitude: Float
-    world_id: ID!
-    name: String!
-    }`;
+let queries = '', mutations = '', models = '';
 let typeDefs = ``;
 
 fs
