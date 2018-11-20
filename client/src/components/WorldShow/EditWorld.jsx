@@ -3,25 +3,26 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
-import EditLocationForm from './EditLocationForm'
+import EditWorldForm from './EditWorldForm'
 
-function EditLocation() {
-  const findLocation = gql`
+function EditWorld({location}) {
+  const findWorld = gql`
   query {
-    findLocationById(id: "53a990d0-5405-4886-9ff8-aa8ba8ce4522"){
+    findWorldById(id: "${location.state.worldID}"){
       id
       name
       description
+      creator_id
     }
   }`
   return (
-    <Query query={findLocation}>
+    <Query query={findWorld}>
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditLocationForm id={data.findLocation.id} first_name={data.findUserById.first_name} last_name={data.findUserById.last_name} />}}
+      return <EditWorldForm id={data.findWorldById.id} name={data.findWorldById.name} description={data.findWorldById.description} creator_id={data.findWorldById.creator_id} />}}
     </Query>
   )
 }
 
-export default EditLocation;
+export default EditWorld;

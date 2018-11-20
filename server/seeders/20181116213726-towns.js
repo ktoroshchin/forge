@@ -9,8 +9,8 @@ module.exports = {
         {
           id: uuid(),
           map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
-          latitude: 1116.7421875,
-          longitude: 608.4921875,
+          longitude: 1116.7421875,
+          latitude: 608.4921875,
           world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
           name: faker.lorem.word(),
           population: 120,

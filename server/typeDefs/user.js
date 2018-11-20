@@ -13,6 +13,7 @@ const modelType = `
     last_name: String
     username: String!
     email: String!
+    worlds: [World!]
   }`;
 
 module.exports = { queryType, mutationType, modelType }

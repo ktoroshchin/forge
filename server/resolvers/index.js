@@ -3,8 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 const basename = path.basename(__filename);
+const db = require('../models');
+const { resolver } = require('graphql-sequelize');
 
 let Query = {}, Mutation = {};
+let User = {
+  worlds: resolver(db.user.worlds)
+}
 
 fs
   .readdirSync(__dirname)
@@ -21,4 +26,4 @@ fs
     }
   });
 
-module.exports = { Query, Mutation };
+module.exports = { Query, Mutation, User };

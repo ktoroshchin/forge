@@ -4,20 +4,16 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 
-class EditTownForm extends Component {
+class EditWorldForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name: this.props.name,
       description: this.props.description,
-      population: this.props.population,
-      government: this.props.government,
       redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handlePopulationChange = this.handlePopulationChange.bind(this);
-    this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
@@ -27,45 +23,35 @@ class EditTownForm extends Component {
   handleDescriptionChange(e) {
     this.setState({description: e.target.value});
   }
-  handlePopulationChange(e) {
-    this.setState({population: e.target.value});
-  }
-  handleGovernmentChange(e) {
-    this.setState({government: e.target.value});
-  }
   setRedirect() {
     this.setState({redirect: true});
   }
   renderRedirect() {
     if (this.state.redirect) {
+      window.location.reload();
       return <Redirect to='/' />
     }
   }
   render() {
-    const { name, description, population, government } = this.state;
-    const {id} = this.props;
+    const { name, description } = this.state;
+    const { id, creator_id } = this.props;
     const POST_MUTATION = gql`
-      mutation ($id: ID!, $name: String!, $description: String, $population: Int, $government: String){
-        bulkEditTown(id: $id, name: $name, description: $description, population: $population,
-          government: $government) {
+      mutation ($id: ID!, $name: String!, $description: String, $creator_id: ID!){
+        bulkEditWorld(id: $id, name: $name, description: $description, creator_id: $creator_id) {
          id
         }
       }`
     return (
       <div>
-        <h2>Edit Town</h2>
+        <h2>Edit World Details</h2>
         <Form>
           <FormGroup>
-            <Label>Name</Label>
+            <Label> Name (required)</Label>
             <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Description</Label>
+            <Label>Description (optional)</Label>
             <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
-            <Label>Population</Label>
-            <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
-            <Label>Government</Label>
-            <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, name, description, population, government }}>
+            <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
                   .then(()=>{this.setRedirect();})
@@ -79,4 +65,4 @@ class EditTownForm extends Component {
   }
 }
 
-export default EditTownForm;
+export default EditWorldForm;
