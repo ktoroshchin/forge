@@ -1,6 +1,5 @@
 const queryType = `
-  allUsers: [User!]!
-  findUserById(id: ID!): User!`;
+  findUsers(id: ID, username: String): [User!]`;
 
 const mutationType = `
   createNewUser(username: String!, email: String!, password: String!, first_name: String, last_name: String): User!

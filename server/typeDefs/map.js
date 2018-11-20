@@ -1,6 +1,5 @@
 const queryType = `
-  findMapById(id: ID!): Map!
-  findMapsByWorldId(world_id: ID!): [Map!]`;
+  findMaps(id: ID, world_id: ID): [Map!]`;
 
 const mutationType = `
   createNewMap(world_id: ID!, url: String!, world_map: Boolean!, width: Int!, height: Int!): Map!

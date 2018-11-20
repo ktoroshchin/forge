@@ -1,8 +1,5 @@
 const queryType = `
-  findTownById(id: ID!): Town!
-  findTownsByWorldId(world_id: ID!): [Town!]
-  findTownsByMapId(map_id: ID!): [Town!]
-`;
+  findLocations(world_id: ID, id: ID, map_id: ID): [Location!]`;
 
 const mutationType = `
   createNewLocation(marker_id: ID, world_id: ID!, name: String!, description: String, map_id: ID, latitude: Float, longitude: Float): Location!
