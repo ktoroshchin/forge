@@ -22,8 +22,8 @@ function WorldList() {
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
-          return (data.allWorlds.map(({ world_id, name, description, creator_id }) => (
-            <World key={world_id} world_id={world_id} name={name} description={description} creator_id={creator_id} />
+          return (data.allWorlds.map(({ id, name, description, creator_id }) => (
+            <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} />
           )));
         }}
       </Query>
