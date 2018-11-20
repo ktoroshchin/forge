@@ -37,7 +37,8 @@ class EditProfileForm extends Component {
     }
   }
   render() {
-    const { id, first_name, last_name, password } = this.state;
+    const { first_name, last_name, password } = this.state;
+    const {id} = this.props;
     const POST_MUTATION = gql`
       mutation ($id: ID!, $password: String!, $first_name: String, $last_name: String){
         bulkEditUser(id: $id, password: $password, first_name: $first_name, last_name: $last_name) {
@@ -57,8 +58,10 @@ class EditProfileForm extends Component {
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
-              {(postMutation, data) =>
-                <Button color="success" onClick={(event)=>{postMutation(event); this.setRedirect()}}>Submit</Button>}
+              {(postMutation) =>
+                <Button color="success" onClick={(event)=>{postMutation(event)
+                  .then(()=>{this.setRedirect();})
+                  .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
           </FormGroup>
