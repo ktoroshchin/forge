@@ -5,10 +5,11 @@ import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 import EditLocationForm from './EditLocationForm'
 
-function EditLocation() {
+function EditLocation({location}) {
+  const locationID = location.state.locationID;
   const findLocation = gql`
   query {
-    findLocationById(id: "53a990d0-5405-4886-9ff8-aa8ba8ce4522"){
+    findLocationById(id: "${locationID}"){
       id
       name
       description
@@ -19,7 +20,7 @@ function EditLocation() {
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditLocationForm id={data.findLocation.id} first_name={data.findUserById.first_name} last_name={data.findUserById.last_name} />}}
+      return <EditLocationForm id={data.findLocationById.id} name={data.findLocationById.name} description={data.findLocationById.description} />}}
     </Query>
   )
 }

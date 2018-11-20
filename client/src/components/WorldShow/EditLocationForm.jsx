@@ -8,56 +8,50 @@ class EditLocationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: this.props.first_name,
-      last_name: this.props.last_name,
-      password: null,
+      name: this.props.name,
+      description: this.props.description,
       redirect: false
     }
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
-  handleFirstNameChange(e) {
-    this.setState({first_name: e.target.value});
+  handleNameChange(e) {
+    this.setState({name: e.target.value});
   }
-  handleLastNameChange(e) {
-    this.setState({last_name: e.target.value});
-  }
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+  handleDescriptionChange(e) {
+    this.setState({description: e.target.value});
   }
   setRedirect() {
     this.setState({redirect: true});
   }
   renderRedirect() {
     if (this.state.redirect) {
+      window.location.reload();
       return <Redirect to='/' />
     }
   }
   render() {
-    const { first_name, last_name, password } = this.state;
+    const { name, description } = this.state;
     const {id} = this.props;
     const POST_MUTATION = gql`
-      mutation ($id: ID!, $password: String!, $first_name: String, $last_name: String){
-        bulkEditUser(id: $id, password: $password, first_name: $first_name, last_name: $last_name) {
+      mutation ($id: ID!, $name: String!, $description: String){
+        bulkEditLocation(id: $id, name: $name, description: $description) {
          id
         }
       }`
     return (
       <div>
-        <h2>Edit Profile</h2>
+        <h2>Edit </h2>
         <Form>
           <FormGroup>
-            <Label>First Name (optional)</Label>
-            <Input value={this.state.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
-            <Label>Last Name (optional)</Label>
-            <Input value={this.state.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
-            <Label>Password</Label>
-            <Input onChange={this.handlePasswordChange} type="password" name="password" />
+            <Label>Name</Label>
+            <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
+            <Label>Description</Label>
+            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
+            <Mutation mutation={POST_MUTATION} variables={{ id, name, description }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
                   .then(()=>{this.setRedirect();})
