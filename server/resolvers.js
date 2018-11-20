@@ -8,57 +8,9 @@ module.exports = {
     findUsers: resolver(db.user),
     findWorlds: resolver(db.world),
     findMaps: resolver(db.map),
-    findCities: resolver(db.city),
-    findTowns: resolver(db.town),
-    findLocations: resolver(db.location)
+    findMarkers: resolver(db.marker)
   },
   Mutation: {
-    createNewCity: async (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => {
-      const city = await db.city.build({
-        id: uuid(),
-        map_id,
-        latitude,
-        longitude,
-        world_id,
-        name,
-        population,
-        government,
-        description
-      })
-      return city.save()
-    },
-    bulkEditCity: async (root, input) => {
-      const city = await db.city.findByPk(input.id)
-      city.set(input)
-      return city.save()
-    },
-    placeCityOnMap: async (root, input) => {
-      const city = await db.city.findByPk(input.id)
-      city.set(input)
-      return city.save()
-    },
-    createNewLocation: async (root, { world_id, name, description, map_id, latitude, longitude }) => {
-      const location = await db.location.build({
-        id: uuid(),
-        map_id,
-        world_id,
-        name,
-        description,
-        longitude,
-        latitude
-      })
-      return location.save()
-    },
-    bulkEditLocation: async (root, input) => {
-      const location = await db.location.findByPk(input.id)
-      location.set(input)
-      return location.save()
-    },
-    placeLocationOnMap: async (root, input) => {
-      const location = await db.location.findByPk(input.id)
-      location.set(input)
-      return location.save()
-    },
     createNewMap: async (root, { world_id, url, world_map, width, height }) => {
       const map = await db.map.build({
         id: uuid(),
@@ -75,60 +27,59 @@ module.exports = {
       map.set(input)
       return map.save()
     },
-    removeMarkerById: async (root, { id }) => {
-      let remove = await db.city.findByPk(id);
-      if (!remove) {
-        remove = await db.town.findByPk(id);
-        if (!remove) {
-          remove = await db.location.findByPk(id);
-        }
-      }
-      remove.update({
-        map_id: null,
-        longitude: null,
-        latitude: null
-      });
-    },
-    removeAllMarkersOnMap: (root, { map_id }) => {
-      city.update({
-        map_id: null,
-        longitude: null,
-        latitude: null
-      }, { where: { map_id } });
-      town.update({
-        map_id: null,
-        longitude: null,
-        latitude: null
-      }, { where: { map_id } });
-      location.update({
-        map_id: null,
-        longitude: null,
-        latitude: null
-      }, { where: { map_id } });
-    },
-    createNewTown: async (root, { world_id, name, population, government, description, map_id, latitude, longitude }) => {
-      const town = await db.town.build({
+    createNewMarker: async (root, { category, world_id, name, population, government, description }) => {
+      const marker = await db.marker.build({
         id: uuid(),
-        map_id,
-        latitude,
-        longitude,
+        category,
         world_id,
         name,
         population,
         government,
-        description,
+        description
       })
-      return town.save()
+      return marker.save()
     },
-    bulkEditTown: async (root, input) => {
-      const town = await db.town.findByPk(input.id)
-      town.set(input)
-      return town.save()
+    editMarkerInfo: async (root, input) => {
+      const marker = await db.marker.findByPk(input.id)
+      marker.set(input)
+      return marker.save()
     },
-    placeTownOnMap: async (root, input) => {
-      const town = await db.town.findByPk(input.id)
-      town.set(input)
-      return town.save()
+    placeMarkerOnMap: async (root, input) => {
+      const marker = await db.marker.findByPk(input.id)
+      marker.set(input)
+      return marker.save()
+    },
+    removeMarkerById: async (root, { id }) => {
+      let marker = await db.marker.findByPk(id);
+      marker.update({
+        map_id: null,
+        longitude: null,
+        latitude: null
+      });
+      return marker.save()
+    },
+    removeAllMarkersOnMap: async (root, { map_id }) => {
+      let map = await db.map.findByPk(map_id)
+      await db.marker.update({
+        map_id: null,
+        longitude: null,
+        latitude: null
+      }, { where: { map_id } })
+      return map
+    },
+    createNewWorld: async (root, { name, creator_id, description }) => {
+      const world = await db.world.build({
+        id: uuid(),
+        name,
+        creator_id,
+        description
+      })
+      return world.save()
+    },
+    bulkEditWorld: async (root, input) => {
+      const world = await db.world.findByPk(input.id)
+      world.set(input)
+      return world.save()
     },
     createNewUser: async (root, { username, email, password, first_name, last_name }) => {
       const user = await db.user.build({
@@ -162,20 +113,6 @@ module.exports = {
 
       return user;
     },
-    createNewWorld: async (root, { name, creator_id, description }) => {
-      const world = await db.world.build({
-        id: uuid(),
-        name,
-        creator_id,
-        description
-      })
-      return world.save()
-    },
-    bulkEditWorld: async (root, input) => {
-      const world = await db.world.findByPk(input.id)
-      world.set(input)
-      return world.save()
-    }
   },
   User: {
     worlds: resolver(db.user.worlds)
@@ -184,15 +121,6 @@ module.exports = {
     maps: resolver(db.world.maps)
   },
   Map: {
-
-  },
-  City: {
-
-  },
-  Town: {
-
-  },
-  Location: {
 
   }
 }
