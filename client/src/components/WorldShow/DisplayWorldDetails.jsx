@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import { Button,ListGroup, ListGroupItem } from 'reactstrap';
-import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
+import { Button, ListGroupItem, ListGroup } from 'reactstrap';
+import { Link } from "react-router-dom";
+
+import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import City from './City'
 import Town from './Town'
 import Location from './Location'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
-import { Link } from "react-router-dom";
 
 
 const cookies = new Cookies();
@@ -20,7 +21,7 @@ export default class DisplayWorldDetails extends Component {
     clicked: false,
     value: "",
     locationID: "",
-    isUser: false
+    isUser: false,
   };
 
 handleClick = this.handleClick.bind(this)
@@ -49,6 +50,7 @@ setLocationID(id) {
 handleRefresh() {
   window.location.reload()
 }
+
 componentDidMount() {
   if (getUserID() === this.props.location.state.creatorID) {
     this.setState({
@@ -57,8 +59,7 @@ componentDidMount() {
   }
 }
   render() {
-    const {worldID, worldName, worldDescription, creatorID} = this.props.location.state;
-    const userID = getUserID();
+    const {worldID, worldName, worldDescription} = this.props.location.state;
 
     return(
         <div className="container mt-3">
@@ -70,7 +71,25 @@ componentDidMount() {
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-                <ShowMap worldID={worldID} userID={userID} />
+
+                {this.state.isUser &&
+                  <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
+                      <Button className="btn btn-success add-world col-md-12">Edit World</Button>
+                  </Link>
+                }
+                <ShowMap worldID={worldID} isUser={this.state.isUser} />
+                {this.state.isUser === true &&
+                  <Link
+                    to={{
+                      pathname: "/edit-map",
+                      state: {
+                        worldID: worldID,
+                      }
+                    }}
+                  >
+                    <Button>Edit Map</Button>
+                  </Link>
+                }
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
@@ -78,13 +97,10 @@ componentDidMount() {
                 {this.state.value === 'City' && <City cityID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.value === 'Town' && <Town  townID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.value === 'Location' && <Location locationID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID}/> : null}
+                {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
               </div>
             }
           </div>
-          {this.state.isUser && <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
-                <Button className="btn btn-success add-world col-md-12">Edit World</Button>
-                </Link>}
         </div>
     )
   }

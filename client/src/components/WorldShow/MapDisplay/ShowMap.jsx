@@ -19,34 +19,8 @@ L.Icon.Default.mergeOptions({
 });
 
 export default class ShowMap extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      redirect: false,
-      worldID: null,
-    }
-  }
-
-  handleEdit = (worldID) => {
-    this.setState({
-      redirect: true,
-      worldID: worldID,
-    })
-  }
-
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/edit-map",
-            state: { worldID: this.state.worldID }
-          }}
-        />)
-    }
-  }
   render () {
-    const {worldID, userID} = this.props
+    const {worldID, isUser} = this.props
     const findMap =
       gql`
         query {
@@ -58,21 +32,13 @@ export default class ShowMap extends Component {
             world_map
           }
         }`;
-    const findUserID =
-      gql`
-        query {
-          findWorldById(id: "${worldID}"){
-            id
-            creator_id
-          }
-        }`;
     return (
       <div>
         <Query query={findMap}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
-            if (data.findMapsByWorldId.length === 0) return <WorldMapSubmit worldID={worldID} />
+            if (data.findMapsByWorldId.length === 0 && isUser === true) return <WorldMapSubmit worldID={worldID} />
             return (
               data.findMapsByWorldId.map(({ id, url, height, width, world_map }) => (
                 <div key={id}>
@@ -90,27 +56,13 @@ export default class ShowMap extends Component {
                       url={url}
                       bounds={[[0, 0], [height, width]]}
                       />
-                    <ShowMarkers mapid={id} />
+                    <ShowMarkers mapid={id} isUser={false} />
                   </Map>
                 }
                 </div>
             )));
           }}
         </Query>
-        <Query query={findUserID}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Fetching</div>
-          if (error) return <div>Error</div>
-          return (
-            <div>
-              {userID === data.findWorldById.creator_id &&
-              <Button onClick={() => {this.handleEdit(data.findWorldById.id)}} color="primary">Edit Map</Button>
-              }
-              {this.renderRedirect()}
-            </div>
-              );
-        }}
-      </Query>
       </div>
     );
   }

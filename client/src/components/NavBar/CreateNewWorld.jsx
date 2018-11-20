@@ -52,7 +52,7 @@ class CreateNewWorld extends Component {
               <Label>Name</Label>
               <Input onChange={this.handleNameChange} type="text" name="name" />
               <Label>Description</Label>
-              <Input onChange={this.handleDescriptionChange} type="text" name="description" />
+              <Input onChange={this.handleDescriptionChange} type="textarea" name="description" />
               <br />
               <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
                 {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)

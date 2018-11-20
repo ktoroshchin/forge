@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Label, Input } from 'reactstrap';
 import ChooseCity from './ChooseCity'
 import ChooseTown from './ChooseTown'
 import ChooseLocation from './ChooseLocation'
@@ -8,89 +8,72 @@ export default class NewMarkerForm extends Component {
 constructor(props) {
     super(props);
     this.state = {
-      modal: false,
-      dropdownOpen: false,
       value: "",
     };
-
-    this.toggleModal = this.toggleModal.bind(this);
-    this.toggleDropdown = this.toggleDropdown.bind(this);
     this.select = this.select.bind(this);
-  }
-
-  toggleDropdown() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
-  }
-
-  toggleModal() {
-    this.setState({
-      modal: !this.state.modal
-    });
   }
 
   select(event) {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
-      value: event.target.innerText,
-    },
-    () => this.toggleModal())
+      value: event.target.value,
+    })
   }
 
   render() {
-    const {submitMarker, coords, worldID, mapID} = this.props
+    const {toggleModal, coords, worldID, mapID} = this.props
     return (
       <div>
-        <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-          <DropdownToggle caret>
-            Select Category
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={this.select}>City</DropdownItem>
-            <DropdownItem onClick={this.select}>Town</DropdownItem>
-            <DropdownItem onClick={this.select}>Location</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-          {this.state.value === 'City' &&
-            <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleModal}>Choose City</ModalHeader>
-              <ChooseCity
-                submitMarker={submitMarker}
-                coords={coords}
-                worldID={worldID}
-                mapID={mapID}
-              />
-            </Modal>
-          }
-          {this.state.value === 'Town' &&
-            <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleModal}>Choose Town</ModalHeader>
-            <ModalBody>
-              <ChooseTown />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={() => {submitMarker()}}>
-                Submit
-              </Button>
-              <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
-            </ModalFooter>
-            </Modal>
-          }
-          {this.state.value === 'Location' &&
-            <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleModal}>Choose Location</ModalHeader>
-            <ModalBody>
-              <ChooseLocation />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="primary" onClick={() => {submitMarker()}}>
-                Submit
-              </Button>
-              <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
-            </ModalFooter>
-            </Modal>
-          }
+        <FormGroup>
+          <Input onClick={this.select} type="select" name="select" id="categorySelect">
+            <option value="">Select a category...</option>
+            <option value="City">City</option>
+            <option value="Town">Town</option>
+            <option value="Location">Location</option>
+          </Input>
+        </FormGroup>
+        {this.state.value === '' &&
+        <div>
+        <FormGroup>
+          <Label for="categorySelect">Choose a...</Label>
+          <Input type="select" disabled>
+            <option value="">Select...</option>
+          </Input>
+        </FormGroup>
+        <ModalFooter>
+          <Button color="success" disabled>Submit</Button>
+        </ModalFooter>
+        </div>
+        }
+        {this.state.value === 'City' &&
+        <div>
+          <ChooseCity
+            toggleModal={toggleModal}
+            coords={coords}
+            worldID={worldID}
+            mapID={mapID}
+          />
+        </div>
+        }
+        {this.state.value === 'Town' &&
+        <div>
+          <ChooseTown
+            toggleModal={toggleModal}
+            coords={coords}
+            worldID={worldID}
+            mapID={mapID}
+          />
+        </div>
+        }
+        {this.state.value === 'Location' &&
+        <div>
+          <ChooseLocation
+            toggleModal={toggleModal}
+            coords={coords}
+            worldID={worldID}
+            mapID={mapID}
+          />
+        </div>
+        }
       </div>
     )
   }
