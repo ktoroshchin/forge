@@ -10,7 +10,7 @@ function EditProfile() {
     const id = this.props.getUserID();
     const findUser = gql`
     query {
-      findUserById(id: "7597283c-0a43-4be5-bc73-95280f3c0c5f"){
+      findUserById(id: "${id}"){
         id
         first_name
         last_name
