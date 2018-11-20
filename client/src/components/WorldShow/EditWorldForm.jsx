@@ -28,7 +28,8 @@ class EditWorldForm extends Component {
   }
   renderRedirect() {
     if (this.state.redirect) {
-      return <Redirect to='/my-worlds' />
+      window.location.reload();
+      return <Redirect to='/' />
     }
   }
   render() {
