@@ -16,6 +16,7 @@ class EditProfile extends Component {
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.setRedirect = this.setRedirect.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleFirstNameChange(e) {
@@ -27,9 +28,12 @@ class EditProfile extends Component {
   handlePasswordChange(e) {
     this.setState({password: e.target.value});
   }
+  setRedirect() {
+    this.setState({redirect: true});
+  }
   renderRedirect() {
     if (this.state.redirect) {
-      return <Redirect to='/world-show' />
+      return <Redirect to='/' />
     }
   }
   render() {
@@ -55,7 +59,7 @@ class EditProfile extends Component {
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
               {(postMutation, data) =>
-                <Button color="success" onClick={(event)=>{postMutation(event)}}>Submit</Button>}
+                <Button color="success" onClick={(event)=>{postMutation(event); this.setRedirect()}}>Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
           </FormGroup>
