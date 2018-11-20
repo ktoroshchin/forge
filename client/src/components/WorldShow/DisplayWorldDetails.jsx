@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button,ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, ListGroupItem } from 'reactstrap';
 import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
 import TableofContents from "./TableofContents"
 import City from './City'
@@ -57,7 +57,7 @@ componentDidMount() {
   }
 }
   render() {
-    const {worldID, worldName, worldDescription, creatorID} = this.props.location.state;
+    const {worldID, worldName, worldDescription} = this.props.location.state;
     const userID = getUserID();
 
     return(

@@ -1,8 +1,6 @@
-import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
 import EditCityForm from './EditCityForm'
 
 function EditCity({location}) {
