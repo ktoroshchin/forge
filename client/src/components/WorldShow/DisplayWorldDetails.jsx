@@ -9,6 +9,7 @@ import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
 import { Link } from "react-router-dom";
 
+
 const cookies = new Cookies();
 const getUserID = function() {
   return cookies.get('userID');
