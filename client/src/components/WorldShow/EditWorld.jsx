@@ -20,7 +20,7 @@ function EditWorld() {
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditWorldForm worldID={data.findWorldById.id} name={data.findWorldById.name} description={data.findWorldById.description} creatorID={data.findWorldById.creator_id} />}}
+      return <EditWorldForm id={data.findWorldById.id} name={data.findWorldById.name} description={data.findWorldById.description} creator_id={data.findWorldById.creator_id} />}}
     </Query>
   )
 }

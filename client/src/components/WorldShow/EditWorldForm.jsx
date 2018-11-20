@@ -33,7 +33,7 @@ class EditWorldForm extends Component {
   }
   render() {
     const { name, description } = this.state;
-    const {id, creator_id} = this.props;
+    const { id, creator_id } = this.props;
     const POST_MUTATION = gql`
       mutation ($id: ID!, $name: String!, $description: String, $creator_id: ID!){
         bulkEditWorld(id: $id, name: $name, description: $description, creator_id: $creator_id) {
