@@ -7,6 +7,7 @@ import Town from './Town'
 import Location from './Location'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
+import { Link } from "react-router-dom";
 
 const cookies = new Cookies();
 const getUserID = function() {
@@ -80,6 +81,7 @@ componentDidMount() {
               </div>
             }
           </div>
+          <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>Edit World</Link>
         </div>
     )
   }
