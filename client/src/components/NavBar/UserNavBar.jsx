@@ -10,6 +10,9 @@ function UserNavBar({username, deleteUser}) {
           Hello, {username}!
         </DropdownToggle>
         <DropdownMenu right>
+        <DropdownItem tag={Link} to="/edit-profile">
+            Edit Profile
+          </DropdownItem>
           <DropdownItem tag={Link} to="/my-worlds">
             Show My Worlds
           </DropdownItem>
