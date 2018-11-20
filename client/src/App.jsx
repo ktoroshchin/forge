@@ -20,6 +20,7 @@ import CreateNewCity from './components/WorldShow/CreateNewCity'
 import HomePage from './components/HomePage.jsx'
 import CustomMapExample from './components/BasicExample/CustomMapView'
 
+import EditLocation from'./components/WorldShow/EditLocation'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -54,6 +55,7 @@ const App = () => (
         <Route path="/world-show" component={DisplayWorldDetails} />
         <Route path="/update-category" component={ChooseCategoryToUpdate} />
         <Route path="/updatecity" component={CreateNewCity} />
+        <Route path="/edit-location" component={EditLocation} />
       </div>
     </Router>
   </ApolloProvider>
