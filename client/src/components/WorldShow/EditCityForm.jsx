@@ -53,17 +53,19 @@ class EditCityForm extends Component {
     }`
     return (
       <div>
-        <h2>Edit Profile</h2>
+        <h2>Edit City</h2>
         <Form>
           <FormGroup>
-            <Label>First Name (optional)</Label>
-            <Input value={this.state.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
-            <Label>Last Name (optional)</Label>
-            <Input value={this.state.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
-            <Label>Password</Label>
-            <Input onChange={this.handlePasswordChange} type="password" name="password" />
+            <Label>Name</Label>
+            <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
+            <Label>Population</Label>
+            <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
+            <Label>Government</Label>
+            <Input onChange={this.handleGovernmentChange} type="text" name="government" />
+            <Label>Description</Label>
+            <Input onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
+            <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
                   .then(()=>{this.setRedirect();})
