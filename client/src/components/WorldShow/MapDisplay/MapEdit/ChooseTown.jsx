@@ -1,51 +1,97 @@
 import React, { Component } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Query } from 'react-apollo';
+import { ModalBody, ModalFooter, Button, FormGroup, Label, Input } from 'reactstrap';
+import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
 export default class ChooseTown extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownOpen: false,
+      value: ""
     }
-    this.toggleDropdown = this.toggleDropdown.bind(this)
-  }
-
-  toggleDropdown() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }))
+    this.select = this.select.bind(this);
   }
 
   select(event) {
-    console.log(event.target.getAttribute('data-key'));
+    console.log(event.target.value);
+    this.setState({
+      value: event.target.value,
+    })
   }
 
   render() {
+    const {submitMarker, coords: {lat, lng}, worldID, mapID} = this.props
     const listTowns = gql`query {
-      findTownsByWorldId(world_id: "2fd0df5b-5623-497a-bb21-3d5d9144f618"){
+      findTownsByWorldId(world_id: "${worldID}"){
         id
         name
+        map_id
       }
     }`
+    const POST_MUTATION = gql`
+      mutation (
+        $id: ID!,
+        $map_id: ID!,
+        $latitude: Float!,
+        $longitude: Float!){
+        placeTownOnMap(
+          id: $id,
+          map_id: $map_id,
+          latitude: $latitude,
+          longitude: $longitude){
+          world_id
+        }
+      }`
+
     return (
-      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdown}>
-          <DropdownToggle caret>
-            Select Town
-          </DropdownToggle>
-          <DropdownMenu>
-          <Query query={listTowns}>
-            {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-            return (data.findTownsByWorldId.map(({ id, name }) => (
-                <DropdownItem key={id} data-key={id} onClick={this.select}>{name}</DropdownItem>
-            )));
-          }}
-          </Query>
-          </DropdownMenu>
-        </Dropdown>
+      <div>
+        <FormGroup>
+          <Label for="categorySelect">Choose a Town...</Label>
+          <Input onClick={this.select} type="select" name="select" id="categorySelect">
+            <option value="">Select...</option>
+            <Query query={listTowns}>
+              {({ loading, error, data }) => {
+              if (loading) return <option>Fetching</option>
+              if (error) return <option>Error</option>
+              return (data.findTownsByWorldId.map(({ id, name, map_id }) => {
+                if (!map_id) {
+                  return (
+                    <option key={id} value={id}>{name}</option>
+                    )
+                } else {
+                  return (
+                    <option key={id} value={id} disabled>{name} already placed!</option>
+                    )
+                }
+                }));
+              }}
+            </Query>
+          </Input>
+        </FormGroup>
+        <ModalFooter>
+          {this.state.value !== "" &&
+          <Mutation
+            mutation={POST_MUTATION}
+            variables={{
+              "id": this.state.value,
+              "map_id": mapID,
+              "latitude": lat,
+              "longitude": lng}}>
+            {(postMutation, data, error) =>
+            <Button color="success" onClick={(event)=>{postMutation()
+              .then(()=>{window.location.reload()})
+              .catch((error) => {
+                alert('Error')
+              }
+            )}}>
+            Submit</Button>}
+          </Mutation>
+          }
+          {this.state.value === "" &&
+          <Button color="success" disabled>Submit</Button>
+          }
+        </ModalFooter>
+      </div>
       )
   }
 }

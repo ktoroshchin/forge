@@ -90,7 +90,7 @@ class WorldMapSubmit extends Component {
               {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
           </Mutation>
           <br />
-          <img alt="Map" onLoad={this.onImgLoad} src={this.state.value} />
+          <img alt="Map" onLoad={this.onImgLoad} src={this.state.value} style={{visibility: "hidden",}}/>
 
           </div>
         }

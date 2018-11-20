@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { ImageOverlay, Map, Marker, Popup } from 'react-leaflet';
+import { Button, Modal, ModalHeader } from 'reactstrap'
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
@@ -20,18 +21,17 @@ export default class EditMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      center: {
-        lat: 512,
-        lng: 1024,
-      },
-      zoom: 1,
       activeMarker: null,
+      modal: false,
     };
     this.refMarker = createRef()
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleDraggable = () => {
-    this.setState({ draggable: !this.state.draggable })
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
   addMarker = (height, width) => {
@@ -64,8 +64,8 @@ export default class EditMap extends Component {
     if (marker != null) {
      this.setState({
         activeMarker: null,
+        modal: false,
       })
-      console.log('Marker Submitted')
     }
   }
 
@@ -111,16 +111,22 @@ export default class EditMap extends Component {
                         ref={this.refMarker}
                         >
                         <Popup minWidth={90}>
-                          <NewMarkerForm
-                            submitMarker={this.submitMarker}
-                            coords={this.state.activeMarker}
-                            worldID={worldID}
-                            mapID={id}
-                          />
+                          <Button color="secondary" onClick={this.toggleModal}>Edit</Button>
+                          <Button color="secondary" onClick={this.submitMarker}>Cancel</Button>
+
+                          <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                          <ModalHeader toggle={this.toggleModal}>Link to a...</ModalHeader>
+                            <NewMarkerForm
+                              toggleModal={this.toggleModal}
+                              coords={this.state.activeMarker}
+                              worldID={worldID}
+                              mapID={id}
+                            />
+                          </Modal>
                         </Popup>
                       </Marker>
                     }
-                    <ShowMarkers mapid={id} />
+                    <ShowMarkers mapid={id} isUser={true} />
                   </Map>
                   {this.state.activeMarker === null &&
                     <button onClick={() => {this.addMarker(height, width)}}>
@@ -131,6 +137,7 @@ export default class EditMap extends Component {
             )));
           }}
           </Query>
+
       </div>
     );
   }
