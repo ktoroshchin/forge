@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, FormGroup, Label, Input } from 'reactstrap';
+import { Button, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
 import ChooseCity from './ChooseCity'
 import ChooseTown from './ChooseTown'
 import ChooseLocation from './ChooseLocation'
@@ -20,7 +20,7 @@ constructor(props) {
   }
 
   render() {
-    const {toggleModal, coords, worldID, mapID} = this.props
+    const { coords, worldID, mapID} = this.props
     return (
       <div>
         <FormGroup>
@@ -47,7 +47,6 @@ constructor(props) {
         {this.state.value === 'City' &&
         <div>
           <ChooseCity
-            toggleModal={toggleModal}
             coords={coords}
             worldID={worldID}
             mapID={mapID}
@@ -57,7 +56,6 @@ constructor(props) {
         {this.state.value === 'Town' &&
         <div>
           <ChooseTown
-            toggleModal={toggleModal}
             coords={coords}
             worldID={worldID}
             mapID={mapID}
@@ -67,7 +65,6 @@ constructor(props) {
         {this.state.value === 'Location' &&
         <div>
           <ChooseLocation
-            toggleModal={toggleModal}
             coords={coords}
             worldID={worldID}
             mapID={mapID}

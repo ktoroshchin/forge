@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ModalBody, ModalFooter, Button, FormGroup, Label, Input } from 'reactstrap';
+import { ModalFooter, Button, FormGroup, Label, Input } from 'reactstrap';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -20,7 +20,7 @@ export default class ChooseTown extends Component {
   }
 
   render() {
-    const {submitMarker, coords: {lat, lng}, worldID, mapID} = this.props
+    const {coords: {lat, lng}, worldID, mapID} = this.props
     const listTowns = gql`query {
       findTownsByWorldId(world_id: "${worldID}"){
         id
