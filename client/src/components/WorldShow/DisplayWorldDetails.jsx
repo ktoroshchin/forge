@@ -13,7 +13,7 @@ const getUserID = function() {
   return cookies.get('userID');
 }
 
-class DisplayWorldDetails extends Component {
+export default class DisplayWorldDetails extends Component {
   state = {
     clicked: false,
     value: "",
@@ -43,6 +43,7 @@ setLocationID(id) {
     locationID: id
   })
 }
+
 handleRefresh() {
   window.location.reload()
 }
@@ -55,6 +56,8 @@ componentDidMount() {
 }
   render() {
     const {worldID, worldName, worldDescription, creatorID} = this.props.location.state;
+    const userID = getUserID();
+
     return(
         <div className="container mt-3">
           <ListGroupItem className="world-name" onClick={this.handleRefresh}>{worldName}</ListGroupItem>
@@ -65,7 +68,7 @@ componentDidMount() {
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-                <ShowMap worldID={worldID} />
+                <ShowMap worldID={worldID} userID={userID} />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
@@ -77,9 +80,7 @@ componentDidMount() {
               </div>
             }
           </div>
-
         </div>
     )
   }
 }
-export default DisplayWorldDetails
