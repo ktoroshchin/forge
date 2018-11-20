@@ -26,8 +26,6 @@ import EditLocation from'./components/WorldShow/EditLocation'
 import HomePage from './components/HomePage.jsx'
 import CustomMapExample from './components/BasicExample/CustomMapView'
 
-import EditLocation from'./components/WorldShow/EditLocation'
-
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
 })
