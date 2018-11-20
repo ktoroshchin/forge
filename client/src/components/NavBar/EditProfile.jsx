@@ -5,8 +5,8 @@ import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 import EditProfileForm from './EditProfileForm'
 
-function EditProfile() {
-  const id = this.props.getUserID();
+function EditProfile({getUserID}) {
+  const id = getUserID();
   const findUser = gql`
   query {
     findUserById(id: "${id}"){
