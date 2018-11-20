@@ -59,7 +59,7 @@ handleDescription(e) {
             <Label for="description">Description</Label>
             <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
           </FormGroup>
-          <Mutation mutation={POST_MUTATION} variables={{ name, population, description, marker_id, world_id }}>
+          <Mutation mutation={POST_MUTATION} variables={{ name, population, description, government, marker_id, world_id }}>
             {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
           </Mutation>
         </Form>

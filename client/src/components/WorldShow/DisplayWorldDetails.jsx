@@ -9,6 +9,7 @@ import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
 import { Link } from "react-router-dom";
 
+
 const cookies = new Cookies();
 const getUserID = function() {
   return cookies.get('userID');
@@ -77,7 +78,7 @@ componentDidMount() {
                 {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
                 {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
                 {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
-                {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
+                {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID}/> : null}
               </div>
             }
           </div>

@@ -2,6 +2,7 @@ import React from "react";
 import {ListGroupItem, ListGroup} from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Link } from "react-router-dom";
 
 
 
@@ -29,7 +30,9 @@ function City({cityID}) {
               <ListGroupItem className="listItem" action><span className="categoryName">Population</span><span>: </span>{data.findCityById.population}</ListGroupItem>
               <ListGroupItem className="listItem" action><span className="categoryName">Government</span><span>: </span>{data.findCityById.government}</ListGroupItem>
               <ListGroupItem className="listItem" action><span className="categoryName">Description</span><span>: </span>{data.findCityById.description}</ListGroupItem>
+              <Link to={{pathname: "/edit-city", state: {cityID: cityID}}}>Edit World</Link>
             </ListGroup>
+
           );
         }}
       </Query>

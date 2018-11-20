@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import Cookies from 'universal-cookie';
 
+
 import './styles/App.css';
 
 import NavbarMain from './components/NavBar/NavbarMain.jsx'
@@ -18,11 +19,12 @@ import ChooseCategoryToUpdate from './components/WorldShow/ChooseCategoryToUpdat
 import CreateNewCity from './components/WorldShow/CreateNewCity'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
 import EditWorld from './components/WorldShow/EditWorld'
+import EditCity from './components/WorldShow/EditCity'
+import EditTown from'./components/WorldShow/EditTown'
 
 import HomePage from './components/HomePage.jsx'
 import CustomMapExample from './components/BasicExample/CustomMapView'
 
-import EditLocation from'./components/WorldShow/EditLocation'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -59,7 +61,8 @@ const App = () => (
         <Route path="/updatecity" component={CreateNewCity} />
         <Route path="/edit-map" component={EditMap} />
         <Route path="/edit-world" component={EditWorld} />
-        <Route path="/edit-location" component={EditLocation} />
+        <Route path="/edit-town" component={EditTown} />
+        <Route path="/edit-city" component={EditCity} />
       </div>
     </Router>
   </ApolloProvider>
