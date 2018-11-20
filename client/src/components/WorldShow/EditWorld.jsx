@@ -5,10 +5,10 @@ import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 import EditWorldForm from './EditWorldForm'
 
-function EditWorld() {
+function EditWorld({location}) {
   const findWorld = gql`
   query {
-    findWorldById(id: "2fd0df5b-5623-497a-bb21-3d5d9144f618"){
+    findWorldById(id: "${location.state.worldID}"){
       id
       name
       description
