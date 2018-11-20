@@ -69,6 +69,12 @@ export default class EditMap extends Component {
     }
   }
 
+  componentWillMount() {
+    if (!this.props.location.state) {
+      return window.location.href = '/'
+    }
+  }
+
   render () {
     const worldID = this.props.location.state.worldID
     const findMap =

@@ -54,38 +54,43 @@ class Register extends Component {
   }
   render() {
     const { first_name, last_name, username, email, password } = this.state;
+    const {getUserID} = this.props;
     const POST_MUTATION = gql`
       mutation ($first_name: String, $last_name: String, $username: String!, $email: String!, $password: String!){
         createNewUser(first_name: $first_name, last_name: $last_name, username: $username, email: $email, password: $password) {
           id
         }
       }`
-    return (
-      <div>
-        <h2>Register</h2>
-        <Form>
-          <FormGroup>
-            <Label>First Name (optional)</Label>
-            <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
-            <Label>Last Name (optional)</Label>
-            <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
-            <Label>Username</Label>
-            <Input onChange={this.handleUsernameChange} type="text" name="username" />
-            <Label>Email</Label>
-            <Input onChange={this.handleEmailChange} type="text" name="email" />
-            <Label>Password</Label>
-            <Input onChange={this.handlePasswordChange} type="password" name="password" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
-              {(postMutation, data) =>
-                <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
-                Submit</Button>}
-            </Mutation>
-            {this.renderRedirect()}
-          </FormGroup>
-        </Form>
-      </div>
-    )
+    if (!getUserID()) {
+      return (
+        <div>
+          <h2>Register</h2>
+          <Form>
+            <FormGroup>
+              <Label>First Name (optional)</Label>
+              <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
+              <Label>Last Name (optional)</Label>
+              <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
+              <Label>Username</Label>
+              <Input onChange={this.handleUsernameChange} type="text" name="username" />
+              <Label>Email</Label>
+              <Input onChange={this.handleEmailChange} type="text" name="email" />
+              <Label>Password</Label>
+              <Input onChange={this.handlePasswordChange} type="password" name="password" />
+              <br />
+              <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
+                {(postMutation, data) =>
+                  <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
+                  Submit</Button>}
+              </Mutation>
+              {this.renderRedirect()}
+            </FormGroup>
+          </Form>
+        </div>
+      )
+    } else {
+      return <Redirect to='/' />
+    }
   }
 }
 

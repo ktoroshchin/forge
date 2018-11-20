@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, ListGroupItem } from 'reactstrap';
 import { Link } from "react-router-dom";
-
+import { Redirect } from "react-router";
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import City from './City'
@@ -49,6 +49,12 @@ setLocationID(id) {
 
 handleRefresh() {
   window.location.reload()
+}
+
+componentWillMount() {
+  if (!this.props.location.state) {
+    return window.location.href = '/'
+  }
 }
 
 componentDidMount() {

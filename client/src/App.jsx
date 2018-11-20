@@ -41,14 +41,16 @@ const deleteUser = function() {
   cookies.remove('username');
   cookies.remove('userID');
 }
-const App = () => (
+
+const App = () => {
+  return (
   <ApolloProvider client={client}>
     <Router>
       <div>
         <NavbarMain cookies={cookies} deleteUser={deleteUser} />
         <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
-        <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} />} />
-        <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} />} />
+        <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
+        <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
         <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
         <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
         <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
@@ -62,5 +64,6 @@ const App = () => (
     </Router>
   </ApolloProvider>
 )
+}
 
 export default App;

@@ -35,34 +35,40 @@ class Login extends Component {
   }
    render() {
     const { username, password } = this.state;
+    const {getUserID} = this.props;
+
     const POST_MUTATION = gql`
       mutation ($username: String!, $password: String!){
         login(username: $username, password: $password) {
           user_id
         }
-      }`
-    return (
-      <div>
-        <h2>Login</h2>
-        <Form>
-          <FormGroup>
-            <Label>Username</Label>
-            <Input onChange={this.handleUsernameChange} type="text" name="username" />
-            <Label>Password</Label>
-            <Input onChange={this.handlePasswordChange} type="password" name="password" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
-              {(postMutation, data, error) =>
-                <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then((data)=>{this.setUser(data);})
-                  .catch((error) => {alert("Wrong login credentials")})}}>
-                Submit</Button>}
-            </Mutation>
-            {this.renderRedirect()}
-          </FormGroup>
-        </Form>
-      </div>
-    )
+      }`;
+    if (!getUserID()) {
+      return (
+        <div>
+          <h2>Login</h2>
+          <Form>
+            <FormGroup>
+              <Label>Username</Label>
+              <Input onChange={this.handleUsernameChange} type="text" name="username" />
+              <Label>Password</Label>
+              <Input onChange={this.handlePasswordChange} type="password" name="password" />
+              <br />
+              <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
+                {(postMutation, data, error) =>
+                  <Button color="success" onClick={(event)=>{postMutation(event)
+                    .then((data)=>{this.setUser(data);})
+                    .catch((error) => {alert("Wrong login credentials")})}}>
+                  Submit</Button>}
+              </Mutation>
+              {this.renderRedirect()}
+            </FormGroup>
+          </Form>
+        </div>
+      )
+    } else {
+      return <Redirect to='/' />
+    }
   }
 }
 
