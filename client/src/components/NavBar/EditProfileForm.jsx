@@ -50,9 +50,9 @@ class EditProfileForm extends Component {
         <Form>
           <FormGroup>
             <Label>First Name (optional)</Label>
-            <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
+            <Input value={this.state.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
             <Label>Last Name (optional)</Label>
-            <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
+            <Input value={this.state.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
             <Label>Password</Label>
             <Input onChange={this.handlePasswordChange} type="password" name="password" />
             <br />
