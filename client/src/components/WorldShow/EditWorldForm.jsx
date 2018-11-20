@@ -28,7 +28,7 @@ class EditWorldForm extends Component {
   }
   renderRedirect() {
     if (this.state.redirect) {
-      return <Redirect to='/' />
+      return <Redirect to='/my-worlds' />
     }
   }
   render() {
@@ -46,9 +46,9 @@ class EditWorldForm extends Component {
         <Form>
           <FormGroup>
             <Label> Name (required)</Label>
-            <Input value={this.state.first_name} onChange={this.handleNameChange} type="text" name="name" />
+            <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
             <Label>Description (optional)</Label>
-            <Input value={this.state.last_name} onChange={this.handleDescriptionChange} type="text" name="description" />
+            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
               {(postMutation) =>
