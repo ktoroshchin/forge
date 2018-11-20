@@ -37,8 +37,7 @@ class EditProfileForm extends Component {
     }
   }
   render() {
-    const { first_name, last_name, password } = this.state;
-    const id = this.props.getUserID();
+    const { id, first_name, last_name, password } = this.state;
     const POST_MUTATION = gql`
       mutation ($id: ID!, $password: String!, $first_name: String, $last_name: String){
         bulkEditUser(id: $id, password: $password, first_name: $first_name, last_name: $last_name) {
