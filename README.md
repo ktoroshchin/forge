@@ -1,4 +1,4 @@
-# Forge
+# The Forge
 
 A a user-friendly web application for all Dungeon Masters/Game Masters who would like to organize their homebrew campaigns.
 
@@ -20,7 +20,10 @@ Based on create-react-app
 12. Visit `localhost:3000` in your browser
 
 ### Collaborators
+[Shawn-Philippe](https://github.com/Levasseur-Sp)
+
+[David](https://github.com/Sonchucks)
+
+[Konstantin](https://github.com/ktoroshchin)
 
 [Zachary](https://github.com/zacharylee97)
-[David](https://github.com/Sonchucks)
-[Shawn-Philippe](https://github.com/Levasseur-Sp)
