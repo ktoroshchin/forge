@@ -8,8 +8,8 @@ class EditProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: null,
-      last_name: null,
+      first_name: this.props.first_name,
+      last_name: this.props.last_name,
       password: null,
       redirect: false
     }
