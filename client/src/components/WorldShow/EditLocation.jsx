@@ -1,4 +1,4 @@
-import Reactfrom "react";
+import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import EditLocationForm from './EditLocationForm'
