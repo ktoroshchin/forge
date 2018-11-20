@@ -1,10 +1,10 @@
 import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { Query, Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 
-class EditProfile extends Component {
+class EditProfileForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,14 +39,6 @@ class EditProfile extends Component {
   render() {
     const { first_name, last_name, password } = this.state;
     const id = this.props.getUserID();
-    const findUser = gql`
-    query {
-      findUserById(id: "7597283c-0a43-4be5-bc73-95280f3c0c5f"){
-        id
-        first_name
-        last_name
-      }
-    }`
     const POST_MUTATION = gql`
       mutation ($id: ID!, $password: String!, $first_name: String, $last_name: String){
         bulkEditUser(id: $id, password: $password, first_name: $first_name, last_name: $last_name) {
@@ -58,28 +50,17 @@ class EditProfile extends Component {
         <h2>Edit Profile</h2>
         <Form>
           <FormGroup>
-          <Query query={findUser}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-            return (
-              <div>
-                <Label>First Name (optional)</Label>
-                <Input value={data.findUserById.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
-                <Label>Last Name (optional)</Label>
-                <Input value={data.findUserById.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
-                <Label>Password</Label>
-                <Input onChange={this.handlePasswordChange} type="password" name="password" />
-                <br />
-                <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
-                  {(postMutation, data) =>
-                    <Button color="success" onClick={(event)=>{postMutation(event); this.setRedirect()}}>Submit</Button>}
-                </Mutation>
-              </div>
-            );
-          }}
-        </Query>
-
+            <Label>First Name (optional)</Label>
+            <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
+            <Label>Last Name (optional)</Label>
+            <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
+            <Label>Password</Label>
+            <Input onChange={this.handlePasswordChange} type="password" name="password" />
+            <br />
+            <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
+              {(postMutation, data) =>
+                <Button color="success" onClick={(event)=>{postMutation(event); this.setRedirect()}}>Submit</Button>}
+            </Mutation>
             {this.renderRedirect()}
           </FormGroup>
         </Form>
@@ -88,4 +69,4 @@ class EditProfile extends Component {
   }
 }
 
-export default EditProfile;
+export default EditProfileForm;
