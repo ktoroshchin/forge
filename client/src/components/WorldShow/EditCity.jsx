@@ -5,22 +5,24 @@ import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 import EditCityForm from './EditCityForm'
 
-function EditCity({getUserID}) {
-  const id = getUserID();
-  const findUser = gql`
+function EditCity() {
+  const findCity = gql`
   query {
-    findUserById(id: "${id}"){
-      id
-      first_name
-      last_name
-    }
+       findCityById(id:"b3d1fa04-ee42-464b-9956-e3dd0081bb04") {
+  			id
+     	  name
+      	population
+      	description
+      	government
+      }
   }`
+
   return (
-    <Query query={findUser}>
+    <Query query={findCity}>
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditCityForm id={data.findUserById.id} first_name={data.findUserById.first_name} last_name={data.findUserById.last_name} />}}
+      return <EditCityForm id={data.findCityById.id} name={data.findUserById.name} population={data.findCityById.population} government={data.findCityById.government} description={data.findCityById.description} />}}
     </Query>
   )
 }
