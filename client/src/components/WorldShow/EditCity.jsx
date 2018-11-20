@@ -5,10 +5,11 @@ import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 import EditCityForm from './EditCityForm'
 
-function EditCity() {
+function EditCity({location}) {
+  const cityID = location.state.cityID;
   const findCity = gql`
   query {
-       findCityById(id:"b3d1fa04-ee42-464b-9956-e3dd0081bb04") {
+       findCityById(id:"${cityID}") {
   			id
      	  name
       	population
