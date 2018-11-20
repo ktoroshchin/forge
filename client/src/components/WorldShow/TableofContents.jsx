@@ -7,7 +7,6 @@ import LocationList from './LocationList'
 
 
 function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
-console.log("hello", isUser)
   return (
     <div className="AccordionForWorldPage">
 
