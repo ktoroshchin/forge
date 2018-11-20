@@ -22,7 +22,6 @@ import EditTown from'./components/WorldShow/EditElement/EditTown'
 import EditLocation from'./components/WorldShow/EditElement/EditLocation'
 
 import HomePage from './components/HomePage.jsx'
-import CustomMapExample from './components/BasicExample/CustomMapView'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -50,7 +49,6 @@ const App = () => (
         <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
         <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} />} />
         <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} />} />
-        <Route path="/custommap" component={CustomMapExample} />
         <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
         <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
         <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
