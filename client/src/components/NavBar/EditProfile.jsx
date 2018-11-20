@@ -61,8 +61,7 @@ class EditProfile extends Component {
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
               {(postMutation, data) =>
-                <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
-                Submit</Button>}
+                <Button color="success" onClick={(event)=>{postMutation(event)}}>Submit</Button>}
             </Mutation>
             {this.renderRedirect()}
           </FormGroup>

@@ -11,6 +11,7 @@ import Login from './components/NavBar/Login'
 import Register from './components/NavBar/Register'
 import CreateNewWorld from './components/NavBar/CreateNewWorld'
 import MyWorldList from './components/NavBar/MyWorldList'
+import EditProfile from './components/NavBar/EditProfile'
 
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import ChooseCategoryToUpdate from './components/WorldShow/ChooseCategoryToUpdate'
@@ -49,6 +50,7 @@ const App = () => (
         <Route path="/custommap" component={CustomMapExample} />
         <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
         <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
+        <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
         <Route path="/world-show" component={DisplayWorldDetails} />
         <Route path="/update-category" component={ChooseCategoryToUpdate} />
         <Route path="/updatecity" component={CreateNewCity} />
