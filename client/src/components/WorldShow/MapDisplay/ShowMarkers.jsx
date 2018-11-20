@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Marker, Popup } from 'react-leaflet';
-import { Query } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Button } from 'reactstrap';
 
@@ -37,6 +37,14 @@ export default class ShowMarkers extends Component {
                 name
               }
             }`;
+    const POST_MUTATION = gql`
+      mutation (
+        $id: ID!){
+        removeMarkerById(
+          id: $id){
+          map_id
+        }
+      }`
     return (
       <div>
       <Query query={findCityMarkers}>
@@ -55,7 +63,20 @@ export default class ShowMarkers extends Component {
                     <br/>
                     <br/>
                     {isUser === true &&
-                      <Button color="secondary" onClick={this.deleteMarker}>Delete</Button>
+                      <Mutation
+                        mutation={POST_MUTATION}
+                        variables={{
+                          "id": id}}>
+                        {(postMutation, data, error) =>
+                        <Button color="danger" onClick={(event)=>{postMutation()
+                          .then(()=>{window.location.reload()})
+                          .catch((error) => {
+                            alert('Error')
+                          }
+                        )}}>
+                        Delete</Button>
+                      }
+                      </Mutation>
                     }
                   </Popup>
                 </Marker>
@@ -77,9 +98,22 @@ export default class ShowMarkers extends Component {
                     </span>
                     <br/>
                     <br/>
-                    <span>
-                      {id}
-                    </span>
+                    {isUser === true &&
+                      <Mutation
+                        mutation={POST_MUTATION}
+                        variables={{
+                          "id": id}}>
+                        {(postMutation, data, error) =>
+                        <Button color="danger" onClick={(event)=>{postMutation()
+                          .then(()=>{window.location.reload()})
+                          .catch((error) => {
+                            alert('Error')
+                          }
+                        )}}>
+                        Delete</Button>
+                      }
+                      </Mutation>
+                    }
                   </Popup>
                 </Marker>
               )));
@@ -100,9 +134,22 @@ export default class ShowMarkers extends Component {
                     </span>
                     <br/>
                     <br/>
-                    <span>
-                      {id}
-                    </span>
+                    {isUser === true &&
+                      <Mutation
+                        mutation={POST_MUTATION}
+                        variables={{
+                          "id": id}}>
+                        {(postMutation, data, error) =>
+                        <Button color="danger" onClick={(event)=>{postMutation()
+                          .then(()=>{window.location.reload()})
+                          .catch((error) => {
+                            alert('Error')
+                          }
+                        )}}>
+                        Delete</Button>
+                      }
+                      </Mutation>
+                    }
                   </Popup>
                 </Marker>
               )));
