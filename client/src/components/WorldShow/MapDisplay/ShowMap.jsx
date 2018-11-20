@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router'
 import { ImageOverlay, Map } from 'react-leaflet';
-import { Button } from 'reactstrap';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
