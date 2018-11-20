@@ -20,6 +20,7 @@ import CreateNewCity from './components/WorldShow/CreateNewCity'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
 import EditWorld from './components/WorldShow/EditWorld'
 import EditCity from './components/WorldShow/EditCity'
+import EditTown from'./components/WorldShow/EditTown'
 
 import HomePage from './components/HomePage.jsx'
 import CustomMapExample from './components/BasicExample/CustomMapView'
@@ -60,6 +61,7 @@ const App = () => (
         <Route path="/updatecity" component={CreateNewCity} />
         <Route path="/edit-map" component={EditMap} />
         <Route path="/edit-world" component={EditWorld} />
+        <Route path="/edit-town" component={EditTown} />
         <Route path="/edit-city" component={EditCity} />
       </div>
     </Router>

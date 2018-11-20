@@ -22,7 +22,7 @@ function EditCity() {
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditCityForm id={data.findCityById.id} name={data.findUserById.name} population={data.findCityById.population} government={data.findCityById.government} description={data.findCityById.description} />}}
+      return <EditCityForm id={data.findCityById.id} name={data.findCityById.name} population={data.findCityById.population} government={data.findCityById.government} description={data.findCityById.description} />}}
     </Query>
   )
 }

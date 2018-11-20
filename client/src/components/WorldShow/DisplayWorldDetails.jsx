@@ -77,7 +77,7 @@ componentDidMount() {
                 {this.state.value === 'City' && <City cityID={this.state.locationID}/>}
                 {this.state.value === 'Town' && <Town  townID={this.state.locationID}/>}
                 {this.state.value === 'Location' && <Location locationID={this.state.locationID}/>}
-                {this.state.clicked ? <ChooseCategoryToUpdate /> : null}
+                {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID}/> : null}
               </div>
             }
           </div>
