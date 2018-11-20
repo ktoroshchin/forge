@@ -43,23 +43,25 @@ class EditWorldForm extends Component {
       }`
     return (
       <div>
-        <h2>Edit World Details</h2>
-        <Form>
-          <FormGroup>
-            <Label> Name (required)</Label>
-            <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Description (optional)</Label>
-            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
-              {(postMutation) =>
-                <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then(()=>{this.setRedirect();})
-                  .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
-            </Mutation>
-            {this.renderRedirect()}
-          </FormGroup>
-        </Form>
+        <div className="container">
+          <h2>Edit World Details</h2>
+          <Form>
+            <FormGroup>
+              <Label> Name (required)</Label>
+              <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
+              <Label>Description (optional)</Label>
+              <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
+              <br />
+              <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
+                {(postMutation) =>
+                  <Button color="success" onClick={(event)=>{postMutation(event)
+                    .then(()=>{this.setRedirect();})
+                    .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+              </Mutation>
+              {this.renderRedirect()}
+            </FormGroup>
+          </Form>
+        </div>
       </div>
     )
   }
