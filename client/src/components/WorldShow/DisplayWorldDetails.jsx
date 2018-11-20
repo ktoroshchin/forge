@@ -82,7 +82,9 @@ componentDidMount() {
               </div>
             }
           </div>
-          <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>Edit World</Link>
+          {this.state.isUser && <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
+                <Button className="btn btn-success add-world col-md-12">Edit World</Button>
+                </Link>}
         </div>
     )
   }
