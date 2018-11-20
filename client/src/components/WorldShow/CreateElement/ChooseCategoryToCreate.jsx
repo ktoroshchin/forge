@@ -4,7 +4,7 @@ import CreateNewCity from './CreateNewCity'
 import CreateNewTown from './CreateNewTown'
 import CreateNewLocation from './CreateNewLocation'
 
-function ChooseCategoryToUpdate ({worldID}) {
+function ChooseCategoryToCreate ({worldID}) {
   return(
     <div className="ChooseCategoryToUpdate">
       <div className="update-categories">
@@ -61,4 +61,4 @@ function ChooseCategoryToUpdate ({worldID}) {
   </div>
   )
 }
-export default ChooseCategoryToUpdate;
+export default ChooseCategoryToCreate;

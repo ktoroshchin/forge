@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { Button,ListGroup, ListGroupItem } from 'reactstrap';
-import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
 import CityList from './CityList'
 import TownList from './TownList'
 import LocationList from './LocationList'

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Button, ListGroupItem, ListGroup } from 'reactstrap';
 import { Link } from "react-router-dom";
 
-import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
+import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import City from './City'
 import Town from './Town'
@@ -97,7 +97,7 @@ componentDidMount() {
                 {this.state.value === 'City' && <City cityID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.value === 'Town' && <Town  townID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.value === 'Location' && <Location locationID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.clicked ? <ChooseCategoryToUpdate worldID={worldID}/> : null}
+                {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
               </div>
             }
           </div>
