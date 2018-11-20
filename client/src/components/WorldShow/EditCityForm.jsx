@@ -44,7 +44,6 @@ class EditCityForm extends Component {
   }
   render() {
     const { name, population, government, description } = this.state;
-    const populationInt = parseInt(population)
     const {id} = this.props;
     const POST_MUTATION = gql`
     mutation($id: ID!, $name: String!, $population: Int, $government: String, $description: String){
@@ -66,7 +65,7 @@ class EditCityForm extends Component {
             <Label>Description</Label>
             <Input onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, name, populationInt, government, description }}>
+            <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
                   .then(()=>{this.setRedirect();})

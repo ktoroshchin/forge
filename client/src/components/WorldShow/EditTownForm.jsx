@@ -28,7 +28,7 @@ class EditTownForm extends Component {
     this.setState({description: e.target.value});
   }
   handlePopulationChange(e) {
-    this.setState({population: e.target.value});
+    this.setState({population: Number(e.target.value)});
   }
   handleGovernmentChange(e) {
     this.setState({government: e.target.value});
