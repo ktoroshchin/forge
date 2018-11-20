@@ -5,10 +5,11 @@ import gql from 'graphql-tag';
 import {Redirect} from 'react-router'
 import EditTownForm from './EditTownForm'
 
-function EditTown() {
+function EditTown({location}) {
+  const townID = location.state.townID;
   const findTown = gql`
   query {
-    findTownById(id: "73ca2e58-b730-401e-9016-fc6186550f80"){
+    findTownById(id: "${townID}"){
       id
       name
       description
