@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Button,ListGroup, ListGroupItem } from 'reactstrap';
+import { Link } from "react-router-dom";
+
 import ChooseCategoryToUpdate from './ChooseCategoryToUpdate';
 import TableofContents from "./TableofContents"
 import City from './City'
@@ -18,7 +20,7 @@ export default class DisplayWorldDetails extends Component {
     clicked: false,
     value: "",
     locationID: "",
-    isUser: false
+    isUser: false,
   };
 
 handleClick = this.handleClick.bind(this)
@@ -47,6 +49,7 @@ setLocationID(id) {
 handleRefresh() {
   window.location.reload()
 }
+
 componentDidMount() {
   if (getUserID() === this.props.location.state.creatorID) {
     this.setState({
@@ -69,6 +72,16 @@ componentDidMount() {
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
                 <ShowMap worldID={worldID} userID={userID} />
+                {this.state.isUser === true &&
+                  <Link
+                    to={{
+                      pathname: "/edit-map",
+                      state: { worldID: worldID }
+                    }}
+                  >
+                    <Button>Edit Map</Button>
+                  </Link>
+                }
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
