@@ -69,6 +69,10 @@ export default class EditMap extends Component {
     }
   }
 
+  backToView = () => {
+    window.history.back();
+  }
+
   componentWillMount() {
     if (!this.props.location.state) {
       return window.location.href = '/'
@@ -90,6 +94,7 @@ export default class EditMap extends Component {
         }`;
     return (
       <div>
+        <Button onClick={() => this.backToView()}>Back to View World</Button>
         <Query query={findMap}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
