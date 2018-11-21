@@ -14,20 +14,31 @@ class WorldMapSubmit extends Component {
       },
       worldMap: true,
     }
-    console.log(this.props)
     this.handleChange = this.handleChange.bind(this)
-    this.onImgLoad = this.onImgLoad.bind(this);
+    this.getImageSize = this.getImageSize.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({
+      value: event.target.value
+    },
+    () => {this.getImageSize(this.state.value, this)});
   }
 
-  onImgLoad({target:img}) {
-    this.setState({imgSize:{
-      height:img.offsetHeight,
-      width:img.offsetWidth
-    }});
+  getImageSize(url, state) {
+    const img = new Image();
+    img.onload = function() {
+      const imgHeight = this.height
+      const imgWidth = this.width
+
+      state.setState({
+        imgSize:{
+          width: imgWidth,
+          height: imgHeight
+        }
+      })
+    };
+    img.src = url
   }
 
   handleConfirm(event) {
@@ -94,7 +105,6 @@ class WorldMapSubmit extends Component {
                 "world_map": worldMap }}>
                 {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
             </Mutation>
-            <img alt="Map" onLoad={this.onImgLoad} src={this.state.value} style={{visibility: "hidden",}}/>
             </div>
           }
         </ModalFooter>
