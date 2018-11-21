@@ -6,7 +6,6 @@ import EditLocation from './EditElement/EditLocation'
 
 export default class Location extends Component {
   state = {
-    locationID: this.props.locationID,
     isUser: this.props.isUser,
     modal: false
   };
@@ -20,7 +19,7 @@ export default class Location extends Component {
     const findLocation =
     gql`
     query {
-      findMarkers(category:"Location", id: "${this.state.locationID}"){
+      findMarkers(category:"Location", id: "${this.props.locationID}"){
         id
         name
         description
