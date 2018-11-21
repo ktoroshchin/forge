@@ -81,7 +81,12 @@ module.exports = {
       world.set(input)
       return world.save()
     },
-    createNewUser: async (root, { username, email, password, first_name, last_name }) => {
+    register: async (root, { username, email, password, first_name, last_name }) => {
+      if (await db.user.findOne({ where: { username } }))
+        throw new Error('Username already Exists');
+      else if (await db.user.findOne({ where: { email } }))
+        throw new Error('Email is already in use');
+
       const user = await db.user.build({
         id: uuid(),
         username,

@@ -1,5 +1,5 @@
 module.exports = Mutation = `type Mutation {
-  createNewUser(username: String!, email: String!, password: String!, first_name: String, last_name: String): User!
+  register(username: String!, email: String!, password: String!, first_name: String, last_name: String): User!
   bulkEditUser(id: ID!, password: String!, first_name: String, last_name: String): User!
   login(username: String!, password: String!): User!
 
