@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Marker, Popup } from 'react-leaflet';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Button } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem } from 'reactstrap';
 
 export default class ShowMarkers extends Component {
   deleteMarker() {
@@ -14,12 +14,9 @@ export default class ShowMarkers extends Component {
           query{
             findMarkers(map_id:"${mapID}"){
               id
-              category
               longitude
               latitude
               name
-              population
-              government
               description
             }
           }`;
@@ -35,24 +32,38 @@ export default class ShowMarkers extends Component {
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
-          return (data.findMarkers.map(({ id, latitude, longitude, name }) => (
+          return (data.findMarkers.map(({ id, latitude, longitude, name, description }) => (
              <Marker
                   key={id}
                   position={[latitude, longitude]}
                   >
                   <Popup>
-                    <span>
-                      {name}
-                    </span>
+                    <ListGroup>
+                      <ListGroupItem className="listItem"><strong>Name</strong>: {name}</ListGroupItem>
+                      {description !== null &&
+                        <ListGroupItem className="listItem">
+                        {description.length <= 100 &&
+                        <span>
+                          <strong>Description</strong>: {description}
+                        </span>
+                        }
+                        {description.length >= 250 &&
+                        <span>
+                          <strong>Description</strong>: {description}
+                        </span>
+                        }
+                        </ListGroupItem>
+                      }
+                    </ListGroup>
                     <br/>
-                    <br/>
+                    <Button className="btn btn-info btn-sm col-4">More Details</Button>
                     {isUser === true &&
                       <Mutation
                         mutation={POST_MUTATION}
                         variables={{
                           "id": id}}>
                         {(postMutation, data, error) =>
-                        <Button color="danger" onClick={(event)=>{postMutation()
+                        <Button className="btn btn-danger btn-sm col-4 offset-4" onClick={(event)=>{postMutation()
                           .then(()=>{window.location.reload()})
                           .catch((error) => {
                             alert('Error')
