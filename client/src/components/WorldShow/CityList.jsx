@@ -9,7 +9,7 @@ function CityList({worldID, setValue, setLocationID}) {
   const findCities =
   gql`
   query {
-    findCitiesByWorldId(world_id: "${worldID}") {
+    findMarkers(category: "City", world_id: "${worldID}") {
       id
       name
     }
@@ -21,7 +21,7 @@ function CityList({worldID, setValue, setLocationID}) {
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
-          return (data.findCitiesByWorldId.map(({ id, name }) => (
+          return (data.findMarkers.map(({ id, name }) => (
             <ListGroupItem key={id} onClick={()=>{setValue("City"); setLocationID(id)}} action>{name} </ListGroupItem>
           )));
         }}

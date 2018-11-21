@@ -10,7 +10,7 @@ function Town({townID, isUser}) {
   const findTown =
   gql`
   query {
-    findTownById(id: "${townID}") {
+    findMarkers(category: "Town", id: "${townID}") {
       id
       name
       population
