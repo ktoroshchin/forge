@@ -11,7 +11,6 @@ class EditCityForm extends Component {
       population: this.props.population,
       government: this.props.government,
       description: this.props.description,
-      redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePopulationChange = this.handlePopulationChange.bind(this);

@@ -53,7 +53,6 @@ export default class City extends Component {
                   </div>
                 }
               </ListGroup>
-
             );
           }}
         </Query>

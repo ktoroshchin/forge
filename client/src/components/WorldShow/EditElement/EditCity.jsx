@@ -14,13 +14,14 @@ function EditCity({cityID}) {
       	government
       }
   }`
-
   return (
     <Query query={findCity}>
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditCityForm id={data.findMarkers[0].id} name={data.findMarkers[0].name} population={data.findMarkers[0].population} government={data.findMarkers[0].government} description={data.findMarkers[0].description} />}}
+      return <EditCityForm id={data.findMarkers[0].id} name={data.findMarkers[0].name}
+        population={data.findMarkers[0].population} government={data.findMarkers[0].government}
+        description={data.findMarkers[0].description} />}}
     </Query>
   )
 }
