@@ -11,7 +11,8 @@ import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
 
 import EditWorld from './EditElement/EditWorld'
-
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const cookies = new Cookies();
 const getUserID = function() {
@@ -74,12 +75,30 @@ componentDidMount() {
   }
 }
   render() {
-    const {worldID, worldName, worldDescription} = this.props.location.state;
+    const {worldID} = this.props.location.state;
+    const findWorld =
+      gql`
+        query {
+          findWorlds(id: "${worldID}"){
+            name
+            description
+          }
+        }`;
 
     return(
         <div className="container mt-3">
-          <ListGroupItem className="world-name" onClick={this.handleRefresh}>{worldName}</ListGroupItem>
-          {worldDescription && <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>}
+        <Query query={findWorld}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Fetching</div>
+            if (error) return <div>Error</div>
+            return (
+              <div>
+                <ListGroupItem className="world-name" onClick={this.handleRefresh}>{data.findWorlds[0].name}</ListGroupItem>
+                <ListGroupItem className="world-description">{data.findWorlds[0].description}</ListGroupItem>
+              </div>
+            )
+          }}
+        </Query>
           <div className="row mt-3">
             <div className="col-md-4 col-lg-3 col-xl-2">
               <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
