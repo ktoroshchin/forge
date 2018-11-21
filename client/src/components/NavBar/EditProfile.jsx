@@ -8,7 +8,7 @@ function EditProfile({getUserID}) {
   const id = getUserID();
   const findUser = gql`
   query {
-    findUserById(id: "${id}"){
+    findUsers(id: "${id}"){
       id
       first_name
       last_name
@@ -20,7 +20,7 @@ function EditProfile({getUserID}) {
       {({ loading, error, data }) => {
         if (loading) return <div>Fetching</div>
         if (error) return <div>Error</div>
-        return <EditProfileForm id={data.findUserById.id} first_name={data.findUserById.first_name} last_name={data.findUserById.last_name} />}}
+        return <EditProfileForm id={data.findUsers[0].id} first_name={data.findUsers[0].first_name} last_name={data.findUsers[0].last_name} />}}
       </Query>
     )
   } else {
