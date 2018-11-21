@@ -5,12 +5,12 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class CreateNewCity extends Component {
   state = {
+    category: "City",
+    world_id: this.props.worldID,
     name: null,
     population: null,
     government: null,
-    description: null,
-    world_id: this.props.worldID,
-    marker_id: null
+    description: null
   }
 
 handleCityName = this.handleCityName.bind(this);
@@ -32,10 +32,10 @@ handleDescription(e) {
 }
 
   render(){
-    const { name, population, government, description, marker_id, world_id } = this.state
+    const { category, world_id, name, population, government, description } = this.state
     const POST_MUTATION = gql`
-      mutation ($name: String!, $population: Int, $government: String, $description: String, $world_id: ID!, $marker_id: ID){
-        createNewCity(name: $name, population: $population, government: $government, description: $description, world_id: $world_id, marker_id: $marker_id) {
+      mutation ($category: String!, $world_id: ID!, $name: String!, $population: Int, $government: String, $description: String){
+        createNewMarker(category: $category, world_id: $world_id, name: $name, population: $population, government: $government, description: $description) {
           id
         }
       }`
@@ -59,7 +59,7 @@ handleDescription(e) {
           <Label for="description">Description</Label>
           <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
         </FormGroup>
-        <Mutation mutation={POST_MUTATION} variables={{ name, population, description, government, marker_id, world_id }}>
+        <Mutation mutation={POST_MUTATION} variables={{ category, world_id, name, population, government, description }}>
           {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
         </Mutation>
       </Form>
