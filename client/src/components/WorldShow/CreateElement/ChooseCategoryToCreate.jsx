@@ -1,5 +1,5 @@
 import React,  { Component } from "react";
-import { ListGroup,ListGroupItem, Button, Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
+import { ListGroupItem, Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import CreateNewCity from './CreateNewCity'
 import CreateNewTown from './CreateNewTown'
 import CreateNewLocation from './CreateNewLocation'
