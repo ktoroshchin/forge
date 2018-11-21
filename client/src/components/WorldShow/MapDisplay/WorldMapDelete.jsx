@@ -40,10 +40,10 @@ export default class WorldMapDelete extends Component {
         </ModalBody>
         <ModalFooter>
         {!this.state.confirm &&
-          <Button disabled>Remove</Button>
+          <Button className="btn btn-danger col-md-6" disabled>Remove</Button>
         }
         {this.state.confirm &&
-          <Button>Remove</Button>
+          <Button className="btn btn-danger col-md-6">Remove</Button>
         }
         </ModalFooter>
       </div>
