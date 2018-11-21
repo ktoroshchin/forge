@@ -64,28 +64,30 @@ class Register extends Component {
     if (!getUserID()) {
       return (
         <div>
-          <h2>Register</h2>
-          <Form>
-            <FormGroup>
-              <Label>First Name (optional)</Label>
-              <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
-              <Label>Last Name (optional)</Label>
-              <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
-              <Label>Username</Label>
-              <Input onChange={this.handleUsernameChange} type="text" name="username" />
-              <Label>Email</Label>
-              <Input onChange={this.handleEmailChange} type="text" name="email" />
-              <Label>Password</Label>
-              <Input onChange={this.handlePasswordChange} type="password" name="password" />
-              <br />
-              <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
-                {(postMutation, data) =>
-                  <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
-                  Submit</Button>}
-              </Mutation>
-              {this.renderRedirect()}
-            </FormGroup>
-          </Form>
+          <div className="container">
+            <h2>Register</h2>
+            <Form>
+              <FormGroup>
+                <Label>First Name (optional)</Label>
+                <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
+                <Label>Last Name (optional)</Label>
+                <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
+                <Label>Username</Label>
+                <Input onChange={this.handleUsernameChange} type="text" name="username" />
+                <Label>Email</Label>
+                <Input onChange={this.handleEmailChange} type="text" name="email" />
+                <Label>Password</Label>
+                <Input onChange={this.handlePasswordChange} type="password" name="password" />
+                <br />
+                <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
+                  {(postMutation, data) =>
+                    <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
+                    Submit</Button>}
+                </Mutation>
+                {this.renderRedirect()}
+              </FormGroup>
+            </Form>
+          </div>
         </div>
       )
     } else {
