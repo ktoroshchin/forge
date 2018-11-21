@@ -51,21 +51,22 @@ module.exports = {
     },
     removeMarkerById: async (root, { id }) => {
       let marker = await db.marker.findByPk(id);
-      marker.update({
+      if (await !marker.update({
         map_id: null,
         longitude: null,
         latitude: null
-      });
-      return marker.save()
+      })) throw new Error('Marker was not removed')
+
+      return true
     },
     removeAllMarkersOnMap: async (root, { map_id }) => {
-      let map = await db.map.findByPk(map_id)
-      await db.marker.update({
+      if (await !db.marker.update({
         map_id: null,
         longitude: null,
         latitude: null
-      }, { where: { map_id } })
-      return map
+      }, { where: { map_id } })) throw new Error('The markers were not removed')
+
+      return true
     },
     createNewWorld: async (root, { name, creator_id, description }) => {
       const world = await db.world.build({
@@ -117,6 +118,19 @@ module.exports = {
       }
 
       return user;
+    },
+    removeWorldById: async (root, { id }) => {
+      let world = await db.world.findByPk(id);
+      await db.marker.destroy({ where: { world_id: id } });
+      await db.map.destroy({ where: { world_id: id } });
+      if (!world.destroy()) throw new Error('World not deleted')
+      return true
+    },
+    removeMapById: async (root, { id }) => {
+      let map = await db.map.findByPk(id);
+      await db.marker.destroy({ where: { world_id: id } });
+      if (!map.destroy()) throw new Error('Map not deleted')
+      return true
     },
   },
   User: {
