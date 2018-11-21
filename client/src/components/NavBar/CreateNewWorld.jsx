@@ -46,23 +46,25 @@ class CreateNewWorld extends Component {
         }`
       return (
         <div>
-          <h2>Create A New World</h2>
-          <Form>
-            <FormGroup>
-              <Label>Name</Label>
-              <Input onChange={this.handleNameChange} type="text" name="name" />
-              <Label>Description</Label>
-              <Input onChange={this.handleDescriptionChange} type="textarea" name="description" />
-              <br />
-              <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
-                {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then(()=>{this.setRedirect()})
-                  .catch((error) => {alert("Please input required fields")})
-                }}>Submit</Button>}
-              </Mutation>
-              {this.renderRedirect()}
-            </FormGroup>
-          </Form>
+          <div className="container">
+            <h2>Create A New World</h2>
+            <Form>
+              <FormGroup>
+                <Label>Name</Label>
+                <Input onChange={this.handleNameChange} type="text" name="name" />
+                <Label>Description</Label>
+                <Input onChange={this.handleDescriptionChange} type="textarea" name="description" />
+                <br />
+                <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
+                  {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
+                    .then(()=>{this.setRedirect()})
+                    .catch((error) => {alert("Please input required fields")})
+                  }}>Submit</Button>}
+                </Mutation>
+                {this.renderRedirect()}
+              </FormGroup>
+            </Form>
+          </div>  
         </div>
         )
     } else {

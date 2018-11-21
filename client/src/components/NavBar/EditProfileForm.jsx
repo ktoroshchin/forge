@@ -47,25 +47,27 @@ class EditProfileForm extends Component {
       }`
     return (
       <div>
-        <h2>Edit Profile</h2>
-        <Form>
-          <FormGroup>
-            <Label>First Name (optional)</Label>
-            <Input value={this.state.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
-            <Label>Last Name (optional)</Label>
-            <Input value={this.state.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
-            <Label>Password (required)</Label>
-            <Input onChange={this.handlePasswordChange} type="password" name="password" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
-              {(postMutation) =>
-                <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then(()=>{this.setRedirect();})
-                  .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
-            </Mutation>
-            {this.renderRedirect()}
-          </FormGroup>
-        </Form>
+        <div className="container">
+          <h2>Edit Profile</h2>
+          <Form>
+            <FormGroup>
+              <Label>First Name (optional)</Label>
+              <Input value={this.state.first_name} onChange={this.handleFirstNameChange} type="text" name="first_name" />
+              <Label>Last Name (optional)</Label>
+              <Input value={this.state.last_name} onChange={this.handleLastNameChange} type="text" name="last_name" />
+              <Label>Password (required)</Label>
+              <Input onChange={this.handlePasswordChange} type="password" name="password" />
+              <br />
+              <Mutation mutation={POST_MUTATION} variables={{ id, first_name, last_name, password }}>
+                {(postMutation) =>
+                  <Button color="success" onClick={(event)=>{postMutation(event)
+                    .then(()=>{this.setRedirect();})
+                    .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+              </Mutation>
+              {this.renderRedirect()}
+            </FormGroup>
+          </Form>
+        </div>  
       </div>
     )
   }

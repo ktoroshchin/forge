@@ -46,24 +46,26 @@ class Login extends Component {
     if (!getUserID()) {
       return (
         <div>
-          <h2>Login</h2>
-          <Form>
-            <FormGroup>
-              <Label>Username</Label>
-              <Input onChange={this.handleUsernameChange} type="text" name="username" />
-              <Label>Password</Label>
-              <Input onChange={this.handlePasswordChange} type="password" name="password" />
-              <br />
-              <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
-                {(postMutation, data, error) =>
-                  <Button color="success" onClick={(event)=>{postMutation(event)
-                    .then((data)=>{this.setUser(data);})
-                    .catch((error) => {alert("Wrong login credentials")})}}>
-                  Submit</Button>}
-              </Mutation>
-              {this.renderRedirect()}
-            </FormGroup>
-          </Form>
+          <div className="container">
+            <h2>Login</h2>
+            <Form>
+              <FormGroup>
+                <Label>Username</Label>
+                <Input onChange={this.handleUsernameChange} type="text" name="username" />
+                <Label>Password</Label>
+                <Input onChange={this.handlePasswordChange} type="password" name="password" />
+                <br />
+                <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
+                  {(postMutation, data, error) =>
+                    <Button color="success" onClick={(event)=>{postMutation(event)
+                      .then((data)=>{this.setUser(data);})
+                      .catch((error) => {alert("Wrong login credentials")})}}>
+                    Submit</Button>}
+                </Mutation>
+                {this.renderRedirect()}
+              </FormGroup>
+            </Form>
+          </div>
         </div>
       )
     } else {
