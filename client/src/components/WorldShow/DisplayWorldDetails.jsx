@@ -70,7 +70,7 @@ componentDidMount() {
     return(
         <div className="container mt-3">
           <ListGroupItem className="world-name" onClick={this.handleRefresh}>{worldName}</ListGroupItem>
-          <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>
+          {worldDescription && <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>}
           <div className="row mt-3">
             <div className="col-md-4 col-lg-3 col-xl-2">
               <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
