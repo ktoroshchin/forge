@@ -46,7 +46,7 @@ export default class City extends Component {
                     <ModalHeader toggle={this.toggleModal}>Edit City</ModalHeader>
                       <EditCity
                         toggleModal={this.toggleModal}
-                        cityID={this.state.cityID}
+                        cityID={data.findMarkers[0].id}
                             />
                   </Modal>
                   </div>

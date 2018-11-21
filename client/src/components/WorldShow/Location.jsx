@@ -42,7 +42,7 @@ export default class Location extends Component {
                     <ModalHeader toggle={this.toggleModal}>Edit Location</ModalHeader>
                       <EditLocation
                         toggleModal={this.toggleModal}
-                        locationID={this.state.locationID}
+                        locationID={data.findMarkers[0].id}
                             />
                   </Modal>
                   </div>

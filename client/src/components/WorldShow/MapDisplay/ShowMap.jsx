@@ -97,7 +97,7 @@ export default class ShowMap extends Component {
                     </Map>
                   }
                     {isUser === true &&
-                      <div>
+                      <div className="mapEditButtons">
                         <Link
                           to={{
                             pathname: "/edit-map",
