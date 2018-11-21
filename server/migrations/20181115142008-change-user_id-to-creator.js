@@ -32,5 +32,3 @@ module.exports = {
     })
   }
 };
-
-// worlds_user_id_fkey on table worlds
