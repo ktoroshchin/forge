@@ -7,7 +7,7 @@ function EditLocation({location}) {
   const locationID = location.state.locationID;
   const findLocation = gql`
   query {
-    findLocationById(id: "${locationID}"){
+    findMarkers(category: "Location", id: "${locationID}"){
       id
       name
       description
@@ -18,7 +18,7 @@ function EditLocation({location}) {
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditLocationForm id={data.findLocationById.id} name={data.findLocationById.name} description={data.findLocationById.description} />}}
+      return <EditLocationForm id={data.findMarkers[0].id} name={data.findMarkers[0].name} description={data.findMarkers[0].description} />}}
     </Query>
   )
 }
