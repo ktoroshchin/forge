@@ -8,7 +8,11 @@ import LocationList from './LocationList'
 function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
   return (
     <div className="AccordionForWorldPage">
-
+      {isUser &&
+        <Button onClick={handleClick} className="btn btn-success btn-sm add-world col-md-12">
+          Add New Element
+        </Button>
+      }
       <div className="row">
         <div id="accordion" className="page-align col">
           <div className="card">
@@ -56,8 +60,6 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
                 </ListGroup>
               </div>
             </div>
-            {isUser && <Button onClick={handleClick} className="btn btn-success add-world col-md-12">Add New Element</Button>}
-
           </div>
         </div>
       </div>
