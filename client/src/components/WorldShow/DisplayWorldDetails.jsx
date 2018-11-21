@@ -102,21 +102,20 @@ componentDidMount() {
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-
+               <Query query={findWorld}>
+                  {({ loading, error, data }) => {
+                    if (loading) return <div>Fetching</div>
+                    if (error) return <div>Error</div>
+                    return (
+                      <div>
+                        <h3 className="text-center">{data.findWorlds[0].description}</h3>
+                      </div>
+                    )
+                  }}
+                </Query>
               {/*Modal for Edit World Details*/}
                 {this.state.isUser &&
                   <div>
-                    <Query query={findWorld}>
-                      {({ loading, error, data }) => {
-                        if (loading) return <div>Fetching</div>
-                        if (error) return <div>Error</div>
-                        return (
-                          <div>
-                            <h3 className="text-center">{data.findWorlds[0].description}</h3>
-                          </div>
-                        )
-                      }}
-                    </Query>
                   <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit World Details</Button>
                   <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
