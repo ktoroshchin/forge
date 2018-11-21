@@ -9,7 +9,7 @@ function MyWorldList({getUserID}) {
   const findUserWorlds =
   gql`
     query {
-      findWorldsByCreatorId(creator_id: "${userID}") {
+      findWorlds(creator_id: "${userID}") {
         id
         name
         description
@@ -24,8 +24,8 @@ function MyWorldList({getUserID}) {
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
-            if (data.findWorldsByCreatorId.length === 0) return <div>No Worlds</div>
-            return (data.findWorldsByCreatorId.map(({ id, name, description, creator_id }) => (
+            if (data.findWorlds.length === 0) return <div>No Worlds</div>
+            return (data.findWorlds.map(({ id, name, description, creator_id }) => (
               <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} />
             )));
           }}
