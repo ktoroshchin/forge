@@ -106,9 +106,9 @@ export default class ShowMap extends Component {
                             }
                           }}
                         >
-                          <Button className="btn btn-outline-warning col-md-6">Edit Map</Button>
+                          <Button className="btn btn-outline-warning btn-sm col-3">Edit Map</Button>
                         </Link>
-                        <Button className="btn btn-outline-danger col-md-6" onClick={this.toggleDeleteModal}>Remove Map</Button>
+                        <Button className="btn btn-outline-danger btn-sm col-3 offset-6" onClick={this.toggleDeleteModal}>Remove Map</Button>
                         <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
                           <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
                           <WorldMapDelete mapID={id} />

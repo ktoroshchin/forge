@@ -24,9 +24,9 @@ class ChooseCategoryToCreate extends Component {
 render(){
   return(
       <div>
-        <div className="row ChooseCategoryToCreate">
+        <div className="ChooseCategoryToCreate">
           <ListGroupItem className="category text-center">Category</ListGroupItem>
-            <Button className="category-button col-md-12 col-lg-12 col-xl-12" onClick={this.toggleModal} value={"1"} >
+            <Button className="category-button col-12" onClick={this.toggleModal} value={"1"} >
               Cities
             </Button>
             <Modal isOpen={this.state.modal === "1"} toggle={this.toggleModal} >
@@ -34,7 +34,7 @@ render(){
                 <CreateNewCity worldID={this.state.worldID} />
             </Modal>
 
-            <Button className="category-button col-md-12 col-lg-12 col-xl-12" onClick={this.toggleModal} value={"2"} >
+            <Button className="category-button col-12" onClick={this.toggleModal} value={"2"} >
               Towns
             </Button>
             <Modal isOpen={this.state.modal === "2"} toggle={this.toggleModal} >
@@ -44,7 +44,7 @@ render(){
               </ModalBody>
             </Modal>
 
-            <Button className="category-button col-md-12 col-lg-12 col-xl-12" onClick={this.toggleModal} value={"3"} >
+            <Button className="category-button col-12" onClick={this.toggleModal} value={"3"} >
               Locations
             </Button>
             <Modal isOpen={this.state.modal === "3"} toggle={this.toggleModal} >

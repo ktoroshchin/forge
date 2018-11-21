@@ -108,7 +108,8 @@ componentDidMount() {
                     if (error) return <div>Error</div>
                     return (
                       <div>
-                        <h3 className="text-center">{data.findWorlds[0].description}</h3>
+                        <h3>Description</h3>
+                        <h6>{data.findWorlds[0].description}</h6>
                       </div>
                     )
                   }}
@@ -116,7 +117,7 @@ componentDidMount() {
               {/*Modal for Edit World Details*/}
                 {this.state.isUser &&
                   <div>
-                  <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit World Details</Button>
+                  <Button className="btn btn-outline-success btn-sm add-world col-3" onClick={this.toggleModal}>Edit World Details</Button>
                   <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
                     <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
                       <EditWorld

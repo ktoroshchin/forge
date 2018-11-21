@@ -23,6 +23,7 @@ code {
 
 #map {
   height: 400px;
+  margin-bottom: 1em;
 }
 
 .btn-group {
@@ -31,4 +32,12 @@ code {
 
 .btn-group .btn {
   width: 100%;
+}
+
+.add-world {
+  margin-bottom: 1em;
+}
+
+.AccordionForWorldPage {
+  height: 100%;
 }

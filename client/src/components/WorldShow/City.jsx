@@ -35,10 +35,10 @@ export default class City extends Component {
             if (error) return <div>Error</div>
             return (
               <ListGroup>
-                <ListGroupItem className="listItem" action><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
-                <ListGroupItem className="listItem" action><span className="categoryName">Population</span><span>: </span>{data.findMarkers[0].population}</ListGroupItem>
-                <ListGroupItem className="listItem" action><span className="categoryName">Government</span><span>: </span>{data.findMarkers[0].government}</ListGroupItem>
-                <ListGroupItem className="listItem" action><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
+                <ListGroupItem className="listItem"><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
+                <ListGroupItem className="listItem"><span className="categoryName">Population</span><span>: </span>{data.findMarkers[0].population}</ListGroupItem>
+                <ListGroupItem className="listItem"><span className="categoryName">Government</span><span>: </span>{data.findMarkers[0].government}</ListGroupItem>
+                <ListGroupItem className="listItem"><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
                 {this.state.isUser &&
                   <div>
                   <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit City</Button>
