@@ -49,7 +49,7 @@ export default class ShowMarkers extends Component {
                         }
                         {description.length >= 250 &&
                         <span>
-                          <strong>Description</strong>: {description}
+                          <strong>Description</strong>: {description.slice(0, 249)}...
                         </span>
                         }
                         </ListGroupItem>
