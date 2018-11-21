@@ -80,7 +80,7 @@ componentDidMount() {
 
                 {this.state.isUser &&
                   <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
-                      <Button className="btn btn-success add-world col-md-12">Edit World</Button>
+                      <Button className="btn btn-success add-world col-md-12">Edit World Details</Button>
                   </Link>
                 }
                 <ShowMap worldID={worldID} isUser={this.state.isUser} />
