@@ -76,12 +76,13 @@ export default class EditMap extends Component {
   }
 
   render () {
-    const worldID = this.props.location.state.worldID
+    const mapID = this.props.location.state.ID
     const findMap =
       gql`
         query {
-          findMapsByWorldId(world_id: "${worldID}"){
+          findMaps(id: "${mapID}"){
             id
+            world_id
             url
             width
             height
@@ -94,7 +95,7 @@ export default class EditMap extends Component {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
             return (
-              data.findMapsByWorldId.map(({ id, url, height, width }) => (
+              data.findMaps.map(({ id, world_id, url, height, width }) => (
                 <div key={id}>
                   <Map
                     id="map"
@@ -125,14 +126,14 @@ export default class EditMap extends Component {
                             <NewMarkerForm
                               toggleModal={this.toggleModal}
                               coords={this.state.activeMarker}
-                              worldID={worldID}
+                              worldID={world_id}
                               mapID={id}
                             />
                           </Modal>
                         </Popup>
                       </Marker>
                     }
-                    <ShowMarkers mapid={id} isUser={true} />
+                    <ShowMarkers mapID={id} isUser={true} />
                   </Map>
                   {this.state.activeMarker === null &&
                     <button onClick={() => {this.addMarker(height, width)}}>
