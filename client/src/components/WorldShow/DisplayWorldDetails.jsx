@@ -84,18 +84,6 @@ componentDidMount() {
                   </Link>
                 }
                 <ShowMap worldID={worldID} isUser={this.state.isUser} />
-                {this.state.isUser === true &&
-                  <Link
-                    to={{
-                      pathname: "/edit-map",
-                      state: {
-                        worldID: worldID,
-                      }
-                    }}
-                  >
-                    <Button>Edit Map</Button>
-                  </Link>
-                }
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&

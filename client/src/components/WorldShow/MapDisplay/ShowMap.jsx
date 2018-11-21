@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ImageOverlay, Map } from 'react-leaflet';
+import { Link } from 'react-router-dom'
+import { Button } from 'reactstrap'
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
@@ -22,7 +24,7 @@ export default class ShowMap extends Component {
     const findMap =
       gql`
         query {
-          findMapsByWorldId(world_id: "${worldID}"){
+          findMaps(world_id: "${worldID}"){
             id
             url
             width
@@ -36,9 +38,10 @@ export default class ShowMap extends Component {
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
-            if (data.findMapsByWorldId.length === 0 && isUser === true) return <WorldMapSubmit worldID={worldID} />
+            if (data.findMaps.length === 0 && isUser === true) return <WorldMapSubmit worldID={worldID} />
             return (
-              data.findMapsByWorldId.map(({ id, url, height, width, world_map }) => (
+              data.findMaps.map(({ id, url, height, width, world_map }) => (
+               <div>
                 <div key={id}>
                 {world_map === true &&
                   <Map
@@ -54,9 +57,24 @@ export default class ShowMap extends Component {
                       url={url}
                       bounds={[[0, 0], [height, width]]}
                       />
-                    <ShowMarkers mapid={id} isUser={false} />
+                    <ShowMarkers mapID={id} isUser={false} />
                   </Map>
                 }
+                </div>
+                <div>
+                  {isUser === true &&
+                    <Link
+                      to={{
+                        pathname: "/edit-map",
+                        state: {
+                          ID: id,
+                        }
+                      }}
+                    >
+                      <Button>Edit Map</Button>
+                    </Link>
+                  }
+                </div>
                 </div>
             )));
           }}

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
-import ChooseCity from './ChooseCity'
-import ChooseTown from './ChooseTown'
-import ChooseLocation from './ChooseLocation'
+import ChooseElement from './ChooseElement'
+
 
 export default class NewMarkerForm extends Component {
 constructor(props) {
@@ -44,30 +43,13 @@ constructor(props) {
         </ModalFooter>
         </div>
         }
-        {this.state.value === 'City' &&
+        {this.state.value !== '' &&
         <div>
-          <ChooseCity
+          <ChooseElement
             coords={coords}
             worldID={worldID}
             mapID={mapID}
-          />
-        </div>
-        }
-        {this.state.value === 'Town' &&
-        <div>
-          <ChooseTown
-            coords={coords}
-            worldID={worldID}
-            mapID={mapID}
-          />
-        </div>
-        }
-        {this.state.value === 'Location' &&
-        <div>
-          <ChooseLocation
-            coords={coords}
-            worldID={worldID}
-            mapID={mapID}
+            eleCategory={this.state.value}
           />
         </div>
         }
