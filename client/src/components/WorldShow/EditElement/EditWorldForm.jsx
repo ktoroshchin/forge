@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -33,24 +33,25 @@ class EditWorldForm extends Component {
         }
       }`
     return (
-      <div>
-        <div className="container">
+      <div className="container">
+        <ModalBody>
           <Form>
             <FormGroup>
               <Label> Name (required)</Label>
               <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
               <Label>Description (optional)</Label>
               <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
-              <br />
-              <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
-                {(postMutation) =>
-                  <Button color="success" onClick={(event)=>{postMutation(event)
-                    .then(()=>{this.handleRefresh();})
-                    .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
-              </Mutation>
             </FormGroup>
           </Form>
-        </div>
+        </ModalBody>
+        <ModalFooter>
+          <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
+            {(postMutation) =>
+              <Button color="success" onClick={(event)=>{postMutation(event)
+                .then(()=>{this.handleRefresh();})
+                .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+          </Mutation>
+        </ModalFooter>
       </div>
     )
   }
