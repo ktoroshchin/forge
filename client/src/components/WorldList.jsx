@@ -6,7 +6,7 @@ import gql from 'graphql-tag';
 const findAllWorlds =
   gql`
     query {
-      allWorlds{
+      findWorlds{
         id
         name
         description
@@ -22,7 +22,7 @@ function WorldList() {
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
-          return (data.allWorlds.map(({ id, name, description, creator_id }) => (
+          return (data.findWorlds.map(({ id, name, description, creator_id }) => (
             <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} />
           )));
         }}
