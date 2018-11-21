@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
-<<<<<<< HEAD
-import { Button, ListGroupItem, Badge } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
-=======
-import { Button, ListGroupItem, Modal, ModalHeader } from 'reactstrap';
->>>>>>> 1774521ef3f308a17f8611b872bd540d52a830f5
+import { Button, ListGroupItem,Badge, Modal, ModalHeader } from 'reactstrap';
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import City from './City'
@@ -91,37 +87,26 @@ componentDidMount() {
 
     return(
         <div className="container mt-3">
-<<<<<<< HEAD
-          <div className="row">
-            <h1 className="world-name col" onClick={this.handleRefresh}>{worldName}</h1>
-          </div>
-=======
         <Query query={findWorld}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
             return (
               <div>
-                <ListGroupItem className="world-name" onClick={this.handleRefresh}>{data.findWorlds[0].name}</ListGroupItem>
-                <ListGroupItem className="world-description">{data.findWorlds[0].description}</ListGroupItem>
+                <h1 className="world-name col" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
+                <h3 className="text-center">{data.findWorlds[0].description}</h3>
               </div>
             )
           }}
         </Query>
->>>>>>> 1774521ef3f308a17f8611b872bd540d52a830f5
           <div className="row mt-3">
             <div className="col-md-4 col-lg-3 col-xl-2">
               <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
             </div>
             {this.state.value === '' && !this.state.clicked &&
-<<<<<<< HEAD
-              <div className="second-column col-md-8 col-lg-9 col-xl-10">
-                <h3 className="text-center">{worldDescription}</h3>
-=======
               <div className="col-md-8 col-lg-9 col-xl-10">
 
               {/*Modal for Edit World Details*/}
->>>>>>> 1774521ef3f308a17f8611b872bd540d52a830f5
                 {this.state.isUser &&
                   <div>
                   <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit World Details</Button>
