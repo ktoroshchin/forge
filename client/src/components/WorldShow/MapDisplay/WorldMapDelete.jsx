@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Button, Modal, ModalHeader, ModalFooter, ModalBody, FormGroup, Label, Input, Form } from 'reactstrap';
+import { Button, ModalFooter, ModalBody, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
