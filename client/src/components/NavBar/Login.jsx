@@ -25,7 +25,7 @@ class Login extends Component {
   }
   setUser(data) {
     this.props.setUsername(this.state.username);
-    this.props.setUserID(data.data.login.user_id);
+    this.props.setUserID(data.data.login.id);
     this.setState({redirect: true})
   }
   renderRedirect() {
@@ -40,7 +40,7 @@ class Login extends Component {
     const POST_MUTATION = gql`
       mutation ($username: String!, $password: String!){
         login(username: $username, password: $password) {
-          user_id
+          id
         }
       }`;
     if (!getUserID()) {
