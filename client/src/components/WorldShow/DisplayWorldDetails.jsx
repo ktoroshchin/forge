@@ -77,12 +77,6 @@ componentDidMount() {
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-
-                {this.state.isUser &&
-                  <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
-                      <Button className="btn btn-success add-world col-md-12">Edit World</Button>
-                  </Link>
-                }
                 <ShowMap worldID={worldID} isUser={this.state.isUser} />
               </div>
             }
