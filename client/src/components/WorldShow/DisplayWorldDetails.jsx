@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
+<<<<<<< HEAD
 import { Button, ListGroupItem, Badge } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
+=======
+import { Button, ListGroupItem, Modal, ModalHeader } from 'reactstrap';
+>>>>>>> 1774521ef3f308a17f8611b872bd540d52a830f5
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import City from './City'
@@ -10,6 +14,9 @@ import Location from './Location'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
 
+import EditWorld from './EditElement/EditWorld'
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const cookies = new Cookies();
 const getUserID = function() {
@@ -22,12 +29,13 @@ export default class DisplayWorldDetails extends Component {
     value: "",
     locationID: "",
     isUser: false,
+    modal: false
   };
 
 handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
-
+toggleModal = this.toggleModal.bind(this);
 
 handleClick() {
   this.setState({
@@ -51,6 +59,12 @@ handleRefresh() {
   window.location.reload()
 }
 
+toggleModal() {
+  this.setState({
+    modal: !this.state.modal
+  });
+}
+
 componentWillMount() {
   if (!this.props.location.state) {
     return window.location.href = '/'
@@ -65,25 +79,62 @@ componentDidMount() {
   }
 }
   render() {
-    const {worldID, worldName, worldDescription} = this.props.location.state;
+    const {worldID} = this.props.location.state;
+    const findWorld =
+      gql`
+        query {
+          findWorlds(id: "${worldID}"){
+            name
+            description
+          }
+        }`;
 
     return(
         <div className="container mt-3">
+<<<<<<< HEAD
           <div className="row">
             <h1 className="world-name col" onClick={this.handleRefresh}>{worldName}</h1>
           </div>
+=======
+        <Query query={findWorld}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Fetching</div>
+            if (error) return <div>Error</div>
+            return (
+              <div>
+                <ListGroupItem className="world-name" onClick={this.handleRefresh}>{data.findWorlds[0].name}</ListGroupItem>
+                <ListGroupItem className="world-description">{data.findWorlds[0].description}</ListGroupItem>
+              </div>
+            )
+          }}
+        </Query>
+>>>>>>> 1774521ef3f308a17f8611b872bd540d52a830f5
           <div className="row mt-3">
             <div className="col-md-4 col-lg-3 col-xl-2">
               <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
             </div>
             {this.state.value === '' && !this.state.clicked &&
+<<<<<<< HEAD
               <div className="second-column col-md-8 col-lg-9 col-xl-10">
                 <h3 className="text-center">{worldDescription}</h3>
+=======
+              <div className="col-md-8 col-lg-9 col-xl-10">
+
+              {/*Modal for Edit World Details*/}
+>>>>>>> 1774521ef3f308a17f8611b872bd540d52a830f5
                 {this.state.isUser &&
-                  <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
-                      <Button className="btn btn-success add-world col-md-12">Edit World</Button>
-                  </Link>
+                  <div>
+                  <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit World Details</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                      <EditWorld
+                        toggleModal={this.toggleModal}
+                        worldID={worldID}
+                            />
+                  </Modal>
+                  </div>
                 }
+
                 <ShowMap worldID={worldID} isUser={this.state.isUser} />
               </div>
             }

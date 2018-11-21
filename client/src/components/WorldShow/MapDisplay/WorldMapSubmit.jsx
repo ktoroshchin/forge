@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { Button } from 'reactstrap';
+import { Button, ModalFooter, ModalBody, FormGroup, Label, Input, Form } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -14,20 +14,31 @@ class WorldMapSubmit extends Component {
       },
       worldMap: true,
     }
-    console.log(this.props)
     this.handleChange = this.handleChange.bind(this)
-    this.onImgLoad = this.onImgLoad.bind(this);
+    this.getImageSize = this.getImageSize.bind(this);
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({
+      value: event.target.value
+    },
+    () => {this.getImageSize(this.state.value, this)});
   }
 
-  onImgLoad({target:img}) {
-    this.setState({imgSize:{
-      height:img.offsetHeight,
-      width:img.offsetWidth
-    }});
+  getImageSize(url, state) {
+    const img = new Image();
+    img.onload = function() {
+      const imgHeight = this.height
+      const imgWidth = this.width
+
+      state.setState({
+        imgSize:{
+          width: imgWidth,
+          height: imgHeight
+        }
+      })
+    };
+    img.src = url
   }
 
   handleConfirm(event) {
@@ -62,38 +73,41 @@ class WorldMapSubmit extends Component {
         }`
     return (
       <div>
-        <h2>Submit Your World Map</h2>
-        <form>
-          <label>
-            Image URL:
-            <input
-              type="url"
-              value={this.state.value}
-              onChange={this.handleChange} />
-          </label>
-        </form>
-        {this.state.value.match(/\.(jpeg|jpg|png)$/) === null &&
-          <div>
-            <span>Please enter a valid image URL.</span>
-          </div>
-        }
-        {this.state.value.match(/\.(jpeg|jpg|png)$/) !== null &&
-          <div>
-          <Mutation
-            mutation={POST_MUTATION}
-            variables={{
-              "world_id": worldID,
-              "url": imageURL,
-              width,
-              height,
-              "world_map": worldMap }}>
-              {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
-          </Mutation>
-          <br />
-          <img alt="Map" onLoad={this.onImgLoad} src={this.state.value} style={{visibility: "hidden",}}/>
-
-          </div>
-        }
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label for="imageURL">Image URL:</Label>
+              <Input
+                type="url"
+                name="imageURL"
+                id="imageURL"
+                placeholder="Enter an image URL..."
+                value={this.state.value}
+                onChange={this.handleChange} />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          {this.state.value.match(/\.(jpeg|jpg|png)$/) === null &&
+            <div>
+              <span>Please enter a valid image URL.</span>
+            </div>
+          }
+          {this.state.value.match(/\.(jpeg|jpg|png)$/) !== null &&
+            <div>
+            <Mutation
+              mutation={POST_MUTATION}
+              variables={{
+                "world_id": worldID,
+                "url": imageURL,
+                width,
+                height,
+                "world_map": worldMap }}>
+                {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
+            </Mutation>
+            </div>
+          }
+        </ModalFooter>
       </div>
       )
   }

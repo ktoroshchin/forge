@@ -1,8 +1,7 @@
 import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
 
 class EditTownForm extends Component {
   constructor(props) {
@@ -12,14 +11,12 @@ class EditTownForm extends Component {
       population: this.props.population,
       government: this.props.government,
       description: this.props.description,
-      redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePopulationChange = this.handlePopulationChange.bind(this);
     this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.setRedirect = this.setRedirect.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
+    this.handleRefresh = this.handleRefresh.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -33,14 +30,8 @@ class EditTownForm extends Component {
   handleDescriptionChange(e) {
     this.setState({description: e.target.value});
   }
-  setRedirect() {
-    this.setState({redirect: true});
-  }
-  renderRedirect() {
-    if (this.state.redirect) {
-      window.location.reload();
-      return <Redirect to='/' />
-    }
+  handleRefresh() {
+    window.location.reload();
   }
   render() {
     const { name, description, population, government } = this.state;
@@ -54,27 +45,28 @@ class EditTownForm extends Component {
       }`
     return (
       <div>
-        <h2>Edit Town</h2>
-        <Form>
-          <FormGroup>
-            <Label>Name (required)</Label>
-            <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Population (optional)</Label>
-            <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
-            <Label>Government (optional)</Label>
-            <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
-            <Label>Description (optional)</Label>
-            <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
-            <br />
-            <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
-              {(postMutation) =>
-                <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then(()=>{this.setRedirect();})
-                  .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
-            </Mutation>
-            {this.renderRedirect()}
-          </FormGroup>
-        </Form>
+        <ModalBody>
+          <Form>
+            <FormGroup>
+              <Label>Name (required)</Label>
+              <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
+              <Label>Population (optional)</Label>
+              <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
+              <Label>Government (optional)</Label>
+              <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
+              <Label>Description (optional)</Label>
+              <Input value={this.state.description} onChange={this.handleDescriptionChange} type="textarea" name="description" />
+            </FormGroup>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
+            {(postMutation) =>
+              <Button color="success" onClick={(event)=>{postMutation(event)
+                .then(()=>{this.handleRefresh();})
+                .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+          </Mutation>
+        </ModalFooter>
       </div>
     )
   }

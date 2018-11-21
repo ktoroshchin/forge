@@ -16,10 +16,6 @@ import EditProfile from './components/NavBar/EditProfile'
 
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
-import EditWorld from './components/WorldShow/EditElement/EditWorld'
-import EditCity from './components/WorldShow/EditElement/EditCity'
-import EditTown from'./components/WorldShow/EditElement/EditTown'
-import EditLocation from'./components/WorldShow/EditElement/EditLocation'
 
 import HomePage from './components/HomePage.jsx'
 
@@ -51,15 +47,11 @@ const App = () => {
         <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
         <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
         <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
-        <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
-        <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
         <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
+        <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
         <Route path="/world-show" component={DisplayWorldDetails} />
+        <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
         <Route path="/edit-map" component={EditMap} />
-        <Route path="/edit-world" component={EditWorld} />
-        <Route path="/edit-town" component={EditTown} />
-        <Route path="/edit-city" component={EditCity} />
-        <Route path="/edit-location" component={EditLocation} />
       </div>
     </Router>
   </ApolloProvider>

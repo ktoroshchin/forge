@@ -27,9 +27,7 @@ export default class ShowMarkers extends Component {
       mutation (
         $id: ID!){
         removeMarkerById(
-          id: $id){
-          id
-        }
+          id: $id)
       }`
     return (
       <div>
