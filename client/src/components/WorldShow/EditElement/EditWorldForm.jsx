@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
 
 class EditWorldForm extends Component {
   constructor(props) {
@@ -10,12 +9,10 @@ class EditWorldForm extends Component {
     this.state = {
       name: this.props.name,
       description: this.props.description,
-      redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.setRedirect = this.setRedirect.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
+    this.handleRefresh = this.handleRefresh.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -23,13 +20,8 @@ class EditWorldForm extends Component {
   handleDescriptionChange(e) {
     this.setState({description: e.target.value});
   }
-  setRedirect() {
-    this.setState({redirect: true});
-  }
-  renderRedirect() {
-    if (this.state.redirect) {
-      window.location.reload();
-    }
+  handleRefresh() {
+    window.location.reload();
   }
   render() {
     const { name, description } = this.state;
@@ -53,10 +45,9 @@ class EditWorldForm extends Component {
               <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
                 {(postMutation) =>
                   <Button color="success" onClick={(event)=>{postMutation(event)
-                    .then(()=>{this.setRedirect();})
+                    .then(()=>{this.handleRefresh();})
                     .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
               </Mutation>
-              {this.renderRedirect()}
             </FormGroup>
           </Form>
         </div>
