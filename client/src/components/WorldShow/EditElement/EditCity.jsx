@@ -6,13 +6,13 @@ import EditCityForm from './EditCityForm'
 function EditCity({cityID}) {
   const findCity = gql`
   query {
-       findMarkers(category: "City", id:"${cityID}") {
-  			id
-     	  name
-      	population
-      	description
-      	government
-      }
+    findMarkers(category: "City", id:"${cityID}") {
+			id
+   	  name
+    	population
+    	description
+    	government
+    }
   }`
   return (
     <Query query={findCity}>
