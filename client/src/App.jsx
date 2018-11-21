@@ -16,7 +16,6 @@ import EditProfile from './components/NavBar/EditProfile'
 
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
-import EditWorld from './components/WorldShow/EditElement/EditWorld'
 import EditCity from './components/WorldShow/EditElement/EditCity'
 import EditTown from'./components/WorldShow/EditElement/EditTown'
 import EditLocation from'./components/WorldShow/EditElement/EditLocation'
@@ -56,7 +55,6 @@ const App = () => {
         <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
         <Route path="/world-show" component={DisplayWorldDetails} />
         <Route path="/edit-map" component={EditMap} />
-        <Route path="/edit-world" component={EditWorld} />
         <Route path="/edit-town" component={EditTown} />
         <Route path="/edit-city" component={EditCity} />
         <Route path="/edit-location" component={EditLocation} />

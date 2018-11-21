@@ -1,44 +1,62 @@
-import React from "react";
-import {ListGroupItem, ListGroup, Button} from 'reactstrap';
+import React, {Component} from "react";
+import {ListGroupItem, ListGroup, Button, Modal, ModalHeader} from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from "react-router-dom";
+import EditTown from './EditElement/EditTown'
 
-
-
-function Town({townID, isUser}) {
-  const findTown =
-  gql`
-  query {
-    findMarkers(category: "Town", id: "${townID}") {
-      id
-      name
-      population
-      government
-      description
-    }
-  }`;
-  return (
-    <div>
-      <Query query={findTown}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Fetching</div>
-          if (error) return <div>Error</div>
-          return (
-            <ListGroup>
-              <ListGroupItem className="listItem"  action><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
-              <ListGroupItem className="listItem"  action><span className="categoryName">Population</span><span>: </span>{data.findMarkers[0].population}</ListGroupItem>
-              <ListGroupItem className="listItem"  action><span className="categoryName">Government</span><span>: </span>{data.findMarkers[0].government}</ListGroupItem>
-              <ListGroupItem className="listItem"  action><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
-              {isUser && <Link to={{pathname: "/edit-town", state: {townID: townID}}}>
-                <Button className="btn btn-success add-world col-md-12">Edit Town</Button>
-                </Link>}
-            </ListGroup>
-          );
-        }}
-      </Query>
-    </div>
-  );
+export default class Town extends Component {
+  state = {
+    townID: this.props.townID,
+    isUser: this.props.isUser,
+    modal: false
+  };
+  toggleModal = this.toggleModal.bind(this);
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+  render() {
+    const findTown =
+    gql`
+    query {
+      findMarkers(category: "Town", id: "${this.state.townID}") {
+        id
+        name
+        population
+        government
+        description
+      }
+    }`;
+    return (
+      <div>
+        <Query query={findTown}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Fetching</div>
+            if (error) return <div>Error</div>
+            return (
+              <ListGroup>
+                <ListGroupItem className="listItem"  action><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
+                <ListGroupItem className="listItem"  action><span className="categoryName">Population</span><span>: </span>{data.findMarkers[0].population}</ListGroupItem>
+                <ListGroupItem className="listItem"  action><span className="categoryName">Government</span><span>: </span>{data.findMarkers[0].government}</ListGroupItem>
+                <ListGroupItem className="listItem"  action><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
+                {this.state.isUser &&
+                  <div>
+                  <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit Town</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Edit Town</ModalHeader>
+                      <EditTown
+                        toggleModal={this.toggleModal}
+                        townID={this.state.townID}
+                            />
+                  </Modal>
+                  </div>
+                }
+              </ListGroup>
+            );
+          }}
+        </Query>
+      </div>
+    );
+  }
 }
-
-export default Town

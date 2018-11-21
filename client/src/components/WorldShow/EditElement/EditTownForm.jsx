@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
 
 class EditTownForm extends Component {
   constructor(props) {
@@ -12,14 +11,12 @@ class EditTownForm extends Component {
       population: this.props.population,
       government: this.props.government,
       description: this.props.description,
-      redirect: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePopulationChange = this.handlePopulationChange.bind(this);
     this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.setRedirect = this.setRedirect.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
+    this.handleRefresh = this.handleRefresh.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -33,14 +30,8 @@ class EditTownForm extends Component {
   handleDescriptionChange(e) {
     this.setState({description: e.target.value});
   }
-  setRedirect() {
-    this.setState({redirect: true});
-  }
-  renderRedirect() {
-    if (this.state.redirect) {
-      window.location.reload();
-      return <Redirect to='/' />
-    }
+  handleRefresh() {
+    window.location.reload();
   }
   render() {
     const { name, description, population, government } = this.state;
@@ -54,7 +45,6 @@ class EditTownForm extends Component {
       }`
     return (
       <div>
-        <h2>Edit Town</h2>
         <Form>
           <FormGroup>
             <Label>Name (required)</Label>
@@ -69,10 +59,9 @@ class EditTownForm extends Component {
             <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
               {(postMutation) =>
                 <Button color="success" onClick={(event)=>{postMutation(event)
-                  .then(()=>{this.setRedirect();})
+                  .then(()=>{this.handleRefresh();})
                   .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
             </Mutation>
-            {this.renderRedirect()}
           </FormGroup>
         </Form>
       </div>
