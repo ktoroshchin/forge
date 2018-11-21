@@ -9,6 +9,8 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ShowMarkers from './ShowMarkers'
 import WorldMapSubmit from './WorldMapSubmit'
+import WorldMapDelete from './WorldMapDelete'
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -23,13 +25,22 @@ export default class ShowMap extends Component {
     super(props);
     this.state = {
       modal: false,
+      deleteModal: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+
   }
 
   toggleModal() {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  toggleDeleteModal() {
+    this.setState({
+      deleteModal: !this.state.deleteModal
     });
   }
 
@@ -68,7 +79,6 @@ export default class ShowMap extends Component {
               return (
                 data.findMaps.map(({ id, url, height, width, world_map }) => (
                  <div key={id}>
-                  <div>
                   {world_map === true &&
                     <Map
                       id="map"
@@ -86,21 +96,25 @@ export default class ShowMap extends Component {
                       <ShowMarkers mapID={id} isUser={false} />
                     </Map>
                   }
-                  </div>
-                  <div>
                     {isUser === true &&
-                      <Link
-                        to={{
-                          pathname: "/edit-map",
-                          state: {
-                            ID: id,
-                          }
-                        }}
-                      >
-                        <Button>Edit Map</Button>
-                      </Link>
+                      <div>
+                        <Link
+                          to={{
+                            pathname: "/edit-map",
+                            state: {
+                              ID: id,
+                            }
+                          }}
+                        >
+                          <Button className="btn btn-outline-warning col-md-6">Edit Map</Button>
+                        </Link>
+                        <Button className="btn btn-outline-danger col-md-6" onClick={this.toggleDeleteModal}>Remove Map</Button>
+                        <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+                          <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
+                          <WorldMapDelete mapID={id} />
+                        </Modal>
+                      </div>
                     }
-                  </div>
                   </div>
               )));
             }
