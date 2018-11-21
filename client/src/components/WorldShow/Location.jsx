@@ -1,42 +1,58 @@
-import React from "react";
-import {ListGroupItem, ListGroup, Button} from 'reactstrap';
+import React, {Component} from "react";
+import {ListGroupItem, ListGroup, Button, Modal, ModalHeader} from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link } from "react-router-dom";
+import EditLocation from './EditElement/EditLocation'
 
-
-
-function Location({locationID, isUser}) {
-  const findLocation =
-  gql`
-  query {
-    findMarkers(id: "${locationID}"){
-      id
-      name
-      description
-      population
-      government
-    }
-  }`;
-  return (
-    <div>
-      <Query query={findLocation}>
-        {({ loading, error, data }) => {
-          if (loading) return <div>Fetching</div>
-          if (error) return <div>Error</div>
-          return (
-            <ListGroup>
-              <ListGroupItem className="listItem"><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
-              <ListGroupItem className="listItem"><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
-              {isUser && <Link to={{pathname: "/edit-location", state: {locationID: locationID}}}>
-                <Button className="btn btn-success add-world col-md-12">Edit Location</Button>
-                </Link>}
-            </ListGroup>
-          );
-        }}
-      </Query>
-    </div>
-  );
+export default class Location extends Component {
+  state = {
+    locationID: this.props.locationID,
+    isUser: this.props.isUser,
+    modal: false
+  };
+  toggleModal = this.toggleModal.bind(this);
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+  render() {
+    const findLocation =
+    gql`
+    query {
+      findMarkers(category:"Location", id: "${this.state.locationID}"){
+        id
+        name
+        description
+      }
+    }`;
+    return (
+      <div>
+        <Query query={findLocation}>
+          {({ loading, error, data }) => {
+            if (loading) return <div>Fetching</div>
+            if (error) return <div>Error</div>
+            return (
+              <ListGroup>
+                <ListGroupItem className="listItem"><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
+                <ListGroupItem className="listItem"><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
+                {this.state.isUser &&
+                  <div>
+                  <Button className="btn btn-success add-world col-md-12" onClick={this.toggleModal}>Edit Location</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Edit Location</ModalHeader>
+                      <EditLocation
+                        toggleModal={this.toggleModal}
+                        locationID={this.state.locationID}
+                            />
+                  </Modal>
+                  </div>
+                }
+              </ListGroup>
+            );
+          }}
+        </Query>
+      </div>
+    );
+  }
 }
-
-export default Location;
