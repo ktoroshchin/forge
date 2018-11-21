@@ -3,8 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import EditCityForm from './EditCityForm'
 
-function EditCity({location}) {
-  const cityID = location.state.cityID;
+function EditCity({cityID}) {
   const findCity = gql`
   query {
        findMarkers(category: "City", id:"${cityID}") {
