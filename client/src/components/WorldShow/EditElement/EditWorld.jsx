@@ -6,7 +6,7 @@ import EditWorldForm from './EditWorldForm'
 function EditWorld({location}) {
   const findWorld = gql`
   query {
-    findWorldById(id: "${location.state.worldID}"){
+    findWorlds(id: "${location.state.worldID}"){
       id
       name
       description
@@ -18,7 +18,8 @@ function EditWorld({location}) {
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditWorldForm id={data.findWorldById.id} name={data.findWorldById.name} description={data.findWorldById.description} creator_id={data.findWorldById.creator_id} />}}
+      return <EditWorldForm id={data.findWorlds[0].id} name={data.findWorlds[0].name}
+        description={data.findWorlds[0].description} creator_id={data.findWorlds[0].creator_id} />}}
     </Query>
   )
 }
