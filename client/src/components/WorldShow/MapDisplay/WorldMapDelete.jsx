@@ -43,7 +43,19 @@ export default class WorldMapDelete extends Component {
           <Button className="btn btn-danger col-md-6" disabled>Remove</Button>
         }
         {this.state.confirm &&
-          <Button className="btn btn-danger col-md-6">Remove</Button>
+          <Mutation
+            mutation={POST_MUTATION}
+            variables={{
+              "id": mapID }}>
+            {(postMutation, data, error) =>
+            <Button className="btn btn-danger col-md-6" onClick={(event)=>{postMutation()
+              .then(()=>{window.location.reload()})
+              .catch((error) => {
+                alert('Error')
+              }
+            )}}>
+            Remove</Button>}
+          </Mutation>
         }
         </ModalFooter>
       </div>
