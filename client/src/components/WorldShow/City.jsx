@@ -26,10 +26,10 @@ function City({cityID, isUser}) {
           if (error) return <div>Error</div>
           return (
             <ListGroup>
-              <ListGroupItem className="listItem" action><span className="categoryName">Name</span><span>: </span>{data.findCityById.name}</ListGroupItem>
-              <ListGroupItem className="listItem" action><span className="categoryName">Population</span><span>: </span>{data.findCityById.population}</ListGroupItem>
-              <ListGroupItem className="listItem" action><span className="categoryName">Government</span><span>: </span>{data.findCityById.government}</ListGroupItem>
-              <ListGroupItem className="listItem" action><span className="categoryName">Description</span><span>: </span>{data.findCityById.description}</ListGroupItem>
+              <ListGroupItem className="listItem" action><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
+              <ListGroupItem className="listItem" action><span className="categoryName">Population</span><span>: </span>{data.findMarkers[0].population}</ListGroupItem>
+              <ListGroupItem className="listItem" action><span className="categoryName">Government</span><span>: </span>{data.findMarkers[0].government}</ListGroupItem>
+              <ListGroupItem className="listItem" action><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
               {isUser && <Link to={{pathname: "/edit-city", state: {cityID: cityID}}}>
                 <Button className="btn btn-success add-world col-md-12">Edit City</Button>
                 </Link>}
