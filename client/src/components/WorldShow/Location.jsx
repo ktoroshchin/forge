@@ -26,8 +26,8 @@ function Location({locationID, isUser}) {
           if (error) return <div>Error</div>
           return (
             <ListGroup>
-              <ListGroupItem className="listItem"><span className="categoryName">Name</span><span>: </span>{data.findMarkers.name}</ListGroupItem>
-              <ListGroupItem className="listItem"><span className="categoryName">Description</span><span>: </span>{data.findMarkers.description}</ListGroupItem>
+              <ListGroupItem className="listItem"><span className="categoryName">Name</span><span>: </span>{data.findMarkers[0].name}</ListGroupItem>
+              <ListGroupItem className="listItem"><span className="categoryName">Description</span><span>: </span>{data.findMarkers[0].description}</ListGroupItem>
               {isUser && <Link to={{pathname: "/edit-location", state: {locationID: locationID}}}>
                 <Button className="btn btn-success add-world col-md-12">Edit Location</Button>
                 </Link>}
