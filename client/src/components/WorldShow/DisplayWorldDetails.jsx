@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router";
-import { Button, ListGroupItem,Badge, Modal, ModalHeader } from 'reactstrap';
+import { Button, Modal, ModalHeader } from 'reactstrap';
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import City from './City'
