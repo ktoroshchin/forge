@@ -7,7 +7,7 @@ function EditTown({location}) {
   const townID = location.state.townID;
   const findTown = gql`
   query {
-    findTownById(id: "${townID}"){
+    findMarkers(category: "Town", id: "${townID}"){
       id
       name
       description
@@ -20,7 +20,9 @@ function EditTown({location}) {
     {({ loading, error, data }) => {
       if (loading) return <div>Fetching</div>
       if (error) return <div>Error</div>
-      return <EditTownForm id={data.findTownById.id} name={data.findTownById.name} description={data.findTownById.description} population={data.findTownById.population} government={data.findTownById.government} />}}
+      return <EditTownForm id={data.findMarkers[0].id} name={data.findMarkers[0].name}
+        description={data.findMarkers[0].description} population={data.findMarkers[0].population}
+         government={data.findMarkers[0].government} />}}
     </Query>
   )
 }
