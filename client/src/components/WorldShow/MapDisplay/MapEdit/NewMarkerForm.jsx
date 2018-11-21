@@ -23,7 +23,7 @@ constructor(props) {
     return (
       <div>
         <FormGroup>
-          <Input onClick={this.select} type="select" name="select" id="categorySelect">
+          <Input onChange={this.select} type="select" name="select" id="categorySelect">
             <option value="">Select a category...</option>
             <option value="City">City</option>
             <option value="Town">Town</option>

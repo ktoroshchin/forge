@@ -48,7 +48,7 @@ export default class ChooseElement extends Component {
       <div>
         <FormGroup>
           <Label for="categorySelect">Choose a {eleCategory}...</Label>
-          <Input onClick={this.select} type="select" name="select" id="categorySelect">
+          <Input onChange={this.select} type="select" name="select" id="categorySelect">
             <option value="">Select...</option>
             <Query query={listElements}>
               {({ loading, error, data }) => {
