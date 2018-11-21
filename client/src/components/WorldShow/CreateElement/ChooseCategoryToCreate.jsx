@@ -1,64 +1,61 @@
-import React from "react";
-import { ListGroup,ListGroupItem } from 'reactstrap';
+import React,  { Component } from "react";
+import { ListGroup,ListGroupItem, Button, Modal, ModalHeader, ModalBody, ModalFooter  } from 'reactstrap';
 import CreateNewCity from './CreateNewCity'
 import CreateNewTown from './CreateNewTown'
 import CreateNewLocation from './CreateNewLocation'
 
-function ChooseCategoryToCreate ({worldID}) {
+class ChooseCategoryToCreate extends Component {
+  state = {
+    modal: false,
+    worldID: this.props.worldID
+  }
+
+  toggleModal = this.toggleModal.bind(this)
+
+  toggleModal(e) {
+      this.setState({
+        modal: e.target.value
+      });
+    }
+
+
+
+
+render(){
   return(
-    <div className="ChooseCategoryToUpdate">
-      <div className="update-categories">
-        <ListGroupItem className="category">Category</ListGroupItem>
-        <div id="accordionUpdate">
-          <div className="card">
-            <div className="card-header" id="headingOne">
-                <button className="btn btn-link form collapsed"  data-toggle="collapse" data-target="#collapseCities" aria-expanded="false" aria-controls="collapseOne">
-                  Cities
-                </button>
-            </div>
+      <div>
+        <div className="row ChooseCategoryToCreate">
+          <ListGroupItem className="category text-center">Category</ListGroupItem>
+            <Button className="category-button col-md-12 col-lg-12 col-xl-12" onClick={this.toggleModal} value={"1"} >
+              Cities
+            </Button>
+            <Modal isOpen={this.state.modal === "1"} toggle={this.toggleModal} >
+              <ModalHeader toggle={this.toggleModal}>Create a New City</ModalHeader>
+                <CreateNewCity worldID={this.state.worldID} />
+            </Modal>
 
-            <div id="collapseCities" className="collapse" aria-labelledby="headingOne" data-parent="#accordionUpdate">
-              <div className="card-body">
-                <ListGroup className="listItemContainer">
-                  <CreateNewCity worldID={worldID} />
-                </ListGroup>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-header" id="headingOne">
-                <button className="btn btn-link form collapsed"  data-toggle="collapse" data-target="#collapseTowns" aria-expanded="false" aria-controls="collapseOne">
-                  Towns
-                </button>
-            </div>
+            <Button className="category-button col-md-12 col-lg-12 col-xl-12" onClick={this.toggleModal} value={"2"} >
+              Towns
+            </Button>
+            <Modal isOpen={this.state.modal === "2"} toggle={this.toggleModal} >
+              <ModalHeader toggle={this.toggleModal}>Create a New Town</ModalHeader>
+              <ModalBody>
+                <CreateNewTown worldID={this.state.worldID} toggleModal={this.toggleModal} />
+              </ModalBody>
+            </Modal>
 
-            <div id="collapseTowns" className="collapse" aria-labelledby="headingOne" data-parent="#accordionUpdate">
-              <div className="card-body">
-                <ListGroup className="listItemContainer">
-                  <CreateNewTown worldID={worldID} />
-                </ListGroup>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-header" id="headingThree">
-              <h5 className="mb-0">
-                <button className="btn btn-link form collapsed" data-toggle="collapse" data-target="#collapseLocations" aria-expanded="false" aria-controls="collapseThree">
-                  Locations
-                </button>
-              </h5>
-            </div>
-            <div id="collapseLocations" className="collapse" aria-labelledby="headingThree" data-parent="#accordionUpdate">
-              <div className="card-body">
-                <ListGroup className="listItemContainer">
-                  <CreateNewLocation worldID={worldID} />
-                </ListGroup>
-            </div>
+            <Button className="category-button col-md-12 col-lg-12 col-xl-12" onClick={this.toggleModal} value={"3"} >
+              Locations
+            </Button>
+            <Modal isOpen={this.state.modal === "3"} toggle={this.toggleModal} >
+              <ModalHeader toggle={this.toggleModal}>Create a New Location</ModalHeader>
+              <ModalBody>
+                <CreateNewLocation worldID={this.state.worldID} />
+              </ModalBody>
+            </Modal>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  )
+    )
+  }
 }
 export default ChooseCategoryToCreate;

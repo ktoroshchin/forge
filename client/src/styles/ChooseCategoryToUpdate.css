@@ -1,11 +1,8 @@
-.ChooseCategoryToUpdate .update-categories {
-  text-align: center;
+.row .ChooseCategoryToCreate {
+  display: flex;
+  flex-direction: column;
 }
 
-
-
-.btn.btn-link.form {
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
+.category-button {
+  margin-bottom: 0.2em;
 }

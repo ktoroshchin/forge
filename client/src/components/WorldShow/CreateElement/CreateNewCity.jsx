@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
 
 class CreateNewCity extends Component {
   state = {
@@ -41,28 +41,31 @@ handleDescription(e) {
       }`
   return (
     <div>
-      <Form>
-        <Label for="form">Create a new city</Label>
-        <FormGroup>
-          <Label for="city">City</Label>
-          <Input onChange={this.handleCityName} type="text" name="name" placeholder="city"/>
-        </FormGroup>
-        <FormGroup>
-          <Label for="population">Population</Label>
-          <Input onChange={this.handlePopulation} type="text" name="population" placeholder="population" />
-        </FormGroup>
-        <FormGroup>
-          <Label for="government">Government</Label>
-          <Input onChange={this.handleGovernment} type="text" name="government" placeholder="government" />
-        </FormGroup>
-        <FormGroup>
-          <Label for="description">Description</Label>
-          <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
-        </FormGroup>
+      <ModalBody>
+        <Form>
+          <FormGroup>
+            <Label for="city">City</Label>
+            <Input onChange={this.handleCityName} type="text" name="name" placeholder="city"/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="population">Population</Label>
+            <Input onChange={this.handlePopulation} type="text" name="population" placeholder="population" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="government">Government</Label>
+            <Input onChange={this.handleGovernment} type="text" name="government" placeholder="government" />
+          </FormGroup>
+          <FormGroup>
+            <Label for="description">Description</Label>
+            <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
+          </FormGroup>
+        </Form>
+      </ModalBody>
+      <ModalFooter>
         <Mutation mutation={POST_MUTATION} variables={{ category, world_id, name, population, government, description }}>
           {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
         </Mutation>
-      </Form>
+      </ModalFooter>
     </div>
     )
   }

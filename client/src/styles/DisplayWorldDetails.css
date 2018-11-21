@@ -33,7 +33,12 @@
 
 .world-name{
   text-align: center;
-  background-color: grey;
+  border: solid 2px red;
+}
+
+.second-column {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 

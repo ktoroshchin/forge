@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button, ListGroupItem } from 'reactstrap';
+import { Button, ListGroupItem, Badge } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router";
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
@@ -69,15 +69,16 @@ componentDidMount() {
 
     return(
         <div className="container mt-3">
-          <ListGroupItem className="world-name" onClick={this.handleRefresh}>{worldName}</ListGroupItem>
-          <ListGroupItem className="world-description">{worldDescription}</ListGroupItem>
+          <div className="row">
+            <h1 className="world-name col" onClick={this.handleRefresh}>{worldName}</h1>
+          </div>
           <div className="row mt-3">
             <div className="col-md-4 col-lg-3 col-xl-2">
               <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
             </div>
             {this.state.value === '' && !this.state.clicked &&
-              <div className="col-md-8 col-lg-9 col-xl-10">
-
+              <div className="second-column col-md-8 col-lg-9 col-xl-10">
+                <h3 className="text-center">{worldDescription}</h3>
                 {this.state.isUser &&
                   <Link to={{pathname: "/edit-world", state: {worldID: worldID}}}>
                       <Button className="btn btn-success add-world col-md-12">Edit World</Button>

@@ -34,7 +34,7 @@ render(){
   return (
     <div>
       <Form>
-        <Label for="form">Create a new Location</Label>
+        
         <FormGroup>
           <Label for="Name">Name</Label>
           <Input onChange={this.handleLocationName} type="text" name="name" placeholder="location name"/>

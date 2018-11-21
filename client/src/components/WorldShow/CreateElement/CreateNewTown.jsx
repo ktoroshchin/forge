@@ -42,7 +42,6 @@ handleDescription(e) {
     return (
       <div>
         <Form>
-          <Label for="form">Create a new Town</Label>
           <FormGroup>
             <Label for="town">Name</Label>
             <Input onChange={this.handleCityName} type="text" name="name" placeholder="city"/>
