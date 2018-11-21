@@ -47,7 +47,7 @@ class EditTownForm extends Component {
     const {id} = this.props;
     const POST_MUTATION = gql`
       mutation ($id: ID!, $name: String!, $description: String, $population: Int, $government: String){
-        bulkEditTown(id: $id, name: $name, description: $description, population: $population,
+        editMarkerInfo(id: $id, name: $name, description: $description, population: $population,
           government: $government) {
          id
         }
@@ -57,13 +57,13 @@ class EditTownForm extends Component {
         <h2>Edit Town</h2>
         <Form>
           <FormGroup>
-            <Label>Name</Label>
+            <Label>Name (required)</Label>
             <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
-            <Label>Population</Label>
+            <Label>Population (optional)</Label>
             <Input value={this.state.population} onChange={this.handlePopulationChange} type="text" name="population" />
-            <Label>Government</Label>
+            <Label>Government (optional)</Label>
             <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
-            <Label>Description</Label>
+            <Label>Description (optional)</Label>
             <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
             <br />
             <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
