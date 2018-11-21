@@ -22,7 +22,7 @@ module.exports = {
       })
       return map.save()
     },
-    bulkEditMap: async (root, input) => {
+    editMapInfo: async (root, input) => {
       const map = await db.map.findByPk(input.id)
       map.set(input)
       return map.save()
@@ -76,7 +76,7 @@ module.exports = {
       })
       return world.save()
     },
-    bulkEditWorld: async (root, input) => {
+    editWorldInfo: async (root, input) => {
       const world = await db.world.findByPk(input.id)
       world.set(input)
       return world.save()
@@ -97,7 +97,7 @@ module.exports = {
       })
       return user.save()
     },
-    bulkEditUser: async (root, { id, password, first_name, last_name }) => {
+    editUserInfo: async (root, { id, password, first_name, last_name }) => {
       const user = await db.user.findByPk(id);
 
       if (await !bcrypt.compareSync(password, user.dataValues.password)) {
