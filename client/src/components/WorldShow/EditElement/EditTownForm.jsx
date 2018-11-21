@@ -45,7 +45,6 @@ class EditTownForm extends Component {
       }`
     return (
       <div>
-        <h2>Edit Town</h2>
         <Form>
           <FormGroup>
             <Label>Name (required)</Label>
