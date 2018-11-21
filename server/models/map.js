@@ -6,13 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    world_id: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: 'world', key: 'id'
-      }
-    },
     url: DataTypes.STRING,
     width: DataTypes.INTEGER,
     height: DataTypes.INTEGER,
@@ -21,7 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     updated_at: DataTypes.DATE,
   }, {});
   map.associate = function(models) {
-    // associations can be defined here
+    map.markers = map.hasMany(models.marker, {foreignKey: 'map_id'});
+    map.belongsTo(models.world, {foreignKey: 'world_id', targetKey: 'id'});
   };
   return map;
 };

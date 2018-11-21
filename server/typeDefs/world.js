@@ -1,13 +1,9 @@
 const queryType = `
-  allWorlds: [World!]!
-  findWorldById(id: ID!): World!
-  findWorldsByCreatorId(creator_id: ID!): [World!]
-  findWorldByName(name: String!): World!
-`;
+  findWorlds(id: ID, creator_id: ID, name: String): [World!]`;
 
 const mutationType = `
   createNewWorld(name: String!, creator_id: ID!, description: String): World!
-  bulkEditWorld(id: ID!, name: String!, creator_id: ID!, description: String): World!`;
+  bulkEditWorld(id: ID!, name: String, creator_id: ID!, description: String): World!`;
 
 const modelType = `
   type World {
@@ -15,6 +11,8 @@ const modelType = `
     name: String!
     description: String
     creator_id: ID!
+    maps: [Map!]
+    markers: [Marker!]
   }`;
   
 module.exports = { queryType, mutationType, modelType }
