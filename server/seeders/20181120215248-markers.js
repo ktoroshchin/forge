@@ -50,6 +50,43 @@ module.exports = {
         description: 'A forest filled with dangerous beasts and various forms of blights.',
         population: null,
         government: null,
+      }, {
+        id: uuid(),
+        world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
+        category: 'Town',
+        map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
+        longitude:  2069.26953125,
+        latitude: 1265.5625,
+        name: 'Piho',
+        description: 'A booming human religious town. It is home to the Church of Piety, a racist religious \
+                      order which indoctrinates it\'s followers by making them kill a non-human to join.',
+        population: 4600,
+        government: 'Theocracy',
+      }, {
+        id: uuid(),
+        world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
+        category: 'Town',
+        map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
+        longitude: 2170.75,
+        latitude: 1211.466796875,
+        name: 'Bol',
+        description: 'A coastal fishing town east of Wolfrest. It\'s main source of money is \
+                      the fish they salt and export to the City.',
+        population: 1080,
+        government: 'Aristocracy',
+      }, {
+        id: uuid(),
+        world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
+        category: 'Town',
+        map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
+        longitude: 2332.46484375,
+        latitude: 1194.564453125,
+        name: 'Zezima',
+        description: 'A small fortress inhabited by strong soldiers who have defected from Wolfrest. \
+                      They live in open rebellion to the throne and hope to gain many followers in their \
+                      quest to liberate the citizens of Wolfrest.',
+        population: 350,
+        government: 'Kraterocracy',
       }
     ], {});
   },
