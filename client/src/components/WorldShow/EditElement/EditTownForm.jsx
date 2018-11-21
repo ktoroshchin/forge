@@ -55,7 +55,7 @@ class EditTownForm extends Component {
               <Label>Government (optional)</Label>
               <Input value={this.state.government} onChange={this.handleGovernmentChange} type="text" name="government" />
               <Label>Description (optional)</Label>
-              <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
+              <Input value={this.state.description} onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
         </ModalBody>

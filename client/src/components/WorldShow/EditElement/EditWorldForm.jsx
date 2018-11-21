@@ -40,7 +40,7 @@ class EditWorldForm extends Component {
               <Label> Name (required)</Label>
               <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
               <Label>Description (optional)</Label>
-              <Input value={this.state.description} onChange={this.handleDescriptionChange} type="text" name="description" />
+              <Input value={this.state.description} onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
         </ModalBody>
