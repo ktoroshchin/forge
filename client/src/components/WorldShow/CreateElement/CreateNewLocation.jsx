@@ -5,10 +5,10 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class CreateNewLocation extends Component {
   state = {
-    name: null,
-    description: null,
-    marker_id: null,
+    category: "Location",
     world_id: this.props.worldID,
+    name: null,
+    description: null
   }
 
 handleLocationName = this.handleLocationName.bind(this);
@@ -23,10 +23,10 @@ handleDescription(e) {
 }
 
 render(){
-  const { name, description, marker_id, world_id } = this.state
+  const { category, world_id, name, description } = this.state
   const POST_MUTATION = gql`
-    mutation ($name: String!, $description: String, $world_id: ID!, $marker_id: ID ){
-      createNewLocation(name: $name, description: $description, world_id: $world_id, marker_id: $marker_id ) {
+    mutation ($category: String!, $world_id: ID!, $name: String!, $description: String){
+      createNewMarker(category: $category, world_id: $world_id, name: $name, description: $description) {
         id
       }
     }`
@@ -43,7 +43,7 @@ render(){
           <Label for="description">Description</Label>
           <Input onChange={this.handleDescription} type="text" name="description" placeholder="description" />
         </FormGroup>
-        <Mutation mutation={POST_MUTATION} variables={{ name, description, marker_id, world_id }}>
+        <Mutation mutation={POST_MUTATION} variables={{ category, world_id, name, description }}>
           {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
         </Mutation>
       </Form>
