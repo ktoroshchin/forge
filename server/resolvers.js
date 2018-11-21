@@ -128,7 +128,11 @@ module.exports = {
     },
     removeMapById: async (root, { id }) => {
       let map = await db.map.findByPk(id);
-      await db.marker.destroy({ where: { world_id: id } });
+      await db.marker.update({
+        map_id: null,
+        longitude: null,
+        latitude: null
+      }, { where: { map_id: id } })
       if (!map.destroy()) throw new Error('Map not deleted')
       return true
     },
