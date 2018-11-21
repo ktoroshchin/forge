@@ -6,7 +6,6 @@ import EditCity from './EditElement/EditCity'
 
 export default class City extends Component {
   state = {
-    cityID: this.props.cityID,
     isUser: this.props.isUser,
     modal: false
   };
@@ -20,7 +19,7 @@ export default class City extends Component {
     const findCity =
     gql`
     query {
-      findMarkers(category: "City", id: "${this.state.cityID}") {
+      findMarkers(category: "City", id: "${this.props.cityID}") {
         id
         name
         population
