@@ -3,10 +3,10 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import EditWorldForm from './EditWorldForm'
 
-function EditWorld({location}) {
+function EditWorld({worldID}) {
   const findWorld = gql`
   query {
-    findWorlds(id: "${location.state.worldID}"){
+    findWorlds(id: "${worldID}"){
       id
       name
       description
