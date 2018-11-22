@@ -17,13 +17,17 @@ code {
     monospace;
 }
 
-#map-container {
-  height: 400px;
+#map {
+  height: 100%;
+  margin-bottom: 1em;
 }
 
-#map {
-  height: 400px;
-  margin-bottom: 1em;
+.editMap {
+  height: 80vh;
+}
+
+.showMap {
+  height: 60vh;
 }
 
 .btn-group {

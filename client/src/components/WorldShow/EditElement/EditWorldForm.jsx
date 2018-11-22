@@ -51,16 +51,16 @@ class EditWorldForm extends Component {
               <Input value={this.state.description} onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+        </ModalBody>
+        <ModalFooter className="justify-content-between">
           <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove World</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
             <ModalHeader toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
             <WorldDelete worldID={id} />
           </Modal>
-        </ModalBody>
-        <ModalFooter>
           <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
             {(postMutation) =>
-              <Button color="success" onClick={(event)=>{postMutation(event)
+              <Button className="btn btn-outline-success btn-sm col-3" onClick={(event)=>{postMutation(event)
                 .then(()=>{this.handleRefresh();})
                 .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
           </Mutation>

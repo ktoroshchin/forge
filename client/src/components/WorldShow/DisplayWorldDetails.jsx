@@ -21,51 +21,60 @@ export default class DisplayWorldDetails extends Component {
     value: "",
     locationID: "",
     isUser: false,
-    modal: false
+    modal: false,
+    refresh: false
   };
 
-handleClick = this.handleClick.bind(this)
-setValue = this.setValue.bind(this);
-setLocationID = this.setLocationID.bind(this);
-toggleModal = this.toggleModal.bind(this);
+  handleClick = this.handleClick.bind(this)
+  setValue = this.setValue.bind(this);
+  setLocationID = this.setLocationID.bind(this);
+  toggleModal = this.toggleModal.bind(this);
+  refreshComponent = this.refreshComponent.bind(this);
 
-handleClick() {
-  this.setState({
-    clicked: true,
-    value: ""
-  });
-}
-setValue(value) {
-  this.setState({
-    value: value,
-    clicked: false
-  })
-}
-setLocationID(id) {
-  this.setState({
-    locationID: id
-  })
-}
-handleRefresh() {
-  window.location.reload()
-}
-toggleModal() {
-  this.setState({
-    modal: !this.state.modal
-  });
-}
-componentWillMount() {
-  if (!this.props.location.state) {
-    return window.location.href = '/'
-  }
-}
-componentDidMount() {
-  if (getUserID() === this.props.location.state.creatorID) {
+  handleClick() {
     this.setState({
-      isUser: true
+      clicked: true,
+      value: ""
+    });
+  }
+  setValue(value) {
+    this.setState({
+      value: value,
+      clicked: false
     })
   }
-}
+  setLocationID(id) {
+    this.setState({
+      locationID: id
+    })
+  }
+  handleRefresh() {
+    window.location.reload()
+  }
+
+  refreshComponent() {
+    this.setState({
+      refresh: !this.state.refresh
+    })
+  }
+
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+  componentWillMount() {
+    if (!this.props.location.state) {
+      return window.location.href = '/'
+    }
+  }
+  componentDidMount() {
+    if (getUserID() === this.props.location.state.creatorID) {
+      this.setState({
+        isUser: true
+      })
+    }
+  }
   render() {
     const {worldID} = this.props.location.state;
     const findWorld =
@@ -121,8 +130,12 @@ componentDidMount() {
                   </Modal>
                   </div>
                 }
-
-                <ShowMap worldID={worldID} isUser={this.state.isUser} />
+                <ShowMap
+                  worldID={worldID}
+                  isUser={this.state.isUser}
+                  creatorID={this.props.location.state.creatorID}
+                  refresh={this.refreshComponent}
+                 />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
