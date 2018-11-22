@@ -15,8 +15,10 @@ export default class WorldDelete extends Component {
     this.setRedirect = this.setRedirect.bind(this);
     this.renderRedirect = this.renderRedirect.bind(this);
   }
-  handleNameChange(e) {
-    this.setState({description: e.target.value});
+  confirmCheck() {
+    this.setState({
+      confirm: !this.state.confirm
+    });
   }
   setRedirect() {
     this.setState({
@@ -29,15 +31,8 @@ export default class WorldDelete extends Component {
       return <Redirect to='/my-worlds' />
     }
   }
-  confirmCheck() {
-    this.setState({
-      confirm: !this.state.confirm
-    });
-  }
-
   render() {
     const {worldID} = this.props;
-
     const POST_MUTATION = gql`
       mutation ($id: ID!){
         removeWorldById(id: $id)
@@ -72,7 +67,7 @@ export default class WorldDelete extends Component {
         {this.renderRedirect()}
         </ModalFooter>
       </div>
-      )
+    )
   }
 }
 
