@@ -45,17 +45,17 @@ class EditWorldForm extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label> Name (required)</Label>
+              <Label>World Name (required)</Label>
               <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
-              <Label>Description (optional)</Label>
+              <Label>World Description (optional)</Label>
               <Input value={this.state.description} onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove World</Button>
         </ModalBody>
         <ModalFooter>
-          <Button className="btn btn-outline-danger btn-sm col-3 offset-6" onClick={this.toggleDeleteModal}>Remove World</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World</ModalHeader>
+            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
             <WorldDelete worldID={id} />
           </Modal>
           <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
