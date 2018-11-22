@@ -12,9 +12,6 @@ import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import WorldDelete from './WorldDelete'
-
-
 const cookies = new Cookies();
 const getUserID = function() {
   return cookies.get('userID');
@@ -146,16 +143,6 @@ componentDidMount() {
               </div>
             }
           </div>
-
-          {/*Delete World button*/}
-          {this.state.isUser &&
-            <div>
-              <Button className="btn btn-outline-danger btn-sm col-3 offset-6" onClick={this.toggleDeleteModal}>Remove World</Button>
-              <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-                <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World</ModalHeader>
-                <WorldDelete worldID={worldID} />
-              </Modal>
-            </div>
           }
         </div>
     )
