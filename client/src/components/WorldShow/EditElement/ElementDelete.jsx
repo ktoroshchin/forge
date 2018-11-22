@@ -38,11 +38,11 @@ export default class ElementDelete extends Component {
     return (
       <div>
         <ModalBody>
-          Are you sure you want to delete {name}?
+          Are you sure you want to delete "{name}"?
           <FormGroup check>
             <Label check>
               <Input type="checkbox" onChange={this.confirmCheck}/>
-              Yes I want to delete {name}!
+              Yes I want to delete "{name}"!
             </Label>
           </FormGroup>
         </ModalBody>
