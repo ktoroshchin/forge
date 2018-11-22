@@ -23,15 +23,13 @@ export default class DisplayWorldDetails extends Component {
     value: "",
     locationID: "",
     isUser: false,
-    modal: false,
-    deleteModal: false
+    modal: false
   };
 
 handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
 toggleModal = this.toggleModal.bind(this);
-toggleDeleteModal = this.toggleDeleteModal.bind(this);
 
 handleClick() {
   this.setState({
@@ -58,11 +56,6 @@ toggleModal() {
     modal: !this.state.modal
   });
 }
-toggleDeleteModal() {
-    this.setState({
-      deleteModal: !this.state.deleteModal
-    });
-  }
 componentWillMount() {
   if (!this.props.location.state) {
     return window.location.href = '/'
@@ -143,7 +136,6 @@ componentDidMount() {
               </div>
             }
           </div>
-          }
         </div>
     )
   }
