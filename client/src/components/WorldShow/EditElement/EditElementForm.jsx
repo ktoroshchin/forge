@@ -80,8 +80,8 @@ export default class EditEditForm extends Component {
           </Form>
           <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove {category}</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
-            <WorldDelete worldID={id} />
+            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your {category}</ModalHeader>
+            <ElementDelete elementID={id} category={category} />
           </Modal>
         </ModalBody>
         <ModalFooter>
