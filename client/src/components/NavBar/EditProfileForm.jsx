@@ -67,7 +67,7 @@ class EditProfileForm extends Component {
               {this.renderRedirect()}
             </FormGroup>
           </Form>
-        </div>  
+        </div>
       </div>
     )
   }
