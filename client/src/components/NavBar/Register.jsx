@@ -8,26 +8,15 @@ class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      first_name: null,
-      last_name: null,
       username: null,
       email: null,
       password: null,
       redirect: false
     }
-    this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.setUser = this.setUser.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
-  }
-  handleFirstNameChange(e) {
-    this.setState({first_name: e.target.value});
-  }
-  handleLastNameChange(e) {
-    this.setState({last_name: e.target.value});
   }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
@@ -52,12 +41,25 @@ class Register extends Component {
       return <Redirect to='/' />
     }
   }
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then((data)=>{
+        this.setUser(data);
+      })
+      .catch((error) => {
+        error.graphQLErrors.map(({ message }) => (alert(message)))})
+  }
+  handleKeypressEnter(event, postMutation) {
+    if (event.key === "Enter") {
+      return this.handleMutationSubmit(postMutation)
+    }
+  }
   render() {
     const { first_name, last_name, username, email, password } = this.state;
     const {getUserID} = this.props;
     const POST_MUTATION = gql`
-      mutation ($first_name: String, $last_name: String, $username: String!, $email: String!, $password: String!){
-        register(first_name: $first_name, last_name: $last_name, username: $username, email: $email, password: $password) {
+      mutation ($username: String!, $email: String!, $password: String!){
+        register(username: $username, email: $email, password: $password) {
           id
         }
       }`
@@ -66,29 +68,41 @@ class Register extends Component {
         <div>
           <div className="container">
             <h2>Register</h2>
-            <Form>
-              <FormGroup>
-                <Label>Username (required)</Label>
-                <Input onChange={this.handleUsernameChange} type="text" name="username" />
-                <Label>Email (required)</Label>
-                <Input onChange={this.handleEmailChange} type="text" name="email" />
-                <Label>Password (required)</Label>
-                <Input onChange={this.handlePasswordChange} type="password" name="password" />
-                <Label>First Name (optional)</Label>
-                <Input onChange={this.handleFirstNameChange} type="text" name="first_name" />
-                <Label>Last Name (optional)</Label>
-                <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
-                <br />
-                <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
-                  {(postMutation, data, error) =>
-                    <Button color="success" onClick={(event)=>{postMutation(event)
-                      .then((data)=>{this.setUser(data);})
-                      .catch((error)=>{(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
-                    Submit</Button>}
-                </Mutation>
-                {this.renderRedirect()}
-              </FormGroup>
-            </Form>
+            <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
+            {postMutation =>
+              <Form>
+                <FormGroup>
+                  <Label>Username</Label>
+                  <Input
+                    onChange={this.handleUsernameChange}
+                    type="text"
+                    name="username"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                  <Label>Email</Label>
+                  <Input
+                    onChange={this.handleEmailChange}
+                    type="text"
+                    name="email"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                  <Label>Password</Label>
+                  <Input
+                    onChange={this.handlePasswordChange}
+                    type="password"
+                    name="password"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                </FormGroup>
+                <Button
+                  color="success"
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                  Submit
+                </Button>
+              </Form>
+            }
+            </Mutation>
+            {this.renderRedirect()}
           </div>
         </div>
       )
