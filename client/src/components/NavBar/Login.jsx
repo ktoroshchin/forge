@@ -15,7 +15,6 @@ class Login extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.setUser = this.setUser.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleUsernameChange(e) {
     this.setState({username: e.target.value});
@@ -43,7 +42,7 @@ class Login extends Component {
   }
   handleKeypressEnter(event, postMutation) {
     if (event.key === "Enter") {
-      return this.onSubmit(postMutation)
+      return this.handleMutationSubmit(postMutation)
     }
   }
   render() {
