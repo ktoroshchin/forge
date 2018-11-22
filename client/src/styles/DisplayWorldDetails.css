@@ -7,6 +7,12 @@
 
 }
 
+#accordion {
+  overflow-y: scroll;
+  height: 300px;
+  padding-right: 0px;
+}
+
 .card-body.nopadding {
   padding: 0;
 }

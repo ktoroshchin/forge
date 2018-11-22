@@ -87,6 +87,7 @@ componentDidMount() {
             if (error) return <div>Error</div>
             return (
               <div>
+                <i class="fas fa-caret-right"></i>
                 <h1 className="world-name col" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
               </div>
             )
