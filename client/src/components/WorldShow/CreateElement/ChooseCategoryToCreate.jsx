@@ -19,14 +19,14 @@ class ChooseCategoryToCreate extends Component {
         <div className="ChooseCategoryToCreate">
           <ListGroupItem className="category text-center">Category</ListGroupItem>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"1"} >
-            Cities
+            New City
           </Button>
           <Modal isOpen={this.state.modal === "1"} toggle={this.toggleModal} >
             <ModalHeader toggle={this.toggleModal}>Create a New City</ModalHeader>
               <CreateNewCity worldID={this.state.worldID} />
           </Modal>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"2"} >
-            Towns
+            New Town
           </Button>
           <Modal isOpen={this.state.modal === "2"} toggle={this.toggleModal} >
             <ModalHeader toggle={this.toggleModal}>Create a New Town</ModalHeader>
@@ -35,7 +35,7 @@ class ChooseCategoryToCreate extends Component {
             </ModalBody>
           </Modal>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"3"} >
-            Locations
+            New Location
           </Button>
           <Modal isOpen={this.state.modal === "3"} toggle={this.toggleModal} >
             <ModalHeader toggle={this.toggleModal}>Create a New Location</ModalHeader>
