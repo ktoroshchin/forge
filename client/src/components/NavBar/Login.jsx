@@ -59,7 +59,7 @@ class Login extends Component {
                   {(postMutation, data, error) =>
                     <Button color="success" onClick={(event)=>{postMutation(event)
                       .then((data)=>{this.setUser(data);})
-                      .catch((error) => {alert("Wrong login credentials")})}}>
+                      .catch((error) => {(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
                     Submit</Button>}
                 </Mutation>
                 {this.renderRedirect()}
