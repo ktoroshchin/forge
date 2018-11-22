@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand } from 'reactstrap';
+import { Collapse, Navbar, Nav, NavItem, NavLink, NavbarToggler, NavbarBrand } from 'reactstrap';
 import NavBarDropDown from "./NavBarDropDown"
 
 class NavbarMain extends Component {
@@ -20,7 +20,12 @@ class NavbarMain extends Component {
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
-            <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href="/">View All Worlds</NavLink>
+              </NavItem>
+              <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
+            </Nav>
           </Collapse>
         </Navbar>
       </div>
