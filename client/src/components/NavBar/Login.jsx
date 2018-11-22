@@ -33,9 +33,25 @@ class Login extends Component {
       return <Redirect to='/' />
     }
   }
+
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then((data)=>{
+        this.setUser(data);
+      })
+      .catch((error) => {
+        error.graphQLErrors.map(({ message }) => (alert(message)))})
+  }
+
+  handleKeypressEnter(event, postMutation) {
+    if (event.key === "Enter") {
+      return this.onSubmit(postMutation)
+    }
+  }
+
    render() {
     const { username, password } = this.state;
-    const {getUserID} = this.props;
+    const { getUserID } = this.props;
 
     const POST_MUTATION = gql`
       mutation ($username: String!, $password: String!){
@@ -48,23 +64,32 @@ class Login extends Component {
         <div>
           <div className="container">
             <h2>Login</h2>
+            <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
+              {(postMutation) =>
             <Form>
               <FormGroup>
                 <Label>Username</Label>
-                <Input onChange={this.handleUsernameChange} type="text" name="username" />
+                <Input
+                  onChange={this.handleUsernameChange}
+                  type="text"
+                  name="username"
+                  onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                />
                 <Label>Password</Label>
-                <Input onChange={this.handlePasswordChange} type="password" name="password" />
-                <br />
-                <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
-                  {(postMutation, data, error) =>
-                    <Button color="success" onClick={(event)=>{postMutation(event)
-                      .then((data)=>{this.setUser(data);})
-                      .catch((error) => {(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
-                    Submit</Button>}
-                </Mutation>
-                {this.renderRedirect()}
+                <Input
+                  onChange={this.handlePasswordChange}
+                  type="password"
+                  name="password"
+                  onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                />
               </FormGroup>
-            </Form>
+              <Button
+                color="success"
+                onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                Submit</Button>
+            </Form>}
+            </Mutation>
+                {this.renderRedirect()}
           </div>
         </div>
       )
