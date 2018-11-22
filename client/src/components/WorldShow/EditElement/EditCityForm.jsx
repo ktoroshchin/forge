@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import ElementDelete from './ElementDelete'
 
 class EditCityForm extends Component {
   constructor(props) {
@@ -11,12 +12,14 @@ class EditCityForm extends Component {
       population: this.props.population,
       government: this.props.government,
       description: this.props.description,
+      deleteModal: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePopulationChange = this.handlePopulationChange.bind(this);
     this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleRefresh = this.handleRefresh.bind(this)
+    this.handleRefresh = this.handleRefresh.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -32,6 +35,11 @@ class EditCityForm extends Component {
   }
   handleRefresh() {
     window.location.reload()
+  }
+  toggleDeleteModal() {
+    this.setState({
+      deleteModal: !this.state.deleteModal
+    });
   }
   render() {
     const { name, population, government, description } = this.state;
@@ -57,8 +65,13 @@ class EditCityForm extends Component {
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove City</Button>
         </ModalBody>
         <ModalFooter>
+          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your Element</ModalHeader>
+            <ElementDelete elementID={id} />
+          </Modal>
           <Mutation mutation={POST_MUTATION} variables={{ id, name, population, government, description }}>
             {(postMutation) =>
               <Button color="success" onClick={(event)=>{postMutation(event)
