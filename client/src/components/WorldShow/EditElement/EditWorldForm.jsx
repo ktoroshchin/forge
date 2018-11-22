@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import WorldDelete from './WorldDelete'
 
 class EditWorldForm extends Component {
   constructor(props) {
@@ -9,10 +10,12 @@ class EditWorldForm extends Component {
     this.state = {
       name: this.props.name,
       description: this.props.description,
+      deleteModal: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleRefresh = this.handleRefresh.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -22,6 +25,11 @@ class EditWorldForm extends Component {
   }
   handleRefresh() {
     window.location.reload();
+  }
+  toggleDeleteModal() {
+    this.setState({
+      deleteModal: !this.state.deleteModal
+    });
   }
   render() {
     const { name, description } = this.state;
@@ -45,6 +53,11 @@ class EditWorldForm extends Component {
           </Form>
         </ModalBody>
         <ModalFooter>
+          <Button className="btn btn-outline-danger btn-sm col-3 offset-6" onClick={this.toggleDeleteModal}>Remove World</Button>
+          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+            <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World</ModalHeader>
+            <WorldDelete worldID={id} />
+          </Modal>
           <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
             {(postMutation) =>
               <Button color="success" onClick={(event)=>{postMutation(event)

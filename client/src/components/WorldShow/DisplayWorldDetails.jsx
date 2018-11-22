@@ -12,9 +12,6 @@ import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import WorldDelete from './WorldDelete'
-
-
 const cookies = new Cookies();
 const getUserID = function() {
   return cookies.get('userID');
@@ -26,15 +23,13 @@ export default class DisplayWorldDetails extends Component {
     value: "",
     locationID: "",
     isUser: false,
-    modal: false,
-    deleteModal: false
+    modal: false
   };
 
 handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
 toggleModal = this.toggleModal.bind(this);
-toggleDeleteModal = this.toggleDeleteModal.bind(this);
 
 handleClick() {
   this.setState({
@@ -61,11 +56,6 @@ toggleModal() {
     modal: !this.state.modal
   });
 }
-toggleDeleteModal() {
-    this.setState({
-      deleteModal: !this.state.deleteModal
-    });
-  }
 componentWillMount() {
   if (!this.props.location.state) {
     return window.location.href = '/'
@@ -146,17 +136,6 @@ componentDidMount() {
               </div>
             }
           </div>
-
-          {/*Delete World button*/}
-          {this.state.isUser &&
-            <div>
-              <Button className="btn btn-outline-danger btn-sm col-3 offset-6" onClick={this.toggleDeleteModal}>Remove World</Button>
-              <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-                <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World</ModalHeader>
-                <WorldDelete worldID={worldID} />
-              </Modal>
-            </div>
-          }
         </div>
     )
   }
