@@ -27,9 +27,6 @@ export default class AddNewElement extends Component {
   handleDescription(e) {
     this.setState({description: e.target.value});
   }
-  handleSubmit(e) {
-    e.preventDefault();
-  }
   handleMutationSubmit(postMutation) {
     return postMutation()
       .then(() => {
@@ -73,7 +70,7 @@ export default class AddNewElement extends Component {
         {postMutation =>
           <div>
             <ModalBody>
-              <Form onSubmit={this.handleSubmit}>
+              <Form>
                 <FormGroup>
                   <Label for="name">{category} Name (required)</Label>
                   <Input
