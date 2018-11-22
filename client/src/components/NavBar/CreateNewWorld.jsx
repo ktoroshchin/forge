@@ -51,7 +51,7 @@ class CreateNewWorld extends Component {
         this.setRedirect();
       })
       .catch((error) => {
-        (alert("Please input required fields"))
+        alert("Please fill in required fields")
       })
   }
   render() {

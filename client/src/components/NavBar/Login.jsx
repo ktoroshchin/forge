@@ -46,7 +46,7 @@ class Login extends Component {
         this.setUser(data);
       })
       .catch((error) => {
-        alert("Please input required fields")
+        alert("Please fill in required fields")
       })
   }
   handleKeypressEnter(event, postMutation) {
