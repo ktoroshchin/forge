@@ -50,9 +50,9 @@ class CreateNewWorld extends Component {
             <h2>Create A New World</h2>
             <Form>
               <FormGroup>
-                <Label>Name</Label>
+                <Label>World Name (required)</Label>
                 <Input onChange={this.handleNameChange} type="text" name="name" />
-                <Label>Description</Label>
+                <Label>World Description (optional)</Label>
                 <Input onChange={this.handleDescriptionChange} type="textarea" name="description" />
                 <br />
                 <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
@@ -64,9 +64,9 @@ class CreateNewWorld extends Component {
                 {this.renderRedirect()}
               </FormGroup>
             </Form>
-          </div>  
+          </div>
         </div>
-        )
+      )
     } else {
       return <Redirect to='/login' />
     }
