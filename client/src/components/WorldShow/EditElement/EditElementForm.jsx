@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import ElementDelete from './ElementDelete'
 
 export default class EditEditForm extends Component {
   constructor(props) {
@@ -77,6 +78,11 @@ export default class EditEditForm extends Component {
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove {category}</Button>
+          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
+            <WorldDelete worldID={id} />
+          </Modal>
         </ModalBody>
         <ModalFooter>
         {category === "Location" &&
