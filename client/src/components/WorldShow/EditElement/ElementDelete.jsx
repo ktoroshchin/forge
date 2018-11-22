@@ -2,9 +2,8 @@ import React, {Component} from "react";
 import { Button, ModalFooter, ModalBody, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
 
-export default class WorldDelete extends Component {
+export default class ElementDelete extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,23 +27,22 @@ export default class WorldDelete extends Component {
   renderRedirect() {
     if (this.state.redirect) {
       window.location.reload();
-      return <Redirect to='/my-worlds' />
     }
   }
   render() {
-    const {worldID} = this.props;
+    const {elementID, name} = this.props;
     const POST_MUTATION = gql`
       mutation ($id: ID!){
-        removeWorldById(id: $id)
+        destroyMarker(id: $id)
       }`
     return (
       <div>
         <ModalBody>
-          Are you sure you want to remove your world?
+          Are you sure you want to delete "{name}"?
           <FormGroup check>
             <Label check>
               <Input type="checkbox" onChange={this.confirmCheck}/>
-              Yes I want to remove my world!
+              Yes I want to delete "{name}"!
             </Label>
           </FormGroup>
         </ModalBody>
@@ -56,7 +54,7 @@ export default class WorldDelete extends Component {
           <Mutation
             mutation={POST_MUTATION}
             variables={{
-              "id": worldID }}>
+              "id": elementID }}>
             {(postMutation, data, error) =>
             <Button className="btn btn-danger col-md-6" onClick={(event)=>{postMutation()
               .then(()=>{this.setRedirect()})

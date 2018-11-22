@@ -1,7 +1,8 @@
 import React, {Component} from "react";
-import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import ElementDelete from './ElementDelete'
 
 export default class EditEditForm extends Component {
   constructor(props) {
@@ -12,12 +13,14 @@ export default class EditEditForm extends Component {
       population: this.props.population,
       government: this.props.government,
       description: this.props.description,
+      deleteModal: false
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handlePopulationChange = this.handlePopulationChange.bind(this);
     this.handleGovernmentChange = this.handleGovernmentChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleRefresh = this.handleRefresh.bind(this)
+    this.handleRefresh = this.handleRefresh.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
     this.setState({name: e.target.value});
@@ -33,6 +36,11 @@ export default class EditEditForm extends Component {
   }
   handleRefresh() {
     window.location.reload()
+  }
+  toggleDeleteModal() {
+    this.setState({
+      deleteModal: !this.state.deleteModal
+    });
   }
   render() {
     const { name, category, population, government, description } = this.state;
@@ -77,6 +85,11 @@ export default class EditEditForm extends Component {
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Delete {name}</Button>
+          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your {category}</ModalHeader>
+            <ElementDelete elementID={id} name={name} />
+          </Modal>
         </ModalBody>
         <ModalFooter>
         {category === "Location" &&
