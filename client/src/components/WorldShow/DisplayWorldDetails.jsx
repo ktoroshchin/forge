@@ -5,7 +5,6 @@ import TableofContents from "./TableofContents"
 import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
-
 import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
@@ -23,12 +22,10 @@ export default class DisplayWorldDetails extends Component {
     isUser: false,
     modal: false
   };
-
 handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
 toggleModal = this.toggleModal.bind(this);
-
 handleClick() {
   this.setState({
     clicked: true,
@@ -76,7 +73,6 @@ componentDidMount() {
             description
           }
         }`;
-
     return(
         <div className="container mt-3">
         <Query query={findWorld}>
@@ -127,7 +123,6 @@ componentDidMount() {
                   </Modal>
                   </div>
                 }
-
                 <ShowMap worldID={worldID} isUser={this.state.isUser} />
               </div>
             }
