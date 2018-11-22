@@ -68,7 +68,7 @@ export default class ChooseElement extends Component {
                 } else {
                   return null;
                 }
-                }));
+              }));
               }}
             </Query>
           </Input>

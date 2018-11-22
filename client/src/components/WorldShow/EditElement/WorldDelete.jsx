@@ -49,7 +49,7 @@ export default class WorldDelete extends Component {
           <FormGroup check>
             <Label check>
               <Input type="checkbox" onChange={this.confirmCheck}/>
-              Yes I want to delete my world!
+              Yes I want to remove my world!
             </Label>
           </FormGroup>
         </ModalBody>
@@ -65,10 +65,7 @@ export default class WorldDelete extends Component {
             {(postMutation, data, error) =>
             <Button className="btn btn-danger col-md-6" onClick={(event)=>{postMutation()
               .then(()=>{this.setRedirect()})
-              .catch((error) => {
-                alert('Error')
-              }
-            )}}>
+              .catch((error) => {(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
             Remove</Button>}
           </Mutation>
         }

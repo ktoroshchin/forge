@@ -62,7 +62,7 @@ class EditProfileForm extends Component {
                 {(postMutation) =>
                   <Button color="success" onClick={(event)=>{postMutation(event)
                     .then(()=>{this.setRedirect();})
-                    .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+                    .catch((error) => {(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>Submit</Button>}
               </Mutation>
               {this.renderRedirect()}
             </FormGroup>

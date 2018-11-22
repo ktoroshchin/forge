@@ -16,4 +16,5 @@ module.exports = Mutation = `type Mutation {
   placeMarkerOnMap(id: ID!, map_id: ID!, latitude: Float!, longitude: Float!): Marker!
   removeMarkerById(id: ID!): Boolean
   removeAllMarkersOnMap(map_id: ID!): Boolean
+  destroyMarker(id: ID!): Boolean
 }`;
