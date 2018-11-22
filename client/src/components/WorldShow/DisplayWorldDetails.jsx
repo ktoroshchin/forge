@@ -5,6 +5,8 @@ import TableofContents from "./TableofContents"
 import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
+import Sidebar from "react-sidebar";
+
 
 import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
@@ -21,13 +23,21 @@ export default class DisplayWorldDetails extends Component {
     value: "",
     locationID: "",
     isUser: false,
-    modal: false
-  };
+    modal: false,
+    sidebarOpen: true
+  }
+
 
 handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
 toggleModal = this.toggleModal.bind(this);
+onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+
+
+onSetSidebarOpen(open) {
+   this.setState({ sidebarOpen: open });
+ }
 
 handleClick() {
   this.setState({
@@ -35,6 +45,7 @@ handleClick() {
     value: ""
   });
 }
+
 setValue(value) {
   this.setState({
     value: value,
@@ -85,15 +96,25 @@ componentDidMount() {
             if (error) return <div>Error</div>
             return (
               <div>
-                <i class="fas fa-caret-right"></i>
                 <h1 className="world-name col" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
               </div>
             )
           }}
         </Query>
           <div className="row mt-3">
+            <i onClick={() => this.onSetSidebarOpen(true)} className="fas fa-angle-right"></i>
+            <Sidebar
+              sidebar={<TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>}
+              open={this.state.sidebarOpen}
+              onSetOpen={this.onSetSidebarOpen}
+              styles={{ sidebar: { background: "white" } }}
+            >
+          </Sidebar>
             <div className="col-md-4 col-lg-3 col-xl-2">
-              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
+
+
+
+
             </div>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-md-8 col-lg-9 col-xl-10">
