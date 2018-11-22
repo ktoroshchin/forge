@@ -1,9 +1,6 @@
 import React from 'react';
 import { Button,ListGroup } from 'reactstrap';
-import CityList from './CityList'
-import TownList from './TownList'
-import LocationList from './LocationList'
-
+import ElementList from './ElementList'
 
 function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
   return (
@@ -24,7 +21,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
             <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div className="card-body nopadding">
                 <ListGroup className="listItemContainer">
-                  <CityList worldID={worldID} setValue={setValue} setLocationID={setLocationID} />
+                  <ElementList worldID={worldID} category="City" setValue={setValue} setLocationID={setLocationID} />
                 </ListGroup>
               </div>
             </div>
@@ -40,7 +37,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div className="card-body nopadding">
                 <ListGroup className="listItemContainer">
-                  <TownList worldID={worldID} setValue={setValue} setLocationID={setLocationID} />
+                  <ElementList worldID={worldID} category="Town" setValue={setValue} setLocationID={setLocationID} />
                 </ListGroup>
               </div>
             </div>
@@ -56,7 +53,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
             <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div className="card-body nopadding">
                 <ListGroup className="listItemContainer">
-                  <LocationList worldID={worldID} setValue={setValue} setLocationID={setLocationID} />
+                  <ElementList worldID={worldID} category="Location" setValue={setValue} setLocationID={setLocationID} />
                 </ListGroup>
               </div>
             </div>

@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import { Button, Modal, ModalHeader } from 'reactstrap';
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
-import City from './City'
-import Town from './Town'
-import Location from './Location'
+import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
 
@@ -129,9 +127,7 @@ componentDidMount() {
             }
             {(this.state.value !== '' || this.state.clicked) &&
               <div className="col-md-8 col-lg-9 col-xl-10">
-                {this.state.value === 'City' && <City cityID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.value === 'Town' && <Town  townID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.value === 'Location' && <Location locationID={this.state.locationID} isUser={this.state.isUser} />}
+                {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
               </div>
             }
