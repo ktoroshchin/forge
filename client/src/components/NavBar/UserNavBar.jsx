@@ -16,6 +16,7 @@ function UserNavBar({username, deleteUser}) {
           <DropdownItem tag={Link} to="/my-worlds">
             Show My Worlds
           </DropdownItem>
+          <DropdownItem divider />
           <DropdownItem tag={Link} to="/login" onClick={deleteUser}>
             Logout
           </DropdownItem>

@@ -4,13 +4,13 @@ import NavBarDropDown from "./NavBarDropDown"
 
 class NavbarMain extends Component {
   state = {
-    dropdownOpen: false,
+    isOpen: false,
   }
   toggle = this.toggle.bind(this);
   toggle() {
-    this.setState(prevState => ({
-      dropdownOpen: !prevState.dropdownOpen
-    }));
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
   }
 
   render() {
