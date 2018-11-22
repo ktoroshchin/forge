@@ -3,8 +3,6 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { ListGroupItem } from 'reactstrap';
 
-
-
 function CityList({worldID, setValue, setLocationID}) {
   const findCities =
   gql`
@@ -14,7 +12,6 @@ function CityList({worldID, setValue, setLocationID}) {
       name
     }
   }`;
-
   return (
     <div>
       <Query query={findCities}>
