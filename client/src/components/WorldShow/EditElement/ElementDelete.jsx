@@ -48,7 +48,7 @@ export default class ElementDelete extends Component {
         </ModalBody>
         <ModalFooter>
         {!this.state.confirm &&
-          <Button className="btn btn-danger col-md-6" disabled>Remove</Button>
+          <Button className="btn btn-danger col-md-6" disabled>Delete</Button>
         }
         {this.state.confirm &&
           <Mutation

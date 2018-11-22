@@ -16,13 +16,20 @@ class CreateNewWorld extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.setRedirect = this.setRedirect.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleNameChange(e) {
-    this.setState({name: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({name: null});
+    } else {
+      this.setState({name: e.target.value.trim()});
+    }
   }
   handleDescriptionChange(e) {
-    this.setState({description: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({description: null});
+    } else {
+      this.setState({description: e.target.value.trim()});
+    }
   }
   setRedirect() {
     this.setState({
@@ -34,6 +41,18 @@ class CreateNewWorld extends Component {
       window.location.reload();
       return <Redirect to='/my-worlds' />
     }
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then((data)=>{
+        this.setRedirect();
+      })
+      .catch((error) => {
+        alert("Please fill in required fields")
+      })
   }
   render() {
     if (this.props.getUserID()) {
@@ -48,22 +67,32 @@ class CreateNewWorld extends Component {
         <div>
           <div className="container">
             <h2>Create A New World</h2>
-            <Form>
-              <FormGroup>
-                <Label>World Name (required)</Label>
-                <Input onChange={this.handleNameChange} type="text" name="name" />
-                <Label>World Description (optional)</Label>
-                <Input onChange={this.handleDescriptionChange} type="textarea" name="description" />
-                <br />
-                <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
-                  {postMutation => <Button color="success" onClick={(event)=>{postMutation(event)
-                    .then(()=>{this.setRedirect()})
-                    .catch((error) => {alert("Please input required fields")})
-                  }}>Submit</Button>}
-                </Mutation>
-                {this.renderRedirect()}
-              </FormGroup>
-            </Form>
+            <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
+              {(postMutation) =>
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup>
+                  <Label>World Name (required)</Label>
+                  <Input
+                    onChange={this.handleNameChange}
+                    type="text"
+                    name="name"
+                  />
+                  <Label>World Description (optional)</Label>
+                  <Input
+                    onChange={this.handleDescriptionChange}
+                    type="textarea"
+                    name="description"
+                  />
+                </FormGroup>
+                <Button
+                  color="success"
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                  Submit
+                </Button>
+              </Form>
+            }
+            </Mutation>
+            {this.renderRedirect()}
           </div>
         </div>
       )

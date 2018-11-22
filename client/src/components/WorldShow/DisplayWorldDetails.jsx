@@ -87,7 +87,6 @@ componentDidMount() {
             description
           }
         }`;
-
     return(
         <div className="container mt-3">
         <Query query={findWorld}>
@@ -122,6 +121,12 @@ componentDidMount() {
                   {({ loading, error, data }) => {
                     if (loading) return <div>Fetching</div>
                     if (error) return <div>Error</div>
+                    if (!data.findWorlds[0].description) return (
+                      <div>
+                        <h3>Description</h3>
+                        <h6>No description</h6>
+                      </div>
+                    )
                     return (
                       <div>
                         <h3>Description</h3>
@@ -143,7 +148,6 @@ componentDidMount() {
                   </Modal>
                   </div>
                 }
-
                 <ShowMap worldID={worldID} isUser={this.state.isUser} />
               </div>
             }

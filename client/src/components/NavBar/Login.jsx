@@ -15,13 +15,20 @@ class Login extends Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.setUser = this.setUser.bind(this);
-    this.renderRedirect = this.renderRedirect.bind(this);
   }
   handleUsernameChange(e) {
-    this.setState({username: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({username: null});
+    } else {
+      this.setState({username: e.target.value.trim()});
+    }
   }
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({password: null});
+    } else {
+      this.setState({password: e.target.value.trim()});
+    }
   }
   setUser(data) {
     this.props.setUsername(this.state.username);
@@ -33,10 +40,23 @@ class Login extends Component {
       return <Redirect to='/' />
     }
   }
-   render() {
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then((data)=>{
+        this.setUser(data);
+      })
+      .catch((error) => {
+        alert("Please fill in required fields")
+      })
+  }
+  handleKeypressEnter(event, postMutation) {
+    if (event.key === "Enter") {
+      return this.handleMutationSubmit(postMutation)
+    }
+  }
+  render() {
     const { username, password } = this.state;
-    const {getUserID} = this.props;
-
+    const { getUserID } = this.props;
     const POST_MUTATION = gql`
       mutation ($username: String!, $password: String!){
         login(username: $username, password: $password) {
@@ -45,27 +65,36 @@ class Login extends Component {
       }`;
     if (!getUserID()) {
       return (
-        <div>
-          <div className="container">
-            <h2>Login</h2>
-            <Form>
-              <FormGroup>
-                <Label>Username</Label>
-                <Input onChange={this.handleUsernameChange} type="text" name="username" />
-                <Label>Password</Label>
-                <Input onChange={this.handlePasswordChange} type="password" name="password" />
-                <br />
-                <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
-                  {(postMutation, data, error) =>
-                    <Button color="success" onClick={(event)=>{postMutation(event)
-                      .then((data)=>{this.setUser(data);})
-                      .catch((error) => {(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
-                    Submit</Button>}
-                </Mutation>
-                {this.renderRedirect()}
-              </FormGroup>
-            </Form>
-          </div>
+        <div className="container">
+          <h2>Login</h2>
+          <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
+            {postMutation =>
+              <Form>
+                <FormGroup>
+                  <Label>Username</Label>
+                  <Input
+                    onChange={this.handleUsernameChange}
+                    type="text"
+                    name="username"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                  <Label>Password</Label>
+                  <Input
+                    onChange={this.handlePasswordChange}
+                    type="password"
+                    name="password"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                </FormGroup>
+                <Button
+                  color="success"
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                  Submit
+                </Button>
+              </Form>
+            }
+          </Mutation>
+          {this.renderRedirect()}
         </div>
       )
     } else {

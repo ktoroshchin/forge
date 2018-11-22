@@ -23,16 +23,32 @@ export default class EditEditForm extends Component {
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
-    this.setState({name: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({name: null});
+    } else {
+      this.setState({name: e.target.value.trim()});
+    }
   }
   handlePopulationChange(e) {
-    this.setState({population: Number(e.target.value)});
+    if (e.target.value.trim() === "" || isNaN(Number(e.target.value))) {
+      this.setState({population: null});
+    } else {
+      this.setState({population: Number(e.target.value.trim())});
+    }
   }
   handleGovernmentChange(e) {
-    this.setState({government: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({government: null});
+    } else {
+      this.setState({government: e.target.value.trim()});
+    }
   }
   handleDescriptionChange(e) {
-    this.setState({description: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({description: null});
+    } else {
+      this.setState({description: e.target.value.trim()});
+    }
   }
   handleRefresh() {
     window.location.reload()
@@ -85,9 +101,9 @@ export default class EditEditForm extends Component {
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
-          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Delete {name}</Button>
+          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Delete {category}</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your {category}</ModalHeader>
+            <ModalHeader toggle={this.toggleDeleteModal}>Delete Your {category}</ModalHeader>
             <ElementDelete elementID={id} name={name} />
           </Modal>
         </ModalBody>
