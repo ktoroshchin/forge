@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import './styles/App.css';
-import HomePage from './components/HomePage.jsx'
 import NavbarMain from './components/NavBar/NavbarMain.jsx'
+import HomePage from './components/HomePage.jsx'
 import Login from './components/NavBar/Login'
 import Register from './components/NavBar/Register'
 import EditProfile from './components/NavBar/EditProfile'
@@ -37,8 +37,8 @@ const App = () => {
     <ApolloProvider client={client}>
       <Router>
         <div>
-          <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
           <NavbarMain cookies={cookies} deleteUser={deleteUser} />
+          <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
           <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
           <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
           <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
