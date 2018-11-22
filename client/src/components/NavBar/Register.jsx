@@ -80,8 +80,10 @@ class Register extends Component {
                 <Input onChange={this.handleLastNameChange} type="text" name="last_name" />
                 <br />
                 <Mutation mutation={POST_MUTATION} variables={{ first_name, last_name, username, email, password }}>
-                  {(postMutation, data) =>
-                    <Button color="success" onClick={(event)=>{postMutation(event).then((data)=>{this.setUser(data);})}}>
+                  {(postMutation, data, error) =>
+                    <Button color="success" onClick={(event)=>{postMutation(event)
+                      .then((data)=>{this.setUser(data);})
+                      .catch((error)=>{(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
                     Submit</Button>}
                 </Mutation>
                 {this.renderRedirect()}
