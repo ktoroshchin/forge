@@ -55,7 +55,7 @@ class Register extends Component {
     }
   }
   render() {
-    const { first_name, last_name, username, email, password } = this.state;
+    const { username, email, password } = this.state;
     const {getUserID} = this.props;
     const POST_MUTATION = gql`
       mutation ($username: String!, $email: String!, $password: String!){
