@@ -18,10 +18,18 @@ class CreateNewWorld extends Component {
     this.setRedirect = this.setRedirect.bind(this);
   }
   handleNameChange(e) {
-    this.setState({name: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({name: null});
+    } else {
+      this.setState({name: e.target.value.trim()});
+    }
   }
   handleDescriptionChange(e) {
-    this.setState({description: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({description: null});
+    } else {
+      this.setState({description: e.target.value.trim()});
+    }
   }
   setRedirect() {
     this.setState({
