@@ -19,22 +19,30 @@ class Register extends Component {
     this.setUser = this.setUser.bind(this);
   }
   handleUsernameChange(e) {
-    this.setState({username: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({username: null});
+    } else {
+      this.setState({username: e.target.value.trim()});
+    }
   }
   handleEmailChange(e) {
-    this.setState({email: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({email: null});
+    } else {
+      this.setState({email: e.target.value.trim()});
+    }
   }
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({password: null});
+    } else {
+      this.setState({password: e.target.value.trim()});
+    }
   }
   setUser(data) {
-    if (this.state.username && this.state.email && this.state.password) {
-      this.props.setUsername(this.state.username);
-      this.props.setUserID(data.data.register.id)
-      this.setState({redirect: true})
-    } else {
-      alert("Please fill in required fields")
-    }
+    this.props.setUsername(this.state.username);
+    this.props.setUserID(data.data.register.id);
+    this.setState({redirect: true});
   }
   renderRedirect() {
     if (this.state.redirect) {
@@ -47,6 +55,9 @@ class Register extends Component {
         this.setUser(data);
       })
       .catch((error) => {
+        if (!this.state.username || !this.state.email || !this.state.password) {
+          alert("Please fill in required fields");
+        }
         error.graphQLErrors.map(({ message }) => (alert(message)))})
   }
   handleKeypressEnter(event, postMutation) {
