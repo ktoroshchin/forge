@@ -12,25 +12,22 @@ class CreateNewCity extends Component {
     government: null,
     description: null
   }
-
-handleCityName = this.handleCityName.bind(this);
-handlePopulation = this.handlePopulation.bind(this);
-handleGovernment = this.handleGovernment.bind(this);
-handleDescription = this.handleDescription.bind(this);
-
-handleCityName(e) {
-  this.setState({name: e.target.value});
-}
-handlePopulation(e) {
-  this.setState({population: Number(e.target.value)});
-}
-handleGovernment(e) {
-  this.setState({government: e.target.value});
-}
-handleDescription(e) {
-  this.setState({description: e.target.value});
-}
-
+  handleCityName = this.handleCityName.bind(this);
+  handlePopulation = this.handlePopulation.bind(this);
+  handleGovernment = this.handleGovernment.bind(this);
+  handleDescription = this.handleDescription.bind(this);
+  handleCityName(e) {
+    this.setState({name: e.target.value});
+  }
+  handlePopulation(e) {
+    this.setState({population: Number(e.target.value)});
+  }
+  handleGovernment(e) {
+    this.setState({government: e.target.value});
+  }
+  handleDescription(e) {
+    this.setState({description: e.target.value});
+  }
   render(){
     const { category, world_id, name, population, government, description } = this.state
     const POST_MUTATION = gql`
@@ -44,20 +41,20 @@ handleDescription(e) {
       <ModalBody>
         <Form>
           <FormGroup>
-            <Label for="city">City</Label>
-            <Input onChange={this.handleCityName} type="text" name="name" placeholder="city"/>
+            <Label for="city">City Name (required)</Label>
+            <Input onChange={this.handleCityName} type="text" name="name" />
           </FormGroup>
           <FormGroup>
-            <Label for="population">Population</Label>
-            <Input onChange={this.handlePopulation} type="text" name="population" placeholder="population" />
+            <Label for="population">Population (optional)</Label>
+            <Input onChange={this.handlePopulation} type="text" name="population" />
           </FormGroup>
           <FormGroup>
-            <Label for="government">Government</Label>
-            <Input onChange={this.handleGovernment} type="text" name="government" placeholder="government" />
+            <Label for="government">Government (optional)</Label>
+            <Input onChange={this.handleGovernment} type="text" name="government" />
           </FormGroup>
           <FormGroup>
-            <Label for="description">Description</Label>
-            <Input onChange={this.handleDescription} type="textarea" name="description" placeholder="description" />
+            <Label for="description">Description (optional)</Label>
+            <Input onChange={this.handleDescription} type="textarea" name="description" />
           </FormGroup>
         </Form>
       </ModalBody>
