@@ -7,7 +7,6 @@ import NavbarMain from './components/NavBar/NavbarMain.jsx'
 import HomePage from './components/HomePage.jsx'
 import Login from './components/NavBar/Login'
 import Register from './components/NavBar/Register'
-import EditProfile from './components/NavBar/EditProfile'
 import CreateNewWorld from './components/NavBar/CreateNewWorld'
 import MyWorldList from './components/NavBar/MyWorldList'
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
@@ -41,7 +40,6 @@ const App = () => {
           <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
           <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
           <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
-          <Route path="/edit-profile" render={() => <EditProfile getUserID={getUserID} />} />
           <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
           <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
           <Route path="/world-show" component={DisplayWorldDetails} />
