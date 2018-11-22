@@ -23,16 +23,32 @@ export default class EditEditForm extends Component {
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
-    this.setState({name: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({name: null});
+    } else {
+      this.setState({name: e.target.value.trim()});
+    }
   }
   handlePopulationChange(e) {
-    this.setState({population: Number(e.target.value)});
+    if (e.target.value.trim() === "" || isNaN(Number(e.target.value))) {
+      this.setState({population: null});
+    } else {
+      this.setState({population: Number(e.target.value.trim())});
+    }
   }
   handleGovernmentChange(e) {
-    this.setState({government: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({government: null});
+    } else {
+      this.setState({government: e.target.value.trim()});
+    }
   }
   handleDescriptionChange(e) {
-    this.setState({description: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({description: null});
+    } else {
+      this.setState({description: e.target.value.trim()});
+    }
   }
   handleRefresh() {
     window.location.reload()
