@@ -49,6 +49,11 @@ module.exports = {
       marker.set(input)
       return marker.save()
     },
+    destroyMarker: async (root, { id }) => {
+      let marker = await db.marker.findByPk(id)
+      if (!marker.destroy()) throw new Error('Marker not deleted')
+      return true
+    },
     removeMarkerById: async (root, { id }) => {
       let marker = await db.marker.findByPk(id);
       if (await !marker.update({
