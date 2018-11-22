@@ -77,6 +77,11 @@ export default class EditEditForm extends Component {
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove {category}</Button>
+          <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your {category}</ModalHeader>
+            <ElementDelete elementID={id} category={category} />
+          </Modal>
         </ModalBody>
         <ModalFooter>
         {category === "Location" &&
