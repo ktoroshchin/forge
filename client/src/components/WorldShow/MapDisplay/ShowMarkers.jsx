@@ -3,10 +3,7 @@ import { Marker, Popup } from 'react-leaflet';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Button, ListGroup, ListGroupItem, Modal, ModalHeader } from 'reactstrap';
-import City from "../City";
-import Town from "../Town";
-import Location from "../Location";
-
+import ElementInfo from "../ElementInfo";
 
 export default class ShowMarkers extends Component {
   constructor(props) {
@@ -78,15 +75,7 @@ export default class ShowMarkers extends Component {
                     <Button className="btn btn-info btn-sm col-4" onClick={this.toggleModal}>More Details</Button>
                     <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                       <ModalHeader toggle={this.toggleModal}>Details of {name}</ModalHeader>
-                      {category === "City" &&
-                        <City cityID={id} />
-                      }
-                      {category === "Town" &&
-                        <Town townID={id} />
-                      }
-                      {category === "Location" &&
-                        <Location locationID={id} />
-                      }
+                        <ElementInfo markerID={id} />
                     </Modal>
                     {isUser === true &&
                       <Mutation
