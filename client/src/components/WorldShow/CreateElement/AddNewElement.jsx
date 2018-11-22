@@ -27,6 +27,18 @@ export default class AddNewElement extends Component {
   handleDescription(e) {
     this.setState({description: e.target.value});
   }
+  handleSubmit(e) {
+    e.preventDefault();
+  }
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert("Please input required fields")
+      })
+  }
   render() {
     const { world_id, name, population, government, description } = this.state
     const { category } = this.props
@@ -49,39 +61,61 @@ export default class AddNewElement extends Component {
         }
       }`
     return (
-      <div>
-        <ModalBody>
-          <Form>
-            <FormGroup>
-              <Label for="name">{category} Name (required)</Label>
-              <Input onChange={this.handleCityName} type="text" name="name" />
-              {category !== "Location" &&
-              <div>
-                <Label for="population">Population (optional)</Label>
-                <Input onChange={this.handlePopulation} type="text" name="population" />
-                <Label for="government">Government (optional)</Label>
-                <Input onChange={this.handleGovernment} type="text" name="government" />
-              </div>
-              }
-              <Label for="description">Description (optional)</Label>
-              <Input onChange={this.handleDescription} type="textarea" name="description" />
-            </FormGroup>
-          </Form>
-        </ModalBody>
-        <ModalFooter>
-          <Mutation
-            mutation={POST_MUTATION}
-            variables={{
-              category,
-              world_id,
-              name,
-              population,
-              government,
-              description }}>
-            {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
-          </Mutation>
-        </ModalFooter>
-      </div>
+      <Mutation
+        mutation={POST_MUTATION}
+        variables={{
+          category,
+          world_id,
+          name,
+          population,
+          government,
+          description }}>
+        {postMutation =>
+          <div>
+            <ModalBody>
+              <Form onSubmit={this.handleSubmit}>
+                <FormGroup>
+                  <Label for="name">{category} Name (required)</Label>
+                  <Input
+                    onChange={this.handleCityName}
+                    type="text"
+                    name="name"
+                  />
+                  {category !== "Location" &&
+                    <div>
+                      <Label for="population">Population (optional)</Label>
+                      <Input
+                        onChange={this.handlePopulation}
+                        type="text"
+                        name="population"
+                      />
+                      <Label for="government">Government (optional)</Label>
+                      <Input
+                        onChange={this.handleGovernment}
+                        type="text"
+                        name="government"
+                      />
+                    </div>
+                  }
+                  <Label for="description">Description (optional)</Label>
+                  <Input
+                    onChange={this.handleDescription}
+                    type="textarea"
+                    name="description"
+                  />
+                </FormGroup>
+              </Form>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                color="success"
+                onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                Submit
+              </Button>
+            </ModalFooter>
+          </div>
+        }
+      </Mutation>
     )
   }
 }
