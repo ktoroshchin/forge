@@ -8,6 +8,8 @@ import NewMarkerForm from './MapEdit/NewMarkerForm'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ShowMarkers from './ShowMarkers'
+import WorldMapDelete from './WorldMapDelete'
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -23,14 +25,22 @@ export default class EditMap extends Component {
     this.state = {
       activeMarker: null,
       modal: false,
+      deleteModal: false,
     };
     this.refMarker = createRef()
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
 
   toggleModal() {
     this.setState({
       modal: !this.state.modal
+    });
+  }
+
+  toggleDeleteModal() {
+    this.setState({
+      deleteModal: !this.state.deleteModal
     });
   }
 
@@ -80,7 +90,9 @@ export default class EditMap extends Component {
   }
 
   render () {
-    const mapID = this.props.location.state.ID
+    const mapID = this.props.location.state.ID;
+    const {worldID, creatorID} = this.props.location.state;
+
     const findMap =
       gql`
         query {
@@ -93,15 +105,17 @@ export default class EditMap extends Component {
           }
         }`;
     return (
-      <div>
-        <Button onClick={() => this.backToView()}>Back to View World</Button>
+      <div className="editMap container mt-3">
         <Query query={findMap}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
             return (
               data.findMaps.map(({ id, world_id, url, height, width }) => (
-                <div key={id}>
+                <div
+                  key={id}
+                  className="h-100"
+                  >
                   <Map
                     id="map"
                     crs={L.CRS.Simple}
@@ -140,11 +154,40 @@ export default class EditMap extends Component {
                     }
                     <ShowMarkers mapID={id} isUser={true} />
                   </Map>
-                  {this.state.activeMarker === null &&
-                    <button onClick={() => {this.addMarker(height, width)}}>
-                      New Marker
-                    </button>
-                  }
+                  <div className="d-flex justify-content-between">
+                    <Button
+                      className="btn btn-outline-info col-sm-12 col-md-4 col-lg-3"
+                      onClick={() => this.backToView()}
+                    >
+                      Back to World View
+                    </Button>
+                    {this.state.activeMarker === null &&
+                      <Button
+                        className="btn btn-outline-success col-sm-12 col-md-4 col-lg-3"
+                        onClick={() => {this.addMarker(height, width)}}
+                      >
+                        New Marker
+                      </Button>
+                    }
+                    {this.state.activeMarker !== null &&
+                      <Button
+                        className="btn btn-outline-success col-sm-12 col-md-4 col-lg-3"
+                        disabled
+                      >
+                        New Marker
+                      </Button>
+                    }
+                    <Button
+                      className="btn btn-outline-danger col-sm-12 col-md-4 col-lg-3"
+                      onClick={this.toggleDeleteModal}
+                    >
+                      Delete Map
+                    </Button>
+                    <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
+                      <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
+                      <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={id} />
+                    </Modal>
+                  </div>
                 </div>
             )));
           }}

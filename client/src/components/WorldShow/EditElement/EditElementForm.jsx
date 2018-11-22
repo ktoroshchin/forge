@@ -58,6 +58,17 @@ export default class EditEditForm extends Component {
       deleteModal: !this.state.deleteModal
     });
   }
+
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then(()=>{
+        this.handleRefresh();
+      })
+      .catch((error) => {
+        alert("Please input required fields")
+      })
+  }
+
   render() {
     const { name, category, population, government, description } = this.state;
     const {id} = this.props;
@@ -101,13 +112,13 @@ export default class EditEditForm extends Component {
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+        </ModalBody>
+        <ModalFooter className="justify-content-between">
           <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Delete {category}</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
             <ModalHeader toggle={this.toggleDeleteModal}>Delete Your {category}</ModalHeader>
             <ElementDelete elementID={id} name={name} />
           </Modal>
-        </ModalBody>
-        <ModalFooter>
         {category === "Location" &&
         <Mutation
           mutation={POST_MUTATION}
@@ -118,9 +129,12 @@ export default class EditEditForm extends Component {
             "government": null,
             description }}>
           {(postMutation) =>
-            <Button color="success" onClick={(event)=>{postMutation(event)
-              .then(()=>{this.handleRefresh();})
-              .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+            <Button
+              className="btn btn-outline-success btn-sm col-3"
+              onClick={() => {this.handleMutationSubmit(postMutation)}}>
+              Submit
+            </Button>
+          }
         </Mutation>
         }
         {category !== "Location" &&
@@ -133,9 +147,12 @@ export default class EditEditForm extends Component {
             government,
             description }}>
           {(postMutation) =>
-            <Button color="success" onClick={(event)=>{postMutation(event)
-              .then(()=>{this.handleRefresh();})
-              .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
+            <Button
+              className="btn btn-outline-success btn-sm col-3"
+              onClick={() => {this.handleMutationSubmit(postMutation)}}>
+              Submit
+            </Button>
+          }
         </Mutation>
         }
         </ModalFooter>

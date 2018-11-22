@@ -48,7 +48,7 @@ class WorldMapSubmit extends Component {
 
 
   render() {
-    const {worldID} = this.props;
+    const {worldID, refresh} = this.props;
     const imageURL = this.state.value;
     const width = this.state.imgSize.width;
     const height = this.state.imgSize.height;
@@ -103,7 +103,19 @@ class WorldMapSubmit extends Component {
                 width,
                 height,
                 "world_map": worldMap }}>
-                {postMutation => <Button color="success" onClick={(event) => {postMutation(); this.handleConfirm(event)}}>Confirm</Button>}
+                {postMutation =>
+                  <Button
+                    color="success"
+                    onClick={
+                      () => {
+                        postMutation()
+                        .then(() => {
+                          this.handleConfirm()
+                        })
+                        .catch((error) => {
+                          alert('Issue with URL')
+                        })
+                        ;}}>Confirm</Button>}
             </Mutation>
             </div>
           }

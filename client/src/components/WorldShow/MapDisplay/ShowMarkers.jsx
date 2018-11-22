@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Marker, Popup } from 'react-leaflet';
 import { Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Button, ListGroup, ListGroupItem, Modal, ModalHeader } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import ElementInfo from "../ElementInfo";
 
 export default class ShowMarkers extends Component {
@@ -75,7 +75,9 @@ export default class ShowMarkers extends Component {
                     <Button className="btn btn-info btn-sm col-4" onClick={this.toggleModal}>More Details</Button>
                     <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                       <ModalHeader toggle={this.toggleModal}>Details of {name}</ModalHeader>
-                        <ElementInfo markerID={id} />
+                      <ModalBody>
+                        <ElementInfo markerID={id} isUser={isUser} />
+                      </ModalBody>
                     </Modal>
                     {isUser === true &&
                       <Mutation

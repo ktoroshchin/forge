@@ -9,7 +9,6 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import ShowMarkers from './ShowMarkers'
 import WorldMapSubmit from './WorldMapSubmit'
-import WorldMapDelete from './WorldMapDelete'
 
 
 delete L.Icon.Default.prototype._getIconUrl;
@@ -25,11 +24,8 @@ export default class ShowMap extends Component {
     super(props);
     this.state = {
       modal: false,
-      deleteModal: false,
     };
     this.toggleModal = this.toggleModal.bind(this);
-    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
-
   }
 
   toggleModal() {
@@ -38,14 +34,8 @@ export default class ShowMap extends Component {
     });
   }
 
-  toggleDeleteModal() {
-    this.setState({
-      deleteModal: !this.state.deleteModal
-    });
-  }
-
   render () {
-    const {worldID, isUser} = this.props
+    const {worldID, isUser, creatorID, refresh} = this.props
     const findMap =
       gql`
         query {
@@ -68,7 +58,7 @@ export default class ShowMap extends Component {
             } else if (data.findMaps.length === 0 && isUser === true) {
               return (
                 <div>
-                <Button color="secondary" onClick={this.toggleModal}>Add a World Map</Button>
+                <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                   <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
                   <WorldMapSubmit worldID={worldID} />
@@ -78,7 +68,7 @@ export default class ShowMap extends Component {
             } else {
               return (
                 data.findMaps.map(({ id, url, height, width, world_map }) => (
-                 <div key={id}>
+                 <div key={id} className="showMap">
                   {world_map === true &&
                     <Map
                       id="map"
@@ -93,26 +83,24 @@ export default class ShowMap extends Component {
                         url={url}
                         bounds={[[0, 0], [height, width]]}
                         />
-                      <ShowMarkers mapID={id} isUser={false} />
+                      <ShowMarkers mapID={id} isUser={isUser} />
                     </Map>
                   }
                     {isUser === true &&
                       <div className="mapEditButtons">
                         <Link
+                          className="col-3 p-0"
                           to={{
                             pathname: "/edit-map",
                             state: {
                               ID: id,
+                              worldID,
+                              creatorID,
                             }
                           }}
                         >
                           <Button className="btn btn-outline-warning btn-sm col-3">Edit Map</Button>
                         </Link>
-                        <Button className="btn btn-outline-danger btn-sm col-3 offset-6" onClick={this.toggleDeleteModal}>Remove Map</Button>
-                        <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-                          <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
-                          <WorldMapDelete mapID={id} />
-                        </Modal>
                       </div>
                     }
                   </div>
