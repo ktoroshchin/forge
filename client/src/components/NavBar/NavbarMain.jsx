@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Collapse,Navbar,NavbarToggler,NavbarBrand } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand } from 'reactstrap';
 import NavBarDropDown from "./NavBarDropDown"
 
 class NavbarMain extends Component {
