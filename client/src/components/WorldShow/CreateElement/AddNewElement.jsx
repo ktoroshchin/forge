@@ -16,16 +16,32 @@ export default class AddNewElement extends Component {
   handleGovernment = this.handleGovernment.bind(this);
   handleDescription = this.handleDescription.bind(this);
   handleCityName(e) {
-    this.setState({name: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({name: null});
+    } else {
+      this.setState({name: e.target.value.trim()});
+    }
   }
   handlePopulation(e) {
-    this.setState({population: Number(e.target.value)});
+    if (e.target.value.trim() === "" || isNaN(Number(e.target.value))) {
+      this.setState({population: null});
+    } else {
+      this.setState({population: e.target.value.trim()});
+    }
   }
   handleGovernment(e) {
-    this.setState({government: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({government: null});
+    } else {
+      this.setState({government: e.target.value.trim()});
+    }
   }
   handleDescription(e) {
-    this.setState({description: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({description: null});
+    } else {
+      this.setState({description: e.target.value.trim()});
+    }
   }
   handleMutationSubmit(postMutation) {
     return postMutation()
