@@ -65,10 +65,7 @@ export default class WorldDelete extends Component {
             {(postMutation, data, error) =>
             <Button className="btn btn-danger col-md-6" onClick={(event)=>{postMutation()
               .then(()=>{this.setRedirect()})
-              .catch((error) => {
-                alert('Error')
-              }
-            )}}>
+              .catch((error) => {(error.graphQLErrors.map(({ message }) => (alert(message))))})}}>
             Remove</Button>}
           </Mutation>
         }
