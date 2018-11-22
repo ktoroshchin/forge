@@ -30,7 +30,7 @@ export default class ElementDelete extends Component {
     }
   }
   render() {
-    const {elementID, category} = this.props;
+    const {elementID, name} = this.props;
     const POST_MUTATION = gql`
       mutation ($id: ID!){
         destroyMarker(id: $id)
@@ -38,11 +38,11 @@ export default class ElementDelete extends Component {
     return (
       <div>
         <ModalBody>
-          Are you sure you want to remove your {category}?
+          Are you sure you want to delete {name}?
           <FormGroup check>
             <Label check>
               <Input type="checkbox" onChange={this.confirmCheck}/>
-              Yes I want to remove my {category}!
+              Yes I want to delete {name}!
             </Label>
           </FormGroup>
         </ModalBody>
