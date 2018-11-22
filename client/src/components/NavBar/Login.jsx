@@ -17,10 +17,18 @@ class Login extends Component {
     this.setUser = this.setUser.bind(this);
   }
   handleUsernameChange(e) {
-    this.setState({username: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({username: null});
+    } else {
+      this.setState({username: e.target.value.trim()});
+    }
   }
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    if (e.target.value.trim() === "") {
+      this.setState({password: null});
+    } else {
+      this.setState({password: e.target.value.trim()});
+    }
   }
   setUser(data) {
     this.props.setUsername(this.state.username);
@@ -38,7 +46,8 @@ class Login extends Component {
         this.setUser(data);
       })
       .catch((error) => {
-        error.graphQLErrors.map(({ message }) => (alert(message)))})
+        alert("Please input required fields")
+      })
   }
   handleKeypressEnter(event, postMutation) {
     if (event.key === "Enter") {
