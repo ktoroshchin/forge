@@ -33,7 +33,6 @@ class Login extends Component {
       return <Redirect to='/' />
     }
   }
-
   handleMutationSubmit(postMutation) {
     return postMutation()
       .then((data)=>{
@@ -42,17 +41,14 @@ class Login extends Component {
       .catch((error) => {
         error.graphQLErrors.map(({ message }) => (alert(message)))})
   }
-
   handleKeypressEnter(event, postMutation) {
     if (event.key === "Enter") {
       return this.onSubmit(postMutation)
     }
   }
-
-   render() {
+  render() {
     const { username, password } = this.state;
     const { getUserID } = this.props;
-
     const POST_MUTATION = gql`
       mutation ($username: String!, $password: String!){
         login(username: $username, password: $password) {
