@@ -26,7 +26,7 @@ export default class AddNewElement extends Component {
     if (e.target.value.trim() === "" || isNaN(Number(e.target.value))) {
       this.setState({population: null});
     } else {
-      this.setState({population: e.target.value.trim()});
+      this.setState({population: Number(e.target.value.trim())});
     }
   }
   handleGovernment(e) {
