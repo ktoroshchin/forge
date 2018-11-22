@@ -56,38 +56,36 @@ class Login extends Component {
       }`;
     if (!getUserID()) {
       return (
-        <div>
-          <div className="container">
-            <h2>Login</h2>
-            <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
-              {postMutation =>
-                <Form>
-                  <FormGroup>
-                    <Label>Username</Label>
-                    <Input
-                      onChange={this.handleUsernameChange}
-                      type="text"
-                      name="username"
-                      onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
-                    />
-                    <Label>Password</Label>
-                    <Input
-                      onChange={this.handlePasswordChange}
-                      type="password"
-                      name="password"
-                      onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
-                    />
-                  </FormGroup>
-                  <Button
-                    color="success"
-                    onClick={() => {this.handleMutationSubmit(postMutation)}}>
-                    Submit
-                  </Button>
-                </Form>
-              }
-            </Mutation>
-            {this.renderRedirect()}
-          </div>
+        <div className="container">
+          <h2>Login</h2>
+          <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
+            {postMutation =>
+              <Form>
+                <FormGroup>
+                  <Label>Username</Label>
+                  <Input
+                    onChange={this.handleUsernameChange}
+                    type="text"
+                    name="username"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                  <Label>Password</Label>
+                  <Input
+                    onChange={this.handlePasswordChange}
+                    type="password"
+                    name="password"
+                    onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                  />
+                </FormGroup>
+                <Button
+                  color="success"
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                  Submit
+                </Button>
+              </Form>
+            }
+          </Mutation>
+          {this.renderRedirect()}
         </div>
       )
     } else {
