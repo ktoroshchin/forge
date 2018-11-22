@@ -3,9 +3,8 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
 
-class CreateNewCity extends Component {
+export default class AddNewElement extends Component {
   state = {
-    category: "City",
     world_id: this.props.worldID,
     name: null,
     population: null,
@@ -29,11 +28,24 @@ class CreateNewCity extends Component {
     this.setState({description: e.target.value});
   }
   render() {
-    const { category, world_id, name, population, government, description } = this.state
+    const { world_id, name, population, government, description } = this.state
+    const { category } = this.props
     const POST_MUTATION = gql`
-      mutation ($category: String!, $world_id: ID!, $name: String!, $population: Int, $government: String, $description: String){
-        createNewMarker(category: $category, world_id: $world_id, name: $name, population: $population, government: $government, description: $description) {
-          id
+      mutation (
+      $category: String!,
+      $world_id: ID!,
+      $name: String!,
+      $population: Int,
+      $government: String,
+      $description: String){
+        createNewMarker(
+          category: $category,
+          world_id: $world_id,
+          name: $name,
+          population: $population,
+          government: $government,
+          description: $description) {
+            id
         }
       }`
     return (
@@ -41,25 +53,31 @@ class CreateNewCity extends Component {
         <ModalBody>
           <Form>
             <FormGroup>
-              <Label for="city">City Name (required)</Label>
+              <Label for="name">{category} Name (required)</Label>
               <Input onChange={this.handleCityName} type="text" name="name" />
-            </FormGroup>
-            <FormGroup>
-              <Label for="population">Population (optional)</Label>
-              <Input onChange={this.handlePopulation} type="text" name="population" />
-            </FormGroup>
-            <FormGroup>
-              <Label for="government">Government (optional)</Label>
-              <Input onChange={this.handleGovernment} type="text" name="government" />
-            </FormGroup>
-            <FormGroup>
+              {category !== "Location" &&
+              <div>
+                <Label for="population">Population (optional)</Label>
+                <Input onChange={this.handlePopulation} type="text" name="population" />
+                <Label for="government">Government (optional)</Label>
+                <Input onChange={this.handleGovernment} type="text" name="government" />
+              </div>
+              }
               <Label for="description">Description (optional)</Label>
               <Input onChange={this.handleDescription} type="textarea" name="description" />
             </FormGroup>
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Mutation mutation={POST_MUTATION} variables={{ category, world_id, name, population, government, description }}>
+          <Mutation
+            mutation={POST_MUTATION}
+            variables={{
+              category,
+              world_id,
+              name,
+              population,
+              government,
+              description }}>
             {postMutation => <Button color="success" onClick={(event)=>{postMutation(event); window.location.reload()}}>Submit</Button>}
           </Mutation>
         </ModalFooter>
@@ -67,5 +85,3 @@ class CreateNewCity extends Component {
     )
   }
 }
-
-export default CreateNewCity;
