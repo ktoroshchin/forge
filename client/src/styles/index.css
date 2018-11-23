@@ -19,9 +19,11 @@ code {
 }
 
 .header {
-  position: fixed;
+  text-align: center;
+  margin: 0.5em 0;
   border: solid 2px red;
   background: white;
+  width: auto;
 }
 
 .page {
@@ -29,7 +31,7 @@ code {
   overflow: auto;
 }
 .info {
-  margin-top: 75px;
+  padding-bottom: 2em;
   overflow-y: scroll;
   position: relative;
   width: 100%;
