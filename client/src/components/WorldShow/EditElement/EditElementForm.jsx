@@ -26,28 +26,28 @@ export default class EditEditForm extends Component {
     if (e.target.value.trim() === "") {
       this.setState({name: null});
     } else {
-      this.setState({name: e.target.value.trim()});
+      this.setState({name: e.target.value});
     }
   }
   handlePopulationChange(e) {
     if (e.target.value.trim() === "" || isNaN(Number(e.target.value))) {
       this.setState({population: null});
     } else {
-      this.setState({population: Number(e.target.value.trim())});
+      this.setState({population: Number(e.target.value)});
     }
   }
   handleGovernmentChange(e) {
     if (e.target.value.trim() === "") {
       this.setState({government: null});
     } else {
-      this.setState({government: e.target.value.trim()});
+      this.setState({government: e.target.value});
     }
   }
   handleDescriptionChange(e) {
     if (e.target.value.trim() === "") {
       this.setState({description: null});
     } else {
-      this.setState({description: e.target.value.trim()});
+      this.setState({description: e.target.value});
     }
   }
   handleRefresh() {

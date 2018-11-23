@@ -21,14 +21,14 @@ class EditWorldForm extends Component {
     if (e.target.value.trim() === "") {
       this.setState({name: null});
     } else {
-      this.setState({name: e.target.value.trim()});
+      this.setState({name: e.target.value});
     }
   }
   handleDescriptionChange(e) {
     if (e.target.value.trim() === "") {
       this.setState({description: null});
     } else {
-      this.setState({description: e.target.value.trim()});
+      this.setState({description: e.target.value});
     }
   }
   handleRefresh() {
