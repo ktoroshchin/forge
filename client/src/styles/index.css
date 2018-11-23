@@ -33,7 +33,7 @@ code {
   overflow-y: scroll;
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 600px;
 }
 .clickable {
   cursor: pointer;
