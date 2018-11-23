@@ -11,18 +11,25 @@ type World {
   name: String!
   description: String
   creator_id: ID!
-  maps: [Map!]
+  world_map: WorldMap
   markers: [Marker!]
 }
 
-type Map {
+type WorldMap {
   id: ID!
   world_id: ID!
   url: String!
   width: Int!
   height: Int!
-  world_map: Boolean!
   markers: [Marker!]
+}
+
+type MarkerMap {
+  id: ID!
+  marker_id: ID!
+  url: String!
+  width: Int!
+  height: Int!
 }
 
 type Marker {
@@ -36,4 +43,5 @@ type Marker {
   population: Int
   government: String
   description: String
+  marker_map: MarkerMap
 }`;
