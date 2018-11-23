@@ -1,5 +1,4 @@
 import React from "react";
-import { Jumbotron } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 function World({world_id, name, description, creator_id, maps}) {
