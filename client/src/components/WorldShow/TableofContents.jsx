@@ -21,7 +21,7 @@ function TableofContents({worldID, worldName, worldDescription,handleClick, setV
             <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
               <div className="card-body nopadding">
                 <ListGroup className="listItemContainer">
-                  <ElementList worldID={worldID} category="City" setValue={setValue} setLocationID={setLocationID} />
+                  <ElementList  worldID={worldID} category="City" setValue={setValue} setLocationID={setLocationID} />
                 </ListGroup>
               </div>
             </div>

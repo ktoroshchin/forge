@@ -20,15 +20,6 @@ code {
     monospace;
 }
 
-<<<<<<< HEAD
-#size-container {
-  min-height: 100%;
-  position: relative;
-
-}
-
-#map-container {
-  height: 400px;
 =======
 .header {
   position: fixed;
@@ -46,13 +37,6 @@ code {
   position: relative;
   width: 100%;
   height: 500px;
-}
-.clickable {
-  cursor: pointer;
-}
-.default {
-  cursor: default;
->>>>>>> 834cee517ccc8b5fc817a09aa23cc9ed04efe04e
 }
 
 #map {
