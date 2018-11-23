@@ -71,13 +71,45 @@ componentWillMount() {
     return window.location.href = '/'
   }
 }
-componentDidMount() {
-  if (getUserID() === this.props.location.state.creatorID) {
-    this.setState({
-      isUser: true
-    })
-  }
+
+setValue(value) {
+  this.setState({
+    value: value,
+    clicked: false
+  })
 }
+setLocationID(id) {
+  this.setState({
+    locationID: id
+  })
+}
+handleRefresh() {
+  window.location.reload()
+}
+
+refreshComponent() {
+  this.setState({
+    refresh: !this.state.refresh
+  })
+}
+
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+  componentWillMount() {
+    if (!this.props.location.state) {
+      return window.location.href = '/'
+    }
+  }
+  componentDidMount() {
+    if (getUserID() === this.props.location.state.creatorID) {
+      this.setState({
+        isUser: true
+      })
+    }
+  }
   render() {
     const {worldID} = this.props.location.state;
     const findWorld =
@@ -89,45 +121,46 @@ componentDidMount() {
           }
         }`;
     return(
-        <div className="h-100 container mt-3">
-        <Query query={findWorld}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-            return (
-              <div className="row">
-                <div className="col-1 navbar-arrow" onClick={this.sideBarToggle}>
-                  {!this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
-                  {this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
+        <div className="container page ">
+          <Query query={findWorld}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>
+              if (error) return <div>Error</div>
+              return (
+                <div className="row">
+                  <div className="col-1 navbar-arrow" onClick={this.sideBarToggle}>
+                    {!this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
+                    {this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
+                  </div>
+                <div className="col-11 world-name">
+                  <h1 onClick={this.handleRefresh}>
+                    {data.findWorlds[0].name}
+                  </h1>
                 </div>
-              <div className="col-11 world-name">
-                <h1 onClick={this.handleRefresh}>
-                  {data.findWorlds[0].name}
-                </h1>
               </div>
-            </div>
-            )
-          }}
-        </Query>
-          <div className="row mt-3 h-100">
-            <span className="sideBar">
-              <CSSTransitionGroup
-                  transitionName="sideBar"
-                  transitionEnterTimeout={500}
-                  transitionLeaveTimeout={200}>
+              )
+            }}
+          </Query>
 
-                 {this.state.sidebarOpen &&
+          <div className="sideBar">
+            <CSSTransitionGroup
+              transitionName="sideBar"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={200}>
 
-                    <TableofContents
-                      handleClick={this.handleClick}
-                      worldID={worldID}
-                      setValue={this.setValue}
-                      setLocationID={this.setLocationID}
-                      isUser={this.state.isUser}
-                      />
-                }
-                </CSSTransitionGroup>
-              </span>
+              {this.state.sidebarOpen &&
+
+                <TableofContents
+                  handleClick={this.handleClick}
+                  worldID={worldID}
+                  setValue={this.setValue}
+                  setLocationID={this.setLocationID}
+                  isUser={this.state.isUser}
+                  />
+              }
+            </CSSTransitionGroup>
+          </div>
+          <div className="row mt-3">
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                <Query query={findWorld}>

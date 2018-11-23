@@ -28,6 +28,7 @@
 .sideBar {
  transform: translateX(8.5%);
  /* transition: transform 300ms; */
+ position: absolute;
  z-index: 99;
 }
 
@@ -41,17 +42,17 @@
   /* opacity: 1; */
   /* transition: opacity 300ms ease-in; */
 }
+.sideBar-leave.sideBar-leave-active {
+  transform-origin: left center;
+  animation: 200ms slideout;
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
 
 .sideBar-leave {
   opacity: 1;
 }
 
-.sideBar-leave.sideBar-leave-active {
-  transform-origin: left center;
-  animation: 200ms slideout;
-  /* opacity: 0.01; */
-  /* transition: opacity 200ms ease-in; */
-}
 
 .AccordionForWorldPage {
   background-color: red;

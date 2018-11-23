@@ -2,16 +2,21 @@ const db = require('./models');
 const { resolver } = require('graphql-sequelize');
 const uuid = require('uuid/v4');
 const bcrypt = require('bcrypt-nodejs');
+const { Op } = require('sequelize');
 
 module.exports = {
   Query: {
     findUsers: resolver(db.user),
     findWorlds: resolver(db.world),
+    searchWorlds: (root, { name }) => db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } }),
     findMaps: resolver(db.map),
     findMarkers: resolver(db.marker)
   },
   Mutation: {
     createNewMap: async (root, { world_id, url, world_map, width, height }) => {
+      if (await db.map.findOne({ where: { world_map: true } }) && world_map) {
+        throw new Error('Cannot set two maps as the main world map')
+      }
       const map = await db.map.build({
         id: uuid(),
         world_id,
@@ -51,7 +56,7 @@ module.exports = {
     },
     destroyMarker: async (root, { id }) => {
       let marker = await db.marker.findByPk(id)
-      if (!marker.destroy()) throw new Error('Marker not deleted')
+      if (!marker.destroy()) throw new Error('Marker was not deleted')
       return true
     },
     removeMarkerById: async (root, { id }) => {
@@ -107,7 +112,7 @@ module.exports = {
       const user = await db.user.findByPk(id);
 
       if (await !bcrypt.compareSync(password, user.dataValues.password)) {
-        throw new Error('UserEdit error: Wrong password');
+        throw new Error('Wrong password');
       }
       user.update({
         first_name,
@@ -118,8 +123,11 @@ module.exports = {
     login: async (root, { username, password }) => {
       const user = await db.user.findOne({ where: { username } });
 
+      if (!user) {
+        throw new Error('No users with that username');
+      }
       if (await !bcrypt.compareSync(password, user.dataValues.password)) {
-        throw new Error('Wrong login credentials');
+        throw new Error('Wrong password');
       }
 
       return user;

@@ -6,8 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    first_name: DataTypes.STRING,
-    last_name: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     created_at: DataTypes.DATE,
@@ -16,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   user.associate = function (models) {
     // associations can be defined here
-    user.worlds = user.hasMany(models.world, {foreignKey: 'creator_id'});
+    user.worlds = user.hasMany(models.world, { foreignKey: 'creator_id' });
   };
   return user;
 };

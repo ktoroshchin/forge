@@ -14,22 +14,24 @@ class EditWorldForm extends Component {
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleRefresh = this.handleRefresh.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
     if (e.target.value.trim() === "") {
       this.setState({name: null});
     } else {
-      this.setState({name: e.target.value.trim()});
+      this.setState({name: e.target.value});
     }
   }
   handleDescriptionChange(e) {
     if (e.target.value.trim() === "") {
       this.setState({description: null});
     } else {
-      this.setState({description: e.target.value.trim()});
+      this.setState({description: e.target.value});
     }
+  }
+  handleSubmit(e) {
+    e.preventDefault();
   }
   handleRefresh() {
     window.location.reload();
@@ -51,7 +53,7 @@ class EditWorldForm extends Component {
     return (
       <div className="container">
         <ModalBody>
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label>World Name (required)</Label>
               <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
@@ -59,16 +61,16 @@ class EditWorldForm extends Component {
               <Input value={this.state.description} onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
           </Form>
+        </ModalBody>
+        <ModalFooter className="justify-content-between">
           <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove World</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
             <ModalHeader toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
             <WorldDelete worldID={id} />
           </Modal>
-        </ModalBody>
-        <ModalFooter>
           <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>
             {(postMutation) =>
-              <Button color="success" onClick={(event)=>{postMutation(event)
+              <Button className="btn btn-outline-success btn-sm col-3" onClick={(event)=>{postMutation(event)
                 .then(()=>{this.handleRefresh();})
                 .catch((error) => {alert("Please input required fields")})}}>Submit</Button>}
           </Mutation>

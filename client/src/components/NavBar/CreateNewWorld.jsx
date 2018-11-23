@@ -64,9 +64,9 @@ class CreateNewWorld extends Component {
           }
         }`
       return (
-        <div>
-          <div className="container">
-            <h2>Create A New World</h2>
+        <div className="container page">
+          <h2 className="header">Create A New World</h2>
+          <div className="info">
             <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
               {(postMutation) =>
               <Form onSubmit={this.handleSubmit}>
