@@ -2,11 +2,13 @@ const db = require('./models');
 const { resolver } = require('graphql-sequelize');
 const uuid = require('uuid/v4');
 const bcrypt = require('bcrypt-nodejs');
+const { Op } = require('sequelize')
 
 module.exports = {
   Query: {
     findUsers: resolver(db.user),
     findWorlds: resolver(db.world),
+    searchWorlds: (root, { name }) => db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } }),
     findMaps: resolver(db.map),
     findMarkers: resolver(db.marker)
   },
