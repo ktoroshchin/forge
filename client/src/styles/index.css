@@ -20,7 +20,6 @@ code {
     monospace;
 }
 
-=======
 .header {
   text-align: center;
   margin: 0.5em 0;
@@ -44,6 +43,7 @@ code {
 #map {
   height: 100%;
   margin-bottom: 1em;
+  z-index: 1;
 }
 
 .editMap {
