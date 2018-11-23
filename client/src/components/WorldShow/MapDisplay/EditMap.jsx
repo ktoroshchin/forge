@@ -90,13 +90,12 @@ export default class EditMap extends Component {
   }
 
   render () {
-    const mapID = this.props.location.state.ID;
     const {worldID, creatorID} = this.props.location.state;
 
     const findMap =
       gql`
         query {
-          findMaps(id: "${mapID}"){
+          findWorldMap(world_id: "${worldID}"){
             id
             world_id
             url
@@ -111,9 +110,8 @@ export default class EditMap extends Component {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
             return (
-              data.findMaps.map(({ id, world_id, url, height, width }) => (
                 <div
-                  key={id}
+                  key={data.findWorldMap.id}
                   className="h-100"
                   >
                   <Map
@@ -121,13 +119,13 @@ export default class EditMap extends Component {
                     crs={L.CRS.Simple}
                     minZoom={-1}
                     maxZoom={2}
-                    bounds={[[0, 0], [height, width]]}
-                    center={[height/2, width/2]}
+                    bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                    center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
                     zoom={1}
                     >
                     <ImageOverlay
-                      url={url}
-                      bounds={[[0, 0], [height, width]]}
+                      url={data.findWorldMap.url}
+                      bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                       />
                     {this.state.activeMarker !== null &&
                       <Marker
@@ -145,14 +143,14 @@ export default class EditMap extends Component {
                             <NewMarkerForm
                               toggleModal={this.toggleModal}
                               coords={this.state.activeMarker}
-                              worldID={world_id}
-                              mapID={id}
+                              worldID={data.findWorldMap.world_id}
+                              mapID={data.findWorldMap.id}
                             />
                           </Modal>
                         </Popup>
                       </Marker>
                     }
-                    <ShowMarkers mapID={id} isUser={true} />
+                    <ShowMarkers mapID={data.findWorldMap.id} isUser={true} />
                   </Map>
                   <div className="d-flex justify-content-between">
                     <Button
@@ -164,7 +162,7 @@ export default class EditMap extends Component {
                     {this.state.activeMarker === null &&
                       <Button
                         className="btn btn-outline-success col-sm-12 col-md-4 col-lg-3"
-                        onClick={() => {this.addMarker(height, width)}}
+                        onClick={() => {this.addMarker(data.findWorldMap.height, data.findWorldMap.width)}}
                       >
                         New Marker
                       </Button>
@@ -185,12 +183,11 @@ export default class EditMap extends Component {
                     </Button>
                     <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
                       <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
-                      <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={id} />
+                      <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={data.findWorldMap.id} />
                     </Modal>
                   </div>
                 </div>
-            )));
-          }}
+                )}}
           </Query>
 
       </div>
