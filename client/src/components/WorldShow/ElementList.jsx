@@ -19,7 +19,7 @@ function ElementList({worldID, category, setValue, setLocationID}) {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.findMarkers.map(({ id, name }) => (
-            <ListGroupItem key={id} onClick={()=>{setValue(category); setLocationID(id)}} action>{name} </ListGroupItem>
+            <ListGroupItem className="clickable" key={id} onClick={()=>{setValue(category); setLocationID(id)}} action>{name} </ListGroupItem>
           )));
         }}
       </Query>

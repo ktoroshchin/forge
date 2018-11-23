@@ -4,7 +4,7 @@ import WorldList from "./WorldList"
 function Homepage() {
   return (
     <div className="container page">
-      <h2 className="header">All Worlds</h2>
+      <h2 className="header default">All Worlds</h2>
       <div className="info">
         <WorldList />
       </div>

@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import ElementDelete from './ElementDelete'
 
-export default class EditEditForm extends Component {
+export default class EditElementForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,7 +58,6 @@ export default class EditEditForm extends Component {
       deleteModal: !this.state.deleteModal
     });
   }
-
   handleMutationSubmit(postMutation) {
     return postMutation()
       .then(()=>{
@@ -68,7 +67,6 @@ export default class EditEditForm extends Component {
         alert("Please input required fields")
       })
   }
-
   render() {
     const { name, category, population, government, description } = this.state;
     const {id} = this.props;
@@ -116,7 +114,7 @@ export default class EditEditForm extends Component {
         <ModalFooter className="justify-content-between">
           <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Delete {category}</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleDeleteModal}>Delete Your {category}</ModalHeader>
+            <ModalHeader className="default" toggle={this.toggleDeleteModal}>Delete Your {category}</ModalHeader>
             <ElementDelete elementID={id} name={name} />
           </Modal>
         {category === "Location" &&

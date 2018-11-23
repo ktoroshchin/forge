@@ -14,27 +14,27 @@ class ChooseCategoryToCreate extends Component {
   render() {
     return(
       <div>
-        <div className="ChooseCategoryToCreate">
+        <div className="ChooseCategoryToCreate default">
           <ListGroupItem className="category text-center">Category</ListGroupItem>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"1"} >
             New City
           </Button>
           <Modal isOpen={this.state.modal === "1"} toggle={this.toggleModal} >
-            <ModalHeader toggle={this.toggleModal}>Create a New City</ModalHeader>
+            <ModalHeader className="default" toggle={this.toggleModal}>Create a New City</ModalHeader>
             <AddNewElement category="City" worldID={this.state.worldID} />
           </Modal>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"2"} >
             New Town
           </Button>
           <Modal isOpen={this.state.modal === "2"} toggle={this.toggleModal} >
-            <ModalHeader toggle={this.toggleModal}>Create a New Town</ModalHeader>
+            <ModalHeader className="default" toggle={this.toggleModal}>Create a New Town</ModalHeader>
             <AddNewElement category="Town" worldID={this.state.worldID} toggleModal={this.toggleModal} />
           </Modal>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"3"} >
             New Location
           </Button>
           <Modal isOpen={this.state.modal === "3"} toggle={this.toggleModal} >
-            <ModalHeader toggle={this.toggleModal}>Create a New Location</ModalHeader>
+            <ModalHeader className="default" toggle={this.toggleModal}>Create a New Location</ModalHeader>
             <AddNewElement category="Location" worldID={this.state.worldID} />
           </Modal>
         </div>

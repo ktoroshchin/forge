@@ -65,7 +65,7 @@ class EditWorldForm extends Component {
         <ModalFooter className="justify-content-between">
           <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove World</Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-            <ModalHeader toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
+            <ModalHeader className="default" toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
             <WorldDelete worldID={id} />
           </Modal>
           <Mutation mutation={POST_MUTATION} variables={{ id, name, description, creator_id }}>

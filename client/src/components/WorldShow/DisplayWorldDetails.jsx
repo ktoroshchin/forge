@@ -91,7 +91,7 @@ export default class DisplayWorldDetails extends Component {
               if (loading) return <div>Fetching</div>
               if (error) return <div>Error</div>
               return (
-                <h1 className="header" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
+                <h1 className="header clickable" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
               )
             }}
           </Query>
@@ -108,14 +108,14 @@ export default class DisplayWorldDetails extends Component {
                       if (error) return <div>Error</div>
                       if (!data.findWorlds[0].description) return (
                         <div>
-                          <h3>Description</h3>
-                          <h6>No description</h6>
+                          <h3 className="default">Description</h3>
+                          <h6 className="default">No description</h6>
                         </div>
                       )
                       return (
                         <div>
-                          <h3>Description</h3>
-                          <h6>{data.findWorlds[0].description}</h6>
+                          <h3 className="default">Description</h3>
+                          <h6 className="default">{data.findWorlds[0].description}</h6>
                         </div>
                       )
                     }}
@@ -125,7 +125,7 @@ export default class DisplayWorldDetails extends Component {
                     <div>
                     <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
                     <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                      <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                      <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
                         <EditWorld
                           toggleModal={this.toggleModal}
                           worldID={worldID}

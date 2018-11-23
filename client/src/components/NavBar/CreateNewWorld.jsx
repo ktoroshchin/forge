@@ -65,7 +65,7 @@ class CreateNewWorld extends Component {
         }`
       return (
         <div className="container page">
-          <h2 className="header">Create A New World</h2>
+          <h2 className="header default">Create A New World</h2>
           <div className="info">
             <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
               {(postMutation) =>

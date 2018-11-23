@@ -38,12 +38,12 @@ export default class Element extends Component {
               <div key={id}>
               {category === "Location" &&
               <ListGroup>
-                <ListGroupItem className="listItem">
+                <ListGroupItem className="listItem default">
                   <span className="categoryName">Name</span>
                   <span>: </span>
                   {name}
                 </ListGroupItem>
-                <ListGroupItem className="listItem">
+                <ListGroupItem className="listItem default">
                   <span className="categoryName">Description</span>
                   <span>: </span>{description}
                 </ListGroupItem>
@@ -51,20 +51,20 @@ export default class Element extends Component {
               }
               {category !== "Location" &&
               <ListGroup>
-                <ListGroupItem className="listItem">
+                <ListGroupItem className="listItem default">
                   <span className="categoryName">Name</span>
                   <span>: </span>
                   {name}
                 </ListGroupItem>
-                <ListGroupItem className="listItem">
+                <ListGroupItem className="listItem default">
                   <span className="categoryName">Population</span>
                   <span>: </span>{population}
                 </ListGroupItem>
-                <ListGroupItem className="listItem">
+                <ListGroupItem className="listItem default">
                   <span className="categoryName">Government</span>
                   <span>: </span>{government}
                 </ListGroupItem>
-                <ListGroupItem className="listItem">
+                <ListGroupItem className="listItem default">
                   <span className="categoryName">Description</span>
                   <span>: </span>{description}
                 </ListGroupItem>
@@ -78,7 +78,7 @@ export default class Element extends Component {
                   Edit {category}
                 </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                  <ModalHeader toggle={this.toggleModal}>Edit {category}</ModalHeader>
+                  <ModalHeader className="default" toggle={this.toggleModal}>Edit {category}</ModalHeader>
                     <EditElement
                       toggleModal={this.toggleModal}
                       markerID={id}

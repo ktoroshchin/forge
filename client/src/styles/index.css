@@ -35,6 +35,12 @@ code {
   width: 100%;
   height: 500px;
 }
+.clickable {
+  cursor: pointer;
+}
+.default {
+  cursor: default;
+}
 
 #map {
   height: 100%;

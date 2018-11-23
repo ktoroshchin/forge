@@ -77,7 +77,7 @@ class Register extends Component {
     if (!getUserID()) {
       return (
         <div className="container page">
-          <h2 className="header">Register</h2>
+          <h2 className="header default">Register</h2>
           <div className="info">
             <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
             {postMutation =>

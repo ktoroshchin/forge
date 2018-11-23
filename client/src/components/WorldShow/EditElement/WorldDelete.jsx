@@ -39,11 +39,11 @@ export default class WorldDelete extends Component {
       }`
     return (
       <div>
-        <ModalBody>
+        <ModalBody className="default">
           Are you sure you want to remove your world?
           <FormGroup check>
-            <Label check>
-              <Input type="checkbox" onChange={this.confirmCheck}/>
+            <Label className="clickable" check>
+              <Input className="clickable" type="checkbox" onChange={this.confirmCheck}/>
               Yes I want to remove my world!
             </Label>
           </FormGroup>

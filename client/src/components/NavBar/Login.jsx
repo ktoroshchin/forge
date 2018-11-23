@@ -66,7 +66,7 @@ class Login extends Component {
     if (!getUserID()) {
       return (
         <div className="container page">
-          <h2 className="header">Login</h2>
+          <h2 className="header default">Login</h2>
           <div className="info">
             <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
               {postMutation =>

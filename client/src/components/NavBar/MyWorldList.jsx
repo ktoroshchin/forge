@@ -19,7 +19,7 @@ function MyWorldList({getUserID}) {
   if (userID) {
     return (
       <div className="container page">
-        <h2 className="header">My Worlds</h2>
+        <h2 className="header default">My Worlds</h2>
         <div className="info">
           <Query query={findUserWorlds}>
             {({ loading, error, data }) => {
