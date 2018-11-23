@@ -31,6 +31,17 @@ module.exports = {
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
+        category: 'City',
+        map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
+        longitude: 650.1640625,
+        latitude: 1135.96875,
+        name: 'Akhad',
+        description: 'A kingdom built under the Barren Wilds. The ceiling of sand is supported by the three arch-wizards of the city',
+        government: 'Confederation',
+        population: 24000
+      }, {
+        id: uuid(),
+        world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
         category: 'Location',
         map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
         longitude: 624.1640625,
@@ -55,7 +66,7 @@ module.exports = {
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
         category: 'Town',
         map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
-        longitude:  2069.26953125,
+        longitude: 2069.26953125,
         latitude: 1265.5625,
         name: 'Piho',
         description: 'A booming human religious town. It is home to the Church of Piety, a racist religious \
@@ -87,6 +98,28 @@ module.exports = {
                       quest to liberate the citizens of Wolfrest.',
         population: 350,
         government: 'Kraterocracy',
+      }, {
+        id: uuid(),
+        world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
+        category: 'Town',
+        map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
+        latitude: 1606.92180,
+        longitude: 2045.010457,
+        name: 'Forde',
+        description: 'A town up in the mountain range of Houi. They live primarily off of Rocky birds.',
+        population: 1200,
+        government: null,
+      }, {
+        id: uuid(),
+        world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
+        category: 'Location',
+        map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
+        latitude: 1622.31511710433,
+        longitude: 1204.328125,
+        name: 'The Mountain Range of Houi',
+        description: 'It longs the whole north perimeter of the continent. The north side is littered with the unknown',
+        population: null,
+        government: null,
       }
     ], {});
   },
