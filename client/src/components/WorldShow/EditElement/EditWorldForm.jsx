@@ -14,7 +14,6 @@ class EditWorldForm extends Component {
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.handleRefresh = this.handleRefresh.bind(this);
     this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
   handleNameChange(e) {
@@ -30,6 +29,9 @@ class EditWorldForm extends Component {
     } else {
       this.setState({description: e.target.value});
     }
+  }
+  handleSubmit(e) {
+    e.preventDefault();
   }
   handleRefresh() {
     window.location.reload();
@@ -51,7 +53,7 @@ class EditWorldForm extends Component {
     return (
       <div className="container">
         <ModalBody>
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label>World Name (required)</Label>
               <Input value={this.state.name} onChange={this.handleNameChange} type="text" name="name" />
