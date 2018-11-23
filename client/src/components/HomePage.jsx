@@ -3,12 +3,12 @@ import WorldList from "./WorldList"
 
 function Homepage() {
   return (
-    <div>
+    <div className="container page">
       <header>
-        <h2 >All Worlds</h2>
+        <h2>All Worlds</h2>
       </header>
-      <div className="container">
-        <WorldList />
+      <div className="info">
+      <WorldList />
       </div>
     </div>
   );
