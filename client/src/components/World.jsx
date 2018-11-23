@@ -44,7 +44,8 @@ function World({world_id, name, description, creator_id, maps}) {
       content: {
         height: '100%',
         width: '100%',
-        color: 'black',
+        color: 'white',
+        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
         backgroundColor: 'rgba(255, 255, 255, 0.5)',
         padding: '3em',
         textAlign: "center",
