@@ -61,30 +61,17 @@ setLocationID(id) {
 handleRefresh() {
   window.location.reload()
 }
+
 toggleModal() {
   this.setState({
     modal: !this.state.modal
   });
 }
+
 componentWillMount() {
   if (!this.props.location.state) {
     return window.location.href = '/'
   }
-}
-
-setValue(value) {
-  this.setState({
-    value: value,
-    clicked: false
-  })
-}
-setLocationID(id) {
-  this.setState({
-    locationID: id
-  })
-}
-handleRefresh() {
-  window.location.reload()
 }
 
 refreshComponent() {
@@ -93,16 +80,6 @@ refreshComponent() {
   })
 }
 
-  toggleModal() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
-  componentWillMount() {
-    if (!this.props.location.state) {
-      return window.location.href = '/'
-    }
-  }
   componentDidMount() {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({

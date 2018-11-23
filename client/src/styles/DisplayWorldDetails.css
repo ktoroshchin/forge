@@ -32,15 +32,14 @@
  z-index: 99;
 }
 
-/* .sideBar-enter {
-  /* opacity: 0.01; */
-/* } */
-
+.sideBar-enter {
+   opacity: 0.01;
+}
 .sideBar-enter.sideBar-enter-active {
   transform-origin: left center;
   animation: 500ms slidein;
-  /* opacity: 1; */
-  /* transition: opacity 300ms ease-in; */
+  opacity: 1;
+  transition: opacity 300ms ease-in;
 }
 .sideBar-leave.sideBar-leave-active {
   transform-origin: left center;
