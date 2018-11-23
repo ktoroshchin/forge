@@ -16,7 +16,7 @@ class NavbarMain extends Component {
   render() {
     return(
     <div>
-        <Navbar color="light" light expand="md" fixed="top">
+        <Navbar color="dark" dark expand="md" fixed="top">
           <NavbarBrand href="/">THE FORGE</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
