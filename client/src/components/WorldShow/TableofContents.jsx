@@ -4,7 +4,7 @@ import ElementList from './ElementList'
 
 function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
   return (
-    <div className="AccordionForWorldPage">
+    <div className="AccordionForWorldPage col-12">
       {isUser &&
         <Button onClick={handleClick} className="btn btn-success btn-sm add-world col-md-12">
           Add New Element

@@ -6,6 +6,12 @@
   text-decoration:underline;
 }
 
+
+.lay-worldname {
+  display: flex;
+
+}
+
 /*****Styling of sidebar*****/
 
 .navbar-arrow {
@@ -26,10 +32,11 @@
 }
 
 .sideBar {
- transform: translateX(8.5%);
+ transform: translateX(-5%);
  /* transition: transform 300ms; */
  position: absolute;
  z-index: 99;
+ width: 30%;
 }
 
 .sideBar-enter {
@@ -54,7 +61,7 @@
 
 
 .AccordionForWorldPage {
-  background-color: red;
+
 }
 
 
@@ -90,7 +97,6 @@
 
 .world-name{
   text-align: center;
-  border: solid 2px red;
 }
 
 .second-column {
@@ -102,3 +108,45 @@
 .worldAccordion {
   width:100%;
 }
+
+
+@media (max-width: 575.98px) {
+  .sideBar {
+    width: 97%;
+     transform: translateX(-4.4%);
+    }
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 575px) and (max-width: 767.98px) {
+.sideBar {
+  width: 93%;
+   transform: translateX(-4%);
+  }
+}
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+.sideBar {
+  width: 50%;
+   transform: translateX(-4%);
+  }
+}
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 991px) and (max-width: 1199.98px) {
+  .sideBar {
+    width: 50%;
+     transform: translateX(-3%);
+  }
+  .world-name{
+
+  }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {  }
+
+
+
+
+
+

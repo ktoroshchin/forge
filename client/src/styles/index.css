@@ -42,6 +42,7 @@ code {
 #map {
   height: 100%;
   margin-bottom: 1em;
+  z-index: 1;
 }
 
 .editMap {
@@ -67,3 +68,8 @@ code {
 .mapEditButtons {
   margin-bottom: 1em;
 }
+
+
+
+
+

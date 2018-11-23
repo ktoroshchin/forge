@@ -104,17 +104,19 @@ refreshComponent() {
               if (loading) return <div>Fetching</div>
               if (error) return <div>Error</div>
               return (
-                <div className="row">
-                  <div className="col-1 navbar-arrow" onClick={this.sideBarToggle}>
-                    {!this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
-                    {this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
+                <div className="container">
+                  <div className="dipslay-worldname row">
+                    <div className="col-1 navbar-arrow" onClick={this.sideBarToggle}>
+                      {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
+                      {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
+                    </div>
+                    <div className="col-11 col-xs-8 world-name">
+                      <h1 onClick={this.handleRefresh}>s
+                        {data.findWorlds[0].name}
+                      </h1>
+                      </div>
                   </div>
-                <div className="col-11 world-name">
-                  <h1 onClick={this.handleRefresh}>
-                    {data.findWorlds[0].name}
-                  </h1>
                 </div>
-              </div>
               )
             }}
           </Query>
@@ -175,7 +177,7 @@ refreshComponent() {
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
-              <div className="col-md-8 col-lg-9 col-xl-10">
+              <div className="col-12">
                 {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
               </div>
