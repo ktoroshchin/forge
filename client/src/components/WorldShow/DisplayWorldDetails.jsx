@@ -17,76 +17,73 @@ const getUserID = function() {
 }
 
 export default class DisplayWorldDetails extends Component {
-  state = {
-    clicked: false,
-    value: "",
-    locationID: "",
-    isUser: false,
-    modal: false,
-    sidebarOpen: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: false,
+      value: "",
+      locationID: "",
+      isUser: false,
+      modal: false,
+      refresh: false
+    };
+    this.handleClick = this.handleClick.bind(this)
+    this.setValue = this.setValue.bind(this);
+    this.setLocationID = this.setLocationID.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.refreshComponent = this.refreshComponent.bind(this);
   }
 
-
-handleClick = this.handleClick.bind(this)
-setValue = this.setValue.bind(this);
-setLocationID = this.setLocationID.bind(this);
-toggleModal = this.toggleModal.bind(this);
-sideBarToggle = this.sideBarToggle.bind(this);
-
-
-sideBarToggle() {
-   this.setState({ sidebarOpen: !this.state.sidebarOpen });
- }
-
-handleClick() {
-  this.setState({
-    clicked: true,
-    value: ""
-  });
-  this.sideBarToggle()
-}
-
-setValue(value) {
-  this.setState({
-    value: value,
-    clicked: false,
-  })
-  this.sideBarToggle()
-}
-setLocationID(id) {
-  this.setState({
-    locationID: id
-  })
-}
-handleRefresh() {
-  window.location.reload()
-}
-
-toggleModal() {
-  this.setState({
-    modal: !this.state.modal
-  });
-}
-
-componentWillMount() {
-  if (!this.props.location.state) {
-    return window.location.href = '/'
+  handleClick = () => {
+    this.setState({
+      clicked: true,
+      value: ""
+    });
   }
-}
 
-refreshComponent() {
-  this.setState({
-    refresh: !this.state.refresh
-  })
-}
+  setValue = (value) => {
+    this.setState({
+      value: value,
+      clicked: false
+    })
+  }
 
-  componentDidMount() {
+  setLocationID = (id) => {
+    this.setState({
+      locationID: id
+    })
+  }
+
+  handleRefresh = () => {
+    window.location.reload()
+  }
+
+  refreshComponent = () => {
+    this.setState({
+      refresh: !this.state.refresh
+    })
+  }
+
+  toggleModal = () =>{
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
+  componentWillMount = () => {
+    if (!this.props.location.state) {
+      return window.location.href = '/'
+    }
+  }
+
+  componentDidMount = () => {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
         isUser: true
       })
     }
   }
+
   render() {
     const {worldID} = this.props.location.state;
     const findWorld =
@@ -98,7 +95,7 @@ refreshComponent() {
           }
         }`;
     return(
-        <div className="container page ">
+        <div className="container page">
           <Query query={findWorld}>
             {({ loading, error, data }) => {
               if (loading) return <div>Fetching</div>
@@ -109,12 +106,12 @@ refreshComponent() {
                     {!this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
                     {this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                   </div>
-                <div className="col-11 world-name">
-                  <h1 onClick={this.handleRefresh}>
-                    {data.findWorlds[0].name}
-                  </h1>
+                  <div className="col-11 world-name">
+                    <h1 onClick={this.handleRefresh}>
+                      {data.findWorlds[0].name}
+                    </h1>
+                  </div>
                 </div>
-              </div>
               )
             }}
           </Query>
@@ -123,17 +120,16 @@ refreshComponent() {
             <CSSTransitionGroup
               transitionName="sideBar"
               transitionEnterTimeout={500}
-              transitionLeaveTimeout={200}>
-
+              transitionLeaveTimeout={200}
+            >
               {this.state.sidebarOpen &&
-
                 <TableofContents
                   handleClick={this.handleClick}
                   worldID={worldID}
                   setValue={this.setValue}
                   setLocationID={this.setLocationID}
                   isUser={this.state.isUser}
-                  />
+                />
               }
             </CSSTransitionGroup>
           </div>
@@ -171,7 +167,12 @@ refreshComponent() {
                   </Modal>
                   </div>
                 }
-                <ShowMap worldID={worldID} isUser={this.state.isUser} />
+
+                <ShowMap
+                  worldID={worldID}
+                  isUser={this.state.isUser}
+                  creatorID={this.props.location.state.creatorID}
+                 />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&

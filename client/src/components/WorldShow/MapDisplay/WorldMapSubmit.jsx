@@ -14,7 +14,7 @@ class WorldMapSubmit extends Component {
       },
       worldMap: true,
     }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleChange = this.handleChange.bind(this);
     this.getImageSize = this.getImageSize.bind(this);
   }
 
@@ -22,7 +22,9 @@ class WorldMapSubmit extends Component {
     this.setState({
       value: event.target.value
     },
-    () => {this.getImageSize(this.state.value, this)});
+    () => {
+      this.getImageSize(this.state.value, this)
+    });
   }
 
   getImageSize(url, state) {
@@ -41,14 +43,18 @@ class WorldMapSubmit extends Component {
     img.src = url
   }
 
-  handleConfirm(event) {
-    event.preventDefault();
-    window.location.reload();
+  handleMutationSubmit(postMutation) {
+    return postMutation()
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert('Issue with URL')
+      })
   }
 
-
   render() {
-    const {worldID, refresh} = this.props;
+    const { worldID } = this.props;
     const imageURL = this.state.value;
     const width = this.state.imgSize.width;
     const height = this.state.imgSize.height;
@@ -89,34 +95,31 @@ class WorldMapSubmit extends Component {
         </ModalBody>
         <ModalFooter>
           {this.state.value.match(/\.(jpeg|jpg|png)$/) === null &&
-            <div>
-              <span>Please enter a valid image URL.</span>
-            </div>
+            <span>Please enter a valid image URL.</span>
           }
           {this.state.value.match(/\.(jpeg|jpg|png)$/) !== null &&
             <div>
-            <Mutation
-              mutation={POST_MUTATION}
-              variables={{
-                "world_id": worldID,
-                "url": imageURL,
-                width,
-                height,
-                "world_map": worldMap }}>
-                {postMutation =>
-                  <Button
-                    color="success"
-                    onClick={
-                      () => {
-                        postMutation()
-                        .then(() => {
-                          this.handleConfirm()
-                        })
-                        .catch((error) => {
-                          alert('Issue with URL')
-                        })
-                        ;}}>Confirm</Button>}
-            </Mutation>
+              {this.state.imgSize.width === 0 &&
+                <span>Obtaining image...</span>
+              }
+              {this.state.imgSize.width !== 0 &&
+              <Mutation
+                mutation={POST_MUTATION}
+                variables={{
+                  "world_id": worldID,
+                  "url": imageURL,
+                  width,
+                  height,
+                  "world_map": worldMap }}>
+                  {postMutation =>
+                    <Button
+                      color="success"
+                      onClick={() => {this.handleMutationSubmit(postMutation)}}
+                    >
+                      Submit
+                    </Button>}
+              </Mutation>
+              }
             </div>
           }
         </ModalFooter>

@@ -35,7 +35,7 @@ export default class ShowMap extends Component {
   }
 
   render () {
-    const {worldID, isUser, creatorID, refresh} = this.props
+    const {worldID, isUser, creatorID} = this.props
     const findMap =
       gql`
         query {

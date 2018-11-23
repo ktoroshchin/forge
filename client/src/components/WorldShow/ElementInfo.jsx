@@ -5,17 +5,22 @@ import gql from 'graphql-tag';
 import EditElement from './EditElement/EditElement'
 
 export default class Element extends Component {
+
   state = {
     modal: false
   };
-  toggleModal = this.toggleModal.bind(this);
-  toggleModal() {
+
+  toggleEditModal = this.toggleEditModal.bind(this);
+
+  toggleEditModal() {
     this.setState({
       modal: !this.state.modal
     });
   }
+
   render() {
     const {isUser, markerID} = this.props
+
     const findElement =
     gql`
     query {
@@ -49,7 +54,28 @@ export default class Element extends Component {
                 </ListGroupItem>
               </ListGroup>
               }
-              {category !== "Location" &&
+              {category === "Town" &&
+              <ListGroup>
+                <ListGroupItem className="listItem">
+                  <span className="categoryName">Name</span>
+                  <span>: </span>
+                  {name}
+                </ListGroupItem>
+                <ListGroupItem className="listItem">
+                  <span className="categoryName">Population</span>
+                  <span>: </span>{population}
+                </ListGroupItem>
+                <ListGroupItem className="listItem">
+                  <span className="categoryName">Government</span>
+                  <span>: </span>{government}
+                </ListGroupItem>
+                <ListGroupItem className="listItem">
+                  <span className="categoryName">Description</span>
+                  <span>: </span>{description}
+                </ListGroupItem>
+              </ListGroup>
+              }
+              {category === "City" &&
               <ListGroup>
                 <ListGroupItem className="listItem default">
                   <span className="categoryName">Name</span>
@@ -70,17 +96,18 @@ export default class Element extends Component {
                 </ListGroupItem>
               </ListGroup>
               }
+
               {isUser &&
               <div>
                 <Button
                   className="btn btn-success add-world col-xs-6 col-sm-4 col-md-4 col-lg-4"
-                  onClick={this.toggleModal}>
+                  onClick={this.toggleEditModal}>
                   Edit {category}
                 </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
                   <ModalHeader className="default" toggle={this.toggleModal}>Edit {category}</ModalHeader>
                     <EditElement
-                      toggleModal={this.toggleModal}
+                      toggleModal={this.toggleEditModal}
                       markerID={id}
                           />
                 </Modal>
