@@ -4,11 +4,9 @@ import WorldList from "./WorldList"
 function Homepage() {
   return (
     <div className="container page">
-      <header>
-        <h2>All Worlds</h2>
-      </header>
+      <h2 className="header">All Worlds</h2>
       <div className="info">
-      <WorldList />
+        <WorldList />
       </div>
     </div>
   );

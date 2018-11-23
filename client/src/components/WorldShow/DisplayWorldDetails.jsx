@@ -86,19 +86,15 @@ export default class DisplayWorldDetails extends Component {
         }`;
     return(
         <div className="container page">
-          <header>
-            <Query query={findWorld}>
-              {({ loading, error, data }) => {
-                if (loading) return <div>Fetching</div>
-                if (error) return <div>Error</div>
-                return (
-                  <div>
-                    <h1 className="world-name col" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
-                  </div>
-                )
-              }}
-            </Query>
-          </header>
+          <Query query={findWorld}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>
+              if (error) return <div>Error</div>
+              return (
+                <h1 className="header" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
+              )
+            }}
+          </Query>
           <div className="info">
             <div className="row mt-3">
               <div className="col-md-4 col-lg-3 col-xl-2">
