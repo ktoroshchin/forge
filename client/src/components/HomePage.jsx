@@ -3,10 +3,8 @@ import WorldList from "./WorldList"
 
 function Homepage() {
   return (
-    <div>
-      <div className="container">
-        <WorldList />
-      </div>
+    <div className="container">
+      <WorldList />
     </div>
   );
 }
