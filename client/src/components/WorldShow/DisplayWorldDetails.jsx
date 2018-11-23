@@ -85,69 +85,69 @@ export default class DisplayWorldDetails extends Component {
           }
         }`;
     return(
-        <div className="container mt-3">
-        <Query query={findWorld}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-            return (
-              <div>
-                <h1 className="world-name col" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
+        <div className="container page">
+          <Query query={findWorld}>
+            {({ loading, error, data }) => {
+              if (loading) return <div>Fetching</div>
+              if (error) return <div>Error</div>
+              return (
+                <h1 className="header" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
+              )
+            }}
+          </Query>
+          <div className="info">
+            <div className="row mt-3">
+              <div className="col-md-4 col-lg-3 col-xl-2">
+                <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
               </div>
-            )
-          }}
-        </Query>
-          <div className="row mt-3">
-            <div className="col-md-4 col-lg-3 col-xl-2">
-              <TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>
+              {this.state.value === '' && !this.state.clicked &&
+                <div className="col-md-8 col-lg-9 col-xl-10">
+                 <Query query={findWorld}>
+                    {({ loading, error, data }) => {
+                      if (loading) return <div>Fetching</div>
+                      if (error) return <div>Error</div>
+                      if (!data.findWorlds[0].description) return (
+                        <div>
+                          <h3>Description</h3>
+                          <h6>No description</h6>
+                        </div>
+                      )
+                      return (
+                        <div>
+                          <h3>Description</h3>
+                          <h6>{data.findWorlds[0].description}</h6>
+                        </div>
+                      )
+                    }}
+                  </Query>
+                {/*Modal for Edit World Details*/}
+                  {this.state.isUser &&
+                    <div>
+                    <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
+                    <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                      <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                        <EditWorld
+                          toggleModal={this.toggleModal}
+                          worldID={worldID}
+                              />
+                    </Modal>
+                    </div>
+                  }
+                  <ShowMap
+                    worldID={worldID}
+                    isUser={this.state.isUser}
+                    creatorID={this.props.location.state.creatorID}
+                    refresh={this.refreshComponent}
+                   />
+                </div>
+              }
+              {(this.state.value !== '' || this.state.clicked) &&
+                <div className="col-md-8 col-lg-9 col-xl-10">
+                  {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
+                  {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
+                </div>
+              }
             </div>
-            {this.state.value === '' && !this.state.clicked &&
-              <div className="col-md-8 col-lg-9 col-xl-10">
-               <Query query={findWorld}>
-                  {({ loading, error, data }) => {
-                    if (loading) return <div>Fetching</div>
-                    if (error) return <div>Error</div>
-                    if (!data.findWorlds[0].description) return (
-                      <div>
-                        <h3>Description</h3>
-                        <h6>No description</h6>
-                      </div>
-                    )
-                    return (
-                      <div>
-                        <h3>Description</h3>
-                        <h6>{data.findWorlds[0].description}</h6>
-                      </div>
-                    )
-                  }}
-                </Query>
-              {/*Modal for Edit World Details*/}
-                {this.state.isUser &&
-                  <div>
-                  <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                      <EditWorld
-                        toggleModal={this.toggleModal}
-                        worldID={worldID}
-                            />
-                  </Modal>
-                  </div>
-                }
-                <ShowMap
-                  worldID={worldID}
-                  isUser={this.state.isUser}
-                  creatorID={this.props.location.state.creatorID}
-                  refresh={this.refreshComponent}
-                 />
-              </div>
-            }
-            {(this.state.value !== '' || this.state.clicked) &&
-              <div className="col-md-8 col-lg-9 col-xl-10">
-                {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
-              </div>
-            }
           </div>
         </div>
     )
