@@ -19,7 +19,6 @@ const findAllWorlds =
 
 function WorldList() {
   return (
-    <div>
       <Query query={findAllWorlds}>
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
@@ -29,7 +28,6 @@ function WorldList() {
           )));
         }}
       </Query>
-    </div>
   );
 }
 
