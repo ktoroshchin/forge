@@ -14,7 +14,7 @@ function MyWorldList({getUserID}) {
         name
         description
         creator_id
-        maps {
+        world_map {
           url
         }
       }
@@ -29,8 +29,8 @@ function MyWorldList({getUserID}) {
               if (loading) return <div>Fetching</div>
               if (error) return <div>Error</div>
               if (data.findWorlds.length === 0) return <div>No Worlds</div>
-              return (data.findWorlds.map(({ id, name, description, creator_id, maps }) => (
-                <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} maps={maps} />
+              return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
+                <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} world_map={world_map} />
               )));
             }}
           </Query>
