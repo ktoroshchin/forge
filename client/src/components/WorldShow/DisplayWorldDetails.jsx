@@ -8,6 +8,7 @@ import Cookies from 'universal-cookie';
 import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { CSSTransitionGroup } from 'react-transition-group'
 
 
 const cookies = new Cookies();
@@ -42,13 +43,15 @@ handleClick() {
     clicked: true,
     value: ""
   });
+  this.sideBarToggle()
 }
 
 setValue(value) {
   this.setState({
     value: value,
-    clicked: false
+    clicked: false,
   })
+  this.sideBarToggle()
 }
 setLocationID(id) {
   this.setState({
@@ -107,17 +110,24 @@ componentDidMount() {
           }}
         </Query>
           <div className="row mt-3 h-100">
-            {this.state.sidebarOpen &&
             <span className="sideBar">
-                <TableofContents
-                  handleClick={this.handleClick}
-                  worldID={worldID}
-                  setValue={this.setValue}
-                  setLocationID={this.setLocationID}
-                  isUser={this.state.isUser}
-                  />
+              <CSSTransitionGroup
+                  transitionName="sideBar"
+                  transitionEnterTimeout={500}
+                  transitionLeaveTimeout={200}>
+
+                 {this.state.sidebarOpen &&
+
+                    <TableofContents
+                      handleClick={this.handleClick}
+                      worldID={worldID}
+                      setValue={this.setValue}
+                      setLocationID={this.setLocationID}
+                      isUser={this.state.isUser}
+                      />
+                }
+                </CSSTransitionGroup>
               </span>
-            }
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                <Query query={findWorld}>
