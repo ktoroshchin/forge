@@ -25,65 +25,61 @@ export default class DisplayWorldDetails extends Component {
       locationID: "",
       isUser: false,
       modal: false,
-      refresh: false
-    };
+      sidebarOpen: false,
+    }
     this.handleClick = this.handleClick.bind(this)
     this.setValue = this.setValue.bind(this);
     this.setLocationID = this.setLocationID.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
-    this.refreshComponent = this.refreshComponent.bind(this);
+    this.sideBarToggle = this.sideBarToggle.bind(this);
   }
-
-  handleClick = () => {
+  sideBarToggle() {
+     this.setState({ sidebarOpen: !this.state.sidebarOpen });
+   }
+  handleClick() {
     this.setState({
       clicked: true,
       value: ""
     });
+    this.sideBarToggle()
   }
-
-  setValue = (value) => {
+  setValue(value) {
     this.setState({
       value: value,
-      clicked: false
+      clicked: false,
     })
+    this.sideBarToggle()
   }
-
-  setLocationID = (id) => {
+  setLocationID(id) {
     this.setState({
       locationID: id
     })
   }
-
-  handleRefresh = () => {
+  handleRefresh() {
     window.location.reload()
   }
-
-  refreshComponent = () => {
-    this.setState({
-      refresh: !this.state.refresh
-    })
-  }
-
-  toggleModal = () =>{
+  toggleModal() {
     this.setState({
       modal: !this.state.modal
     });
   }
-
-  componentWillMount = () => {
+  componentWillMount() {
     if (!this.props.location.state) {
       return window.location.href = '/'
     }
   }
-
-  componentDidMount = () => {
+  refreshComponent() {
+    this.setState({
+      refresh: !this.state.refresh
+    })
+  }
+  componentDidMount() {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
         isUser: true
       })
     }
   }
-
   render() {
     const {worldID} = this.props.location.state;
     const findWorld =
@@ -95,7 +91,7 @@ export default class DisplayWorldDetails extends Component {
           }
         }`;
     return(
-        <div className="container page">
+        <div className="container page ">
           <Query query={findWorld}>
             {({ loading, error, data }) => {
               if (loading) return <div>Fetching</div>
@@ -106,22 +102,20 @@ export default class DisplayWorldDetails extends Component {
                     {!this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
                     {this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                   </div>
-                  <div className="col-11 world-name">
-                    <h1 onClick={this.handleRefresh}>
-                      {data.findWorlds[0].name}
-                    </h1>
-                  </div>
+                <div className="col-11 world-name">
+                  <h1 onClick={this.handleRefresh}>
+                    {data.findWorlds[0].name}
+                  </h1>
                 </div>
+              </div>
               )
             }}
           </Query>
-
           <div className="sideBar">
             <CSSTransitionGroup
               transitionName="sideBar"
               transitionEnterTimeout={500}
-              transitionLeaveTimeout={200}
-            >
+              transitionLeaveTimeout={200}>
               {this.state.sidebarOpen &&
                 <TableofContents
                   handleClick={this.handleClick}
@@ -129,7 +123,7 @@ export default class DisplayWorldDetails extends Component {
                   setValue={this.setValue}
                   setLocationID={this.setLocationID}
                   isUser={this.state.isUser}
-                />
+                  />
               }
             </CSSTransitionGroup>
           </div>
@@ -163,16 +157,15 @@ export default class DisplayWorldDetails extends Component {
                       <EditWorld
                         toggleModal={this.toggleModal}
                         worldID={worldID}
-                            />
+                      />
                   </Modal>
                   </div>
                 }
-
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}
                   creatorID={this.props.location.state.creatorID}
-                 />
+                />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
