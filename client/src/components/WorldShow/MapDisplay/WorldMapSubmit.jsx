@@ -12,7 +12,6 @@ class WorldMapSubmit extends Component {
         width: 0,
         height: 0,
       },
-      worldMap: true,
     }
     this.handleChange = this.handleChange.bind(this);
     this.getImageSize = this.getImageSize.bind(this);
@@ -58,19 +57,16 @@ class WorldMapSubmit extends Component {
     const imageURL = this.state.value;
     const width = this.state.imgSize.width;
     const height = this.state.imgSize.height;
-    const worldMap = this.state.worldMap;
 
     const POST_MUTATION = gql`
       mutation (
         $world_id: ID!,
         $url: String!,
         $width: Int!,
-        $height: Int!,
-        $world_map: Boolean!){
-        createNewMap(
+        $height: Int!){
+        createNewWorldMap(
           world_id: $world_id,
           url: $url,
-          world_map: $world_map,
           width: $width,
           height: $height
           ){
@@ -109,8 +105,9 @@ class WorldMapSubmit extends Component {
                   "world_id": worldID,
                   "url": imageURL,
                   width,
-                  height,
-                  "world_map": worldMap }}>
+                  height
+                }}
+              >
                   {postMutation =>
                     <Button
                       color="success"

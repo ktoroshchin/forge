@@ -54,7 +54,7 @@ export default class ShowMap extends Component {
               return <div>Fetching</div>
             } else if (error) {
               return <div>Error</div>
-            } else if (data.findWorldMap.length === 0 && isUser === true) {
+            } else if (data.findWorldMap === null && isUser === true) {
               return (
                 <div>
                 <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>

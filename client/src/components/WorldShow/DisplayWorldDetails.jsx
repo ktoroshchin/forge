@@ -81,7 +81,7 @@ export default class DisplayWorldDetails extends Component {
     }
   }
   render() {
-    const {worldID} = this.props.location.state;
+    const {worldID, creatorID} = this.props.location.state;
     const findWorld =
       gql`
         query {
@@ -164,7 +164,7 @@ export default class DisplayWorldDetails extends Component {
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}
-                  creatorID={this.props.location.state.creatorID}
+                  creatorID={creatorID}
                 />
               </div>
             }
