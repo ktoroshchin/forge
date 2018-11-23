@@ -5,12 +5,9 @@ import TableofContents from "./TableofContents"
 import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
-import Sidebar from "react-sidebar";
 import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 const cookies = new Cookies();
@@ -96,16 +93,16 @@ componentDidMount() {
             if (error) return <div>Error</div>
             return (
               <div className="row">
-                <div className="col-1" onClick={this.sideBarToggle}>
-                  <i className="fas fa-arrow-right"></i>
+                <div className="col-1 navbar-arrow" onClick={this.sideBarToggle}>
+                  {!this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
+                  {this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                 </div>
-                <h1
-                  className="world-name col-11"
-                  onClick={this.handleRefresh}
-                >
+              <div className="col-11 world-name">
+                <h1 onClick={this.handleRefresh}>
                   {data.findWorlds[0].name}
                 </h1>
               </div>
+            </div>
             )
           }}
         </Query>
