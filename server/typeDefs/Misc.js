@@ -1,8 +1,6 @@
 module.exports = Misc = 
 `type User {
   id: ID!
-  first_name: String
-  last_name: String
   username: String!
   email: String!
   worlds: [World!]

@@ -12,6 +12,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
@@ -19,6 +20,7 @@ code {
     monospace;
 }
 
+<<<<<<< HEAD
 #size-container {
   min-height: 100%;
   position: relative;
@@ -27,11 +29,43 @@ code {
 
 #map-container {
   height: 400px;
+=======
+.header {
+  position: fixed;
+  border: solid 2px red;
+  background: white;
+}
+
+.page {
+  margin-top: 60px;
+  overflow: auto;
+}
+.info {
+  margin-top: 75px;
+  overflow-y: scroll;
+  position: relative;
+  width: 100%;
+  height: 500px;
+}
+.clickable {
+  cursor: pointer;
+}
+.default {
+  cursor: default;
+>>>>>>> 834cee517ccc8b5fc817a09aa23cc9ed04efe04e
 }
 
 #map {
-  height: 400px;
+  height: 100%;
   margin-bottom: 1em;
+}
+
+.editMap {
+  height: 80vh;
+}
+
+.showMap {
+  height: 60vh;
 }
 
 .btn-group {

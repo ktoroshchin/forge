@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 function GuestNavBar() {
   return (
-    <Nav className="ml-auto" navbar>
+    <div>
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
           Hello, Guest!
@@ -19,7 +19,7 @@ function GuestNavBar() {
           </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
-    </Nav>
+    </div>
   )
 }
 

@@ -2,6 +2,7 @@ module.exports = Query = `type Query {
   findUsers(id: ID, username: String): [User!]
 
   findWorlds(id: ID, creator_id: ID, name: String): [World!]
+  searchWorlds(name: String!): [World!]
 
   findMaps(id: ID, world_id: ID): [Map!]
 

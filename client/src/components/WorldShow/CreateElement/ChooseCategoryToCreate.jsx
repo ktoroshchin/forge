@@ -1,8 +1,6 @@
 import React,  { Component } from "react";
 import { ListGroupItem, Button, Modal, ModalHeader } from 'reactstrap';
-import CreateNewCity from './CreateNewCity'
-import CreateNewTown from './CreateNewTown'
-import CreateNewLocation from './CreateNewLocation'
+import AddNewElement from './AddNewElement'
 
 class ChooseCategoryToCreate extends Component {
   state = {
@@ -16,28 +14,28 @@ class ChooseCategoryToCreate extends Component {
   render() {
     return(
       <div>
-        <div className="ChooseCategoryToCreate">
+        <div className="ChooseCategoryToCreate default">
           <ListGroupItem className="category text-center">Category</ListGroupItem>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"1"} >
             New City
           </Button>
           <Modal isOpen={this.state.modal === "1"} toggle={this.toggleModal} >
-            <ModalHeader toggle={this.toggleModal}>Create a New City</ModalHeader>
-            <CreateNewCity worldID={this.state.worldID} />
+            <ModalHeader className="default" toggle={this.toggleModal}>Create a New City</ModalHeader>
+            <AddNewElement category="City" worldID={this.state.worldID} />
           </Modal>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"2"} >
             New Town
           </Button>
           <Modal isOpen={this.state.modal === "2"} toggle={this.toggleModal} >
-            <ModalHeader toggle={this.toggleModal}>Create a New Town</ModalHeader>
-            <CreateNewTown worldID={this.state.worldID} toggleModal={this.toggleModal} />
+            <ModalHeader className="default" toggle={this.toggleModal}>Create a New Town</ModalHeader>
+            <AddNewElement category="Town" worldID={this.state.worldID} toggleModal={this.toggleModal} />
           </Modal>
           <Button className="category-button col-12" onClick={this.toggleModal} value={"3"} >
             New Location
           </Button>
           <Modal isOpen={this.state.modal === "3"} toggle={this.toggleModal} >
-            <ModalHeader toggle={this.toggleModal}>Create a New Location</ModalHeader>
-            <CreateNewLocation worldID={this.state.worldID} />
+            <ModalHeader className="default" toggle={this.toggleModal}>Create a New Location</ModalHeader>
+            <AddNewElement category="Location" worldID={this.state.worldID} />
           </Modal>
         </div>
       </div>

@@ -1,25 +1,25 @@
 import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import {ListGroupItem} from 'reactstrap';
+import { ListGroupItem } from 'reactstrap';
 
-function LocationList({worldID, setValue, setLocationID}) {
-  const findLocations =
+function ElementList({worldID, category, setValue, setLocationID}) {
+  const findElements =
   gql`
   query {
-    findMarkers(world_id: "${worldID}", category: "Location"){
+    findMarkers(category: "${category}", world_id: "${worldID}") {
       id
       name
     }
   }`;
   return (
     <div>
-      <Query query={findLocations}>
+      <Query query={findElements}>
         {({ loading, error, data }) => {
           if (loading) return <div>Fetching</div>
           if (error) return <div>Error</div>
           return (data.findMarkers.map(({ id, name }) => (
-            <ListGroupItem key={id} onClick={()=>{setValue("Location"); setLocationID(id)}} action>{name}</ListGroupItem>
+            <ListGroupItem key={id} onClick={()=>{setValue(category); setLocationID(id)}} action>{name} </ListGroupItem>
           )));
         }}
       </Query>
@@ -27,5 +27,9 @@ function LocationList({worldID, setValue, setLocationID}) {
   );
 }
 
-export default LocationList;
+export default ElementList;
+
+
+
+
 
