@@ -6,11 +6,12 @@ import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import Cookies from 'universal-cookie';
 import Sidebar from "react-sidebar";
-
-
 import EditWorld from './EditElement/EditWorld'
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+
 
 const cookies = new Cookies();
 const getUserID = function() {
@@ -24,7 +25,7 @@ export default class DisplayWorldDetails extends Component {
     locationID: "",
     isUser: false,
     modal: false,
-    sidebarOpen: true
+    sidebarOpen: false,
   }
 
 
@@ -32,11 +33,11 @@ handleClick = this.handleClick.bind(this)
 setValue = this.setValue.bind(this);
 setLocationID = this.setLocationID.bind(this);
 toggleModal = this.toggleModal.bind(this);
-onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
+sideBarToggle = this.sideBarToggle.bind(this);
 
 
-onSetSidebarOpen(open) {
-   this.setState({ sidebarOpen: open });
+sideBarToggle() {
+   this.setState({ sidebarOpen: !this.state.sidebarOpen });
  }
 
 handleClick() {
@@ -88,35 +89,40 @@ componentDidMount() {
           }
         }`;
     return(
-        <div className="container mt-3">
+        <div className="h-100 container mt-3">
         <Query query={findWorld}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
             if (error) return <div>Error</div>
             return (
-              <div>
-                <h1 className="world-name col" onClick={this.handleRefresh}>{data.findWorlds[0].name}</h1>
+              <div className="row">
+                <div className="col-1" onClick={this.sideBarToggle}>
+                  <i className="fas fa-arrow-right"></i>
+                </div>
+                <h1
+                  className="world-name col-11"
+                  onClick={this.handleRefresh}
+                >
+                  {data.findWorlds[0].name}
+                </h1>
               </div>
             )
           }}
         </Query>
-          <div className="row mt-3">
-            <i onClick={() => this.onSetSidebarOpen(true)} className="fas fa-angle-right"></i>
-            <Sidebar
-              sidebar={<TableofContents handleClick={this.handleClick} worldID={worldID} setValue={this.setValue} setLocationID={this.setLocationID} isUser={this.state.isUser}/>}
-              open={this.state.sidebarOpen}
-              onSetOpen={this.onSetSidebarOpen}
-              styles={{ sidebar: { background: "white" } }}
-            >
-          </Sidebar>
-            <div className="col-md-4 col-lg-3 col-xl-2">
-
-
-
-
-            </div>
+          <div className="row mt-3 h-100">
+            {this.state.sidebarOpen &&
+            <span className="sideBar">
+                <TableofContents
+                  handleClick={this.handleClick}
+                  worldID={worldID}
+                  setValue={this.setValue}
+                  setLocationID={this.setLocationID}
+                  isUser={this.state.isUser}
+                  />
+              </span>
+            }
             {this.state.value === '' && !this.state.clicked &&
-              <div className="col-md-8 col-lg-9 col-xl-10">
+              <div className="col-12">
                <Query query={findWorld}>
                   {({ loading, error, data }) => {
                     if (loading) return <div>Fetching</div>

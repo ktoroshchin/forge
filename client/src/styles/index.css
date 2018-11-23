@@ -1,6 +1,7 @@
 @import './DisplayWorldDetails.css';
 @import './ChooseCategoryToUpdate.css';
 @import './App.css';
+/* @import '@trendmicro/react-sidenav/dist/react-sidenav.css'; */
 
 html,
 body {
@@ -30,8 +31,18 @@ code {
 }
 
 #map {
+  z-index: 0;
   height: 400px;
   margin-bottom: 1em;
+}
+
+#root {
+  height:100%;
+}
+
+.sideBar {
+  position: fixed;
+  z-index: 1;
 }
 
 .btn-group {
