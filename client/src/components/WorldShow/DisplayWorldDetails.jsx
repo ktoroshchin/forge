@@ -90,6 +90,9 @@ export default class DisplayWorldDetails extends Component {
             description
           }
         }`;
+    const noMargin = {
+      marginLeft: "0"
+    }
     return(
         <div className="container page">
           <Query query={findWorld}>
@@ -129,7 +132,7 @@ export default class DisplayWorldDetails extends Component {
               }
             </CSSTransitionGroup>
           </div>
-          <div className=" info row mt-3">
+          <div className="info row mt-3">
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                <Query query={findWorld}>
@@ -138,31 +141,46 @@ export default class DisplayWorldDetails extends Component {
                     if (error) return <div>Error</div>
                     if (!data.findWorlds[0].description) return (
                       <div>
-                        <h3 className="default">Description</h3>
+                        <div className="row" style={noMargin}>
+                          <h3 className="default">Description</h3>
+                          {this.state.isUser &&
+                            <div>
+                              <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
+                              <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                                <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                                  <EditWorld
+                                    toggleModal={this.toggleModal}
+                                    worldID={worldID}
+                                  />
+                              </Modal>
+                            </div>
+                          }
+                        </div>
                         <h6 className="default">No description</h6>
                       </div>
                     )
                     return (
                       <div>
-                        <h3 className="default">Description</h3>
-                        <h6 className="default">{data.findWorlds[0].description}</h6>
+                        <div className="row" style={noMargin}>
+                          <h3 className="default">Description</h3>
+                          {this.state.isUser &&
+                            <div>
+                            <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
+                            <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                              <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                                <EditWorld
+                                  toggleModal={this.toggleModal}
+                                  worldID={worldID}
+                                />
+                            </Modal>
+                            </div>
+                          }
+                          </div>
+                          <h6 className="default">{data.findWorlds[0].description}</h6>
                       </div>
                     )
                   }}
                 </Query>
-              {/*Modal for Edit World Details*/}
-                {this.state.isUser &&
-                  <div>
-                  <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                    <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                      <EditWorld
-                        toggleModal={this.toggleModal}
-                        worldID={worldID}
-                      />
-                  </Modal>
-                  </div>
-                }
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}
