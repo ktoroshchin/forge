@@ -195,18 +195,6 @@ refreshComponent() {
                 isUser={this.state.isUser}
                 creatorID={creatorID}
               />
-                {this.state.isUser &&
-                  <div>
-                  <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                      <EditWorld
-                        toggleModal={this.toggleModal}
-                        worldID={worldID}
-                            />
-                  </Modal>
-                  </div>
-                }
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
