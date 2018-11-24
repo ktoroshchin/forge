@@ -137,7 +137,7 @@ refreshComponent() {
               }
             </CSSTransitionGroup>
           </div>
-          <div className="info row mt-3">
+          <div className="info row mt-3" style={noMargin}>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                <Query query={findWorld}>
@@ -148,18 +148,22 @@ refreshComponent() {
                       <div>
                         <div className="row" style={noMargin}>
                           <h3 className="default">Description</h3>
-                          {this.state.isUser &&
-                            <div>
-                              <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                              <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                                <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                                  <EditWorld
-                                    toggleModal={this.toggleModal}
-                                    worldID={worldID}
-                                  />
-                              </Modal>
-                            </div>
-                          }
+                          </div>
+                          <div className="col">
+                            {this.state.isUser &&
+                              <div>
+                                <Button className="btn btn-outline-success btn-sm add-world float-right"
+                                  onClick={this.toggleModal}>Edit World Details
+                                </Button>
+                                <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                                  <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                                    <EditWorld
+                                      toggleModal={this.toggleModal}
+                                      worldID={worldID}
+                                    />
+                                </Modal>
+                              </div>
+                            }
                         </div>
                         <h6 className="default">No description</h6>
                       </div>
