@@ -17,62 +17,69 @@ const getUserID = function() {
 }
 
 export default class DisplayWorldDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clicked: false,
-      value: "",
-      locationID: "",
-      isUser: false,
-      modal: false,
-      sidebarOpen: false,
-    }
-    this.handleClick = this.handleClick.bind(this)
-    this.setValue = this.setValue.bind(this);
-    this.setLocationID = this.setLocationID.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.sideBarToggle = this.sideBarToggle.bind(this);
+  state = {
+    clicked: false,
+    value: "",
+    locationID: "",
+    isUser: false,
+    modal: false,
+    sidebarOpen: false,
   }
-  sideBarToggle() {
-     this.setState({ sidebarOpen: !this.state.sidebarOpen });
-   }
-  handleClick() {
-    this.setState({
-      clicked: true,
-      value: ""
-    });
-    this.sideBarToggle()
+
+
+handleClick = this.handleClick.bind(this)
+setValue = this.setValue.bind(this);
+setLocationID = this.setLocationID.bind(this);
+toggleModal = this.toggleModal.bind(this);
+sideBarToggle = this.sideBarToggle.bind(this);
+
+
+sideBarToggle() {
+   this.setState({ sidebarOpen: !this.state.sidebarOpen });
+ }
+
+handleClick() {
+  this.setState({
+    clicked: true,
+    value: ""
+  });
+  this.sideBarToggle()
+}
+
+setValue(value) {
+  this.setState({
+    value: value,
+    clicked: false,
+  })
+  this.sideBarToggle()
+}
+setLocationID(id) {
+  this.setState({
+    locationID: id
+  })
+}
+handleRefresh() {
+  window.location.reload()
+}
+
+toggleModal() {
+  this.setState({
+    modal: !this.state.modal
+  });
+}
+
+componentWillMount() {
+  if (!this.props.location.state) {
+    return window.location.href = '/'
   }
-  setValue(value) {
-    this.setState({
-      value: value,
-      clicked: false,
-    })
-    this.sideBarToggle()
-  }
-  setLocationID(id) {
-    this.setState({
-      locationID: id
-    })
-  }
-  handleRefresh() {
-    window.location.reload()
-  }
-  toggleModal() {
-    this.setState({
-      modal: !this.state.modal
-    });
-  }
-  componentWillMount() {
-    if (!this.props.location.state) {
-      return window.location.href = '/'
-    }
-  }
-  refreshComponent() {
-    this.setState({
-      refresh: !this.state.refresh
-    })
-  }
+}
+
+refreshComponent() {
+  this.setState({
+    refresh: !this.state.refresh
+  })
+}
+
   componentDidMount() {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
@@ -101,27 +108,28 @@ export default class DisplayWorldDetails extends Component {
               if (error) return <div>Error</div>
               return (
                 <div className="container">
-                  <div className="dipslay-worldname row">
-                    <div className="col-1 navbar-arrow pointer" onClick={this.sideBarToggle}>
+                  <div className="display-worldname row" >
+                    <div className="navbar-arrow" onClick={this.sideBarToggle}>
                       {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                       {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
                     </div>
-                    <div className="col-11 col-xs-8 world-name">
-                      <h1 className="pointer" onClick={this.handleRefresh}>
-                        {data.findWorlds[0].name}
-                      </h1>
-                      </div>
+                    <h1 onClick={this.handleRefresh}>
+                      {data.findWorlds[0].name}
+                    </h1>
                   </div>
                 </div>
               )
             }}
           </Query>
+
           <div className="sideBar">
             <CSSTransitionGroup
               transitionName="sideBar"
               transitionEnterTimeout={500}
               transitionLeaveTimeout={200}>
+
               {this.state.sidebarOpen &&
+
                 <TableofContents
                   handleClick={this.handleClick}
                   worldID={worldID}
@@ -181,15 +189,29 @@ export default class DisplayWorldDetails extends Component {
                     )
                   }}
                 </Query>
-                <ShowMap
-                  worldID={worldID}
-                  isUser={this.state.isUser}
-                  creatorID={creatorID}
-                />
+              {/*Modal for Edit World Details*/}
+              <ShowMap
+                worldID={worldID}
+                isUser={this.state.isUser}
+                creatorID={creatorID}
+              />
+                {this.state.isUser &&
+                  <div>
+                  <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                    <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                      <EditWorld
+                        toggleModal={this.toggleModal}
+                        worldID={worldID}
+                            />
+                  </Modal>
+                  </div>
+                }
+                <ShowMap worldID={worldID} isUser={this.state.isUser} />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
-              <div className="col-12">
+              <div className="col-md-12 col-lg-12 col-xl-12">
                 {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
               </div>
