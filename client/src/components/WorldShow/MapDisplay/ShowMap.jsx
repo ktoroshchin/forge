@@ -54,16 +54,20 @@ export default class ShowMap extends Component {
               return <div>Fetching</div>
             } else if (error) {
               return <div>Error</div>
-            } else if (data.findWorldMap === null && isUser === true) {
-              return (
-                <div>
-                <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                  <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
-                  <WorldMapSubmit worldID={worldID} />
-                </Modal>
-                </div>
-                )
+            } else if (data.findWorldMap === null) {
+              if (isUser === true) {
+                return (
+                  <div>
+                  <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                    <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
+                    <WorldMapSubmit worldID={worldID} />
+                  </Modal>
+                  </div>
+                  )
+              } else {
+                return null
+              }
             } else {
               return (
                <div key={data.findWorldMap.id} className="showMap">
