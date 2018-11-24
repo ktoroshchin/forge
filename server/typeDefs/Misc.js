@@ -27,6 +27,7 @@ type WorldMap {
 type MarkerMap {
   id: ID!
   marker_id: ID!
+  world_id: ID!
   url: String!
   width: Int!
   height: Int!

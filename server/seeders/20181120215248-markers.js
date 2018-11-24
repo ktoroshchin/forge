@@ -162,6 +162,7 @@ module.exports = {
           id: uuid(),
           url: 'https://i.redd.it/5t9oottzvgdy.jpg',
           marker_id: '1ecc79d9-dd03-44f5-a2b2-08689c553342',
+          world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
           height: 653,
           width: 851
         }

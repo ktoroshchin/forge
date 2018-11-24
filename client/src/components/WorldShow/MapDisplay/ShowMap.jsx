@@ -58,7 +58,7 @@ export default class ShowMap extends Component {
               if (isUser === true) {
                 return (
                   <div>
-                  <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
+                  <Button className="btn btn-outline-info btn-sm col-xs-12 col-sm-6 col-md-4 col-lg-3" onClick={this.toggleModal}>Add a World Map</Button>
                   <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                     <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
                     <WorldMapSubmit worldID={worldID} />

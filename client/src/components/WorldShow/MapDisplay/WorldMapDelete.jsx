@@ -23,7 +23,6 @@ export default class WorldMapDelete extends Component {
   handleMutationSubmit(postMutation) {
     return postMutation()
       .then((data) => {
-        alert("Map successfully deleted");
         window.location.reload();
       })
       .catch((error) => {

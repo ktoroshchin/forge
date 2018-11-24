@@ -146,14 +146,18 @@ module.exports = {
       return user;
     },
     removeWorldById: async (root, { id }) => {
-      let world = await db.world.findByPk(id);
+      await db.marker_map.destroy({ where: { world_id: id } })
       await db.marker.destroy({ where: { world_id: id } });
-      await db.map.destroy({ where: { world_id: id } });
-      if (!world.destroy()) throw new Error('World not deleted')
+      await db.world_map.destroy({ where: { world_id: id } });
+      if (await !db.world.destroy({ where: { id } })) throw new Error('World not deleted')
       return true
     },
     removeMapById: async (root, { id }) => {
-      let map = await db.map.findByPk(id);
+      let map;
+      map = await db.world_map.findByPk(id);
+      if (!map) {
+        map = await db.marker_map.findByPk(id);
+      }
       await db.marker.update({
         map_id: null,
         longitude: null,
