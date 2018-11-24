@@ -17,69 +17,62 @@ const getUserID = function() {
 }
 
 export default class DisplayWorldDetails extends Component {
-  state = {
-    clicked: false,
-    value: "",
-    locationID: "",
-    isUser: false,
-    modal: false,
-    sidebarOpen: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: false,
+      value: "",
+      locationID: "",
+      isUser: false,
+      modal: false,
+      sidebarOpen: false,
+    }
+    this.handleClick = this.handleClick.bind(this)
+    this.setValue = this.setValue.bind(this);
+    this.setLocationID = this.setLocationID.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
+    this.sideBarToggle = this.sideBarToggle.bind(this);
   }
-
-
-handleClick = this.handleClick.bind(this)
-setValue = this.setValue.bind(this);
-setLocationID = this.setLocationID.bind(this);
-toggleModal = this.toggleModal.bind(this);
-sideBarToggle = this.sideBarToggle.bind(this);
-
-
-sideBarToggle() {
-   this.setState({ sidebarOpen: !this.state.sidebarOpen });
- }
-
-handleClick() {
-  this.setState({
-    clicked: true,
-    value: ""
-  });
-  this.sideBarToggle()
-}
-
-setValue(value) {
-  this.setState({
-    value: value,
-    clicked: false,
-  })
-  this.sideBarToggle()
-}
-setLocationID(id) {
-  this.setState({
-    locationID: id
-  })
-}
-handleRefresh() {
-  window.location.reload()
-}
-
-toggleModal() {
-  this.setState({
-    modal: !this.state.modal
-  });
-}
-
-componentWillMount() {
-  if (!this.props.location.state) {
-    return window.location.href = '/'
+  sideBarToggle() {
+     this.setState({ sidebarOpen: !this.state.sidebarOpen });
+   }
+  handleClick() {
+    this.setState({
+      clicked: true,
+      value: ""
+    });
+    this.sideBarToggle()
   }
-}
-
-refreshComponent() {
-  this.setState({
-    refresh: !this.state.refresh
-  })
-}
-
+  setValue(value) {
+    this.setState({
+      value: value,
+      clicked: false,
+    })
+    this.sideBarToggle()
+  }
+  setLocationID(id) {
+    this.setState({
+      locationID: id
+    })
+  }
+  handleRefresh() {
+    window.location.reload()
+  }
+  toggleModal() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+  componentWillMount() {
+    if (!this.props.location.state) {
+      return window.location.href = '/'
+    }
+  }
+  refreshComponent() {
+    this.setState({
+      refresh: !this.state.refresh
+    })
+  }
   componentDidMount() {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
@@ -88,7 +81,7 @@ refreshComponent() {
     }
   }
   render() {
-    const {worldID} = this.props.location.state;
+    const {worldID, creatorID} = this.props.location.state;
     const findWorld =
       gql`
         query {
@@ -120,15 +113,12 @@ refreshComponent() {
               )
             }}
           </Query>
-
           <div className="sideBar">
             <CSSTransitionGroup
               transitionName="sideBar"
               transitionEnterTimeout={500}
               transitionLeaveTimeout={200}>
-
               {this.state.sidebarOpen &&
-
                 <TableofContents
                   handleClick={this.handleClick}
                   worldID={worldID}
@@ -169,11 +159,15 @@ refreshComponent() {
                       <EditWorld
                         toggleModal={this.toggleModal}
                         worldID={worldID}
-                            />
+                      />
                   </Modal>
                   </div>
                 }
-                <ShowMap worldID={worldID} isUser={this.state.isUser} />
+                <ShowMap
+                  worldID={worldID}
+                  isUser={this.state.isUser}
+                  creatorID={creatorID}
+                />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&

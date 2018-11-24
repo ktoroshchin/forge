@@ -2,15 +2,13 @@ import React, {Component} from "react";
 import { Button, ModalFooter, ModalBody, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class WorldMapDelete extends Component {
   constructor(props) {
     super(props);
     this.state = {
       confirm: false,
-      sent: false,
-      redirect: false,
     }
     this.confirmCheck = this.confirmCheck.bind(this)
     this.handleMutationSubmit = this.handleMutationSubmit.bind(this)
@@ -22,39 +20,15 @@ export default class WorldMapDelete extends Component {
     });
   }
 
-  handleMutationSubmit(postMutation, thisState) {
+  handleMutationSubmit(postMutation) {
     return postMutation()
-      .then(()=>{
-        thisState.setState({
-          sent: true,
-        },
-        () => thisState.activateRedirect()
-        );
+      .then((data) => {
+        alert("Map successfully deleted");
+        window.location.reload();
       })
       .catch((error) => {
-        error.graphQLErrors.map(({ message }) => (alert(message)))})
-  }
-
-  activateRedirect() {
-    this.setState({
-      redirect: true,
-    })
-  }
-
-  renderRedirect() {
-    if (this.state.redirect) {
-      return (
-          <Redirect
-            to={{
-              pathname: "/world-show",
-              state: {
-                worldID: this.props.worldID,
-                creatorID: this.props.creatorID,
-              }
-            }}
-          />
-      )
-    }
+        alert("Issue with map delete")
+      })
   }
 
   render() {
@@ -87,14 +61,22 @@ export default class WorldMapDelete extends Component {
             variables={{
               "id": mapID }}>
             {(postMutation, data, error) =>
-
-              <Button
-                className="btn btn-danger col-md-6"
-                onClick={() => {this.handleMutationSubmit(postMutation, this)}}
+              <Link
+                to={{
+                  pathname: "/world-show",
+                  state: {
+                    worldID: this.props.worldID,
+                    creatorID: this.props.creatorID,
+                  }
+                }}
               >
-                Remove
-                {this.renderRedirect()}
-              </Button>
+                <Button
+                  className="btn btn-danger col-md-6"
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}
+                >
+                  Remove
+                </Button>
+              </Link>
             }
           </Mutation>
         }

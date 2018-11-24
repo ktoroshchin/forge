@@ -10,20 +10,21 @@ export default class ShowMarkers extends Component {
     super(props);
     this.state = {
       modal: false,
+      markerID: null,
+      markerName: null,
     };
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal() {
+  toggleModal = (markerID, markerName) => {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
+      markerID,
+      markerName,
     });
   }
 
-  deleteMarker() {
-    console.log('Deleting Marker!')
-  }
-  render () {
+  render() {
     const {mapID, isUser} = this.props
     const findMarkers = gql`
           query{
@@ -72,13 +73,12 @@ export default class ShowMarkers extends Component {
                       }
                     </ListGroup>
                     <br/>
-                    <Button className="btn btn-info btn-sm col-4" onClick={this.toggleModal}>More Details</Button>
-                    <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                      <ModalHeader toggle={this.toggleModal}>Details of {name}</ModalHeader>
-                      <ModalBody>
-                        <ElementInfo markerID={id} isUser={isUser} />
-                      </ModalBody>
-                    </Modal>
+                    <Button
+                      className="btn btn-info btn-sm col-4"
+                      onClick={() => {this.toggleModal(id, name)}}
+                    >
+                      More Details
+                    </Button>
                     {isUser === true &&
                       <Mutation
                         mutation={POST_MUTATION}
@@ -100,6 +100,16 @@ export default class ShowMarkers extends Component {
               )));
         }}
       </Query>
+      <Modal
+        className={this.props.className}
+        toggle={this.toggleModal}
+        isOpen={this.state.modal}
+      >
+        <ModalHeader toggle={this.toggleModal}>Details of {this.state.markerName}</ModalHeader>
+        <ModalBody>
+          <ElementInfo markerID={this.state.markerID} isUser={isUser} />
+        </ModalBody>
+      </Modal>
       </div>
     );
   }

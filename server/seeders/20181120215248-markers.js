@@ -99,7 +99,7 @@ module.exports = {
         population: 350,
         government: 'Kraterocracy',
       }, {
-        id: uuid(),
+        id: '1ecc79d9-dd03-44f5-a2b2-08689c553342',
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
         category: 'Town',
         map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
@@ -156,10 +156,22 @@ module.exports = {
         population: 130,
         government: 'Democrary',
       }
-    ], {});
+    ], {}).then(() => {
+      queryInterface.bulkInsert('marker_maps', [
+        {
+          id: uuid(),
+          url: 'https://i.redd.it/5t9oottzvgdy.jpg',
+          marker_id: '1ecc79d9-dd03-44f5-a2b2-08689c553342',
+          height: 653,
+          width: 851
+        }
+      ])
+    })
   },
 
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('markers', null, {});
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.bulkDelete('marker_maps', null, {})
+
+    return queryInterface.bulkDelete('markers', null, {})
   }
 };

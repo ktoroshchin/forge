@@ -35,16 +35,15 @@ export default class ShowMap extends Component {
   }
 
   render () {
-    const {worldID, isUser, creatorID, refresh} = this.props
+    const {worldID, isUser, creatorID} = this.props
     const findMap =
       gql`
         query {
-          findMaps(world_id: "${worldID}"){
+          findWorldMap(world_id: "${worldID}"){
             id
             url
             width
             height
-            world_map
           }
         }`;
     return (
@@ -55,7 +54,7 @@ export default class ShowMap extends Component {
               return <div>Fetching</div>
             } else if (error) {
               return <div>Error</div>
-            } else if (data.findMaps.length === 0 && isUser === true) {
+            } else if (data.findWorldMap === null && isUser === true) {
               return (
                 <div>
                 <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
@@ -67,44 +66,40 @@ export default class ShowMap extends Component {
                 )
             } else {
               return (
-                data.findMaps.map(({ id, url, height, width, world_map }) => (
-                 <div key={id} className="showMap">
-                  {world_map === true &&
-                    <Map
-                      id="map"
-                      crs={L.CRS.Simple}
-                      minZoom={-1}
-                      maxZoom={2}
-                      bounds={[[0, 0], [height, width]]}
-                      center={[height/2, width/2]}
-                      zoom={1}
+               <div key={data.findWorldMap.id} className="showMap">
+                  <Map
+                    id="map"
+                    crs={L.CRS.Simple}
+                    minZoom={-1}
+                    maxZoom={2}
+                    bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                    center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
+                    zoom={1}
+                    >
+                    <ImageOverlay
+                      url={data.findWorldMap.url}
+                      bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                      />
+                    <ShowMarkers mapID={data.findWorldMap.id} isUser={isUser} />
+                  </Map>
+                  {isUser === true &&
+                    <div className="mapEditButtons">
+                      <Link
+                        className="col-3 p-0"
+                        to={{
+                          pathname: "/edit-map",
+                          state: {
+                            worldID,
+                            creatorID,
+                          }
+                        }}
                       >
-                      <ImageOverlay
-                        url={url}
-                        bounds={[[0, 0], [height, width]]}
-                        />
-                      <ShowMarkers mapID={id} isUser={isUser} />
-                    </Map>
+                        <Button className="btn btn-outline-warning btn-sm col-3">Edit Map</Button>
+                      </Link>
+                    </div>
                   }
-                    {isUser === true &&
-                      <div className="mapEditButtons">
-                        <Link
-                          className="col-3 p-0"
-                          to={{
-                            pathname: "/edit-map",
-                            state: {
-                              ID: id,
-                              worldID,
-                              creatorID,
-                            }
-                          }}
-                        >
-                          <Button className="btn btn-outline-warning btn-sm col-3">Edit Map</Button>
-                        </Link>
-                      </div>
-                    }
-                  </div>
-              )));
+                </div>
+                )
             }
           }}
         </Query>

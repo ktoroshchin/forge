@@ -9,19 +9,32 @@ module.exports = {
     findUsers: resolver(db.user),
     findWorlds: resolver(db.world),
     searchWorlds: (root, { name }) => db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } }),
-    findMaps: resolver(db.map),
+    findWorldMap: (root, { world_id }) => db.world_map.findOne({ where: { world_id } }),
+    findMarkerMap: (root, { marker_id }) => db.marker_map.findOne({ where: { marker_id } }),
     findMarkers: resolver(db.marker)
   },
   Mutation: {
-    createNewMap: async (root, { world_id, url, world_map, width, height }) => {
-      if (await db.map.findOne({ where: { world_map: true } }) && world_map) {
+    createNewWorldMap: async (root, { world_id, url, width, height }) => {
+      if (await db.world_map.findOne({ where: { world_id } })) {
         throw new Error('Cannot set two maps as the main world map')
       }
-      const map = await db.map.build({
+      const map = await db.world_map.build({
         id: uuid(),
         world_id,
         url,
-        world_map,
+        width,
+        height
+      })
+      return map.save()
+    },
+    createNewMarkerMap: async (root, { marker_id, url, width, height }) => {
+      if (await db.marker_map.findOne({ where: { marker_id } })) {
+        throw new Error('Cannot set two maps as the Marker world map')
+      }
+      const map = await db.marker_map.build({
+        id: uuid(),
+        marker_id,
+        url,
         width,
         height
       })
@@ -154,10 +167,13 @@ module.exports = {
     worlds: resolver(db.user.worlds)
   },
   World: {
-    maps: resolver(db.world.maps),
+    world_map: resolver(db.world.world_map),
     markers: resolver(db.world.markers)
   },
-  Map: {
-    markers: resolver(db.map.markers)
+  WorldMap: {
+    markers: resolver(db.world_map.markers)
+  },
+  Marker: {
+    marker_map: resolver(db.marker.map)
   }
 }

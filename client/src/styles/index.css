@@ -4,6 +4,7 @@
 
 html,
 body {
+  background: darkgrey;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -20,23 +21,32 @@ code {
     monospace;
 }
 
-=======
+#root {
+  height: 100vh;
+  background: darkgrey;
+}
+
 .header {
-  position: fixed;
-  border: solid 2px red;
-  background: white;
+  text-align: center;
+  margin: 0.5em 0;
+  background: #B62020;
+  width: auto;
+  height: 1.5em;
+  border-radius: 10px;
 }
 
 .page {
-  margin-top: 60px;
-  overflow: auto;
+  background: white;
+  padding: 60px 0;
+  overflow: hidden;
+  height: 100%;
 }
 .info {
-  margin-top: 75px;
-  overflow-y: scroll;
+  overflow: auto;
   position: relative;
   width: 100%;
-  height: 500px;
+  height: 100%;
+  padding-bottom: 2em;
 }
 
 #map {

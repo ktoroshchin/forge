@@ -7,8 +7,9 @@ module.exports = Mutation = `type Mutation {
   editWorldInfo(id: ID!, name: String, creator_id: ID!, description: String): World!
   removeWorldById(id: ID!): Boolean
 
-  createNewMap(world_id: ID!, url: String!, world_map: Boolean!, width: Int!, height: Int!): Map!
-  editMapInfo(id: ID!, world_id: ID!, url: String!, width: Int!, height: Int!, world_map: Boolean!): Map!
+  createNewWorldMap(world_id: ID!, url: String!, width: Int!, height: Int!): WorldMap!
+  createNewMarkerMap(marker_id: ID!, url: String!, width: Int!, height: Int!): MarkerMap!
+  editMapInfo(id: ID!, world_id: ID!, url: String!, width: Int!, height: Int!, world_map: Boolean!): WorldMap!
   removeMapById(id: ID!): Boolean
   
   createNewMarker(category: String!, world_id: ID!, name: String!, population: Int, government: String, description: String, map_id: ID, latitude: Float, longitude: Float): Marker!
