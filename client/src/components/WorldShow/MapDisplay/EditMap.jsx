@@ -181,9 +181,18 @@ export default class EditMap extends Component {
                     >
                       Delete Map
                     </Button>
-                    <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-                      <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
-                      <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={data.findWorldMap.id} />
+                    <Modal
+                      isOpen={this.state.deleteModal}
+                      toggle={this.toggleDeleteModal}
+                      className={this.props.className}
+                    >
+                      <ModalHeader
+                        className="default"
+                        toggle={this.toggleDeleteModal}
+                      >
+                        Delete Your World Map
+                      </ModalHeader>
+                        <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={data.findWorldMap.id} />
                     </Modal>
                   </div>
                 </div>

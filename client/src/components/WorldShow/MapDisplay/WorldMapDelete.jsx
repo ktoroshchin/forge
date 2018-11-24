@@ -45,7 +45,7 @@ export default class WorldMapDelete extends Component {
         <ModalBody>
           Are you sure you want to remove your map? This will remove all the markers placed on it as well!
           <FormGroup check>
-            <Label check>
+            <Label className="pointer" check>
               <Input className="pointer" type="checkbox" onChange={this.confirmCheck}/>
               Yes I want to delete my map!
             </Label>
@@ -72,7 +72,7 @@ export default class WorldMapDelete extends Component {
                 }}
               >
                 <Button
-                  className="btn btn-danger col-12"
+                  className="btn btn-danger btn-sm col-12"
                   onClick={() => {this.handleMutationSubmit(postMutation)}}
                 >
                   Remove
