@@ -54,27 +54,32 @@ export default class ShowMap extends Component {
               return <div>Fetching</div>
             } else if (error) {
               return <div>Error</div>
-            } else if (data.findWorldMap === null && isUser === true) {
-              return (
-                <div>
-                <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                  <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
-                  <WorldMapSubmit worldID={worldID} />
-                </Modal>
-                </div>
-                )
+            } else if (data.findWorldMap === null) {
+              if (isUser === true) {
+                return (
+                  <div>
+                  <Button className="btn btn-outline-info btn-sm col-xs-12 col-sm-6 col-md-4 col-lg-3" onClick={this.toggleModal}>Add a World Map</Button>
+                  <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                    <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
+                    <WorldMapSubmit worldID={worldID} />
+                  </Modal>
+                  </div>
+                  )
+              } else {
+                return null
+              }
             } else {
               return (
                <div key={data.findWorldMap.id} className="showMap">
                   <Map
                     id="map"
                     crs={L.CRS.Simple}
-                    minZoom={-1}
+                    minZoom={-2}
                     maxZoom={2}
+                    zoom={1}
                     bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                    zoom={1}
+                    maxBounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     >
                     <ImageOverlay
                       url={data.findWorldMap.url}

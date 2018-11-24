@@ -4,7 +4,6 @@
 
 html,
 body {
-  background: darkgrey;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -15,28 +14,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 #root {
   height: 100vh;
-  background: darkgrey;
+  background: rgba(139, 0, 0, 0.75);
 }
-
 .header {
   text-align: center;
   margin: 0.5em 0;
   background: #B62020;
+  color: white;
   width: auto;
-  height: 1.5em;
   border-radius: 10px;
 }
-
 .page {
-  background: white;
+  background: #DCDCDC;
   padding: 60px 0;
   overflow: hidden;
   height: 100%;
@@ -48,38 +43,49 @@ code {
   height: 100%;
   padding-bottom: 2em;
 }
-
+.default {
+  cursor: default;
+}
+.pointer {
+  cursor: pointer;
+}
+.world-content {
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 3em;
+  text-align: center;
+  border-radius: 10px;
+}
 #map {
   height: 100%;
   margin-bottom: 1em;
   z-index: 1;
 }
-
-.editMap {
-  height: 80vh;
-}
-
 .showMap {
   height: 60vh;
 }
-
 .btn-group {
   width: 100%;
 }
-
 .btn-group .btn {
   width: 100%;
 }
-
 .add-world {
   margin-bottom: 1em;
 }
-
 .mapEditButtons {
   margin-bottom: 1em;
 }
-
-
-
-
-
+.editMap {
+  height: 90%;
+  border-radius: 10px;
+}
+#editMap {
+  height: 100%;
+  margin-bottom: 1em;
+  z-index: 1;
+  border-radius: 10px;
+}

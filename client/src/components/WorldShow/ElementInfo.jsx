@@ -104,8 +104,8 @@ export default class Element extends Component {
                   onClick={this.toggleEditModal}>
                   Edit {category}
                 </Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                  <ModalHeader className="default" toggle={this.toggleModal}>Edit {category}</ModalHeader>
+                <Modal isOpen={this.state.modal} toggle={this.toggleEditModal}>
+                  <ModalHeader className="default" toggle={this.toggleEditModal}>Edit {category}</ModalHeader>
                     <EditElement
                       toggleModal={this.toggleEditModal}
                       markerID={id}

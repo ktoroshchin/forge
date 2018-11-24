@@ -19,6 +19,16 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+const newMarkerIcon = L.icon({
+    iconUrl: require('./assets/location-pin.png'),
+    iconSize: [35, 35],
+    iconAnchor: [17.5, 35],
+    popupAnchor: [0, -30],
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+    shadowSize: [41, 41],
+    shadowAnchor: [15, 40]
+});
+
 export default class EditMap extends Component {
   constructor(props) {
     super(props);
@@ -104,7 +114,9 @@ export default class EditMap extends Component {
           }
         }`;
     return (
-      <div className="editMap container mt-3">
+      <div className="container page">
+          <h2 className="header">World Map Edit</h2>
+        <div className="info">
         <Query query={findMap}>
           {({ loading, error, data }) => {
             if (loading) return <div>Fetching</div>
@@ -112,16 +124,17 @@ export default class EditMap extends Component {
             return (
                 <div
                   key={data.findWorldMap.id}
-                  className="h-100"
+                  className="editMap"
                   >
                   <Map
-                    id="map"
+                    id="editMap"
                     crs={L.CRS.Simple}
-                    minZoom={-1}
+                    minZoom={-2}
                     maxZoom={2}
+                    zoom={0}
                     bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                    zoom={1}
+                    maxBounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     >
                     <ImageOverlay
                       url={data.findWorldMap.url}
@@ -133,10 +146,25 @@ export default class EditMap extends Component {
                         onDragend={this.updateMarker}
                         position={this.state.activeMarker}
                         ref={this.refMarker}
+                        icon={newMarkerIcon}
                         >
                         <Popup minWidth={90}>
-                          <Button color="secondary" onClick={this.toggleModal}>Edit</Button>
-                          <Button color="secondary" onClick={this.submitMarker}>Cancel</Button>
+                          <Button
+                            outline
+                            size="sm"
+                            color="info"
+                            onClick={this.toggleModal}
+                          >
+                            Edit
+                          </Button>
+                          <Button
+                            outline
+                            size="sm"
+                            color="danger"
+                            onClick={this.submitMarker}
+                          >
+                            Cancel
+                          </Button>
 
                           <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
                           <ModalHeader toggle={this.toggleModal}>Link to a...</ModalHeader>
@@ -181,15 +209,24 @@ export default class EditMap extends Component {
                     >
                       Delete Map
                     </Button>
-                    <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
-                      <ModalHeader toggle={this.toggleDeleteModal}>Delete Your World Map</ModalHeader>
-                      <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={data.findWorldMap.id} />
+                    <Modal
+                      isOpen={this.state.deleteModal}
+                      toggle={this.toggleDeleteModal}
+                      className={this.props.className}
+                    >
+                      <ModalHeader
+                        className="default"
+                        toggle={this.toggleDeleteModal}
+                      >
+                        Delete Your World Map
+                      </ModalHeader>
+                        <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={data.findWorldMap.id} />
                     </Modal>
                   </div>
                 </div>
                 )}}
           </Query>
-
+        </div>
       </div>
     );
   }

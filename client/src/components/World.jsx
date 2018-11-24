@@ -3,30 +3,19 @@ import { Link } from "react-router-dom";
 
 function World({world_id, name, description, creator_id, world_map}) {
   if (world_map) {
-    const style = {
-      image: {
-        backgroundImage: `url('${world_map.url}')`,
-        backgroundRepeat: 'no-repeat',
-        backgroundAttachment: 'relative',
-        backgroundPosition: 'center',
-        height: "200px",
-        borderRadius: "10px",
-        marginBottom: "1em"
-      },
-      content: {
-        height: '100%',
-        width: '100%',
-        color: 'white',
-        textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-        padding: '3em',
-        textAlign: "center",
-      }
+    const imageStyle = {
+      backgroundImage: `url('${world_map.url}')`,
+      backgroundRepeat: 'no-repeat',
+      backgroundAttachment: 'relative',
+      backgroundPosition: 'center',
+      height: "200px",
+      borderRadius: "10px",
+      marginBottom: "1em"
     }
     return (
       <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
-      <div style={style.image}>
-        <div style={style.content}>
+      <div style={imageStyle}>
+        <div className="world-content">
           <h3>{name}</h3>
           {description && <p>Description: {description}</p>}
         </div>
@@ -34,26 +23,16 @@ function World({world_id, name, description, creator_id, world_map}) {
     </Link>
     )
   } else {
-    const style = {
-      image: {
-        backgroundColor: "grey",
-        height: "200px",
-        borderRadius: "10px",
-        marginBottom: "1em"
-      },
-      content: {
-        height: '100%',
-        width: '100%',
-        color: 'black',
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-        padding: '3em',
-        textAlign: "center",
-      }
+    const imageStyle = {
+      backgroundColor: "grey",
+      height: "200px",
+      borderRadius: "10px",
+      marginBottom: "1em"
     }
     return (
       <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
-        <div style={style.image}>
-          <div style={style.content}>
+        <div style={imageStyle}>
+          <div className="world-content">
             <h3>{name}</h3>
             {description && <p>Description: {description}</p>}
           </div>
