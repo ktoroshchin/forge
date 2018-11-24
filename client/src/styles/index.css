@@ -48,7 +48,12 @@ code {
   height: 100%;
   padding-bottom: 2em;
 }
-
+.default {
+  cursor: default;
+}
+.pointer {
+  cursor: pointer;
+}
 #map {
   height: 100%;
   margin-bottom: 1em;
