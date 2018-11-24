@@ -20,7 +20,7 @@ L.Icon.Default.mergeOptions({
 });
 
 const newMarkerIcon = L.icon({
-    iconUrl: require('leaflet/dist/images/location-pin.png'),
+    iconUrl: require('./assets/location-pin.png'),
     iconSize: [35, 35],
     iconAnchor: [17.5, 35],
     popupAnchor: [0, -30],
