@@ -109,11 +109,11 @@ refreshComponent() {
               return (
                 <div className="container">
                   <div className="display-worldname row" >
-                    <div className="navbar-arrow" onClick={this.sideBarToggle}>
+                    <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
                       {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                       {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
                     </div>
-                    <h1 onClick={this.handleRefresh}>
+                    <h1 className="pointer" onClick={this.handleRefresh}>
                       {data.findWorlds[0].name}
                     </h1>
                   </div>
@@ -121,15 +121,12 @@ refreshComponent() {
               )
             }}
           </Query>
-
           <div className="sideBar">
             <CSSTransitionGroup
               transitionName="sideBar"
               transitionEnterTimeout={500}
               transitionLeaveTimeout={200}>
-
               {this.state.sidebarOpen &&
-
                 <TableofContents
                   handleClick={this.handleClick}
                   worldID={worldID}
@@ -140,7 +137,7 @@ refreshComponent() {
               }
             </CSSTransitionGroup>
           </div>
-          <div className="info row mt-3">
+          <div className="info row mt-3" style={noMargin}>
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                <Query query={findWorld}>
@@ -151,18 +148,22 @@ refreshComponent() {
                       <div>
                         <div className="row" style={noMargin}>
                           <h3 className="default">Description</h3>
-                          {this.state.isUser &&
-                            <div>
-                              <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                              <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                                <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                                  <EditWorld
-                                    toggleModal={this.toggleModal}
-                                    worldID={worldID}
-                                  />
-                              </Modal>
-                            </div>
-                          }
+                          </div>
+                          <div className="col">
+                            {this.state.isUser &&
+                              <div>
+                                <Button className="btn btn-outline-success btn-sm add-world float-right"
+                                  onClick={this.toggleModal}>Edit World Details
+                                </Button>
+                                <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                                  <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                                    <EditWorld
+                                      toggleModal={this.toggleModal}
+                                      worldID={worldID}
+                                    />
+                                </Modal>
+                              </div>
+                            }
                         </div>
                         <h6 className="default">No description</h6>
                       </div>
@@ -189,25 +190,11 @@ refreshComponent() {
                     )
                   }}
                 </Query>
-              {/*Modal for Edit World Details*/}
               <ShowMap
                 worldID={worldID}
                 isUser={this.state.isUser}
                 creatorID={creatorID}
               />
-                {this.state.isUser &&
-                  <div>
-                  <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                    <ModalHeader toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                      <EditWorld
-                        toggleModal={this.toggleModal}
-                        worldID={worldID}
-                            />
-                  </Modal>
-                  </div>
-                }
-              
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
