@@ -14,17 +14,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 #root {
   height: 100vh;
   background: rgba(139, 0, 0, 0.75);
 }
-
 .header {
   text-align: center;
   margin: 0.5em 0;
@@ -34,7 +31,6 @@ code {
   height: 1.5em;
   border-radius: 10px;
 }
-
 .page {
   background: #DCDCDC;
   padding: 60px 0;
@@ -69,38 +65,28 @@ code {
   margin-bottom: 1em;
   z-index: 1;
 }
-
 .showMap {
   height: 60vh;
 }
-
 .btn-group {
   width: 100%;
 }
-
 .btn-group .btn {
   width: 100%;
 }
-
 .add-world {
   margin-bottom: 1em;
 }
-
 .mapEditButtons {
   margin-bottom: 1em;
 }
-<<<<<<< HEAD
-
 .editMap {
   height: 90%;
   border-radius: 10px;
 }
-
 #editMap {
   height: 100%;
   margin-bottom: 1em;
   z-index: 1;
   border-radius: 10px;
 }
-=======
->>>>>>> chore/styling
