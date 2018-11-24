@@ -129,7 +129,7 @@ export default class DisplayWorldDetails extends Component {
               }
             </CSSTransitionGroup>
           </div>
-          <div className="row mt-3">
+          <div className=" info row mt-3">
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                <Query query={findWorld}>
