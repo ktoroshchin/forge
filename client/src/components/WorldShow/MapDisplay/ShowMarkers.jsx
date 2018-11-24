@@ -73,28 +73,38 @@ export default class ShowMarkers extends Component {
                       }
                     </ListGroup>
                     <br/>
-                    <Button
-                      className="btn btn-info btn-sm col-4"
-                      onClick={() => {this.toggleModal(id, name)}}
-                    >
-                      More Details
-                    </Button>
-                    {isUser === true &&
-                      <Mutation
-                        mutation={POST_MUTATION}
-                        variables={{
-                          "id": id}}>
-                        {(postMutation, data, error) =>
-                        <Button className="btn btn-danger btn-sm col-4 offset-4" onClick={(event)=>{postMutation()
-                          .then(()=>{window.location.reload()})
-                          .catch((error) => {
-                            alert('Error')
-                          }
-                        )}}>
-                        Delete</Button>
+                    <div className="d-flex justify-content-between">
+                      <Button
+                        outline
+                        color="info"
+                        size="sm"
+                        className="col-xs-12 col-sm-6 col-md-4"
+                        onClick={() => {this.toggleModal(id, name)}}
+                      >
+                        More Details
+                      </Button>
+                      {isUser === true &&
+                        <Mutation
+                          mutation={POST_MUTATION}
+                          variables={{"id": id}}
+                        >
+                          {(postMutation, data, error) =>
+                          <Button
+                            outline
+                            color="danger"
+                            size="sm"
+                            className="col-xs-12 col-sm-6 col-md-4"
+                            onClick={(event)=>{postMutation()
+                            .then(()=>{window.location.reload()})
+                            .catch((error) => {
+                              alert('Error')
+                            }
+                          )}}>
+                          Delete</Button>
+                        }
+                        </Mutation>
                       }
-                      </Mutation>
-                    }
+                    </div>
                   </Popup>
                 </Marker>
               )));

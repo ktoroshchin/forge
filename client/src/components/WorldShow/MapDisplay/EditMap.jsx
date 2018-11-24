@@ -38,17 +38,15 @@ export default class EditMap extends Component {
       deleteModal: false,
     };
     this.refMarker = createRef()
-    this.toggleModal = this.toggleModal.bind(this);
-    this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
   }
 
-  toggleModal() {
+  toggleModal = () => {
     this.setState({
       modal: !this.state.modal
     });
   }
 
-  toggleDeleteModal() {
+  toggleDeleteModal = () => {
     this.setState({
       deleteModal: !this.state.deleteModal
     });
@@ -131,10 +129,9 @@ export default class EditMap extends Component {
                     crs={L.CRS.Simple}
                     minZoom={-2}
                     maxZoom={2}
-                    zoom={0}
                     bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                    maxBounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                    maxBounds={[[-data.findWorldMap.height/2, -data.findWorldMap.width/2], [data.findWorldMap.height*1.5, data.findWorldMap.width*1.5]]}
                     >
                     <ImageOverlay
                       url={data.findWorldMap.url}

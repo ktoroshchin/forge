@@ -25,16 +25,15 @@ export default class ShowMap extends Component {
     this.state = {
       modal: false,
     };
-    this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal() {
+  toggleModal = () => {
     this.setState({
       modal: !this.state.modal
     });
   }
 
-  render () {
+  render = () => {
     const {worldID, isUser, creatorID} = this.props
     const findMap =
       gql`
@@ -49,64 +48,80 @@ export default class ShowMap extends Component {
     return (
       <div>
         <Query query={findMap}>
-          {({ loading, error, data }) => {
-            if (loading) {
-              return <div>Fetching</div>
-            } else if (error) {
-              return <div>Error</div>
-            } else if (data.findWorldMap === null) {
-              if (isUser === true) {
+          {
+            ({ loading, error, data }) => {
+              if (loading) {
+                return (<div>Fetching</div>)
+              } else if (error) {
+                return (<div>Error</div>)
+              } else if (data.findWorldMap === null) {
+                if (isUser === true) {
+                  return (
+                    <div>
+                      <Button
+                        outline
+                        color="info"
+                        size="sm"
+                        className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+                        onClick={this.toggleModal}
+                      >
+                        Add a World Map
+                      </Button>
+                      <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                        <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
+                        <WorldMapSubmit worldID={worldID} />
+                      </Modal>
+                    </div>
+                    )
+                } else {
+                  return null
+                }
+              } else {
                 return (
-                  <div>
-                  <Button className="btn btn-outline-info btn-sm col-3" onClick={this.toggleModal}>Add a World Map</Button>
-                  <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                    <ModalHeader toggle={this.toggleModal}>Submit Your World Map</ModalHeader>
-                    <WorldMapSubmit worldID={worldID} />
-                  </Modal>
+                 <div key={data.findWorldMap.id} className="showMap">
+                    <Map
+                      id="map"
+                      crs={L.CRS.Simple}
+                      minZoom={-2}
+                      maxZoom={2}
+                      bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                      center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
+                      maxBounds={[[-data.findWorldMap.height/2, -data.findWorldMap.width/2], [data.findWorldMap.height*1.5, data.findWorldMap.width*1.5]]}
+                      >
+                      <ImageOverlay
+                        url={data.findWorldMap.url}
+                        bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                        />
+                      <ShowMarkers mapID={data.findWorldMap.id} isUser={isUser} />
+                    </Map>
+                    {isUser === true &&
+                      <div className="mapEditButtons">
+                        <Link
+                          className="col-3 p-0"
+                          to={{
+                            pathname: "/edit-map",
+                            state: {
+                              worldID,
+                              creatorID,
+                            }
+                          }}
+                        >
+                          <Button
+                            outline
+                            color="warning"
+                            size="sm"
+                            className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
+                          >
+                            Edit Map
+                          </Button>
+                        </Link>
+                      </div>
+                    }
                   </div>
                   )
-              } else {
-                return null
               }
-            } else {
-              return (
-               <div key={data.findWorldMap.id} className="showMap">
-                  <Map
-                    id="map"
-                    crs={L.CRS.Simple}
-                    minZoom={-2}
-                    maxZoom={2}
-                    zoom={1}
-                    bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
-                    center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                    maxBounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
-                    >
-                    <ImageOverlay
-                      url={data.findWorldMap.url}
-                      bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
-                      />
-                    <ShowMarkers mapID={data.findWorldMap.id} isUser={isUser} />
-                  </Map>
-                  {isUser === true &&
-                    <div className="mapEditButtons">
-                      <Link
-                        className="col-3 p-0"
-                        to={{
-                          pathname: "/edit-map",
-                          state: {
-                            worldID,
-                            creatorID,
-                          }
-                        }}
-                      >
-                        <Button className="btn btn-outline-warning btn-sm col-3">Edit Map</Button>
-                      </Link>
-                    </div>
-                  }
-                </div>
-                )
             }
-          }}
+          }
         </Query>
       </div>
     );

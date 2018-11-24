@@ -20,19 +20,19 @@ code {
 }
 #root {
   height: 100vh;
-  background: rgba(139, 0, 0, 0.75);
+  background: #3c1c13;
 }
 .header {
   text-align: center;
   margin: 0.5em 0;
-  background: #B62020;
+  background: #585050;
   color: white;
   width: auto;
   border-radius: 10px;
 }
 .page {
-  background: #DCDCDC;
-  padding: 60px 0;
+  background: #a7917f;
+  padding: 55px 0;
   overflow: hidden;
   height: 100%;
 }
@@ -63,6 +63,7 @@ code {
   height: 100%;
   margin-bottom: 1em;
   z-index: 1;
+  background: darkgrey;
 }
 .showMap {
   height: 60vh;
@@ -88,4 +89,5 @@ code {
   margin-bottom: 1em;
   z-index: 1;
   border-radius: 10px;
+  background: darkgrey;
 }
