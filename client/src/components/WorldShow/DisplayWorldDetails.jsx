@@ -104,7 +104,7 @@ export default class DisplayWorldDetails extends Component {
                       {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
                     </div>
                     <div className="col-11 col-xs-8 world-name">
-                      <h1 onClick={this.handleRefresh}>s
+                      <h1 onClick={this.handleRefresh}>
                         {data.findWorlds[0].name}
                       </h1>
                       </div>
