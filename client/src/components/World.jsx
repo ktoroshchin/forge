@@ -8,30 +8,28 @@ function World({world_id, name, description, creator_id, world_map}) {
       backgroundRepeat: 'no-repeat',
       backgroundAttachment: 'relative',
       backgroundPosition: 'center',
-      height: "200px",
       borderRadius: "10px",
       marginBottom: "1em"
     }
     return (
       <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
-      <div style={imageStyle}>
-        <div className="world-content">
-          <h3>{name}</h3>
-          {description && <p>Description: {description}</p>}
+        <div className="world" style={imageStyle}>
+          <div className="world-content">
+            <h3>{name}</h3>
+            {description && <p>Description: {description}</p>}
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
     )
   } else {
     const imageStyle = {
       backgroundColor: "grey",
-      height: "200px",
       borderRadius: "10px",
       marginBottom: "1em"
     }
     return (
       <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
-        <div style={imageStyle}>
+        <div className="world" style={imageStyle}>
           <div className="world-content">
             <h3>{name}</h3>
             {description && <p>Description: {description}</p>}
