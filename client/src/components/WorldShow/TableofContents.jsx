@@ -5,13 +5,14 @@ import ElementList from './ElementList'
 function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
   return (
     <div className="AccordionForWorldPage col-12">
-      {isUser &&
-        <Button onClick={handleClick} className="btn btn-success btn-sm add-world col-md-12">
-          Add New Element
-        </Button>
-      }
+
       <div className="row">
         <div id="accordion" className="page-align col">
+          {isUser &&
+            <Button onClick={handleClick} className="btn btn-success btn-sm add-world col-md-12">
+              Add New Element
+            </Button>
+          }
           <div className="card">
             <div className="card-header" id="headingOne">
               <button className="btn btn-link category" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
