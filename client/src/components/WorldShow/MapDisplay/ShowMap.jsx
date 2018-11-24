@@ -74,7 +74,7 @@ export default class ShowMap extends Component {
                     maxZoom={2}
                     bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                    zoom={1}
+                    maxBounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     >
                     <ImageOverlay
                       url={data.findWorldMap.url}

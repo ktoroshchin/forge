@@ -54,14 +54,11 @@ code {
 .pointer {
   cursor: pointer;
 }
+
 #map {
   height: 100%;
   margin-bottom: 1em;
   z-index: 1;
-}
-
-.editMap {
-  height: 80vh;
 }
 
 .showMap {
@@ -84,7 +81,14 @@ code {
   margin-bottom: 1em;
 }
 
+.editMap {
+  height: 90%;
+  border-radius: 10px;
+}
 
-
-
-
+#editMap {
+  height: 100%;
+  margin-bottom: 1em;
+  z-index: 1;
+  border-radius: 10px;
+}
