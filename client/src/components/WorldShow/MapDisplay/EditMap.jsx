@@ -119,8 +119,9 @@ export default class EditMap extends Component {
                   <Map
                     id="editMap"
                     crs={L.CRS.Simple}
-                    minZoom={-1}
+                    minZoom={-2}
                     maxZoom={2}
+                    zoom={0}
                     bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
                     center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
                     maxBounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
