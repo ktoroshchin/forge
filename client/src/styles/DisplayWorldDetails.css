@@ -32,8 +32,6 @@
  z-index: 99;
  width: 30%;
  /* margin-right: 2px; */
-
- background-color: red;
 }
 
 .sideBar-enter {
@@ -41,13 +39,13 @@
 }
 .sideBar-enter.sideBar-enter-active {
   transform-origin: left center;
-  animation: 500ms slidein;
+  animation: 700ms slidein;
   opacity: 1;
   transition: opacity 300ms ease-in;
 }
 .sideBar-leave.sideBar-leave-active {
   transform-origin: left center;
-  animation: 200ms slideout;
+  animation: 0ms slideout;
   opacity: 0.01;
   transition: opacity 200ms ease-in;
 }

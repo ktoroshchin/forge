@@ -124,8 +124,8 @@ refreshComponent() {
           <div className="sideBar">
             <CSSTransitionGroup
               transitionName="sideBar"
-              transitionEnterTimeout={500}
-              transitionLeaveTimeout={200}>
+              transitionEnterTimeout={700}
+              transitionLeaveTimeout={700}>
               {this.state.sidebarOpen &&
                 <TableofContents
                   handleClick={this.handleClick}
