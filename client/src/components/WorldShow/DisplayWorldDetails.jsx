@@ -207,7 +207,6 @@ refreshComponent() {
                   </Modal>
                   </div>
                 }
-                <ShowMap worldID={worldID} isUser={this.state.isUser} />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&
