@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { ImageOverlay, Map } from 'react-leaflet';
 import { Link } from 'react-router-dom'
 import { Button, Modal, ModalHeader } from 'reactstrap'
-import 'leaflet/dist/leaflet.css';
-import 'leaflet/dist/leaflet.js';
-import L from 'leaflet';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import 'leaflet/dist/leaflet.js';
+
 import ShowMarkers from './ShowMarkers'
 import WorldMapSubmit from './WorldMapSubmit'
-
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -34,7 +34,7 @@ export default class ShowMap extends Component {
   }
 
   render = () => {
-    const {worldID, isUser, creatorID} = this.props
+    const { worldID, isUser, creatorID } = this.props
     const findMap =
       gql`
         query {
@@ -77,48 +77,55 @@ export default class ShowMap extends Component {
                   return null
                 }
               } else {
+
+                const mapID = data.findWorldMap.id;
+                const imgURL = data.findWorldMap.url;
+                const height = data.findWorldMap.height;
+                const width = data.findWorldMap.width;
+                const bounds = [[0, 0], [height, width]];
+                const center = [height/2, width/2];
+                const maxBounds = [[-height/2, -width/2], [height*1.5, width*1.5]];
+
                 return (
-                 <div key={data.findWorldMap.id} className="showMap">
+                  <div key={mapID} className="showMap">
                     <Map
                       id="map"
                       crs={L.CRS.Simple}
                       minZoom={-2}
                       maxZoom={2}
-                      bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
-                      center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                      maxBounds={[[-data.findWorldMap.height/2, -data.findWorldMap.width/2], [data.findWorldMap.height*1.5, data.findWorldMap.width*1.5]]}
+                      bounds={bounds}
+                      center={center}
+                      maxBounds={maxBounds}
                       >
                       <ImageOverlay
-                        url={data.findWorldMap.url}
-                        bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
+                        url={imgURL}
+                        bounds={bounds}
                         />
-                      <ShowMarkers mapID={data.findWorldMap.id} isUser={isUser} />
+                      <ShowMarkers mapID={mapID} isUser={isUser} />
                     </Map>
                     {isUser === true &&
-                      <div className="mapEditButtons">
-                        <Link
-                          className="col-3 p-0"
-                          to={{
-                            pathname: "/edit-map",
-                            state: {
-                              worldID,
-                              creatorID,
-                            }
-                          }}
+                      <Link
+                        className="col-3 p-0"
+                        to={{
+                          pathname: "/edit-map",
+                          state: {
+                            worldID,
+                            creatorID,
+                          }
+                        }}
+                      >
+                        <Button
+                          outline
+                          color="warning"
+                          size="sm"
+                          className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
                         >
-                          <Button
-                            outline
-                            color="warning"
-                            size="sm"
-                            className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
-                          >
-                            Edit Map
-                          </Button>
-                        </Link>
-                      </div>
+                          Edit Map
+                        </Button>
+                      </Link>
                     }
                   </div>
-                  )
+                )
               }
             }
           }

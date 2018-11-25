@@ -5,16 +5,11 @@
   font-weight: bolder;
   text-decoration:underline;
 }
-
-
 .lay-worldname {
   display: flex;
 
 }
-
 /*****Styling of sidebar*****/
-
-
 @keyframes slidein {
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
@@ -31,41 +26,32 @@
  position: absolute;
  z-index: 99;
  width: 30%;
+ /* margin-right: 2px; */
 }
-
 .sideBar-enter {
    opacity: 0.01;
 }
 .sideBar-enter.sideBar-enter-active {
   transform-origin: left center;
-  animation: 500ms slidein;
+  animation: 700ms slidein;
   opacity: 1;
   transition: opacity 300ms ease-in;
 }
 .sideBar-leave.sideBar-leave-active {
   transform-origin: left center;
-  animation: 200ms slideout;
+  animation: 0ms slideout;
   opacity: 0.01;
   transition: opacity 200ms ease-in;
 }
-
 .sideBar-leave {
   opacity: 1;
 }
-
-
-.AccordionForWorldPage {
-
-}
-
-
 #accordion {
   overflow-y: scroll;
   height: 300px;
-  padding-right: 0px;
+  /* padding-right: 0px; */
 
 }
-
 .card-body.nopadding {
   padding: 0;
 }
@@ -75,73 +61,46 @@
   height: 100%;
   text-decoration: none;
 }
-
-
 .navbar-arrow {
   position: absolute;
   left:0;
   top:13px;
 }
-
 .display-worldname {
   display: flex;
   justify-content: center;
   position: relative;
 }
-
-
 .second-column {
   padding-left: 0;
   padding-right: 0;
 }
-
-
 .worldAccordion {
   width:100%;
 }
-
-
+.world {
+  height: 300px;
+}
 @media (max-width: 575.98px) {
   .sideBar {
     width: 97%;
      transform: translateX(-4.4%);
     }
-
 }
-
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 575px) and (max-width: 767.98px) {
-.sideBar {
-  width: 40%;
-   transform: translateX(-10%);
+@media (min-width: 575px){
+  .sideBar {
+    width: 50%;
+    transform: translateX(-5%);
   }
 }
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-.sideBar {
-  width: 30%;
-   transform: translateX(-6%);
-  }
-}
-/* // Large devices (desktops, 992px and up) */
-@media (min-width: 991px) and (max-width: 1199.98px) {
-  .sideBar {
-    width: 50%;
-     transform: translateX(-3%);
-  }
-
-}
-
-/* // Extra large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
+@media (min-width: 768px){
   .sideBar {
     width: 30%;
-     transform: translateX(-6%);
+    transform: translateX(-6%);
+  }
+  .world {
+    height: 300px;
   }
 }
-
-
-
-
-
-

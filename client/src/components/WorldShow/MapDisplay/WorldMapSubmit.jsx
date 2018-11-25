@@ -3,7 +3,7 @@ import { Button, ModalFooter, ModalBody, FormGroup, Label, Input, Form } from 'r
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
-class WorldMapSubmit extends Component {
+export default class WorldMapSubmit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -113,7 +113,10 @@ class WorldMapSubmit extends Component {
               >
                   {postMutation =>
                     <Button
+                      outline
                       color="success"
+                      size="sm"
+                      className="col-md-3"
                       onClick={() => {this.handleMutationSubmit(postMutation)}}
                     >
                       Submit
@@ -124,8 +127,6 @@ class WorldMapSubmit extends Component {
           }
         </ModalFooter>
       </div>
-      )
+    )
   }
 }
-
-export default WorldMapSubmit;

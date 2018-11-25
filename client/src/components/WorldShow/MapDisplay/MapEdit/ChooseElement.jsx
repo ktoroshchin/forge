@@ -9,26 +9,35 @@ export default class ChooseElement extends Component {
     this.state = {
       value: ""
     }
-    this.select = this.select.bind(this);
   }
 
-  select(event) {
+  select = (event) => {
     this.setState({
       value: event.target.value,
     })
   }
 
-  render() {
-    const { coords: {lat, lng}, worldID, mapID, eleCategory} = this.props
+  handleMutationSubmit = (postMutation) => {
+    return postMutation()
+      .then((data) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert("Issue with marker creation!")
+      })
+  }
+
+  render = () => {
+    const { coords: {lat, lng}, worldID, mapID, eleCategory } = this.props
     const listElements = gql`
-          query{
-            findMarkers(world_id:"${worldID}"){
-              id
-              category
-              name
-              map_id
-            }
-          }`;
+      query{
+        findMarkers(world_id:"${worldID}"){
+          id
+          category
+          name
+          map_id
+        }
+      }`;
     const POST_MUTATION = gql`
       mutation (
         $id: ID!,
@@ -52,51 +61,66 @@ export default class ChooseElement extends Component {
             <option value="">Select...</option>
             <Query query={listElements}>
               {({ loading, error, data }) => {
-              if (loading) return <option>Fetching</option>
-              if (error) return <option>Error</option>
-              return (data.findMarkers.map(({ id, category, name, map_id }) => {
-                if (category === eleCategory) {
-                  if (!map_id) {
-                    return (
-                      <option key={id} value={id}>{name}</option>
-                      )
-                  } else {
-                    return (
-                      <option key={id} value={id} disabled>{name} already placed!</option>
-                      )
-                  }
+                if (loading) {
+                  return <option>Fetching</option>
+                } else if (error) {
+                  return <option>Error</option>
                 } else {
-                  return null;
+                  return (data.findMarkers.map(({ id, category, name, map_id }) => {
+                    if (category === eleCategory) {
+                      if (!map_id) {
+                        return (
+                          <option key={id} value={id}>{name}</option>
+                          )
+                      } else {
+                        return (
+                          <option key={id} value={id} disabled>{name} already placed!</option>
+                          )
+                      }
+                    } else {
+                      return null;
+                    }
+                  }));
                 }
-              }));
               }}
             </Query>
           </Input>
         </FormGroup>
         <ModalFooter>
           {this.state.value !== "" &&
-          <Mutation
-            mutation={POST_MUTATION}
-            variables={{
-              "id": this.state.value,
-              "map_id": mapID,
-              "latitude": lat,
-              "longitude": lng}}>
-            {(postMutation, data, error) =>
-            <Button color="success" onClick={(event)=>{postMutation()
-              .then(()=>{window.location.reload()})
-              .catch((error) => {
-                alert('Error')
+            <Mutation
+              mutation={POST_MUTATION}
+              variables={{
+                "id": this.state.value,
+                "map_id": mapID,
+                "latitude": lat,
+                "longitude": lng}}>
+              {(postMutation, data, error) =>
+                <Button
+                  outline
+                  size="sm"
+                  color="success"
+                  className="col-3"
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}
+                >
+                  Submit
+                </Button>
               }
-            )}}>
-            Submit</Button>}
-          </Mutation>
+            </Mutation>
           }
           {this.state.value === "" &&
-          <Button color="success" disabled>Submit</Button>
+            <Button
+              outline
+              size="sm"
+              color="success"
+              className="col-3"
+              disabled
+            >
+              Submit
+            </Button>
           }
         </ModalFooter>
       </div>
-      )
+    )
   }
 }

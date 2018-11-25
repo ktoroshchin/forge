@@ -91,3 +91,7 @@ code {
   border-radius: 10px;
   background: darkgrey;
 }
+.AccordionForWorldPage {
+  background: grey;
+  height: 100vh;
+}
