@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import { Button, Modal, ModalHeader } from 'reactstrap';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import { CSSTransitionGroup } from 'react-transition-group'
+import Cookies from 'universal-cookie';
+
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
-import Cookies from 'universal-cookie';
 import EditWorld from './EditElement/EditWorld'
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import { CSSTransitionGroup } from 'react-transition-group'
-
 
 const cookies = new Cookies();
-const getUserID = function() {
+
+const getUserID = () => {
   return cookies.get('userID');
 }
 
@@ -151,34 +152,6 @@ export default class DisplayWorldDetails extends Component {
                         return <div>Fetching</div>
                       } else if (error) {
                         return <div>Error</div>
-                      } else if (!data.findWorlds[0].description) {
-                        return (
-                          <div>
-                            <div className="d-flex justify-content-between">
-                              <h3 className="default">Description</h3>
-                              {this.state.isUser &&
-                                <div>
-                                  <Button
-                                    outline
-                                    color="success"
-                                    size="sm"
-                                    onClick={this.toggleModal}
-                                  >
-                                    Edit World Details
-                                  </Button>
-                                  <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                                    <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                                      <EditWorld
-                                        toggleModal={this.toggleModal}
-                                        worldID={worldID}
-                                      />
-                                  </Modal>
-                                </div>
-                              }
-                            </div>
-                            <h6 className="default">No description</h6>
-                          </div>
-                        )
                       } else {
                         return (
                           <div>
@@ -204,7 +177,12 @@ export default class DisplayWorldDetails extends Component {
                                 </div>
                               }
                             </div>
-                            <h6 className="default">{data.findWorlds[0].description}</h6>
+                            {data.findWorlds[0].description &&
+                              <h6 className="default">{data.findWorlds[0].description}</h6>
+                            }
+                            {!data.findWorlds[0].description &&
+                              <h6 className="default">No description</h6>
+                            }
                           </div>
                         )
                       }
