@@ -24,10 +24,9 @@ export default class Element extends Component {
       return (
         <div>
           <Button
-            outline
             size="sm"
             color="success"
-            className="col-xs-6 col-sm-4 col-md-4 col-lg-4"
+            className="col-xs-6 col-sm-4 col-md-4 col-lg-4 mt-3"
             onClick={this.toggleEditModal}>
             Edit {category}
           </Button>
@@ -67,51 +66,34 @@ export default class Element extends Component {
             } else if (error) {
               return <div>Error</div>
             } else {
-              return (data.findMarkers.map(({ id, name, category, population, government, description }) => {
-                if (category === "Location") {
-                  return (
-                    <div key={id}>
-                      <ListGroup>
-                        <ListGroupItem className="listItem default">
-                          <span className="categoryName">Name</span>
-                          <span>: </span>
-                          {name}
-                        </ListGroupItem>
-                        <ListGroupItem className="listItem default">
-                          <span className="categoryName">Description</span>
-                          <span>: </span>{description}
-                        </ListGroupItem>
-                      </ListGroup>
-                      {this.toggleEditButton(id, category)}
-                    </div>
-                  )
-                } else {
-                  return (
-                    <div key={id}>
-                      <ListGroup>
-                        <ListGroupItem className="listItem">
-                          <span className="categoryName">Name</span>
-                          <span>: </span>
-                          {name}
-                        </ListGroupItem>
-                        <ListGroupItem className="listItem">
-                          <span className="categoryName">Population</span>
-                          <span>: </span>{population}
-                        </ListGroupItem>
-                        <ListGroupItem className="listItem">
-                          <span className="categoryName">Government</span>
-                          <span>: </span>{government}
-                        </ListGroupItem>
-                        <ListGroupItem className="listItem">
-                          <span className="categoryName">Description</span>
-                          <span>: </span>{description}
-                        </ListGroupItem>
-                      </ListGroup>
-                      {this.toggleEditButton(id, category)}
-                    </div>
-                  )
-                }
-              }));
+              return (data.findMarkers.map(({ id, name, category, population, government, description }) => (
+                <div key={id}>
+                  <ListGroup>
+                    <ListGroupItem className="listItem default">
+                      <span className="categoryName">Name</span>
+                      <span>: </span>
+                      {name}
+                    </ListGroupItem>
+                    {category !== "Location" &&
+                      <ListGroupItem className="listItem">
+                        <span className="categoryName">Population</span>
+                        <span>: </span>{population}
+                      </ListGroupItem>
+                    }
+                    {category !== "Location" &&
+                      <ListGroupItem className="listItem">
+                        <span className="categoryName">Government</span>
+                        <span>: </span>{government}
+                      </ListGroupItem>
+                    }
+                    <ListGroupItem className="listItem default">
+                      <span className="categoryName">Description</span>
+                      <span>: </span>{description}
+                    </ListGroupItem>
+                  </ListGroup>
+                  {this.toggleEditButton(id, category)}
+                </div>
+              )));
             }
           }
         }

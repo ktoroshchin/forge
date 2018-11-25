@@ -2,7 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import Cookies from 'universal-cookie';
+
 import './styles/App.css';
+
 import NavbarMain from './components/NavBar/NavbarMain.jsx'
 import HomePage from './components/HomePage.jsx'
 import Login from './components/NavBar/Login'
@@ -11,7 +14,6 @@ import CreateNewWorld from './components/NavBar/CreateNewWorld'
 import MyWorldList from './components/NavBar/MyWorldList'
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
-import Cookies from 'universal-cookie';
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
