@@ -1,68 +1,95 @@
-import React from 'react';
-import { Button,ListGroup } from 'reactstrap';
+import React, { Component } from 'react';
+import { Button, Collapse, Card, CardHeader } from 'reactstrap';
+
 import ElementList from './ElementList'
 
-function TableofContents({worldID, worldName, worldDescription,handleClick, setValue, setLocationID, handleRefresh, isUser}) {
-  return (
-    <div className="AccordionForWorldPage col-12">
+export default class TableofContents extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityCollapse: false,
+      townCollapse: false,
+      locationCollapse: false
+    };
+  }
 
-      <div className="row">
-        <div id="accordion" className="page-align col">
+  toggleCityList = () => {
+    this.setState({
+      cityCollapse: !this.state.cityCollapse,
+      townCollapse: false,
+      locationCollapse: false
+    });
+  }
+
+  toggleTownList = () => {
+    this.setState({
+      cityCollapse: false,
+      townCollapse: !this.state.townCollapse,
+      locationCollapse: false
+    });
+  }
+
+  toggleLocationList = () => {
+    this.setState({
+      cityCollapse: false,
+      townCollapse: false,
+      locationCollapse: !this.state.locationCollapse
+    });
+  }
+
+  render = () => {
+    const { worldID, handleClick, setValue, setLocationID, isUser } = this.props;
+    const tOCClassName = 'text-center pointer border border-top-0';
+    const tOCStyle = {
+      backgroundColor: 'white',
+      color: 'black',
+      borderColor: '#595959'
+    };
+
+    return (
+      <div className="AccordionForWorldPage">
+        <Card
+          inverse
+          className="h-100 ml-4 border-0"
+          style={{
+            backgroundColor: '#595959',
+          }}
+        >
           {isUser &&
-            <Button onClick={handleClick} className="btn btn-success btn-sm add-world col-md-12">
+            <Button color="success" size="sm" onClick={handleClick}>
               Add New Element
             </Button>
           }
-          <div className="card">
-            <div className="card-header" id="headingOne">
-              <button className="btn btn-link category" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Cities
-              </button>
-            </div>
-            <div id="collapseOne" className="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-              <div className="card-body nopadding">
-                <ListGroup className="listItemContainer">
-                  <ElementList  worldID={worldID} category="City" setValue={setValue} setLocationID={setLocationID} />
-                </ListGroup>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-header" id="headingTwo">
-              <h5 className="mb-0">
-                <button className="btn btn-link category collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Towns
-                </button>
-              </h5>
-            </div>
-            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-              <div className="card-body nopadding">
-                <ListGroup className="listItemContainer">
-                  <ElementList worldID={worldID} category="Town" setValue={setValue} setLocationID={setLocationID} />
-                </ListGroup>
-              </div>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-header" id="headingThree">
-              <h5 className="mb-0">
-                <button className="btn btn-link category collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Locations
-                </button>
-              </h5>
-            </div>
-            <div id="collapseThree" className="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div className="card-body nopadding">
-                <ListGroup className="listItemContainer">
-                  <ElementList worldID={worldID} category="Location" setValue={setValue} setLocationID={setLocationID} />
-                </ListGroup>
-              </div>
-            </div>
-          </div>
-        </div>
+          <CardHeader className="text-center default border" style={tOCStyle}>Table of Contents</CardHeader>
+          <CardHeader onClick={this.toggleCityList} className={tOCClassName}>Cities</CardHeader>
+          <Collapse isOpen={this.state.cityCollapse}>
+            <ElementList
+              worldID={worldID}
+              category="City"
+              setValue={setValue}
+              setLocationID={setLocationID}
+            />
+          </Collapse>
+          <CardHeader onClick={this.toggleTownList} className={tOCClassName}>Towns</CardHeader>
+          <Collapse isOpen={this.state.townCollapse}>
+            <ElementList
+              worldID={worldID}
+              category="Town"
+              setValue={setValue}
+              setLocationID={setLocationID}
+            />
+          </Collapse>
+          <CardHeader onClick={this.toggleLocationList} className={tOCClassName}>Locations</CardHeader>
+          <Collapse isOpen={this.state.locationCollapse}>
+            <ElementList
+              worldID={worldID}
+              category="Location"
+              setValue={setValue}
+              setLocationID={setLocationID}
+            />
+          </Collapse>
+        </Card>
       </div>
-    </div>
-
-  )
+    )
+  }
 }
-export default TableofContents;

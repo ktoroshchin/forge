@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,35 +12,37 @@ class Login extends Component {
       password: null,
       redirect: false
     }
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.setUser = this.setUser.bind(this);
   }
-  handleUsernameChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handleUsernameChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({username: null});
     } else {
-      this.setState({username: e.target.value.trim()});
+      this.setState({username: event.target.value.trim()});
     }
   }
-  handlePasswordChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handlePasswordChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({password: null});
     } else {
-      this.setState({password: e.target.value.trim()});
+      this.setState({password: event.target.value.trim()});
     }
   }
-  setUser(data) {
+
+  setUser = (data) => {
     this.props.setUsername(this.state.username);
     this.props.setUserID(data.data.login.id);
     this.setState({redirect: true})
   }
-  renderRedirect() {
+
+  renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/' />
     }
   }
-  handleMutationSubmit(postMutation) {
+
+  handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data)=>{
         this.setUser(data);
@@ -49,12 +51,14 @@ class Login extends Component {
         alert("Please fill in required fields")
       })
   }
-  handleKeypressEnter(event, postMutation) {
+
+  handleKeypressEnter = (event, postMutation) => {
     if (event.key === "Enter") {
       return this.handleMutationSubmit(postMutation)
     }
   }
-  render() {
+
+  render = () => {
     const { username, password } = this.state;
     const { getUserID } = this.props;
     const POST_MUTATION = gql`
@@ -104,5 +108,3 @@ class Login extends Component {
     }
   }
 }
-
-export default Login;

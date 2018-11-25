@@ -2,12 +2,11 @@ import React from "react";
 import World from "../World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 
-function MyWorldList({getUserID}) {
+export default function MyWorldList({ getUserID }) {
   const userID = getUserID();
-  const findUserWorlds =
-  gql`
+  const findUserWorlds = gql`
     query {
       findWorlds(creator_id: "${userID}") {
         id
@@ -19,20 +18,35 @@ function MyWorldList({getUserID}) {
         }
       }
     }`;
+
   if (userID) {
     return (
       <div className="container page">
         <h2 className="header default">My Worlds</h2>
         <div className="info">
           <Query query={findUserWorlds}>
-            {({ loading, error, data }) => {
-              if (loading) return <div>Fetching</div>
-              if (error) return <div>Error</div>
-              if (data.findWorlds.length === 0) return <div>No Worlds</div>
-              return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
-                <World key={id} world_id={id} name={name} description={description} creator_id={creator_id} world_map={world_map} />
-              )));
-            }}
+            {
+              ({ loading, error, data }) => {
+                if (loading) {
+                  return <div>Fetching</div>
+                } else if (error) {
+                  return <div>Error</div>
+                } else if (data.findWorlds.length === 0) {
+                  return <div>No Worlds</div>
+                } else {
+                  return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
+                    <World
+                      key={id}
+                      world_id={id}
+                      name={name}
+                      description={description}
+                      creator_id={creator_id}
+                      world_map={world_map}
+                    />
+                  )));
+                }
+              }
+            }
           </Query>
         </div>
       </div>
@@ -41,5 +55,3 @@ function MyWorldList({getUserID}) {
     return <Redirect to='/login' />
   }
 }
-
-export default MyWorldList;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function World({world_id, name, description, creator_id, world_map}) {
+export default function World({ world_id, name, description, creator_id, world_map }) {
   if (world_map) {
     const imageStyle = {
       backgroundImage: `url('${world_map.url}')`,
@@ -39,5 +39,3 @@ function World({world_id, name, description, creator_id, world_map}) {
     )
   }
 }
-
-export default World;

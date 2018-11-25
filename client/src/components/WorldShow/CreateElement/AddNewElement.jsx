@@ -1,49 +1,53 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Button, Form, FormGroup, Label, Input, ModalBody, ModalFooter } from 'reactstrap';
 
 export default class AddNewElement extends Component {
-  state = {
-    world_id: this.props.worldID,
-    name: null,
-    population: null,
-    government: null,
-    description: null
+  constructor(props) {
+    super(props);
+    this.state = {
+      world_id: this.props.worldID,
+      name: null,
+      population: null,
+      government: null,
+      description: null
+    }
   }
-  handleCityName = this.handleCityName.bind(this);
-  handlePopulation = this.handlePopulation.bind(this);
-  handleGovernment = this.handleGovernment.bind(this);
-  handleDescription = this.handleDescription.bind(this);
-  handleCityName(e) {
-    if (e.target.value.trim() === "") {
+
+  handleCityName = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({name: null});
     } else {
-      this.setState({name: e.target.value.trim()});
+      this.setState({name: event.target.value.trim()});
     }
   }
-  handlePopulation(e) {
-    if (e.target.value.trim() === "" || isNaN(Number(e.target.value))) {
+
+  handlePopulation = (event) => {
+    if (event.target.value.trim() === "" || isNaN(Number(event.target.value))) {
       this.setState({population: null});
     } else {
-      this.setState({population: Number(e.target.value.trim())});
+      this.setState({population: Number(event.target.value.trim())});
     }
   }
-  handleGovernment(e) {
-    if (e.target.value.trim() === "") {
+
+  handleGovernment = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({government: null});
     } else {
-      this.setState({government: e.target.value.trim()});
+      this.setState({government: event.target.value.trim()});
     }
   }
-  handleDescription(e) {
-    if (e.target.value.trim() === "") {
+
+  handleDescription = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({description: null});
     } else {
-      this.setState({description: e.target.value.trim()});
+      this.setState({description: event.target.value.trim()});
     }
   }
-  handleMutationSubmit(postMutation) {
+
+  handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then(() => {
         window.location.reload();
@@ -52,7 +56,8 @@ export default class AddNewElement extends Component {
         alert("Please input required fields")
       })
   }
-  render() {
+
+  render = () => {
     const { world_id, name, population, government, description } = this.state
     const { category } = this.props
     const POST_MUTATION = gql`
@@ -122,7 +127,8 @@ export default class AddNewElement extends Component {
             <ModalFooter>
               <Button
                 color="success"
-                onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                onClick={() => {this.handleMutationSubmit(postMutation)}}
+              >
                 Submit
               </Button>
             </ModalFooter>

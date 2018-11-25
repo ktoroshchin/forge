@@ -85,7 +85,7 @@ export default class DisplayWorldDetails extends Component {
     }
   }
 
-  render() {
+  render = () => {
     const {worldID, creatorID} = this.props.location.state;
     const findWorld =
       gql`

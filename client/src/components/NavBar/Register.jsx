@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 
-class Register extends Component {
+export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,43 +13,45 @@ class Register extends Component {
       password: null,
       redirect: false
     }
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.setUser = this.setUser.bind(this);
   }
-  handleUsernameChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handleUsernameChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({username: null});
     } else {
-      this.setState({username: e.target.value.trim()});
+      this.setState({username: event.target.value.trim()});
     }
   }
-  handleEmailChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handleEmailChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({email: null});
     } else {
-      this.setState({email: e.target.value.trim()});
+      this.setState({email: event.target.value.trim()});
     }
   }
-  handlePasswordChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handlePasswordChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({password: null});
     } else {
-      this.setState({password: e.target.value.trim()});
+      this.setState({password: event.target.value.trim()});
     }
   }
-  setUser(data) {
+
+  setUser = (data) => {
     this.props.setUsername(this.state.username);
     this.props.setUserID(data.data.register.id);
     this.setState({redirect: true});
   }
-  renderRedirect() {
+
+  renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/' />
     }
   }
-  handleMutationSubmit(postMutation) {
+
+  handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data)=>{
         this.setUser(data);
@@ -57,14 +59,18 @@ class Register extends Component {
       .catch((error) => {
         if (!this.state.username || !this.state.email || !this.state.password) {
           alert("Please fill in required fields");
+        } else {
+          error.graphQLErrors.map(({ message }) => (alert(message)))
         }
-        error.graphQLErrors.map(({ message }) => (alert(message)))})
+      })
   }
-  handleKeypressEnter(event, postMutation) {
+
+  handleKeypressEnter = (event, postMutation) => {
     if (event.key === "Enter") {
       return this.handleMutationSubmit(postMutation)
     }
   }
+
   render() {
     const { username, email, password } = this.state;
     const {getUserID} = this.props;
@@ -74,6 +80,7 @@ class Register extends Component {
           id
         }
       }`
+
     if (!getUserID()) {
       return (
         <div className="container page">
@@ -122,5 +129,3 @@ class Register extends Component {
     }
   }
 }
-
-export default Register;

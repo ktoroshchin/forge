@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import {Redirect} from 'react-router'
+import { Redirect } from 'react-router'
 
-class CreateNewWorld extends Component {
+export default class CreateNewWorld extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,39 +13,42 @@ class CreateNewWorld extends Component {
       creator_id: this.props.getUserID(),
       redirect: false
     }
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
-    this.setRedirect = this.setRedirect.bind(this);
   }
-  handleNameChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handleNameChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({name: null});
     } else {
-      this.setState({name: e.target.value.trim()});
+      this.setState({name: event.target.value.trim()});
     }
   }
-  handleDescriptionChange(e) {
-    if (e.target.value.trim() === "") {
+
+  handleDescriptionChange = (event) => {
+    if (event.target.value.trim() === "") {
       this.setState({description: null});
     } else {
-      this.setState({description: e.target.value.trim()});
+      this.setState({description: event.target.value.trim()});
     }
   }
-  setRedirect() {
+
+  setRedirect = () => {
     this.setState({
       redirect: true
     })
   }
-  renderRedirect() {
+
+  renderRedirect = () => {
     if (this.state.redirect) {
       window.location.reload();
       return <Redirect to='/my-worlds' />
     }
   }
-  handleSubmit(e) {
-    e.preventDefault();
+
+  handleSubmit = (event) => {
+    event.preventDefault();
   }
-  handleMutationSubmit(postMutation) {
+
+  handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data)=>{
         this.setRedirect();
@@ -54,6 +57,7 @@ class CreateNewWorld extends Component {
         alert("Please fill in required fields")
       })
   }
+
   render() {
     if (this.props.getUserID()) {
       const { name, description, creator_id } = this.state;
@@ -101,5 +105,3 @@ class CreateNewWorld extends Component {
     }
   }
 }
-
-export default CreateNewWorld;

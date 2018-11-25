@@ -97,7 +97,6 @@ export default class ChooseElement extends Component {
                 "longitude": lng}}>
               {(postMutation, data, error) =>
                 <Button
-                  outline
                   size="sm"
                   color="success"
                   className="col-3"
@@ -110,7 +109,6 @@ export default class ChooseElement extends Component {
           }
           {this.state.value === "" &&
             <Button
-              outline
               size="sm"
               color="success"
               className="col-3"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
+import { Button, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
 import ChooseElement from './ChooseElement';
 
 
@@ -21,7 +21,7 @@ export default class NewMarkerForm extends Component {
     const { coords, worldID, mapID } = this.props;
 
     return (
-      <div>
+      <ModalBody>
         <FormGroup>
           <Input onChange={this.select} type="select" name="select" id="categorySelect">
             <option value="">Select a category...</option>
@@ -39,7 +39,7 @@ export default class NewMarkerForm extends Component {
             </Input>
           </FormGroup>
           <ModalFooter>
-            <Button color="success" disabled>Submit</Button>
+            <Button color="success" size="sm" className="col-3" disabled>Submit</Button>
           </ModalFooter>
           </div>
         }
@@ -53,7 +53,7 @@ export default class NewMarkerForm extends Component {
             />
           </div>
         }
-      </div>
+      </ModalBody>
     )
   }
 }

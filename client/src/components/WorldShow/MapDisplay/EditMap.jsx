@@ -29,6 +29,8 @@ const newMarkerIcon = L.icon({
     shadowAnchor: [15, 40]
 });
 
+const buttonColSize = "col-sm-12 col-md-4 col-lg-3"
+
 export default class EditMap extends Component {
   constructor(props) {
     super(props);
@@ -87,18 +89,44 @@ export default class EditMap extends Component {
     }
   }
 
+  handleAddMarkerButton = (height, width) => {
+    if (!this.state.activeMarker) {
+      return (
+        <Button
+          color="success"
+          size="sm"
+          className={buttonColSize}
+          onClick={() => {this.addMarker(height, width)}}
+        >
+          New Marker
+        </Button>
+      )
+    } else {
+      return (
+        <Button
+          color="success"
+          size="sm"
+          className={buttonColSize}
+          disabled
+        >
+          New Marker
+        </Button>
+      )
+    }
+  }
+
   backToView = () => {
     window.history.back();
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     if (!this.props.location.state) {
       return window.location.href = '/'
     }
   }
 
   render () {
-    const {worldID, creatorID} = this.props.location.state;
+    const { worldID, creatorID } = this.props.location.state;
 
     const findMap =
       gql`
@@ -116,112 +144,115 @@ export default class EditMap extends Component {
           <h2 className="header">World Map Edit</h2>
         <div className="info">
         <Query query={findMap}>
-          {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
-            return (
-                <div
-                  key={data.findWorldMap.id}
-                  className="editMap"
-                  >
-                  <Map
-                    id="editMap"
-                    crs={L.CRS.Simple}
-                    minZoom={-2}
-                    maxZoom={2}
-                    bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
-                    center={[data.findWorldMap.height/2, data.findWorldMap.width/2]}
-                    maxBounds={[[-data.findWorldMap.height/2, -data.findWorldMap.width/2], [data.findWorldMap.height*1.5, data.findWorldMap.width*1.5]]}
-                    >
-                    <ImageOverlay
-                      url={data.findWorldMap.url}
-                      bounds={[[0, 0], [data.findWorldMap.height, data.findWorldMap.width]]}
-                      />
-                    {this.state.activeMarker !== null &&
-                      <Marker
-                        draggable={true}
-                        onDragend={this.updateMarker}
-                        position={this.state.activeMarker}
-                        ref={this.refMarker}
-                        icon={newMarkerIcon}
+          {
+            ({ loading, error, data }) => {
+              if (loading) {
+                return <div>Fetching</div>
+              } else if (error) {
+                return <div>Error</div>
+              } else {
+                const mapID = data.findWorldMap.id;
+                const imgURL = data.findWorldMap.url;
+                const height = data.findWorldMap.height;
+                const width = data.findWorldMap.width;
+                const bounds = [[0, 0], [height, width]];
+                const center = [height/2, width/2];
+                const maxBounds = [[-height/2, -width/2], [height*1.5, width*1.5]];
+                return (
+                    <div
+                      key={mapID}
+                      className="editMap"
+                      >
+                      <Map
+                        id="editMap"
+                        crs={L.CRS.Simple}
+                        minZoom={-2}
+                        maxZoom={2}
+                        bounds={bounds}
+                        center={center}
+                        maxBounds={maxBounds}
                         >
-                        <Popup minWidth={90}>
-                          <Button
-                            outline
-                            size="sm"
-                            color="info"
-                            onClick={this.toggleModal}
-                          >
-                            Edit
-                          </Button>
-                          <Button
-                            outline
-                            size="sm"
-                            color="danger"
-                            onClick={this.submitMarker}
-                          >
-                            Cancel
-                          </Button>
+                        <ImageOverlay
+                          url={imgURL}
+                          bounds={bounds}
+                          />
+                        {this.state.activeMarker !== null &&
+                          <Marker
+                            draggable={true}
+                            onDragend={this.updateMarker}
+                            position={this.state.activeMarker}
+                            ref={this.refMarker}
+                            icon={newMarkerIcon}
+                            >
+                            <Popup minWidth={90}>
+                              <Button
+                                outline
+                                size="sm"
+                                color="info"
+                                onClick={this.toggleModal}
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                outline
+                                size="sm"
+                                color="danger"
+                                onClick={this.submitMarker}
+                              >
+                                Cancel
+                              </Button>
 
-                          <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                          <ModalHeader toggle={this.toggleModal}>Link to a...</ModalHeader>
-                            <NewMarkerForm
-                              toggleModal={this.toggleModal}
-                              coords={this.state.activeMarker}
-                              worldID={data.findWorldMap.world_id}
-                              mapID={data.findWorldMap.id}
-                            />
-                          </Modal>
-                        </Popup>
-                      </Marker>
-                    }
-                    <ShowMarkers mapID={data.findWorldMap.id} isUser={true} />
-                  </Map>
-                  <div className="d-flex justify-content-between">
-                    <Button
-                      className="btn btn-outline-info col-sm-12 col-md-4 col-lg-3"
-                      onClick={() => this.backToView()}
-                    >
-                      Back to World View
-                    </Button>
-                    {this.state.activeMarker === null &&
-                      <Button
-                        className="btn btn-outline-success col-sm-12 col-md-4 col-lg-3"
-                        onClick={() => {this.addMarker(data.findWorldMap.height, data.findWorldMap.width)}}
-                      >
-                        New Marker
-                      </Button>
-                    }
-                    {this.state.activeMarker !== null &&
-                      <Button
-                        className="btn btn-outline-success col-sm-12 col-md-4 col-lg-3"
-                        disabled
-                      >
-                        New Marker
-                      </Button>
-                    }
-                    <Button
-                      className="btn btn-outline-danger col-sm-12 col-md-4 col-lg-3"
-                      onClick={this.toggleDeleteModal}
-                    >
-                      Delete Map
-                    </Button>
-                    <Modal
-                      isOpen={this.state.deleteModal}
-                      toggle={this.toggleDeleteModal}
-                      className={this.props.className}
-                    >
-                      <ModalHeader
-                        className="default"
-                        toggle={this.toggleDeleteModal}
-                      >
-                        Delete Your World Map
-                      </ModalHeader>
-                        <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={data.findWorldMap.id} />
-                    </Modal>
-                  </div>
-                </div>
-                )}}
+                              <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                              <ModalHeader toggle={this.toggleModal}>Link to a...</ModalHeader>
+                                <NewMarkerForm
+                                  toggleModal={this.toggleModal}
+                                  coords={this.state.activeMarker}
+                                  worldID={worldID}
+                                  mapID={mapID}
+                                />
+                              </Modal>
+                            </Popup>
+                          </Marker>
+                        }
+                        <ShowMarkers mapID={mapID} isUser={true} />
+                      </Map>
+                      <div className="d-flex justify-content-between">
+                        <Button
+                          color="info"
+                          size="sm"
+                          className={buttonColSize}
+                          onClick={() => this.backToView()}
+                        >
+                          Back to World View
+                        </Button>
+                        {this.handleAddMarkerButton(height, width)}
+                        <Button
+                          color="danger"
+                          size="sm"
+                          className={buttonColSize}
+                          onClick={this.toggleDeleteModal}
+                        >
+                          Delete Map
+                        </Button>
+                        <Modal
+                          isOpen={this.state.deleteModal}
+                          toggle={this.toggleDeleteModal}
+                          className={this.props.className}
+                        >
+                          <ModalHeader
+                            className="default"
+                            toggle={this.toggleDeleteModal}
+                          >
+                            Delete Your World Map
+                          </ModalHeader>
+                            <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={mapID} />
+                        </Modal>
+                      </div>
+                    </div>
+                  )
+                }
+              }
+            }
           </Query>
         </div>
       </div>
