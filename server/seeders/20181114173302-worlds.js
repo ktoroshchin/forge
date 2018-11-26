@@ -18,7 +18,7 @@ module.exports = {
       {
         id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         name: 'El\'Karath',
-        description: null,
+        description: '',
         creator_id: 'd276a825-9501-4ab3-a4c0-888011937571'
       }
     ], {});
