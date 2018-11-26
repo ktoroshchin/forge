@@ -31,7 +31,6 @@
  position: absolute;
  z-index: 99;
  width: 30%;
- /* margin-right: 2px; */
 }
 
 .sideBar-enter {
@@ -39,13 +38,13 @@
 }
 .sideBar-enter.sideBar-enter-active {
   transform-origin: left center;
-  animation: 700ms slidein;
+  animation: 500ms slidein;
   opacity: 1;
   transition: opacity 300ms ease-in;
 }
 .sideBar-leave.sideBar-leave-active {
   transform-origin: left center;
-  animation: 0ms slideout;
+  animation: 200ms slideout;
   opacity: 0.01;
   transition: opacity 200ms ease-in;
 }
@@ -63,7 +62,7 @@
 #accordion {
   overflow-y: scroll;
   height: 300px;
-  /* padding-right: 0px; */
+  padding-right: 0px;
 
 }
 
@@ -121,20 +120,35 @@
 }
 
 /* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 575px){
+@media (min-width: 575px) and (max-width: 767.98px) {
 .sideBar {
-  width: 50%;
-   transform: translateX(-5%);
+  width: 40%;
+   transform: translateX(-10%);
   }
 }
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px){
+@media (min-width: 768px) and (max-width: 991.98px) {
 .sideBar {
   width: 30%;
    transform: translateX(-6%);
   }
 }
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 991px) and (max-width: 1199.98px) {
+  .sideBar {
+    width: 50%;
+     transform: translateX(-3%);
+  }
 
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .sideBar {
+    width: 30%;
+     transform: translateX(-6%);
+  }
+}
 
 
 

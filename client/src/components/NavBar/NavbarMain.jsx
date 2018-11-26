@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Collapse, Navbar, Nav, NavItem, NavLink, NavbarToggler, NavbarBrand } from 'reactstrap';
+
 import NavBarDropDown from "./NavBarDropDown"
 
-class NavbarMain extends Component {
-  state = {
-    isOpen: false,
+export default class NavbarMain extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false,
+    }
   }
-  toggle = this.toggle.bind(this);
-  toggle() {
+
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen
     });
@@ -15,21 +19,18 @@ class NavbarMain extends Component {
 
   render() {
     return(
-    <div>
-        <Navbar color="dark" dark expand="md" fixed="top">
-          <NavbarBrand href="/">THE FORGE</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/">View All Worlds</NavLink>
-              </NavItem>
-              <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+      <Navbar color="dark" dark expand="md" fixed="top">
+        <NavbarBrand href="/">THE FORGE</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="/">View All Worlds</NavLink>
+            </NavItem>
+            <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
+          </Nav>
+        </Collapse>
+      </Navbar>
     );
   }
 }
-export default NavbarMain

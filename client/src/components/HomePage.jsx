@@ -1,7 +1,8 @@
 import React from "react";
+
 import WorldList from "./WorldList"
 
-function Homepage() {
+export default function Homepage() {
   return (
     <div className="container page">
       <h2 className="header default">All Worlds</h2>
@@ -11,5 +12,3 @@ function Homepage() {
     </div>
   );
 }
-
-export default Homepage;

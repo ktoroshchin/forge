@@ -3,7 +3,7 @@ import { Button, ModalFooter, ModalBody, FormGroup, Label, Input, Form } from 'r
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
-class WorldMapSubmit extends Component {
+export default class WorldMapSubmit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,11 +13,9 @@ class WorldMapSubmit extends Component {
         height: 0,
       },
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.getImageSize = this.getImageSize.bind(this);
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({
       value: event.target.value
     },
@@ -26,7 +24,11 @@ class WorldMapSubmit extends Component {
     });
   }
 
-  getImageSize(url, state) {
+  handleSubmit = (event) => {
+    event.preventDefault()
+  }
+
+  getImageSize = (url, state) => {
     const img = new Image();
     img.onload = function() {
       const imgHeight = this.height
@@ -42,7 +44,7 @@ class WorldMapSubmit extends Component {
     img.src = url
   }
 
-  handleMutationSubmit(postMutation) {
+  handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then(() => {
         window.location.reload();
@@ -52,7 +54,7 @@ class WorldMapSubmit extends Component {
       })
   }
 
-  render() {
+  render = () => {
     const { worldID } = this.props;
     const imageURL = this.state.value;
     const width = this.state.imgSize.width;
@@ -76,7 +78,7 @@ class WorldMapSubmit extends Component {
     return (
       <div>
         <ModalBody>
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label for="imageURL">Image URL:</Label>
               <Input
@@ -85,11 +87,12 @@ class WorldMapSubmit extends Component {
                 id="imageURL"
                 placeholder="Enter an image URL..."
                 value={this.state.value}
-                onChange={this.handleChange} />
+                onChange={this.handleChange}
+              />
             </FormGroup>
           </Form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter style={{height: '4em'}}>
           {this.state.value.match(/\.(jpeg|jpg|png)$/) === null &&
             <span>Please enter a valid image URL.</span>
           }
@@ -111,6 +114,7 @@ class WorldMapSubmit extends Component {
                   {postMutation =>
                     <Button
                       color="success"
+                      size="sm"
                       onClick={() => {this.handleMutationSubmit(postMutation)}}
                     >
                       Submit
@@ -121,8 +125,6 @@ class WorldMapSubmit extends Component {
           }
         </ModalFooter>
       </div>
-      )
+    )
   }
 }
-
-export default WorldMapSubmit;

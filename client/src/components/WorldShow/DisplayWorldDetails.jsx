@@ -1,200 +1,185 @@
 import React, {Component} from 'react';
 import { Button, Modal, ModalHeader } from 'reactstrap';
+import { Query } from 'react-apollo';
+import gql from 'graphql-tag';
+import { CSSTransitionGroup } from 'react-transition-group'
+import Cookies from 'universal-cookie';
+
 import ChooseCategoryToCreate from './CreateElement/ChooseCategoryToCreate';
 import TableofContents from "./TableofContents"
 import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
-import Cookies from 'universal-cookie';
 import EditWorld from './EditElement/EditWorld'
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import { CSSTransitionGroup } from 'react-transition-group'
-
 
 const cookies = new Cookies();
-const getUserID = function() {
+
+const getUserID = () => {
   return cookies.get('userID');
 }
 
 export default class DisplayWorldDetails extends Component {
-  state = {
-    clicked: false,
-    value: "",
-    locationID: "",
-    isUser: false,
-    modal: false,
-    sidebarOpen: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      clicked: false,
+      value: "",
+      locationID: "",
+      isUser: false,
+      modal: false,
+      sidebarOpen: false,
+    }
+  };
+
+  sideBarToggle = () => {
+     this.setState({ sidebarOpen: !this.state.sidebarOpen });
+   }
+
+  handleClick = () => {
+    this.setState({
+      clicked: true,
+      value: ""
+    });
+    this.sideBarToggle()
   }
 
-
-handleClick = this.handleClick.bind(this)
-setValue = this.setValue.bind(this);
-setLocationID = this.setLocationID.bind(this);
-toggleModal = this.toggleModal.bind(this);
-sideBarToggle = this.sideBarToggle.bind(this);
-
-
-sideBarToggle() {
-   this.setState({ sidebarOpen: !this.state.sidebarOpen });
- }
-
-handleClick() {
-  this.setState({
-    clicked: true,
-    value: ""
-  });
-  this.sideBarToggle()
-}
-
-setValue(value) {
-  this.setState({
-    value: value,
-    clicked: false,
-  })
-  this.sideBarToggle()
-}
-setLocationID(id) {
-  this.setState({
-    locationID: id
-  })
-}
-handleRefresh() {
-  window.location.reload()
-}
-
-toggleModal() {
-  this.setState({
-    modal: !this.state.modal
-  });
-}
-
-componentWillMount() {
-  if (!this.props.location.state) {
-    return window.location.href = '/'
+  setValue = (value) => {
+    this.setState({
+      value: value,
+      clicked: false,
+    })
+    this.sideBarToggle()
   }
-}
 
-refreshComponent() {
-  this.setState({
-    refresh: !this.state.refresh
-  })
-}
+  setLocationID = (id) => {
+    this.setState({
+      locationID: id
+    })
+  }
 
-  componentDidMount() {
+  handleRefresh = () => {
+    window.location.reload()
+  }
+
+  toggleModal = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
+  componentWillMount = () => {
+    if (!this.props.location.state) {
+      return window.location.href = '/'
+    }
+  }
+
+  componentDidMount = () => {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
         isUser: true
       })
     }
   }
-  render() {
-    const {worldID, creatorID} = this.props.location.state;
-    const findWorld =
-      gql`
-        query {
-          findWorlds(id: "${worldID}"){
-            name
-            description
+
+  getWorldName = (query) => {
+    return (
+      <Query query={query}>
+        {({ loading, error, data }) => {
+          if (loading) {
+            return "Fetching"
+          } else if (error) {
+            return "Error"
+          } else {
+            return data.findWorlds[0].name
           }
-        }`;
-    const noMargin = {
-      marginLeft: "0"
-    }
-    return(
+        }}
+      </Query>
+    )
+  }
+
+  getWorldDescription = (query) => {
+    return (
+      <Query query={query}>
+        {({ loading, error, data }) => {
+          if (loading) {
+            return "Fetching"
+          } else if (error) {
+            return "Error"
+          } else if (!data.findWorlds[0].description) {
+            return "No description"
+          } else {
+            return data.findWorlds[0].description
+          }
+        }}
+      </Query>
+    )
+  }
+
+  render = () => {
+    const {worldID, creatorID} = this.props.location.state;
+    const findWorld = gql`
+      query {
+        findWorlds(id: "${worldID}"){
+          name
+          description
+        }
+      }`;
+
+    return (
         <div className="container page">
-          <Query query={findWorld}>
-            {({ loading, error, data }) => {
-              if (loading) return <div>Fetching</div>
-              if (error) return <div>Error</div>
-              return (
-                <div className="container">
-                  <div className="display-worldname row" >
-                    <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
-                      {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
-                      {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
-                    </div>
-                    <h1 className="pointer" onClick={this.handleRefresh}>
-                      {data.findWorlds[0].name}
-                    </h1>
-                  </div>
-                </div>
-              )
-            }}
-          </Query>
-          <div className="sideBar">
-            <CSSTransitionGroup
-              transitionName="sideBar"
-              transitionEnterTimeout={700}
-              transitionLeaveTimeout={700}>
-              {this.state.sidebarOpen &&
-                <TableofContents
-                  handleClick={this.handleClick}
-                  worldID={worldID}
-                  setValue={this.setValue}
-                  setLocationID={this.setLocationID}
-                  isUser={this.state.isUser}
-                  />
-              }
-            </CSSTransitionGroup>
+          <div className="container">
+            <div className="display-worldname row header" >
+              <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
+                {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
+                {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
+              </div>
+              <h1 className="pointer" onClick={this.handleRefresh}>{this.getWorldName(findWorld)}</h1>
+            </div>
           </div>
-          <div className="info row mt-3" style={noMargin}>
+          <CSSTransitionGroup
+            className="sideBar"
+            transitionName="sideBar"
+            transitionEnterTimeout={700}
+            transitionLeaveTimeout={700}>
+            {this.state.sidebarOpen &&
+              <TableofContents
+                handleClick={this.handleClick}
+                worldID={worldID}
+                setValue={this.setValue}
+                setLocationID={this.setLocationID}
+                isUser={this.state.isUser}
+              />
+            }
+          </CSSTransitionGroup>
+          <div className="info">
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
-               <Query query={findWorld}>
-                  {({ loading, error, data }) => {
-                    if (loading) return <div>Fetching</div>
-                    if (error) return <div>Error</div>
-                    if (!data.findWorlds[0].description) return (
+                  <div className="d-flex justify-content-between">
+                    <h3 className="default">Description</h3>
+                    {this.state.isUser &&
                       <div>
-                        <div className="row" style={noMargin}>
-                          <h3 className="default">Description</h3>
-                          </div>
-                          <div className="col">
-                            {this.state.isUser &&
-                              <div>
-                                <Button className="btn btn-outline-success btn-sm add-world float-right"
-                                  onClick={this.toggleModal}>Edit World Details
-                                </Button>
-                                <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                                  <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                                    <EditWorld
-                                      toggleModal={this.toggleModal}
-                                      worldID={worldID}
-                                    />
-                                </Modal>
-                              </div>
-                            }
-                        </div>
-                        <h6 className="default">No description</h6>
+                        <Button
+                          color="success"
+                          size="sm"
+                          onClick={this.toggleModal}
+                        >
+                          Edit World Details
+                        </Button>
+                        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                          <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                            <EditWorld
+                              toggleModal={this.toggleModal}
+                              worldID={worldID}
+                            />
+                        </Modal>
                       </div>
-                    )
-                    return (
-                      <div>
-                        <div className="row" style={noMargin}>
-                          <h3 className="default">Description</h3>
-                          {this.state.isUser &&
-                            <div>
-                            <Button className="btn btn-outline-success btn-sm add-world" onClick={this.toggleModal}>Edit World Details</Button>
-                            <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                              <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                                <EditWorld
-                                  toggleModal={this.toggleModal}
-                                  worldID={worldID}
-                                />
-                            </Modal>
-                            </div>
-                          }
-                          </div>
-                          <h6 className="default">{data.findWorlds[0].description}</h6>
-                      </div>
-                    )
-                  }}
-                </Query>
-              <ShowMap
-                worldID={worldID}
-                isUser={this.state.isUser}
-                creatorID={creatorID}
-              />
+                    }
+                  </div>
+                <h6 className="default">{this.getWorldDescription(findWorld)}</h6>
+                <ShowMap
+                  worldID={worldID}
+                  isUser={this.state.isUser}
+                  creatorID={creatorID}
+                />
               </div>
             }
             {(this.state.value !== '' || this.state.clicked) &&

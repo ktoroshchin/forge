@@ -10,17 +10,15 @@ export default class WorldMapDelete extends Component {
     this.state = {
       confirm: false,
     }
-    this.confirmCheck = this.confirmCheck.bind(this)
-    this.handleMutationSubmit = this.handleMutationSubmit.bind(this)
   }
 
-  confirmCheck() {
+  confirmCheck = () => {
     this.setState({
       confirm: !this.state.confirm
     });
   }
 
-  handleMutationSubmit(postMutation) {
+  handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data) => {
         window.location.reload();
@@ -30,8 +28,8 @@ export default class WorldMapDelete extends Component {
       })
   }
 
-  render() {
-    const {mapID} = this.props;
+  render = () => {
+    const { mapID } = this.props;
 
     const POST_MUTATION = gql`
       mutation (
@@ -39,6 +37,7 @@ export default class WorldMapDelete extends Component {
         removeMapById(
           id: $id)
       }`
+
     return (
       <div>
         <ModalBody>
@@ -52,14 +51,22 @@ export default class WorldMapDelete extends Component {
         </ModalBody>
         <ModalFooter>
         {!this.state.confirm &&
-          <Button className="btn btn-danger btn-sm col-md-6" disabled>Remove</Button>
+          <Button
+            outline
+            color="danger"
+            size="sm"
+            className="col-md-3"
+            disabled
+          >
+            Remove
+          </Button>
         }
         {this.state.confirm &&
           <Mutation
             mutation={POST_MUTATION}
-            variables={{
-              "id": mapID }}>
-            {(postMutation, data, error) =>
+            variables={{"id": mapID}}
+          >
+            {(postMutation) =>
               <Link
                 className="col-md-6 p-0"
                 to={{
@@ -71,7 +78,10 @@ export default class WorldMapDelete extends Component {
                 }}
               >
                 <Button
-                  className="btn btn-danger btn-sm col-12"
+                  outline
+                  color="danger"
+                  size="sm"
+                  className="col-md-3"
                   onClick={() => {this.handleMutationSubmit(postMutation)}}
                 >
                   Remove
@@ -82,7 +92,7 @@ export default class WorldMapDelete extends Component {
         }
         </ModalFooter>
       </div>
-      )
+    )
   }
 }
 

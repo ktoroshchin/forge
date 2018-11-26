@@ -1,13 +1,13 @@
 import React from "react";
+
 import GuestNavBar from "./GuestNavBar"
 import UserNavBar from "./UserNavBar"
 
-
-function NavBarDropDown({cookies, deleteUser}) {
+export default function NavBarDropDown({cookies, deleteUser}) {
   const username = cookies.get('username')
   if (username) {
     return (
-      <UserNavBar username={username} deleteUser={deleteUser}/>
+      <UserNavBar username={username} deleteUser={deleteUser} />
     )
   } else {
     return (
@@ -15,5 +15,3 @@ function NavBarDropDown({cookies, deleteUser}) {
     )
   }
 }
-
-export default NavBarDropDown;
