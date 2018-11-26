@@ -3,7 +3,7 @@ import World from "../World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
-import { Container, Row, Col, Jumbotron } from 'reactstrap'
+import { Container, Col, Jumbotron } from 'reactstrap'
 
 export default function MyWorldList({ getUserID }) {
   const userID = getUserID();
@@ -24,7 +24,7 @@ export default function MyWorldList({ getUserID }) {
     return (
       <Container>
         <h1 className="my-4 text-center">My Worlds</h1>
-        <Row>
+        <div className="custom-row">
           <Query query={findUserWorlds}>
             {
               ({ loading, error, data }) => {
@@ -60,7 +60,7 @@ export default function MyWorldList({ getUserID }) {
               }
             }
           </Query>
-        </Row>
+        </div>
       </Container>
     );
   } else {

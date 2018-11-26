@@ -1,6 +1,5 @@
 body {
   padding-top: 54px;
-  background-color: #D3D3D3
 }
 
 @media (min-width: 992px) {
@@ -15,4 +14,9 @@ body {
 
 .world-list {
   height: 100%;
+}
+
+.custom-row {
+  display: flex;
+  flex-wrap: wrap;
 }
