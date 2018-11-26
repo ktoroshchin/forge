@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, Container } from 'reactstrap';
+import { Button, Modal, ModalHeader, Container, Col } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CSSTransitionGroup } from 'react-transition-group'
@@ -115,7 +115,7 @@ export default class DisplayWorldDetails extends Component {
   }
 
   render = () => {
-    const {worldID, creatorID} = this.props.location.state;
+    const { worldID, creatorID } = this.props.location.state;
     const findWorld = gql`
       query {
         findWorlds(id: "${worldID}"){
@@ -125,9 +125,9 @@ export default class DisplayWorldDetails extends Component {
       }`;
 
     return (
-        <Container>
+        <Container className="custom-container">
           <Container>
-            <div className="display-worldname custom-row my-4" >
+            <div className="display-worldname custom-row header" >
               <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
                 {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                 {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
@@ -150,45 +150,47 @@ export default class DisplayWorldDetails extends Component {
               />
             }
           </CSSTransitionGroup>
-          <div className="custom-row">
-            {this.state.value === '' && !this.state.clicked &&
-              <div className="col-12">
-                  <div className="d-flex justify-content-between">
-                    <h3 className="default">Description</h3>
-                    {this.state.isUser &&
-                      <div>
-                        <Button
-                          color="success"
-                          size="sm"
-                          onClick={this.toggleModal}
-                        >
-                          Edit World Details
-                        </Button>
-                        <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
-                          <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
-                            <EditWorld
-                              toggleModal={this.toggleModal}
-                              worldID={worldID}
-                            />
-                        </Modal>
-                      </div>
-                    }
-                  </div>
-                <h6 className="default">{this.getWorldDescription(findWorld)}</h6>
-                <ShowMap
-                  worldID={worldID}
-                  isUser={this.state.isUser}
-                  creatorID={creatorID}
-                />
-              </div>
-            }
-            {(this.state.value !== '' || this.state.clicked) &&
-              <div className="col-md-12 col-lg-12 col-xl-12">
-                {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
-              </div>
-            }
-          </div>
+          <Container>
+            <div className="custom-row">
+              {this.state.value === '' && !this.state.clicked &&
+                <Col>
+                    <div className="bottom-spacing justified">
+                      <h3 className="default">Description</h3>
+                      {this.state.isUser &&
+                        <div>
+                          <Button
+                            color="warning"
+                            size="sm"
+                            onClick={this.toggleModal}
+                          >
+                            Edit World Details
+                          </Button>
+                          <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                            <ModalHeader className="default" toggle={this.toggleModal}>Edit World Details</ModalHeader>
+                              <EditWorld
+                                toggleModal={this.toggleModal}
+                                worldID={worldID}
+                              />
+                          </Modal>
+                        </div>
+                      }
+                    </div>
+                  <h6 className="default bottom-spacing pb-3">{this.getWorldDescription(findWorld)}</h6>
+                  <ShowMap
+                    worldID={worldID}
+                    isUser={this.state.isUser}
+                    creatorID={creatorID}
+                  />
+                </Col>
+              }
+              {(this.state.value !== '' || this.state.clicked) &&
+                <div className="col-md-12 col-lg-12 col-xl-12">
+                  {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
+                  {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
+                </div>
+              }
+            </div>
+          </Container>
         </Container>
     )
   }

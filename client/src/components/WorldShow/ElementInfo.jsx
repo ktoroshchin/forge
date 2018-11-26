@@ -25,7 +25,7 @@ export default class Element extends Component {
         <div>
           <Button
             size="sm"
-            color="success"
+            color="warning"
             className="col-xs-6 col-sm-4 col-md-4 col-lg-4 mt-3"
             onClick={this.toggleEditModal}>
             Edit {category}
@@ -58,7 +58,6 @@ export default class Element extends Component {
         }
       }`;
     return (
-      <Container>
         <Query query={findElement}>
           {
             ({ loading, error, data }) => {
@@ -99,7 +98,6 @@ export default class Element extends Component {
             }
           }
         </Query>
-      </Container>
     );
   }
 }

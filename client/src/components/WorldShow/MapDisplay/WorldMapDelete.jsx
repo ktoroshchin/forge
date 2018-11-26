@@ -52,7 +52,6 @@ export default class WorldMapDelete extends Component {
         <ModalFooter>
         {!this.state.confirm &&
           <Button
-            outline
             color="danger"
             size="sm"
             className="col-md-3"
@@ -68,7 +67,7 @@ export default class WorldMapDelete extends Component {
           >
             {(postMutation) =>
               <Link
-                className="col-md-6 p-0"
+                className="col-md-3 p-0"
                 to={{
                   pathname: "/world-show",
                   state: {
@@ -78,10 +77,9 @@ export default class WorldMapDelete extends Component {
                 }}
               >
                 <Button
-                  outline
                   color="danger"
                   size="sm"
-                  className="col-md-3"
+                  className="col-12"
                   onClick={() => {this.handleMutationSubmit(postMutation)}}
                 >
                   Remove

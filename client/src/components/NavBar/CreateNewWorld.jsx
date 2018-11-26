@@ -68,14 +68,13 @@ export default class CreateNewWorld extends Component {
           }
         }`
       return (
-        <Container>
-          <h1 className="my-4 text-center">Create A New World</h1>
+        <Container className="custom-container">
+          <h1 className="header">Create A New World</h1>
           <Card
             body
-            inverse
             style={{
-              backgroundColor: '#595959',
-              borderColor: '#595959'
+              backgroundColor: '#D3D3D3',
+              borderColor: '#D3D3D3'
             }}
           >
             <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
@@ -100,7 +99,7 @@ export default class CreateNewWorld extends Component {
                   </CardText>
                 </FormGroup>
                 <Button
-                  color="success"
+                  color="primary"
                   onClick={() => {this.handleMutationSubmit(postMutation)}}
                 >
                   Submit

@@ -6,8 +6,8 @@ import SearchBar from "./NavBar/SearchBar"
 
 export default function Homepage() {
   return (
-    <Container>
-      <h1 className="my-3 text-center">All Worlds</h1>
+    <Container className="custom-container">
+      <h1 className="header">All Worlds</h1>
       <div className="custom-row">
         <SearchBar />
         <WorldList />

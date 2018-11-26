@@ -19,8 +19,8 @@ export default function SearchWorldList({ location }) {
     }`;
   const name = location.state.search;
   return (
-    <Container>
-      <h1 className="my-4 text-center">Searching for "{name}"</h1>
+    <Container className="custom-container">
+      <h1 className="header">Searching for "{name}"</h1>
       <div className="custom-row">
         <Query query={searchWorlds} variables={{ name }}>
           {

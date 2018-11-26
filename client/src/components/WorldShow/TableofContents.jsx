@@ -47,20 +47,22 @@ export default class TableofContents extends Component {
     };
 
     return (
-      <div className="AccordionForWorldPage">
+      <div>
         <Card
           inverse
-          className="h-75 ml-4 border-0 p-2"
+          className="ml-4 border-0 p-2"
           style={{
             backgroundColor: '#595959',
           }}
         >
           {isUser &&
-            <Button color="success" size="sm" onClick={handleClick}>
+            <Button color="primary" size="sm" onClick={handleClick}>
               Add New Element
             </Button>
           }
-          <CardHeader className="text-center default border" style={tOCStyle}>Table of Contents</CardHeader>
+          <CardHeader className="text-center default border" style={tOCStyle}>
+            <h3>Table of Contents</h3>
+          </CardHeader>
           <CardHeader onClick={this.toggleCityList} className={tOCClassName}>Cities</CardHeader>
           <Collapse isOpen={this.state.cityCollapse}>
             <ElementList

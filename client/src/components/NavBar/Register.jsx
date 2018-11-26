@@ -83,14 +83,13 @@ export default class Register extends Component {
 
     if (!getUserID()) {
       return (
-        <Container>
-          <h1 className="my-4 text-center">Register</h1>
+        <Container className="custom-container">
+          <h1 className="header">Register</h1>
           <Card
             body
-            inverse
             style={{
-              backgroundColor: '#595959',
-              borderColor: '#595959'
+              backgroundColor: '#D3D3D3',
+              borderColor: '#D3D3D3'
             }}
           >
             <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
@@ -126,7 +125,7 @@ export default class Register extends Component {
                   </CardText>
                 </FormGroup>
                 <Button
-                  color="success"
+                  color="primary"
                   onClick={() => {this.handleMutationSubmit(postMutation)}}
                 >
                   Submit

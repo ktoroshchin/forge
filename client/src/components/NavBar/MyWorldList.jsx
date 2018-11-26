@@ -22,8 +22,8 @@ export default function MyWorldList({ getUserID }) {
 
   if (userID) {
     return (
-      <Container>
-        <h1 className="my-4 text-center">My Worlds</h1>
+      <Container className="custom-container">
+        <h1 className="header">My Worlds</h1>
         <div className="custom-row">
           <Query query={findUserWorlds}>
             {
