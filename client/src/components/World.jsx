@@ -10,22 +10,24 @@ export default function World({ world_id, name, description, creator_id, world_m
       backgroundAttachment: 'relative',
       backgroundPosition: 'center',
       borderRadius: "10px",
-      marginBottom: "1em"
     }
     return (
-      <Link
-        to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}
-        style={{textDecoration: "none"}}
-      >
-        <Card className="world-list" style={imageStyle}>
+      <Card className="world-list" style={imageStyle}>
+        <Link
+          to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}
+          style={{
+            textDecoration: "none",
+            height: "100%",
+          }}
+        >
           <CardBody className="world-content">
             <CardHeader className="border mb-3">
               <h3>{name}</h3>
             </CardHeader>
             <CardText>{description}</CardText>
           </CardBody>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     )
   } else {
     const imageStyle = {
@@ -34,19 +36,22 @@ export default function World({ world_id, name, description, creator_id, world_m
       marginBottom: "1em"
     }
     return (
-      <Link
-        to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}
-        style={{textDecoration: "none"}}
-      >
-        <Card className="world-list" style={imageStyle}>
+      <Card className="world-list" style={imageStyle}>
+        <Link
+          to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}
+          style={{
+            textDecoration: "none",
+            height: "100%",
+          }}
+        >
           <CardBody className="world-content">
             <CardHeader className="border mb-3">
               <h3>{name}</h3>
             </CardHeader>
             <CardText>{description}</CardText>
           </CardBody>
-        </Card>
-      </Link>
+        </Link>
+      </Card>
     )
   }
 }

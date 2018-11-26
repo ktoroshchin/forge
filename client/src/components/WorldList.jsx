@@ -40,7 +40,7 @@ export default function WorldList() {
                 }
 
                 return (
-                  <Col key={id} sm="6" lg="4" className="portfolio-item">
+                  <Col key={id} sm="6" lg="4" className="portfolio-item mb-3">
                     <World
                       world_id={id}
                       name={name}
