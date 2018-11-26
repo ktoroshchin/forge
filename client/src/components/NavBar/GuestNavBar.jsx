@@ -6,15 +6,15 @@ export default function GuestNavBar() {
   return (
     <UncontrolledDropdown nav inNavbar>
       <DropdownToggle nav caret>
-        Hello, Guest!
+        <span className="hello-user">HELLO, GUEST!</span>
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownItem tag={Link} to="/login">
-          Login
+          LOGIN
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem tag={Link} to="/register">
-          Register
+          REGISTER
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>

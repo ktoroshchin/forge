@@ -70,7 +70,7 @@ export default class Login extends Component {
     if (!getUserID()) {
       return (
         <Container>
-          <h1 className="my-4 text-center">Login</h1>
+          <h1 className="my-4 text-center">LOGIN</h1>
           <Card
             body
             inverse

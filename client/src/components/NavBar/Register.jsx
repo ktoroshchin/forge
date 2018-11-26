@@ -84,7 +84,7 @@ export default class Register extends Component {
     if (!getUserID()) {
       return (
         <Container>
-          <h1 className="my-4 text-center">Register</h1>
+          <h1 className="my-4 text-center">REGISTER</h1>
           <Card
             body
             inverse
