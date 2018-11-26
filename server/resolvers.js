@@ -8,7 +8,12 @@ module.exports = {
   Query: {
     findUsers: resolver(db.user),
     findWorlds: resolver(db.world),
-    searchWorlds: (root, { name }) => db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } }),
+    searchWorlds: (root, { name, creator_id }) => {
+      if (creator_id) {
+        return db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` }, creator_id } })
+      }
+      return db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } })
+    },
     findWorldMap: (root, { world_id }) => db.world_map.findOne({ where: { world_id } }),
     findMarkerMap: (root, { marker_id }) => db.marker_map.findOne({ where: { marker_id } }),
     findMarkers: resolver(db.marker),
