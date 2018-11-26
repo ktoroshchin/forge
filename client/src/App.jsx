@@ -4,7 +4,6 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import Cookies from 'universal-cookie';
 
-import './styles/App.css';
 
 import NavbarMain from './components/NavBar/NavbarMain.jsx'
 import HomePage from './components/HomePage.jsx'
