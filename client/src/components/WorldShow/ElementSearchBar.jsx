@@ -34,7 +34,7 @@ export default class ElementSearchBar extends Component {
             name="search"
             placeholder="Search For Element"
           />
-          <Button onClick={(event)=>this.handleSubmit(event)} color="success">Search</Button>
+          <Button onClick={(event)=>this.handleSubmit(event)} color="primary">Search</Button>
         </div>
       </Form>
     )
