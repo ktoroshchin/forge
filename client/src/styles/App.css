@@ -15,8 +15,9 @@ code {
 }
 #root {
   height: 100vh;
-/*  background: #3c1c13;*/
+  background-color: #D3D3D3
 }
+
 .header {
   text-align: center;
   margin: 0.5em 0;
