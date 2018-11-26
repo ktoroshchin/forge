@@ -25,7 +25,7 @@ export default class NavbarMain extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink href="/">View All Worlds</NavLink>
+              <NavLink href="/all-worlds">View All Worlds</NavLink>
             </NavItem>
             <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
           </Nav>

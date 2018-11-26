@@ -20,7 +20,7 @@ export default class SearchWorldList extends Component {
   }
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
   render() {
@@ -38,8 +38,8 @@ export default class SearchWorldList extends Component {
       }`;
     const {search} = this.props.location.state;
     return (
-      <Container>
-        <Button onClick={()=>{this.setRedirect()}} color="success">Back</Button>
+      <Container className="custom-container">
+        <Button onClick={()=>{this.setRedirect()}} color="info">Back</Button>
         <h1 className="header">Searching for "{search}"</h1>
         <div className="custom-row">
           <Query query={searchWorlds} variables={{ 'name': search }}>

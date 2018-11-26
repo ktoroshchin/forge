@@ -47,7 +47,7 @@ export default class Register extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
 
@@ -138,7 +138,7 @@ export default class Register extends Component {
         </Container>
       )
     } else {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
 }

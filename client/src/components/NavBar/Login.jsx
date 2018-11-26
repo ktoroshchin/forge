@@ -38,7 +38,7 @@ export default class Login extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
 
@@ -115,7 +115,7 @@ export default class Login extends Component {
         </Container>
       )
     } else {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
 }
