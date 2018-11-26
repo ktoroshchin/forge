@@ -30,6 +30,7 @@ export default class SearchWorldList extends Component {
           id
           name
           description
+          creator_id
           world_map {
             url
           }
