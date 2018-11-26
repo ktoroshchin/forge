@@ -3,7 +3,7 @@ import World from "../World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
-import { Jumbotron } from 'reactstrap'
+import { Container, Row, Col, Jumbotron } from 'reactstrap'
 
 export default function MyWorldList({ getUserID }) {
   const userID = getUserID();
@@ -22,9 +22,9 @@ export default function MyWorldList({ getUserID }) {
 
   if (userID) {
     return (
-      <div className="container page">
-        <h2 className="header default">My Worlds</h2>
-        <div>
+      <Container>
+        <h1 className="my-4 text-center">My Worlds</h1>
+        <Row>
           <Query query={findUserWorlds}>
             {
               ({ loading, error, data }) => {
@@ -35,22 +35,33 @@ export default function MyWorldList({ getUserID }) {
                 } else if (data.findWorlds.length === 0) {
                   return <Jumbotron className="jumbotron default">No Worlds</Jumbotron>
                 } else {
-                  return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
-                    <World
-                      key={id}
-                      world_id={id}
-                      name={name}
-                      description={description}
-                      creator_id={creator_id}
-                      world_map={world_map}
-                    />
-                  )));
+                  return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => {
+                    let worldDesc = ""
+
+                    if (description.length <= 200) {
+                      worldDesc = description
+                    } else {
+                      worldDesc = description.slice(0, 199) + "..."
+                    }
+
+                    return (
+                      <Col key={id} sm="6" lg="4" className="portfolio-item">
+                        <World
+                          world_id={id}
+                          name={name}
+                          description={worldDesc}
+                          creator_id={creator_id}
+                          world_map={world_map}
+                        />
+                      </Col>
+                    )
+                  }));
                 }
               }
             }
           </Query>
-        </div>
-      </div>
+        </Row>
+      </Container>
     );
   } else {
     return <Redirect to='/login' />
