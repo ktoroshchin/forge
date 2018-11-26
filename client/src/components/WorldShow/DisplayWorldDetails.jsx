@@ -176,7 +176,7 @@ export default class DisplayWorldDetails extends Component {
                     }
                   </div>
                 <h6 className="default">{this.getWorldDescription(findWorld)}</h6>
-                <ElementSearchBar />
+                <ElementSearchBar worldID={worldID} />
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}
