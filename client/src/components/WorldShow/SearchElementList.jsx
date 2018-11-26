@@ -26,7 +26,6 @@ export default function SearchElementList({ worldID, search }) {
             } else {
               return (data.searchMarkers.map(({ id }) => (
                 <div>
-                  <h2>Search Results </h2>
                   <Element
                     key={id}
                     markerID={id}
