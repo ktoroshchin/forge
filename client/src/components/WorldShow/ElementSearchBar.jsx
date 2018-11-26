@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from 'reactstrap';
-import { Redirect } from 'react-router'
 
 export default class ElementSearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: null,
-      redirect: false
+      search: null
     }
   }
 
@@ -21,15 +19,8 @@ export default class ElementSearchBar extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (this.state.search) {
-      this.setState({redirect: true})
-    }
-  }
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to=  {{
-        pathname: "/element-search",
-        state: { worldID: this.props.worldID, search: this.state.search }
-      }} />
+      this.props.setValue("search");
+      this.props.setSearch(this.state.search);
     }
   }
 
@@ -45,7 +36,6 @@ export default class ElementSearchBar extends Component {
           />
           <Button onClick={(event)=>this.handleSubmit(event)} color="success">Search</Button>
         </div>
-        {this.renderRedirect()}
       </Form>
     )
   }

@@ -11,6 +11,7 @@ import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import EditWorld from './EditElement/EditWorld'
 import ElementSearchBar from "./ElementSearchBar"
+import SearchElementList from "./SearchElementList"
 
 const cookies = new Cookies();
 
@@ -28,6 +29,7 @@ export default class DisplayWorldDetails extends Component {
       isUser: false,
       modal: false,
       sidebarOpen: false,
+      search: ""
     }
   };
 
@@ -48,12 +50,20 @@ export default class DisplayWorldDetails extends Component {
       value: value,
       clicked: false,
     })
-    this.sideBarToggle()
+    if (value !== 'search') {
+      this.sideBarToggle()
+    }
   }
 
   setLocationID = (id) => {
     this.setState({
       locationID: id
+    })
+  }
+
+  setSearch = (search) => {
+    this.setState({
+      search: search
     })
   }
 
@@ -176,7 +186,7 @@ export default class DisplayWorldDetails extends Component {
                     }
                   </div>
                 <h6 className="default">{this.getWorldDescription(findWorld)}</h6>
-                <ElementSearchBar worldID={worldID} />
+                <ElementSearchBar worldID={worldID} setValue={this.setValue} setSearch={this.setSearch}/>
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}
@@ -186,7 +196,8 @@ export default class DisplayWorldDetails extends Component {
             }
             {(this.state.value !== '' || this.state.clicked) &&
               <div className="col-md-12 col-lg-12 col-xl-12">
-                {this.state.value !== '' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
+                {this.state.value === 'search' && <SearchElementList worldID={worldID} search={this.state.search}/> }
+                {this.state.value !== 'search' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
                 {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
               </div>
             }
