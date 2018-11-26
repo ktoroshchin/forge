@@ -71,7 +71,6 @@ export default class ElementDelete extends Component {
             }
           </Mutation>
         }
-        {this.renderRedirect()}
         </ModalFooter>
       </div>
     )

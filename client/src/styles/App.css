@@ -49,6 +49,11 @@ code {
 .pointer {
   cursor: pointer;
 }
+.jumbotron {
+  text-align: center;
+  height: 150px;
+  width: 100%;
+}
 .world-content {
   height: 100%;
   width: 100%;
