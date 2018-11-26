@@ -1,0 +1,22 @@
+.world-list {
+  height: 100%;
+}
+
+.custom-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.custom-container {
+  background: white;
+}
+
+.bottom-spacing {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.justified {
+  display: flex;
+  justify-content: space-between;
+}

@@ -3,7 +3,8 @@ import World from "../World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
-import { Container, Col, Jumbotron } from 'reactstrap'
+import { Link } from "react-router-dom";
+import { Container, Col, Button } from 'reactstrap'
 
 import SearchBar from "./SearchBar"
 
@@ -36,7 +37,14 @@ export default function MyWorldList({ getUserID }) {
                 } else if (error) {
                   return <div>Error</div>
                 } else if (data.findWorlds.length === 0) {
-                  return <Jumbotron className="jumbotron default">No Worlds</Jumbotron>
+                  return (
+                    <div>
+                      <h2>No Worlds</h2>
+                      <Link to="/new-world">
+                        <Button color='primary'>Create A New World</Button>
+                      </Link>
+                    </div>
+                  )
                 } else {
                   return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => {
                     let worldDesc = ""
@@ -51,7 +59,7 @@ export default function MyWorldList({ getUserID }) {
                     }
 
                     return (
-                      <Col key={id} sm="6" lg="4" className="portfolio-item">
+                      <Col key={id} sm="6" lg="4" className="portfolio-item mb-3">
                         <World
                           world_id={id}
                           name={name}
