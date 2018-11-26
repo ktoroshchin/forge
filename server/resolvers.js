@@ -11,7 +11,8 @@ module.exports = {
     searchWorlds: (root, { name }) => db.world.findAll({ where: { name: { [Op.iLike]: `%${name}%` } } }),
     findWorldMap: (root, { world_id }) => db.world_map.findOne({ where: { world_id } }),
     findMarkerMap: (root, { marker_id }) => db.marker_map.findOne({ where: { marker_id } }),
-    findMarkers: resolver(db.marker)
+    findMarkers: resolver(db.marker),
+    searchMarkers: (root, { world_id, name }) => db.marker.findAll({ where: { name: { [Op.iLike]: `%${name}%` }, world_id } })
   },
   Mutation: {
     createNewWorldMap: async (root, { world_id, url, width, height }) => {

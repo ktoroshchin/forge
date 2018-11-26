@@ -8,4 +8,5 @@ module.exports = Query = `type Query {
   findMarkerMap(marker_id: ID): MarkerMap
 
   findMarkers(world_id: ID, id: ID, map_id: ID, category: String): [Marker!]
+  searchMarkers(world_id: ID!, name: String!): [Marker!]
 }`;
