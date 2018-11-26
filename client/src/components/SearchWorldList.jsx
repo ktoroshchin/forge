@@ -5,7 +5,7 @@ import { Jumbotron } from 'reactstrap'
 
 import World from "./World"
 
-export default function SearchWorldList() {
+export default function SearchWorldList({ location }) {
   const searchWorlds = gql`
     query ($name: String!){
       searchWorlds(name: $name) {
@@ -17,7 +17,7 @@ export default function SearchWorldList() {
         }
       }
     }`;
-  const name = "Blah"
+  const name = location.state.search;
   return (
     <div className="container page">
       <h2 className="header default">Search</h2>
