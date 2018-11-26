@@ -27,7 +27,7 @@ export default class SearchBar extends Component {
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to=  {{
-        pathname: "/search",
+        pathname: "/world-search",
         state: { search: this.state.search }
       }} />
     }

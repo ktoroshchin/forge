@@ -16,6 +16,7 @@ import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
 
 import SearchWorldList from './components/SearchWorldList'
+import SearchElementList from './components/WorldShow/SearchElementList'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
@@ -48,7 +49,8 @@ const App = () => {
           <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
           <Route path="/world-show" component={DisplayWorldDetails} />
           <Route path="/edit-map" component={EditMap} />
-          <Route path="/search" component={SearchWorldList} />
+          <Route path="/world-search" component={SearchWorldList} />
+          <Route path="/element-search" component={SearchElementList} />
         </div>
       </Router>
     </ApolloProvider>
