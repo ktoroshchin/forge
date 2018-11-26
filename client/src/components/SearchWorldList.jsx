@@ -18,29 +18,32 @@ export default function SearchWorldList() {
     }`;
   const name = "Ymir"
   return (
-    <div>
-      <Query query={searchWorlds} variables={{ name }}>
-        {
-          ({ loading, error, data }) => {
-            if (loading) {
-              return <div>Fetching</div>
-            } else if (error) {
-              return <div>Error</div>
-            } else {
-              return (data.searchWorlds.map(({ id, name, description, creator_id, world_map }) => (
-                <World
-                  key={id}
-                  world_id={id}
-                  name={name}
-                  description={description}
-                  creator_id={creator_id}
-                  world_map={world_map}
-                />
-              )));
+    <div className="container page">
+      <h2 className="header default">Search</h2>
+      <div>
+        <Query query={searchWorlds} variables={{ name }}>
+          {
+            ({ loading, error, data }) => {
+              if (loading) {
+                return <div>Fetching</div>
+              } else if (error) {
+                return <div>Error</div>
+              } else {
+                return (data.searchWorlds.map(({ id, name, description, creator_id, world_map }) => (
+                  <World
+                    key={id}
+                    world_id={id}
+                    name={name}
+                    description={description}
+                    creator_id={creator_id}
+                    world_map={world_map}
+                  />
+                )));
+              }
             }
           }
-        }
-      </Query>
+        </Query>
+      </div>
     </div>
   );
 }
