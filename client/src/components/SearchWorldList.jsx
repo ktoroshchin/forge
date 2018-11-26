@@ -27,7 +27,7 @@ export default function SearchWorldList() {
             } else if (error) {
               return <div>Error</div>
             } else {
-              return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
+              return (data.searchWorlds.map(({ id, name, description, creator_id, world_map }) => (
                 <World
                   key={id}
                   world_id={id}
