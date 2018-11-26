@@ -32,7 +32,7 @@ export default function World({ world_id, name, description, creator_id, world_m
         <div className="world" style={imageStyle}>
           <div className="world-content">
             <h3>{name}</h3>
-            {description && <p>Description: {description}</p>}
+            {description && <p>{description}</p>}
           </div>
         </div>
       </Link>
