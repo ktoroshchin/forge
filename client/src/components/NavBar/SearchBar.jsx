@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, Input } from 'reactstrap';
 import { Redirect } from 'react-router'
 
 export default class SearchBar extends Component {
@@ -18,11 +18,9 @@ export default class SearchBar extends Component {
       this.setState({search: event.target.value.trim()});
     }
   }
-
-  onSubmit = (event) => {
-    if (this.state.search === null) {
-      event.preventDefault();
-    } else {
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if (this.state.search) {
       this.setState({redirect: true})
     }
   }
@@ -37,22 +35,15 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <div className="container page">
-        <h2 className="header default">Create A New World</h2>
-        <div className="info">
-          <Form onSubmit={this.handleSubmit}>
-            <FormGroup>
-              <Label>Search</Label>
-              <Input
-                onChange={this.handleNameChange}
-                type="text"
-                name="search"
-              />
-            </FormGroup>
-          </Form>
-          {this.renderRedirect()}
-        </div>
-      </div>
+      <Form onSubmit={this.handleSubmit}>
+        <Input
+          onChange={this.handleSearchChange}
+          type="text"
+          name="search"
+          placeholder="Search For World"
+        />
+        {this.renderRedirect()}
+      </Form>
     )
   }
 }

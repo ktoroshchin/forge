@@ -3,7 +3,7 @@ import World from "../World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
-import {Jumbotron} from 'reactstrap'
+import { Jumbotron } from 'reactstrap'
 
 export default function MyWorldList({ getUserID }) {
   const userID = getUserID();

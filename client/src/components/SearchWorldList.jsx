@@ -1,6 +1,7 @@
 import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Jumbotron } from 'reactstrap'
 
 import World from "./World"
 
@@ -16,7 +17,7 @@ export default function SearchWorldList() {
         }
       }
     }`;
-  const name = "Ymir"
+  const name = "Blah"
   return (
     <div className="container page">
       <h2 className="header default">Search</h2>
@@ -28,6 +29,8 @@ export default function SearchWorldList() {
                 return <div>Fetching</div>
               } else if (error) {
                 return <div>Error</div>
+              } else if (data.searchWorlds.length === 0) {
+                  return <Jumbotron className="jumbotron default">No Worlds</Jumbotron>
               } else {
                 return (data.searchWorlds.map(({ id, name, description, creator_id, world_map }) => (
                   <World
