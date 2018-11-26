@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, Container } from 'reactstrap';
+import { Button, Modal, ModalHeader, Container, Col } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CSSTransitionGroup } from 'react-transition-group'
@@ -126,7 +126,7 @@ export default class DisplayWorldDetails extends Component {
   }
 
   render = () => {
-    const {worldID, creatorID} = this.props.location.state;
+    const { worldID, creatorID } = this.props.location.state;
     const findWorld = gql`
       query {
         findWorlds(id: "${worldID}"){
@@ -136,40 +136,44 @@ export default class DisplayWorldDetails extends Component {
       }`;
 
     return (
+      <Container className="custom-container">
         <Container>
-          <Container>
-            <div className="display-worldname custom-row my-4" >
-              <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
-                {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
-                {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
-              </div>
-              <h1 className="pointer" onClick={this.handleRefresh}>{this.getWorldName(findWorld)}</h1>
+          <div className="display-worldname custom-row header" >
+            <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
+              {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
+              {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
             </div>
+            <h1 className="pointer" onClick={this.handleRefresh}>{this.getWorldName(findWorld)}</h1>
+          </div>
+          <Container className="bottom-spacing">
+            <ElementSearchBar worldID={worldID} setValue={this.setValue} setSearch={this.setSearch}/>
           </Container>
-          <CSSTransitionGroup
-            className="sideBar"
-            transitionName="sideBar"
-            transitionEnterTimeout={700}
-            transitionLeaveTimeout={700}>
-            {this.state.sidebarOpen &&
-              <TableofContents
-                handleClick={this.handleClick}
-                worldID={worldID}
-                setValue={this.setValue}
-                setLocationID={this.setLocationID}
-                isUser={this.state.isUser}
-              />
-            }
-          </CSSTransitionGroup>
+        </Container>
+        <CSSTransitionGroup
+          className="sideBar"
+          transitionName="sideBar"
+          transitionEnterTimeout={700}
+          transitionLeaveTimeout={700}>
+          {this.state.sidebarOpen &&
+            <TableofContents
+              handleClick={this.handleClick}
+              worldID={worldID}
+              setValue={this.setValue}
+              setLocationID={this.setLocationID}
+              isUser={this.state.isUser}
+            />
+          }
+        </CSSTransitionGroup>
+        <Container>
           <div className="custom-row">
             {this.state.value === '' && !this.state.clicked &&
-              <div className="col-12">
-                  <div className="d-flex justify-content-between">
+              <Col>
+                  <div className="bottom-spacing justified">
                     <h3 className="default">Description</h3>
                     {this.state.isUser &&
                       <div>
                         <Button
-                          color="success"
+                          color="warning"
                           size="sm"
                           onClick={this.toggleModal}
                         >
@@ -185,14 +189,13 @@ export default class DisplayWorldDetails extends Component {
                       </div>
                     }
                   </div>
-                <h6 className="default">{this.getWorldDescription(findWorld)}</h6>
-                <ElementSearchBar worldID={worldID} setValue={this.setValue} setSearch={this.setSearch}/>
+                <h6 className="default bottom-spacing pb-3">{this.getWorldDescription(findWorld)}</h6>
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}
                   creatorID={creatorID}
                 />
-              </div>
+              </Col>
             }
             {(this.state.value !== '' || this.state.clicked) &&
               <div className="col-md-12 col-lg-12 col-xl-12">
@@ -203,6 +206,7 @@ export default class DisplayWorldDetails extends Component {
             }
           </div>
         </Container>
+      </Container>
     )
   }
 }

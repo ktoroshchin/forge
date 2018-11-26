@@ -126,7 +126,7 @@ export default class AddNewElement extends Component {
             </ModalBody>
             <ModalFooter>
               <Button
-                color="success"
+                color="primary"
                 onClick={() => {this.handleMutationSubmit(postMutation)}}
               >
                 Submit

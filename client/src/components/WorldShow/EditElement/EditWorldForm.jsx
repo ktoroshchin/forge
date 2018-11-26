@@ -81,7 +81,14 @@ export default class EditWorldForm extends Component {
           </Form>
         </ModalBody>
         <ModalFooter className="justify-content-between">
-          <Button className="btn btn-outline-danger btn-sm col-3" onClick={this.toggleDeleteModal}>Remove World</Button>
+          <Button
+            color="danger"
+            size="sm"
+            className="col-3"
+            onClick={this.toggleDeleteModal}
+          >
+            Remove World
+          </Button>
           <Modal isOpen={this.state.deleteModal} toggle={this.toggleDeleteModal} className={this.props.className}>
             <ModalHeader className="default" toggle={this.toggleDeleteModal}>Remove Your World</ModalHeader>
             <WorldDelete worldID={id} />
@@ -97,7 +104,7 @@ export default class EditWorldForm extends Component {
           >
             {(postMutation) =>
               <Button
-                color="success"
+                color="primary"
                 size="sm"
                 className="col-3"
                 onClick={()=>{this.handleMutationSubmit(postMutation)}}

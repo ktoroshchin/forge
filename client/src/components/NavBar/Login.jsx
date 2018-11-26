@@ -69,14 +69,13 @@ export default class Login extends Component {
       }`;
     if (!getUserID()) {
       return (
-        <Container>
-          <h1 className="my-4 text-center">Login</h1>
+        <Container className="custom-container">
+          <h1 className="header">Login</h1>
           <Card
             body
-            inverse
             style={{
-              backgroundColor: '#595959',
-              borderColor: '#595959'
+              backgroundColor: '#D3D3D3',
+              borderColor: '#D3D3D3'
             }}
           >
             <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
@@ -103,7 +102,7 @@ export default class Login extends Component {
                     </CardText>
                   </FormGroup>
                   <Button
-                    color="success"
+                    color="primary"
                     onClick={() => {this.handleMutationSubmit(postMutation)}}
                   >
                     Submit

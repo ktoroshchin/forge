@@ -20,42 +20,42 @@ export default class ChooseCategoryToCreate extends Component {
 
   render = () => {
     const cardStyle = {
-      backgroundColor: '#595959',
-      borderColor: '#595959',
+      backgroundColor: '#D3D3D3',
+      borderColor: '#D3D3D3',
       boxShadow: '10px 10px 5px 0px black'
     }
     return (
       <div>
         <CardDeck className="mb-4">
-          <Card body inverse style={cardStyle} className="text-center default">
+          <Card body style={cardStyle} className="text-center default">
             <CardTitle>City</CardTitle>
-            <Button color="info" onClick={this.toggleModal} value={"City"} >
+            <Button color="primary" onClick={this.toggleModal} value={"City"} >
               Create New
             </Button>
           </Card>
-          <Card body inverse style={cardStyle} className="text-center default">
+          <Card body style={cardStyle} className="text-center default">
             <CardTitle>Town</CardTitle>
-            <Button color="info" onClick={this.toggleModal} value={"Town"} >
+            <Button color="primary" onClick={this.toggleModal} value={"Town"} >
               Create New
             </Button>
           </Card>
-          <Card body inverse style={cardStyle} className="text-center default">
+          <Card body style={cardStyle} className="text-center default">
             <CardTitle>Location</CardTitle>
-            <Button color="info" onClick={this.toggleModal} value={"Location"} >
+            <Button color="primary" onClick={this.toggleModal} value={"Location"} >
               Create New
             </Button>
           </Card>
         </CardDeck>
         <CardDeck>
-          <Card body inverse style={cardStyle} className="text-center default">
+          <Card body style={cardStyle} className="text-center default">
             <CardTitle>People of Importance</CardTitle>
-            <Button color="info" disabled>
+            <Button color="primary" disabled>
               Create New
             </Button>
           </Card>
-          <Card body inverse style={cardStyle} className="text-center default">
+          <Card body style={cardStyle} className="text-center default">
             <CardTitle>Place of Importance</CardTitle>
-            <Button color="info" disabled>
+            <Button color="primary" disabled>
               Create New
             </Button>
           </Card>

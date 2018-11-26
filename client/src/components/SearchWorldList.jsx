@@ -40,7 +40,7 @@ export default class SearchWorldList extends Component {
     return (
       <Container>
         <Button onClick={()=>{this.setRedirect()}} color="success">Back</Button>
-        <h1 className="my-4 text-center">Searching for "{search}"</h1>
+        <h1 className="header">Searching for "{search}"</h1>
         <div className="custom-row">
           <Query query={searchWorlds} variables={{ 'name': search }}>
             {

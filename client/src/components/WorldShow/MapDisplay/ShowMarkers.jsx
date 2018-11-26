@@ -90,9 +90,8 @@ export default class ShowMarkers extends Component {
                         }
                       </ListGroup>
                       <br/>
-                      <div className="d-flex justify-content-between">
+                      <div className="justified">
                         <Button
-                          outline
                           color="info"
                           size="sm"
                           className="col-xs-12 col-sm-6 col-md-4"
@@ -107,7 +106,6 @@ export default class ShowMarkers extends Component {
                           >
                             {(postMutation) =>
                               <Button
-                                outline
                                 color="danger"
                                 size="sm"
                                 className="col-xs-12 col-sm-6 col-md-4"

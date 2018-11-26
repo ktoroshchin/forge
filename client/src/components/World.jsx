@@ -19,7 +19,7 @@ export default function World({ world_id, name, description, creator_id, world_m
       >
         <Card className="world-list" style={imageStyle}>
           <CardBody className="world-content">
-            <CardHeader className="border">
+            <CardHeader className="border mb-3">
               <h3>{name}</h3>
             </CardHeader>
             <CardText>{description}</CardText>
@@ -34,15 +34,19 @@ export default function World({ world_id, name, description, creator_id, world_m
       marginBottom: "1em"
     }
     return (
-      <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
+      <Link
+        to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}
+        style={{textDecoration: "none"}}
+      >
         <Card className="world-list" style={imageStyle}>
           <CardBody className="world-content">
-            <CardTitle>
-                {name}
-            </CardTitle>
+            <CardHeader className="border mb-3">
+              <h3>{name}</h3>
+            </CardHeader>
             <CardText>{description}</CardText>
           </CardBody>
         </Card>
-      </Link>    )
+      </Link>
+    )
   }
 }

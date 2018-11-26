@@ -27,7 +27,7 @@ export default class ElementSearchBar extends Component {
   render() {
     return (
       <Form className="search" onSubmit={this.handleSubmit}>
-        <div className="d-flex justify-content-between">
+        <div className="justified">
           <Input
             onChange={this.handleSearchChange}
             type="text"
