@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
+import { Card, CardText, CardBody, CardHeader, CardTitle } from "reactstrap";
 
 export default function World({ world_id, name, description, creator_id, world_map }) {
   if (world_map) {
@@ -13,12 +13,15 @@ export default function World({ world_id, name, description, creator_id, world_m
       marginBottom: "1em"
     }
     return (
-      <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
-        <Card className="h-100" style={imageStyle}>
+      <Link
+        to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}
+        style={{textDecoration: "none"}}
+      >
+        <Card className="world-list" style={imageStyle}>
           <CardBody className="world-content">
-            <CardTitle>
-                {name}
-            </CardTitle>
+            <CardHeader className="border">
+              <h3>{name}</h3>
+            </CardHeader>
             <CardText>{description}</CardText>
           </CardBody>
         </Card>
@@ -32,13 +35,14 @@ export default function World({ world_id, name, description, creator_id, world_m
     }
     return (
       <Link to={{pathname: "/world-show", state: {worldID: world_id, creatorID: creator_id}}}>
-        <div className="world" style={imageStyle}>
-          <div className="world-content">
-            <h3>{name}</h3>
-            {description && <p>{description}</p>}
-          </div>
-        </div>
-      </Link>
-    )
+        <Card className="world-list" style={imageStyle}>
+          <CardBody className="world-content">
+            <CardTitle>
+                {name}
+            </CardTitle>
+            <CardText>{description}</CardText>
+          </CardBody>
+        </Card>
+      </Link>    )
   }
 }
