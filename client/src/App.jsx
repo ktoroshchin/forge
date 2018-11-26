@@ -10,6 +10,7 @@ import HomePage from './components/HomePage.jsx'
 import Login from './components/NavBar/Login'
 import Register from './components/NavBar/Register'
 import CreateNewWorld from './components/NavBar/CreateNewWorld'
+import AllWorlds from './components/AllWorlds'
 import MyWorldList from './components/NavBar/MyWorldList'
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
@@ -38,9 +39,10 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="custom-row">
+        <div className="custom-row" style={{height: '100%',}}>
           <NavbarMain cookies={cookies} deleteUser={deleteUser} />
-          <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/all-worlds" render={() => <AllWorlds getUserID={getUserID} />} />
           <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
           <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
           <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />

@@ -3,7 +3,6 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Col } from "reactstrap";
 
-
 import World from "./World"
 
 export default function WorldList() {

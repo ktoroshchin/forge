@@ -47,7 +47,7 @@ export default class Register extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
 
@@ -87,10 +87,9 @@ export default class Register extends Component {
           <h1 className="my-4 text-center">REGISTER</h1>
           <Card
             body
-            inverse
             style={{
-              backgroundColor: '#595959',
-              borderColor: '#595959'
+              backgroundColor: '#D3D3D3',
+              borderColor: '#D3D3D3'
             }}
           >
             <Mutation mutation={POST_MUTATION} variables={{ username, email, password }}>
@@ -126,7 +125,7 @@ export default class Register extends Component {
                   </CardText>
                 </FormGroup>
                 <Button
-                  color="success"
+                  color="primary"
                   onClick={() => {this.handleMutationSubmit(postMutation)}}
                 >
                   Submit
@@ -139,7 +138,7 @@ export default class Register extends Component {
         </Container>
       )
     } else {
-      return <Redirect to='/' />
+      return <Redirect to='/all-worlds' />
     }
   }
 }
