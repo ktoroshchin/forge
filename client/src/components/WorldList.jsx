@@ -1,6 +1,8 @@
 import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import { Col } from "reactstrap";
+
 
 import World from "./World"
 
@@ -18,16 +20,16 @@ export default function WorldList() {
       }
     }`;
   return (
-    <div>
-      <Query query={findAllWorlds}>
-        {
-          ({ loading, error, data }) => {
-            if (loading) {
-              return <div>Fetching</div>
-            } else if (error) {
-              return <div>Error</div>
-            } else {
-              return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
+    <Query query={findAllWorlds}>
+      {
+        ({ loading, error, data }) => {
+          if (loading) {
+            return <div>Fetching</div>
+          } else if (error) {
+            return <div>Error</div>
+          } else {
+            return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
+              <Col sm="6" lg="4" className="portfolio-item">
                 <World
                   key={id}
                   world_id={id}
@@ -36,11 +38,11 @@ export default function WorldList() {
                   creator_id={creator_id}
                   world_map={world_map}
                 />
-              )));
-            }
+              </Col>
+            )));
           }
         }
-      </Query>
-    </div>
+      }
+    </Query>
   );
 }

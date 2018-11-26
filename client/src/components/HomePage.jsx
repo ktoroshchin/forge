@@ -1,14 +1,15 @@
 import React from "react";
+import { Container, Row } from "reactstrap";
 
 import WorldList from "./WorldList"
 
 export default function Homepage() {
   return (
-    <div className="container page">
-      <h2 className="header default">All Worlds</h2>
-      <div className="info">
-          <WorldList />
-      </div>
-    </div>
+    <Container>
+      <h1 className="my-4 text-center">All Worlds</h1>
+      <Row>
+        <WorldList />
+      </Row>
+    </Container>
   );
 }

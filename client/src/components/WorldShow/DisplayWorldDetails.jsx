@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { Button, Modal, ModalHeader } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
