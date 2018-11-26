@@ -1,8 +1,0 @@
-.row .ChooseCategoryToCreate {
-  display: flex;
-  flex-direction: column;
-}
-
-.category-button {
-  margin-bottom: 0.2em;
-}

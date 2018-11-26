@@ -50,7 +50,7 @@ export default class TableofContents extends Component {
       <div className="AccordionForWorldPage">
         <Card
           inverse
-          className="h-100 ml-4 border-0"
+          className="h-75 ml-4 border-0 p-2"
           style={{
             backgroundColor: '#595959',
           }}

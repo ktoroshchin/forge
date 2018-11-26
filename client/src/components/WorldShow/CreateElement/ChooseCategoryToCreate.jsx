@@ -1,5 +1,5 @@
 import React,  { Component } from "react";
-import { ListGroupItem, Button, Modal, ModalHeader } from 'reactstrap';
+import { Button, Modal, ModalHeader, Card, CardTitle, CardDeck } from 'reactstrap';
 
 import AddNewElement from './AddNewElement'
 
@@ -19,29 +19,50 @@ export default class ChooseCategoryToCreate extends Component {
   }
 
   render = () => {
+    const cardStyle = {
+      backgroundColor: '#595959',
+      borderColor: '#595959',
+      boxShadow: '10px 10px 5px 0px black'
+    }
     return (
-      <div className="ChooseCategoryToCreate default">
-        <ListGroupItem className="category text-center">Category</ListGroupItem>
-        <Button className="category-button col-12" onClick={this.toggleModal} value={"1"} >
-          New City
-        </Button>
-        <Modal isOpen={this.state.modal === "1"} toggle={this.toggleModal} >
-          <ModalHeader className="default" toggle={this.toggleModal}>Create a New City</ModalHeader>
-          <AddNewElement category="City" worldID={this.state.worldID} />
-        </Modal>
-        <Button className="category-button col-12" onClick={this.toggleModal} value={"2"} >
-          New Town
-        </Button>
-        <Modal isOpen={this.state.modal === "2"} toggle={this.toggleModal} >
-          <ModalHeader className="default" toggle={this.toggleModal}>Create a New Town</ModalHeader>
-          <AddNewElement category="Town" worldID={this.state.worldID} toggleModal={this.toggleModal} />
-        </Modal>
-        <Button className="category-button col-12" onClick={this.toggleModal} value={"3"} >
-          New Location
-        </Button>
-        <Modal isOpen={this.state.modal === "3"} toggle={this.toggleModal} >
-          <ModalHeader className="default" toggle={this.toggleModal}>Create a New Location</ModalHeader>
-          <AddNewElement category="Location" worldID={this.state.worldID} />
+      <div>
+        <CardDeck className="mb-4">
+          <Card body inverse style={cardStyle} className="text-center default">
+            <CardTitle>City</CardTitle>
+            <Button color="info" onClick={this.toggleModal} value={"City"} >
+              Create New
+            </Button>
+          </Card>
+          <Card body inverse style={cardStyle} className="text-center default">
+            <CardTitle>Town</CardTitle>
+            <Button color="info" onClick={this.toggleModal} value={"Town"} >
+              Create New
+            </Button>
+          </Card>
+          <Card body inverse style={cardStyle} className="text-center default">
+            <CardTitle>Location</CardTitle>
+            <Button color="info" onClick={this.toggleModal} value={"Location"} >
+              Create New
+            </Button>
+          </Card>
+        </CardDeck>
+        <CardDeck>
+          <Card body inverse style={cardStyle} className="text-center default">
+            <CardTitle>People of Importance</CardTitle>
+            <Button color="info" disabled>
+              Create New
+            </Button>
+          </Card>
+          <Card body inverse style={cardStyle} className="text-center default">
+            <CardTitle>Place of Importance</CardTitle>
+            <Button color="info" disabled>
+              Create New
+            </Button>
+          </Card>
+        </CardDeck>
+        <Modal isOpen={this.state.modal} toggle={this.toggleModal} >
+          <ModalHeader className="default" toggle={this.toggleModal}>Create a New {this.state.modal}</ModalHeader>
+          <AddNewElement category={this.state.modal} worldID={this.state.worldID} toggleModal={this.toggleModal} />
         </Modal>
       </div>
     )

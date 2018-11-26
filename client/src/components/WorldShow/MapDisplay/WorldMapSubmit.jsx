@@ -92,7 +92,7 @@ export default class WorldMapSubmit extends Component {
             </FormGroup>
           </Form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter style={{height: '4em'}}>
           {this.state.value.match(/\.(jpeg|jpg|png)$/) === null &&
             <span>Please enter a valid image URL.</span>
           }
@@ -113,10 +113,8 @@ export default class WorldMapSubmit extends Component {
               >
                   {postMutation =>
                     <Button
-                      outline
                       color="success"
                       size="sm"
-                      className="col-md-3"
                       onClick={() => {this.handleMutationSubmit(postMutation)}}
                     >
                       Submit

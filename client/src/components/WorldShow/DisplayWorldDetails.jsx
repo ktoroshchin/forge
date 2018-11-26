@@ -72,12 +72,6 @@ export default class DisplayWorldDetails extends Component {
     }
   }
 
-  refreshComponent = () => {
-    this.setState({
-      refresh: !this.state.refresh
-    })
-  }
-
   componentDidMount = () => {
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
@@ -133,7 +127,7 @@ export default class DisplayWorldDetails extends Component {
     return (
         <div className="container page">
           <div className="container">
-            <div className="display-worldname row" >
+            <div className="display-worldname row header" >
               <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
                 {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                 {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}

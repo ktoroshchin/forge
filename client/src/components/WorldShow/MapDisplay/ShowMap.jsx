@@ -59,7 +59,6 @@ export default class ShowMap extends Component {
                   return (
                     <div>
                       <Button
-                        outline
                         color="info"
                         size="sm"
                         className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
@@ -115,7 +114,6 @@ export default class ShowMap extends Component {
                         }}
                       >
                         <Button
-                          outline
                           color="warning"
                           size="sm"
                           className="col-xs-12 col-sm-6 col-md-4 col-lg-3"
