@@ -37,11 +37,14 @@ export default function MyWorldList({ getUserID }) {
                 } else {
                   return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => {
                     let worldDesc = ""
-
-                    if (description.length <= 200) {
-                      worldDesc = description
+                    if (description) {
+                      if (description.length <= 200) {
+                        worldDesc = description
+                      } else {
+                        worldDesc = description.slice(0, 199) + "..."
+                      }
                     } else {
-                      worldDesc = description.slice(0, 199) + "..."
+                      worldDesc = null
                     }
 
                     return (
