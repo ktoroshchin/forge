@@ -24,7 +24,7 @@ export default function MyWorldList({ getUserID }) {
     return (
       <div className="container page">
         <h2 className="header default">My Worlds</h2>
-        <div className="info">
+        <div>
           <Query query={findUserWorlds}>
             {
               ({ loading, error, data }) => {
