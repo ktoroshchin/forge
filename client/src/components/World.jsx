@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardText, CardBody, CardTitle, Button } from "reactstrap";
+import { Card, CardText, CardBody, CardTitle } from "reactstrap";
 
 export default function World({ world_id, name, description, creator_id, world_map }) {
   if (world_map) {
