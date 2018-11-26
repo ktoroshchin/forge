@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input } from 'reactstrap';
+import { Form, Input, Button } from 'reactstrap';
 import { Redirect } from 'react-router'
 
 export default class SearchBar extends Component {
@@ -35,13 +35,16 @@ export default class SearchBar extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Input
-          onChange={this.handleSearchChange}
-          type="text"
-          name="search"
-          placeholder="Search For World"
-        />
+      <Form className="search" onSubmit={this.handleSubmit}>
+        <div className="d-flex justify-content-between">
+          <Input
+            onChange={this.handleSearchChange}
+            type="text"
+            name="search"
+            placeholder="Search For World"
+          />
+          <Button onClick={(event)=>this.handleSubmit(event)} color="success">Search</Button>
+        </div>
         {this.renderRedirect()}
       </Form>
     )

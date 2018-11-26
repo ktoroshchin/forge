@@ -9,9 +9,9 @@ export default function Homepage() {
     <Container>
       <h1 className="my-4 text-center">All Worlds</h1>
       <Row>
-        <div className="search">
-          <SearchBar />
-        </div>
+        <SearchBar />
+      </Row>
+      <Row>
         <WorldList />
       </Row>
     </Container>
