@@ -1,7 +1,7 @@
 import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Container, Row, Col, Jumbotron } from 'reactstrap'
+import { Container, Col, Jumbotron } from 'reactstrap'
 
 import World from "./World"
 
@@ -21,7 +21,7 @@ export default function SearchWorldList({ location }) {
   return (
     <Container>
       <h1 className="my-4 text-center">Searching for "{name}"</h1>
-      <Row>
+      <div className="custom-row">
         <Query query={searchWorlds} variables={{ name }}>
           {
             ({ loading, error, data }) => {
@@ -61,7 +61,7 @@ export default function SearchWorldList({ location }) {
             }
           }
         </Query>
-      </Row>
+      </div>
     </Container>
   );
 }
