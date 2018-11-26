@@ -48,7 +48,7 @@ export default class Login extends Component {
         this.setUser(data);
       })
       .catch((error) => {
-        alert("Please fill in required fields")
+        error.graphQLErrors.map(({ message }) => (alert(message)))
       })
   }
 
