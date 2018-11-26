@@ -3,6 +3,7 @@ import World from "../World"
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
+import {Jumbotron} from 'reactstrap'
 
 export default function MyWorldList({ getUserID }) {
   const userID = getUserID();
@@ -32,7 +33,7 @@ export default function MyWorldList({ getUserID }) {
                 } else if (error) {
                   return <div>Error</div>
                 } else if (data.findWorlds.length === 0) {
-                  return <div>No Worlds</div>
+                  return <Jumbotron className="jumbotron default">No Worlds</Jumbotron>
                 } else {
                   return (data.findWorlds.map(({ id, name, description, creator_id, world_map }) => (
                     <World
