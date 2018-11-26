@@ -10,6 +10,7 @@ import TableofContents from "./TableofContents"
 import ElementInfo from './ElementInfo'
 import ShowMap from './MapDisplay/ShowMap'
 import EditWorld from './EditElement/EditWorld'
+import ElementSearchBar from "./ElementSearchBar"
 
 const cookies = new Cookies();
 
@@ -175,6 +176,7 @@ export default class DisplayWorldDetails extends Component {
                     }
                   </div>
                 <h6 className="default">{this.getWorldDescription(findWorld)}</h6>
+                <ElementSearchBar />
                 <ShowMap
                   worldID={worldID}
                   isUser={this.state.isUser}

@@ -41,7 +41,7 @@ export default class ElementSearchBar extends Component {
             onChange={this.handleSearchChange}
             type="text"
             name="search"
-            placeholder="Search For World"
+            placeholder="Search For Element"
           />
           <Button onClick={(event)=>this.handleSubmit(event)} color="success">Search</Button>
         </div>
