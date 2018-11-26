@@ -16,7 +16,9 @@ module.exports = {
         population: 12000,
         government: 'Noocracy',
         description: 'Many tribes of wood elves, eons ago, decided the best course of action for survival \
-                      would be to band together into a common clan to better fend off the blights of The Great Forest of June.'
+                      would be to band together into a common clan to better fend off the blights of The Great Forest of June.',
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
@@ -28,7 +30,9 @@ module.exports = {
         description: 'A kingdom build on iron and blood. They have two twins sisters as their leaders. \
                       They have the titles of \'Warrior Queens\'. They are hated by their citizens.',
         government: 'Aristocraty',
-        population: 185778
+        population: 185778,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -39,7 +43,9 @@ module.exports = {
         name: 'Akhad',
         description: 'A kingdom built under the Barren Wilds. The ceiling of sand is supported by the three arch-wizards of the city',
         government: 'Confederation',
-        population: 24000
+        population: 24000,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -51,6 +57,8 @@ module.exports = {
         description: 'Desolate plains to the west of civilization. No logical being live in those desert-like plains.',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -62,6 +70,8 @@ module.exports = {
         description: 'A forest filled with dangerous beasts and various forms of blights.',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -74,6 +84,8 @@ module.exports = {
                       order which indoctrinates it\'s followers by making them kill a non-human to join.',
         population: 4600,
         government: 'Theocracy',
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -86,6 +98,8 @@ module.exports = {
                       the fish they salt and export to the City.',
         population: 1080,
         government: 'Aristocracy',
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -99,6 +113,8 @@ module.exports = {
                       quest to liberate the citizens of Wolfrest.',
         population: 350,
         government: 'Kraterocracy',
+        commerce: '',
+        defences: ''
       }, {
         id: '1ecc79d9-dd03-44f5-a2b2-08689c553342',
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -110,6 +126,8 @@ module.exports = {
         description: 'A town up in the mountain range of Houi. They live primarily off of Rocky birds.',
         population: 1200,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -121,6 +139,8 @@ module.exports = {
         description: 'It longs the whole north perimeter of the continent. The north side is littered with the unknown',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -132,6 +152,8 @@ module.exports = {
         description: 'Said to be home to a fey entity, people often steer clear of this lake by fear of the forces of nature',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -143,6 +165,8 @@ module.exports = {
         description: 'There is a myth that during the war of the ages, an ancient dragon got it\'s head chopped off and droppend in this ocean',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -154,6 +178,8 @@ module.exports = {
         description: 'Mountain with deep tunnels of ancient dwarven civilizations',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       },
       // YMIR
       {
@@ -167,6 +193,8 @@ module.exports = {
         description: 'North America\'s remnants. The city is located in an intricate system of tunnels with few expeditions sent to the surface',
         population: 450000,
         government: 'Autocracy',
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '9a967301-3467-4197-9e5e-99769f4ba13b',
@@ -178,6 +206,8 @@ module.exports = {
         description: 'After the french nuclear reactor exploded due to a terrorist attack back in the year 2409, the whole of Europe has become a radiaded wasteland.',
         population: null,
         government: null,
+        commerce: '',
+        defences: ''
       }, {
         id: uuid(),
         world_id: '9a967301-3467-4197-9e5e-99769f4ba13b',
@@ -189,6 +219,8 @@ module.exports = {
         description: 'Multiple scientists live there trying to rid Ymir of its new glacial age.',
         population: 130,
         government: 'Democrary',
+        commerce: '',
+        defences: ''
       },
       // El'Karath
       {
@@ -204,6 +236,8 @@ module.exports = {
         Norgrum is a very technologically advanced city, thanks to the Grand Inventor, Navarti Fastspark, they have wonderful creations throughout the city. The main one that people know of is the automated lift that brings visitors up the cliff to the city without the use of pulleys. Much of the city guard and even part of the military force is comprised of sentinels, who look to be walking suits of armor. Clever enchanting and craftsmanship allows the suits of armor to move on their own and complete tasks and take orders. Norgrum is also known as the city of origin of firearms on El’Karath, despite rumours saying otherwise. They keep them mostly to themselves but it is possible for outsiders to purchase them under certain circumstances.',
         population: 30000,
         government: 'Dwarven Hierarchy',
+        commerce: 'Fine metals and jewels, finely crafted weapons and armor',
+        defences: 'Natural pretection and large military'
       }, {
         id: uuid(),
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
@@ -217,6 +251,8 @@ module.exports = {
         The royal family is the same bloodline of the original ruler, Vesryn Farel.They have continued with this since the founding of the city with little push back.If the city has stayed succesful for this long under the same rule, why should they need to change ? Gantar Farel has been the ruler for nearely 150 years and has allowed Illeysnore to reach more people than ever before.Thanks to their expansion of the Ooknac groves, they have been able to produce more than normal over the past 30 years and have shipped them to more cities than previously thought possible, except to most of the human cities.The elves of Illeysnore have, for many years, had a great dislike towards humans.They deem them to be not their own people, but a mix of the already found races here on El’Karath.This has caused some issues with other races but also within some of the other elven cities as well.',
         population: 8000,
         government: 'Elven Royalty',
+        commerce: 'Basic airships, magical and mithral items',
+        defences: 'Treetop city, magical defenses'
       }, {
         id: uuid(),
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
@@ -230,6 +266,8 @@ module.exports = {
         The Kingdom is connected by large stone roads, which are patrolled at all times by Royal Guards of Lyanshara. There are constant patrols where during periods of high volume of travellers, there can be a patrol of four guards every hour who go from town to town. There is very little crime committed since they are so well protected, making Lyanshara one of the best places for merchants to travel to.',
         population: 40000,
         government: 'Elven Hierarchy',
+        commerce: 'Raw materials (Lumber)',
+        defences: 'Medium size military force'
       }, {
         id: uuid(),
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
@@ -242,6 +280,8 @@ module.exports = {
         Feyduin has produced many of the best smiths in the kingdom. Some have moved to Lyanshara and opened quite successful shops, dealing with merchants from outside the kingdom and crafting more ceremonial type of weapons and armor. For the ones that stay behind in Feyduin, most of their work comes from making weapons and armor for Lyanshara’s military.',
         population: 800,
         government: 'Duke from royal family',
+        commerce: 'Weapon/Armor for military',
+        defences: 'Small brigade of main army'
       }, {
         id: uuid(),
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
@@ -254,6 +294,8 @@ module.exports = {
         The majority of the town is dedicated to the lumber trade, whether it is cutting the trees or processing the logs into lumber. There is a small shop of general goods  store and a barebones inn and tavern.',
         population: 700,
         government: 'Duke from royal family',
+        commerce: 'Lumber',
+        defences: 'Small brigade of main army'
       }, {
         id: uuid(),
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
@@ -266,6 +308,8 @@ module.exports = {
         The town has a single tavern and a general goods store which is mostly equipped for farming goods but some basic exploring gear can be purchased there.',
         population: 300,
         government: 'Duke from royal family',
+        commerce: 'Farming',
+        defences: 'Small brigade of main army'
       },
     ], {}).then(() => {
       queryInterface.bulkInsert('marker_maps', [
