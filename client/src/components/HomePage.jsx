@@ -11,7 +11,7 @@ export default function Homepage() {
         <small>Organizing your world, so you don't have to!</small>
       </h2>
       <h3 className="header">Getting Started</h3>
-        <SearchBar />
+      <SearchBar page="all-worlds"/>
     </Container>
   );
 }

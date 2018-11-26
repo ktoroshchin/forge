@@ -9,7 +9,7 @@ export default function AllWorlds() {
     <Container className="custom-container">
       <h1 className="header">All Worlds</h1>
       <div className="custom-row">
-        <SearchBar />
+        <SearchBar page="all-worlds"/>
         <WorldList />
       </div>
     </Container>

@@ -28,7 +28,7 @@ export default class SearchBar extends Component {
     if (this.state.redirect) {
       return <Redirect to=  {{
         pathname: "/search",
-        state: { search: this.state.search }
+        state: { search: this.state.search, page: this.props.page }
       }} />
     }
   }
