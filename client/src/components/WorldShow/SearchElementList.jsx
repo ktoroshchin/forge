@@ -25,11 +25,8 @@ export default function SearchElementList({ worldID, search }) {
                 return <Jumbotron className="jumbotron default">No Elements Found</Jumbotron>
             } else {
               return (data.searchMarkers.map(({ id }) => (
-                <div>
-                  <Element
-                    key={id}
-                    markerID={id}
-                  />
+                <div key={id}>
+                  <Element markerID={id} />
                   <br />
                 </div>
               )));
