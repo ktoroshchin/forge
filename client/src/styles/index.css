@@ -90,6 +90,6 @@ code {
   border-radius: 10px;
 }
 .AccordionForWorldPage {
-  background-image: grey;
+  background: grey;
   height: 100vh;
 }
