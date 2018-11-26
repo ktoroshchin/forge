@@ -85,7 +85,7 @@
   .sideBar {
     width: 97%;
      transform: translateX(-4.4%);
-    }
+  }
 }
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 575px){
