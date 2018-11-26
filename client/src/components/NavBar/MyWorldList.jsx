@@ -5,6 +5,8 @@ import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
 import { Container, Col, Jumbotron } from 'reactstrap'
 
+import SearchBar from "./SearchBar"
+
 export default function MyWorldList({ getUserID }) {
   const userID = getUserID();
   const findUserWorlds = gql`
@@ -25,6 +27,7 @@ export default function MyWorldList({ getUserID }) {
       <Container>
         <h1 className="my-4 text-center">My Worlds</h1>
         <div className="custom-row">
+          <SearchBar page="my-worlds"/>
           <Query query={findUserWorlds}>
             {
               ({ loading, error, data }) => {

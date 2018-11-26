@@ -9,7 +9,7 @@ export default function Homepage() {
     <Container>
       <h1 className="my-3 text-center">All Worlds</h1>
       <div className="custom-row">
-        <SearchBar />
+        <SearchBar page="all-worlds"/>
         <WorldList />
       </div>
     </Container>
