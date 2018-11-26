@@ -17,7 +17,7 @@ module.exports = {
         width: 1600
       }, {
         id: 'f151a02d-9adc-4e5d-ae15-5920317bff2f',
-        url: 'https://lh3.googleusercontent.com/3mdyP0wVsjWFqw_ge6VXZdX4rSsvqf-3veB81udoFimlpEzDrbghc8KmuNTkE43QEbMbJZ8uWUkU-MlSYV9m=w2880-h1378-rw',
+        url: 'https://imgur.com/a/PXBTi0j',
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         height: 1378,
         width: 1837
