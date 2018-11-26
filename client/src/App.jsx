@@ -14,6 +14,8 @@ import MyWorldList from './components/NavBar/MyWorldList'
 import DisplayWorldDetails from './components/WorldShow/DisplayWorldDetails'
 import EditMap from './components/WorldShow/MapDisplay/EditMap'
 
+import SearchWorldList from './components/SearchWorldList'
+
 const client = new ApolloClient({
   uri: 'http://localhost:4000/'
 })
@@ -36,7 +38,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="row">
+        <div className="custom-row">
           <NavbarMain cookies={cookies} deleteUser={deleteUser} />
           <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
           <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
@@ -45,6 +47,7 @@ const App = () => {
           <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
           <Route path="/world-show" component={DisplayWorldDetails} />
           <Route path="/edit-map" component={EditMap} />
+          <Route path="/search" component={SearchWorldList} />
         </div>
       </Router>
     </ApolloProvider>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Card, CardTitle, CardText, Button, Form, FormGroup, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
@@ -68,37 +68,49 @@ export default class CreateNewWorld extends Component {
           }
         }`
       return (
-        <div className="container page">
-          <h2 className="header default">Create A New World</h2>
-          <div className="info">
+        <Container>
+          <h1 className="my-4 text-center">Create A New World</h1>
+          <Card
+            body
+            inverse
+            style={{
+              backgroundColor: '#595959',
+              borderColor: '#595959'
+            }}
+          >
             <Mutation mutation={POST_MUTATION} variables={{ name, description, creator_id }}>
               {(postMutation) =>
               <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
-                  <Label>World Name (required)</Label>
-                  <Input
-                    onChange={this.handleNameChange}
-                    type="text"
-                    name="name"
-                  />
-                  <Label>World Description (optional)</Label>
-                  <Input
-                    onChange={this.handleDescriptionChange}
-                    type="textarea"
-                    name="description"
-                  />
+                  <CardTitle>World Name (required)</CardTitle>
+                  <CardText>
+                    <Input
+                      onChange={this.handleNameChange}
+                      type="text"
+                      name="name"
+                    />
+                  </CardText>
+                  <CardTitle>World Description (optional)</CardTitle>
+                  <CardText>
+                    <Input
+                      onChange={this.handleDescriptionChange}
+                      type="textarea"
+                      name="description"
+                    />
+                  </CardText>
                 </FormGroup>
                 <Button
                   color="success"
-                  onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                  onClick={() => {this.handleMutationSubmit(postMutation)}}
+                >
                   Submit
                 </Button>
               </Form>
             }
             </Mutation>
             {this.renderRedirect()}
-          </div>
-        </div>
+          </Card>
+        </Container>
       )
     } else {
       return <Redirect to='/login' />

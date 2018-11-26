@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Card, CardTitle, CardText, Button, Form, FormGroup, Input } from 'reactstrap';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Redirect } from 'react-router'
@@ -69,39 +69,51 @@ export default class Login extends Component {
       }`;
     if (!getUserID()) {
       return (
-        <div className="container page">
-          <h2 className="header default">Login</h2>
-          <div className="info">
+        <Container>
+          <h1 className="my-4 text-center">Login</h1>
+          <Card
+            body
+            inverse
+            style={{
+              backgroundColor: '#595959',
+              borderColor: '#595959'
+            }}
+          >
             <Mutation mutation={POST_MUTATION} variables={{ username, password }}>
               {postMutation =>
                 <Form>
                   <FormGroup>
-                    <Label>Username</Label>
-                    <Input
-                      onChange={this.handleUsernameChange}
-                      type="text"
-                      name="username"
-                      onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
-                    />
-                    <Label>Password</Label>
-                    <Input
-                      onChange={this.handlePasswordChange}
-                      type="password"
-                      name="password"
-                      onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
-                    />
+                    <CardTitle>Username</CardTitle>
+                    <CardText>
+                      <Input
+                        onChange={this.handleUsernameChange}
+                        type="text"
+                        name="username"
+                        onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                      />
+                    </CardText>
+                    <CardTitle>Password</CardTitle>
+                    <CardText>
+                      <Input
+                        onChange={this.handlePasswordChange}
+                        type="password"
+                        name="password"
+                        onKeyPress={(event) => this.handleKeypressEnter(event, postMutation)}
+                      />
+                    </CardText>
                   </FormGroup>
                   <Button
                     color="success"
-                    onClick={() => {this.handleMutationSubmit(postMutation)}}>
+                    onClick={() => {this.handleMutationSubmit(postMutation)}}
+                  >
                     Submit
                   </Button>
                 </Form>
               }
             </Mutation>
             {this.renderRedirect()}
-          </div>
-        </div>
+          </Card>
+        </Container>
       )
     } else {
       return <Redirect to='/' />

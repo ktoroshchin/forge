@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ListGroupItem, ListGroup, Button, Modal, ModalHeader } from 'reactstrap';
+import { Container, ListGroupItem, ListGroup, Button, Modal, ModalHeader, Card } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
@@ -58,46 +58,48 @@ export default class Element extends Component {
         }
       }`;
     return (
-      <Query query={findElement}>
-        {
-          ({ loading, error, data }) => {
-            if (loading) {
-              return <div>Fetching</div>
-            } else if (error) {
-              return <div>Error</div>
-            } else {
-              return (data.findMarkers.map(({ id, name, category, population, government, description }) => (
-                <div key={id}>
-                  <ListGroup>
-                    <ListGroupItem className="listItem default">
-                      <span className="categoryName">Name</span>
-                      <span>: </span>
-                      {name}
-                    </ListGroupItem>
-                    {category !== "Location" &&
-                      <ListGroupItem className="listItem">
-                        <span className="categoryName">Population</span>
-                        <span>: </span>{population}
+      <Container>
+        <Query query={findElement}>
+          {
+            ({ loading, error, data }) => {
+              if (loading) {
+                return <div>Fetching</div>
+              } else if (error) {
+                return <div>Error</div>
+              } else {
+                return (data.findMarkers.map(({ id, name, category, population, government, description }) => (
+                  <Card body key={id}>
+                    <ListGroup>
+                      <ListGroupItem className="listItem default">
+                        <span className="categoryName">Name</span>
+                        <span>: </span>
+                        {name}
                       </ListGroupItem>
-                    }
-                    {category !== "Location" &&
-                      <ListGroupItem className="listItem">
-                        <span className="categoryName">Government</span>
-                        <span>: </span>{government}
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Population</span>
+                          <span>: </span>{population}
+                        </ListGroupItem>
+                      }
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Government</span>
+                          <span>: </span>{government}
+                        </ListGroupItem>
+                      }
+                      <ListGroupItem className="listItem default">
+                        <span className="categoryName">Description</span>
+                        <span>: </span>{description}
                       </ListGroupItem>
-                    }
-                    <ListGroupItem className="listItem default">
-                      <span className="categoryName">Description</span>
-                      <span>: </span>{description}
-                    </ListGroupItem>
-                  </ListGroup>
-                  {this.toggleEditButton(id, category)}
-                </div>
-              )));
+                    </ListGroup>
+                    {this.toggleEditButton(id, category)}
+                  </Card>
+                )));
+              }
             }
           }
-        }
-      </Query>
+        </Query>
+      </Container>
     );
   }
 }

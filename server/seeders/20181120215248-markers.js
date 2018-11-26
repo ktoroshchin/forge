@@ -224,12 +224,12 @@ module.exports = {
       },
       // El'Karath
       {
-        id: uuid(),
+        id: 'e28041eb-d315-4595-a9c8-30eb123b16b2',
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         category: 'City',
-        // map_id: 'f151a02d-9adc-4e5d-ae15-5920317bff2f',
-        // latitude: 380.531848828957,
-        // longitude: 998.517578125,
+        map_id: null,
+        latitude: null,
+        longitude: null,
         name: 'Norgrum',
         description: 'Norgrum, the Dwarven Homestead of El’karath and main dwarven city in the East. Norgrum was officially established in the year 130 of the Age of Rest after the fall of the original homestead, Themgulir. Learning from their mistakes, they didn’t have their kingdom in the open at the base of a mountain. Instead, they built on top and into the mountain at the top of a ravine with only one way through it. They can see anything approaching it for over a mile. Thanks to its location, Norgrum has remained untouched by the minor attacks upon it during its early years. Despite being built centuries after the other homesteads of the continent, it didn’t take long to regain its former glory, and surpass it. Under the rule of the Ambershard family, Norgrum has gained respect by rulers of all other races, one of the strongest allies being Wyvaria.\n\
         Norgrum is built upon a mountain which is incredibly rich in resources. The mines are abundant with rare materials that are sent out all over the continent. They stone and metal that they pull from the mines also allows magic effects to take hold faster than normal so those are shipped to Wyvaria and Illysnore in large volumes.\n\
@@ -239,7 +239,7 @@ module.exports = {
         commerce: 'Fine metals and jewels, finely crafted weapons and armor',
         defences: 'Natural pretection and large military'
       }, {
-        id: uuid(),
+        id: 'f24b99ef-8340-456f-8205-266d9c4361d8',
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         category: 'City',
         map_id: 'f151a02d-9adc-4e5d-ae15-5920317bff2f',
@@ -254,7 +254,7 @@ module.exports = {
         commerce: 'Basic airships, magical and mithral items',
         defences: 'Treetop city, magical defenses'
       }, {
-        id: uuid(),
+        id: '96be8000-2936-43d2-b1e4-bd280f2b0a3f',
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         category: 'City',
         map_id: 'f151a02d-9adc-4e5d-ae15-5920317bff2f',
@@ -269,7 +269,7 @@ module.exports = {
         commerce: 'Raw materials (Lumber)',
         defences: 'Medium size military force'
       }, {
-        id: uuid(),
+        id: '9fd3bf1b-6852-4d2b-a1d7-6a1195cb421c',
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         category: 'Town',
         map_id: 'f151a02d-9adc-4e5d-ae15-5920317bff2f',
@@ -300,9 +300,9 @@ module.exports = {
         id: uuid(),
         world_id: 'f770f340-32d9-43b7-8481-90d7599e8459',
         category: 'Town',
-        // map_id: 'f151a02d-9adc-4e5d-ae15-5920317bff2f',
-        // latitude: 380.531848828957,
-        // longitude: 998.517578125,
+        map_id: null,
+        latitude: null,
+        longitude: null,
         name: 'Enorius',
         description: 'Smallest of the towns that are part of the kingdom but second largest in size when landmass is concerned. They supply almost all of the food for the whole kingdom and leftovers are sent to other neighboring towns. The town has a large variety of crops from vegetables to grains. This was the last expansion as more farm land was needed to supply the Kingdom with food. The lands were very rich and perfect for farming and has for many years been very lucrative.\n\
         The town has a single tavern and a general goods store which is mostly equipped for farming goods but some basic exploring gear can be purchased there.',
