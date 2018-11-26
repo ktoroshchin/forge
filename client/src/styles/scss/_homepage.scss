@@ -1,37 +1,28 @@
-body {
-  padding-top: 54px;
+.homepageHeader {
+  background-image: url('https://static1.squarespace.com/static/59ee0dc0ec4eb75eb12277a5/t/59f0fd5ef09ca48c7949e606/1508965730862/Blacksmith-Forge.jpg?format=1500w');
+  background-repeat: no-repeat;
+  background-attachment: relative;
+  background-position: center;
+}
+
+.homepageBanner {
+  padding: 8rem 0;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  background-color: rgba(255, 255, 255, 0.2);
+  text-align: center;
 }
 
 @media (min-width: 992px) {
-  body {
-    padding-top: 56px;
+  .homepageBanner {
+    padding: 10rem 0;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    background-color: rgba(255, 255, 255, 0.2);
+    text-align: center;
   }
 }
 
-.portfolio-item {
-  margin-bottom: 30px;
-}
-
-.world-list {
-  height: 100%;
-}
-
-.custom-row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.custom-container {
-  height: 100%;
-  background: white;
-}
-
-.bottom-spacing {
-  margin-bottom: 1rem;
-  border-bottom: 1px solid #dee2e6;
-}
-
-.justified {
-  display: flex;
-  justify-content: space-between;
+section {
+  padding: 5rem 0;
 }
