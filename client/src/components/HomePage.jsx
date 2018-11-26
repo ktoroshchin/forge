@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom"
 import { Container, Col, Button } from "reactstrap";
 
-import SearchBar from "./NavBar/SearchBar"
-
 export default function Homepage() {
   return (
     <Container className="custom-container p-0">

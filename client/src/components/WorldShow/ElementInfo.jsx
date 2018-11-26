@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, ListGroupItem, ListGroup, Button, Modal, ModalHeader, Card } from 'reactstrap';
+import { ListGroupItem, ListGroup, Button, Modal, ModalHeader, Card } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
