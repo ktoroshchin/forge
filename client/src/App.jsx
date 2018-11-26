@@ -37,9 +37,9 @@ const deleteUser = function() {
 
 const App = () => {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider className="custom-row h-100" client={client}>
       <Router>
-        <div className="custom-row" style={{height: "100%",}}>
+        <div style={{height: "100%",}}>
           <NavbarMain cookies={cookies} deleteUser={deleteUser} />
           <Route exact path="/" component={HomePage} />
           <Route path="/all-worlds" render={() => <AllWorlds getUserID={getUserID} />} />
