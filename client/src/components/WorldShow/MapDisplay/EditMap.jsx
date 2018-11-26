@@ -1,6 +1,6 @@
 import React, { Component, createRef } from 'react';
 import { ImageOverlay, Map, Marker, Popup } from 'react-leaflet';
-import { Button, Modal, ModalHeader } from 'reactstrap'
+import { Button, Modal, ModalHeader, Container } from 'reactstrap'
 import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/leaflet.js';
 import L from 'leaflet';
@@ -140,122 +140,125 @@ export default class EditMap extends Component {
           }
         }`;
     return (
-      <div className="container page">
-          <h2 className="header">World Map Edit</h2>
-        <div className="info">
-        <Query query={findMap}>
-          {
-            ({ loading, error, data }) => {
-              if (loading) {
-                return <div>Fetching</div>
-              } else if (error) {
-                return <div>Error</div>
-              } else {
-                const mapID = data.findWorldMap.id;
-                const imgURL = data.findWorldMap.url;
-                const height = data.findWorldMap.height;
-                const width = data.findWorldMap.width;
-                const bounds = [[0, 0], [height, width]];
-                const center = [height/2, width/2];
-                const maxBounds = [[-height/2, -width/2], [height*1.5, width*1.5]];
-                return (
-                    <div
-                      key={mapID}
-                      className="editMap"
-                      >
-                      <Map
-                        id="editMap"
-                        crs={L.CRS.Simple}
-                        minZoom={-2}
-                        maxZoom={2}
-                        bounds={bounds}
-                        center={center}
-                        maxBounds={maxBounds}
+      <Container>
+        <h1 className="my-4 text-center">All Worlds</h1>
+        <div className="custom-row">
+          <Query query={findMap}>
+            {
+              ({ loading, error, data }) => {
+                if (loading) {
+                  return <div>Fetching</div>
+                } else if (error) {
+                  return <div>Error</div>
+                } else {
+                  const mapID = data.findWorldMap.id;
+                  const imgURL = data.findWorldMap.url;
+                  const height = data.findWorldMap.height;
+                  const width = data.findWorldMap.width;
+                  const bounds = [[0, 0], [height, width]];
+                  const center = [height/2, width/2];
+                  const maxBounds = [[-height/2, -width/2], [height*1.5, width*1.5]];
+                  return (
+                      <div
+                        key={mapID}
+                        style={{
+                          height: '75vh',
+                          width: '100%'
+                        }}
                         >
-                        <ImageOverlay
-                          url={imgURL}
+                        <Map
+                          id="editMap"
+                          crs={L.CRS.Simple}
+                          minZoom={-2}
+                          maxZoom={2}
                           bounds={bounds}
-                          />
-                        {this.state.activeMarker !== null &&
-                          <Marker
-                            draggable={true}
-                            onDragend={this.updateMarker}
-                            position={this.state.activeMarker}
-                            ref={this.refMarker}
-                            icon={newMarkerIcon}
-                            >
-                            <Popup minWidth={90}>
-                              <Button
-                                outline
-                                size="sm"
-                                color="info"
-                                onClick={this.toggleModal}
-                              >
-                                Edit
-                              </Button>
-                              <Button
-                                outline
-                                size="sm"
-                                color="danger"
-                                onClick={this.submitMarker}
-                              >
-                                Cancel
-                              </Button>
-
-                              <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
-                              <ModalHeader toggle={this.toggleModal}>Link to a...</ModalHeader>
-                                <NewMarkerForm
-                                  toggleModal={this.toggleModal}
-                                  coords={this.state.activeMarker}
-                                  worldID={worldID}
-                                  mapID={mapID}
-                                />
-                              </Modal>
-                            </Popup>
-                          </Marker>
-                        }
-                        <ShowMarkers mapID={mapID} isUser={true} />
-                      </Map>
-                      <div className="d-flex justify-content-between">
-                        <Button
-                          color="info"
-                          size="sm"
-                          className={buttonColSize}
-                          onClick={() => this.backToView()}
-                        >
-                          Back to World View
-                        </Button>
-                        {this.handleAddMarkerButton(height, width)}
-                        <Button
-                          color="danger"
-                          size="sm"
-                          className={buttonColSize}
-                          onClick={this.toggleDeleteModal}
-                        >
-                          Delete Map
-                        </Button>
-                        <Modal
-                          isOpen={this.state.deleteModal}
-                          toggle={this.toggleDeleteModal}
-                          className={this.props.className}
-                        >
-                          <ModalHeader
-                            className="default"
-                            toggle={this.toggleDeleteModal}
+                          center={center}
+                          maxBounds={maxBounds}
                           >
-                            Delete Your World Map
-                          </ModalHeader>
-                            <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={mapID} />
-                        </Modal>
+                          <ImageOverlay
+                            url={imgURL}
+                            bounds={bounds}
+                            />
+                          {this.state.activeMarker !== null &&
+                            <Marker
+                              draggable={true}
+                              onDragend={this.updateMarker}
+                              position={this.state.activeMarker}
+                              ref={this.refMarker}
+                              icon={newMarkerIcon}
+                              >
+                              <Popup minWidth={90}>
+                                <Button
+                                  outline
+                                  size="sm"
+                                  color="info"
+                                  onClick={this.toggleModal}
+                                >
+                                  Edit
+                                </Button>
+                                <Button
+                                  outline
+                                  size="sm"
+                                  color="danger"
+                                  onClick={this.submitMarker}
+                                >
+                                  Cancel
+                                </Button>
+
+                                <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
+                                <ModalHeader toggle={this.toggleModal}>Link to a...</ModalHeader>
+                                  <NewMarkerForm
+                                    toggleModal={this.toggleModal}
+                                    coords={this.state.activeMarker}
+                                    worldID={worldID}
+                                    mapID={mapID}
+                                  />
+                                </Modal>
+                              </Popup>
+                            </Marker>
+                          }
+                          <ShowMarkers mapID={mapID} isUser={true} />
+                        </Map>
+                        <div className="d-flex justify-content-between">
+                          <Button
+                            color="info"
+                            size="sm"
+                            className={buttonColSize}
+                            onClick={() => this.backToView()}
+                          >
+                            Back to World View
+                          </Button>
+                          {this.handleAddMarkerButton(height, width)}
+                          <Button
+                            color="danger"
+                            size="sm"
+                            className={buttonColSize}
+                            onClick={this.toggleDeleteModal}
+                          >
+                            Delete Map
+                          </Button>
+                          <Modal
+                            isOpen={this.state.deleteModal}
+                            toggle={this.toggleDeleteModal}
+                            className={this.props.className}
+                          >
+                            <ModalHeader
+                              className="default"
+                              toggle={this.toggleDeleteModal}
+                            >
+                              Delete Your World Map
+                            </ModalHeader>
+                              <WorldMapDelete worldID={worldID} creatorID={creatorID} mapID={mapID} />
+                          </Modal>
+                        </div>
                       </div>
-                    </div>
-                  )
+                    )
+                  }
                 }
               }
-            }
-          </Query>
+            </Query>
         </div>
-      </div>
+      </Container>
     );
   }
 }

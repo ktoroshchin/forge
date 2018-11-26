@@ -39,7 +39,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="row">
+        <div className="custom-row">
           <NavbarMain cookies={cookies} deleteUser={deleteUser} />
           <Route exact path="/" render={() => <HomePage getUserID={getUserID} />} />
           <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader } from 'reactstrap';
+import { Button, Modal, ModalHeader, Container } from 'reactstrap';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { CSSTransitionGroup } from 'react-transition-group'
@@ -125,16 +125,16 @@ export default class DisplayWorldDetails extends Component {
       }`;
 
     return (
-        <div className="container page">
-          <div className="container">
-            <div className="display-worldname row header" >
+        <Container>
+          <Container>
+            <div className="display-worldname custom-row my-4" >
               <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
                 {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
                 {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
               </div>
               <h1 className="pointer" onClick={this.handleRefresh}>{this.getWorldName(findWorld)}</h1>
             </div>
-          </div>
+          </Container>
           <CSSTransitionGroup
             className="sideBar"
             transitionName="sideBar"
@@ -150,7 +150,7 @@ export default class DisplayWorldDetails extends Component {
               />
             }
           </CSSTransitionGroup>
-          <div className="info">
+          <div className="custom-row">
             {this.state.value === '' && !this.state.clicked &&
               <div className="col-12">
                   <div className="d-flex justify-content-between">
@@ -189,7 +189,7 @@ export default class DisplayWorldDetails extends Component {
               </div>
             }
           </div>
-        </div>
+        </Container>
     )
   }
 }
