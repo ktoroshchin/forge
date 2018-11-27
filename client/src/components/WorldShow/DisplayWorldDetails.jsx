@@ -145,9 +145,11 @@ export default class DisplayWorldDetails extends Component {
             </div>
             <h1 className="pointer" onClick={this.handleRefresh}>{this.getWorldName(findWorld)}</h1>
           </div>
-          <Container className="bottom-spacing">
-            <ElementSearchBar worldID={worldID} setValue={this.setValue} setSearch={this.setSearch}/>
-          </Container>
+           { this.state.value !== "search" &&
+            <Container className="bottom-spacing">
+              <ElementSearchBar worldID={worldID} setValue={this.setValue} setSearch={this.setSearch}/>
+            </Container>
+          }
         </Container>
         <CSSTransitionGroup
           className="sideBar"

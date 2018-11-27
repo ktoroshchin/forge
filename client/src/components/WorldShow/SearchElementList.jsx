@@ -14,6 +14,7 @@ export default function SearchElementList({ worldID, search }) {
     }`;
   return (
     <div>
+      <h1 className="header">Searching for "{search}"</h1>
       <Query query={searchMarkers} variables={{ 'world_id': worldID, 'name': search }}>
         {
           ({ loading, error, data }) => {
