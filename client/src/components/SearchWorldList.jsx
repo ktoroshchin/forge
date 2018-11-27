@@ -111,8 +111,8 @@ export default class SearchWorldList extends Component {
     } else {
       return (
         <Container>
-          <Button onClick={()=>{this.setRedirect()}} color="success">Back</Button>
           <h1 className="header">Searching for "{search}"</h1>
+          <Button onClick={()=>{this.setRedirect()}} color="secondary" style={{margin: '1em',}}>Back</Button>
           <div className="custom-row">
             <Query query={searchMyWorlds} variables={{ 'name': search, 'creator_id': getUserID() }}>
               {
@@ -136,7 +136,7 @@ export default class SearchWorldList extends Component {
                         worldDesc = null
                       }
                       return (
-                        <Col key={id} sm="6" lg="4" className="portfolio-item">
+                        <Col key={id} sm="6" lg="4" className="portfolio-item mb-3">
                           <World
                             world_id={id}
                             name={name}
