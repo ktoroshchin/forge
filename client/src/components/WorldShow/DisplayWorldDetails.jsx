@@ -197,11 +197,15 @@ export default class DisplayWorldDetails extends Component {
                 />
               </Col>
             }
-            {(this.state.value !== '' || this.state.clicked) &&
+            {(this.state.value !== '') &&
               <div className="col-md-12 col-lg-12 col-xl-12">
                 {this.state.value === 'search' && <SearchElementList worldID={worldID} search={this.state.search}/> }
                 {this.state.value !== 'search' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
-                {this.state.clicked ? <ChooseCategoryToCreate worldID={worldID}/> : null}
+              </div>
+            }
+            {this.state.clicked &&
+              <div className="col-md-12 col-lg-12 col-xl-12">
+                <ChooseCategoryToCreate worldID={worldID}/>
               </div>
             }
           </div>
