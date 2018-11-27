@@ -11,7 +11,9 @@ export default class AddNewElement extends Component {
       name: null,
       population: null,
       government: null,
-      description: null
+      description: null,
+      commerce: null,
+      defences: null
     }
   }
 
@@ -39,6 +41,24 @@ export default class AddNewElement extends Component {
     }
   }
 
+
+  handleCommerce = (event) => {
+    if (event.target.value.trim() === "") {
+      this.setState({commerce: null});
+    } else {
+      this.setState({commerce: event.target.value.trim()});
+    }
+  }
+
+
+  handleDefences = (event) => {
+    if (event.target.value.trim() === "") {
+      this.setState({defences: null});
+    } else {
+      this.setState({defences: event.target.value.trim()});
+    }
+  }
+
   handleDescription = (event) => {
     if (event.target.value.trim() === "") {
       this.setState({description: null});
@@ -58,7 +78,7 @@ export default class AddNewElement extends Component {
   }
 
   render = () => {
-    const { world_id, name, population, government, description } = this.state
+    const { world_id, name, population, government, description, commerce, defences } = this.state
     const { category } = this.props
     const POST_MUTATION = gql`
       mutation (
@@ -67,13 +87,18 @@ export default class AddNewElement extends Component {
       $name: String!,
       $population: Int,
       $government: String,
-      $description: String){
+      $description: String,
+      $commerce: String,
+      $defences: String
+    ){
         createNewMarker(
           category: $category,
           world_id: $world_id,
           name: $name,
           population: $population,
           government: $government,
+          commerce: $commerce,
+          defences: $defences,
           description: $description) {
             id
         }
@@ -87,6 +112,8 @@ export default class AddNewElement extends Component {
           name,
           population,
           government,
+          commerce,
+          defences,
           description }}>
         {postMutation =>
           <div>
@@ -112,6 +139,18 @@ export default class AddNewElement extends Component {
                         onChange={this.handleGovernment}
                         type="text"
                         name="government"
+                      />
+                    <Label for="commerce">Commerce (optional)</Label>
+                      <Input
+                        onChange={this.handleCommerce}
+                        type="text"
+                        name="commerce"
+                      />
+                    <Label for="defences">Defence (optional)</Label>
+                      <Input
+                        onChange={this.handleDefences}
+                        type="text"
+                        name="defences"
                       />
                     </div>
                   }
