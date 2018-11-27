@@ -27,7 +27,7 @@ export default class NavbarMain extends Component {
             <NavItem>
               <NavLink href="/all-worlds">View All Worlds</NavLink>
             </NavItem>
-            <NavBarDropDown cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
+            <NavBarDropDown onClick={this.toggle} cookies={this.props.cookies} deleteUser={this.props.deleteUser} />
           </Nav>
         </Collapse>
       </Navbar>
