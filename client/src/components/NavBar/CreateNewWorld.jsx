@@ -57,7 +57,7 @@ export default class CreateNewWorld extends Component {
         this.setRedirect(data.data.createNewWorld.id);
       })
       .catch((error) => {
-       console.log(error)
+       alert("Please fill in required fields")
       })
   }
 
