@@ -3,21 +3,24 @@ import { Link } from "react-router-dom";
 import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export default function UserNavBar({ username, deleteUser }) {
+
+
+
   return (
     <UncontrolledDropdown nav inNavbar>
       <DropdownToggle nav caret>
-        Hello, {username}!
+        HELLO, {username.toUpperCase()}!
       </DropdownToggle>
       <DropdownMenu right>
         <DropdownItem tag={Link} to="/new-world">
-          Create A New World
+          CREATE A NEW WORLD
         </DropdownItem>
         <DropdownItem tag={Link} to="/my-worlds">
-          Show My Worlds
+          SHOW MY WORLDS
         </DropdownItem>
         <DropdownItem divider />
         <DropdownItem onClick={deleteUser} tag={Link} to="/login">
-          Logout
+          LOGOUT
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
