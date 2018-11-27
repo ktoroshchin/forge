@@ -12,8 +12,8 @@ module.exports = Mutation = `type Mutation {
   editMapInfo(id: ID!, world_id: ID!, url: String!, width: Int!, height: Int!, world_map: Boolean!): WorldMap!
   removeMapById(id: ID!): Boolean
   
-  createNewMarker(category: String!, world_id: ID!, name: String!, population: Int, government: String, description: String, map_id: ID, latitude: Float, longitude: Float): Marker!
-  editMarkerInfo(id: ID!, name: String, population: Int, government: String, description: String): Marker!
+  createNewMarker(category: String!, world_id: ID!, name: String!, population: Int, government: String, description: String, commerce: String, defences: String): Marker!
+  editMarkerInfo(id: ID!, name: String, population: Int, government: String, description: String, commerce: String, defences: String): Marker!
   placeMarkerOnMap(id: ID!, map_id: ID!, latitude: Float!, longitude: Float!): Marker!
   removeMarkerById(id: ID!): Boolean
   removeAllMarkersOnMap(map_id: ID!): Boolean

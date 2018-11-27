@@ -44,5 +44,7 @@ type Marker {
   population: Int
   government: String
   description: String
+  commerce: String
+  defences: String
   marker_map: MarkerMap
 }`;
