@@ -32,11 +32,9 @@ export default class DisplayWorldDetails extends Component {
       search: ""
     }
   };
-
   sideBarToggle = () => {
      this.setState({ sidebarOpen: !this.state.sidebarOpen });
    }
-
   handleClick = () => {
     this.setState({
       clicked: true,
@@ -44,7 +42,6 @@ export default class DisplayWorldDetails extends Component {
     });
     this.sideBarToggle()
   }
-
   setValue = (value) => {
     this.setState({
       value: value,
@@ -54,29 +51,24 @@ export default class DisplayWorldDetails extends Component {
       this.sideBarToggle()
     }
   }
-
   setLocationID = (id) => {
     this.setState({
       locationID: id
     })
   }
-
   setSearch = (search) => {
     this.setState({
       search: search
     })
   }
-
   handleRefresh = () => {
     window.location.reload()
   }
-
   toggleModal = () => {
     this.setState({
       modal: !this.state.modal
     });
   }
-
   componentWillMount = () => {
     if (!this.props.location.state) {
       return window.location.href = '/'
@@ -84,6 +76,7 @@ export default class DisplayWorldDetails extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     if (getUserID() === this.props.location.state.creatorID) {
       this.setState({
         isUser: true

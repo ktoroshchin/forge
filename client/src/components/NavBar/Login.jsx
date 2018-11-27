@@ -13,7 +13,6 @@ export default class Login extends Component {
       redirect: false
     }
   }
-
   handleUsernameChange = (event) => {
     if (event.target.value.trim() === "") {
       this.setState({username: null});
@@ -21,7 +20,6 @@ export default class Login extends Component {
       this.setState({username: event.target.value.trim()});
     }
   }
-
   handlePasswordChange = (event) => {
     if (event.target.value.trim() === "") {
       this.setState({password: null});
@@ -29,19 +27,16 @@ export default class Login extends Component {
       this.setState({password: event.target.value.trim()});
     }
   }
-
   setUser = (data) => {
     this.props.setUsername(this.state.username);
     this.props.setUserID(data.data.login.id);
     this.setState({redirect: true})
   }
-
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to='/my-worlds' />
     }
   }
-
   handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data)=>{
@@ -51,13 +46,14 @@ export default class Login extends Component {
         error.graphQLErrors.map(({ message }) => (alert(message)))
       })
   }
-
   handleKeypressEnter = (event, postMutation) => {
     if (event.key === "Enter") {
       return this.handleMutationSubmit(postMutation)
     }
   }
-
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render = () => {
     const { username, password } = this.state;
     const { getUserID } = this.props;

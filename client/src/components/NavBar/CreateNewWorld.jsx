@@ -14,7 +14,6 @@ export default class CreateNewWorld extends Component {
       redirect: false
     }
   }
-
   handleNameChange = (event) => {
     if (event.target.value.trim() === "") {
       this.setState({name: null});
@@ -22,7 +21,6 @@ export default class CreateNewWorld extends Component {
       this.setState({name: event.target.value.trim()});
     }
   }
-
   handleDescriptionChange = (event) => {
     if (event.target.value.trim() === "") {
       this.setState({description: null});
@@ -30,14 +28,12 @@ export default class CreateNewWorld extends Component {
       this.setState({description: event.target.value.trim()});
     }
   }
-
   setRedirect = (id) => {
     this.setState({
       world_id: id,
       redirect: true
     })
   }
-
   renderRedirect = () => {
     if (this.state.redirect) {
       window.location.reload();
@@ -46,11 +42,9 @@ export default class CreateNewWorld extends Component {
       />
     }
   }
-
   handleSubmit = (event) => {
     event.preventDefault();
   }
-
   handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data)=>{
@@ -60,7 +54,9 @@ export default class CreateNewWorld extends Component {
        alert("Please fill in required fields")
       })
   }
-
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
   render() {
     if (this.props.getUserID()) {
       const { name, description, creator_id } = this.state;
