@@ -1,6 +1,6 @@
 # The Forge
 
-A a user-friendly web application for all Dungeon Masters/Game Masters who would like to organize their homebrew campaigns.
+A user-friendly web application for Game Masters and Authors to organize their world creation in a consice way.
 
 ## Setup
 
@@ -18,6 +18,12 @@ Based on create-react-app
 10. Install the dependencies: `npm i`
 11. Open up the apollo-client: `yarn start`
 12. Visit `localhost:3000` in your browser
+
+### Screenshots
+Homepage View
+
+!["Monitor-Homepage"](http://sendvid.com/m359xxz5)
+!["Responsive-Homepage"](http://sendvid.com/edskwqfj)
 
 ### Collaborators
 [Shawn-Philippe](https://github.com/Levasseur-Sp)

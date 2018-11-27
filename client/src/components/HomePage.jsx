@@ -8,7 +8,7 @@ export default function Homepage() {
       <header className="homepageHeader">
         <Container className="homepageBanner">
           <h1>Welcome to the Forge!</h1>
-          <p className="lead">Helping you organize your world!</p>
+          <p className="lead">Helping GMs and Authors organize their world!</p>
         </Container>
       </header>
       <section id="about">
@@ -16,7 +16,8 @@ export default function Homepage() {
           <div className="custom-row">
             <div className="col-lg-8 mx-auto">
               <h2 className="header">What we're about!</h2>
-              <p className="lead">This is an aide to all those DMs, GMs, Authors or anyone who's into creating their own world. But is fed up with having to keep track of all their miscellaneous papers, documents, maps, etc.</p>
+              <p className="lead">This is an aide to all those DMs, GMs, Authors or anyone who's into creating their own world,
+                but is fed up with having to keep track of all their miscellaneous papers, documents, maps, etc.</p>
               <ul>
                 <li>Create a world and start building it up with our easy to use templates.</li>
                 <li>Keeps all your information under an easy to use table of contents</li>
