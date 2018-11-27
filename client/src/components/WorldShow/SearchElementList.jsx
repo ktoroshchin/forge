@@ -1,7 +1,7 @@
 import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Jumbotron } from 'reactstrap'
+import { Jumbotron, Button } from 'reactstrap'
 
 import Element from './ElementInfo'
 
@@ -15,6 +15,7 @@ export default function SearchElementList({ worldID, search }) {
   return (
     <div>
       <h1 className="header">Searching for "{search}"</h1>
+      <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
       <Query query={searchMarkers} variables={{ 'world_id': worldID, 'name': search }}>
         {
           ({ loading, error, data }) => {
