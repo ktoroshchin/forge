@@ -55,6 +55,8 @@ export default class Element extends Component {
           population
           government
           description
+          commerce
+          defences
         }
       }`;
     return (
@@ -68,7 +70,7 @@ export default class Element extends Component {
               } else if (error) {
                 return <div>Error</div>
               } else {
-                return (data.findMarkers.map(({ id, name, category, population, government, description }) => (
+                return (data.findMarkers.map(({ id, name, category, population, government, description, commerce, defences }) => (
                   <Card body key={id}>
                     <ListGroup>
                       <ListGroupItem className="listItem default">
@@ -86,6 +88,18 @@ export default class Element extends Component {
                         <ListGroupItem className="listItem">
                           <span className="categoryName">Government</span>
                           <span>: </span>{government}
+                        </ListGroupItem>
+                      }
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Commerce</span>
+                          <span>: </span>{commerce}
+                        </ListGroupItem>
+                      }
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Defences</span>
+                          <span>: </span>{defences}
                         </ListGroupItem>
                       }
                       <ListGroupItem className="listItem default">

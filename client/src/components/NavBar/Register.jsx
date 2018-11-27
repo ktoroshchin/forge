@@ -83,7 +83,7 @@ export default class Register extends Component {
 
     if (!getUserID()) {
       return (
-        <Container>
+        <Container className="custom-container">
           <h1 className="my-4 text-center">REGISTER</h1>
           <Card
             body
