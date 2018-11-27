@@ -40,6 +40,7 @@ export default class CreateNewWorld extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
+      window.location.reload();
       return <Redirect to={{pathname: "/world-show",
         state: {worldID: this.state.world_id, creatorID: this.state.creator_id}}}
       />
