@@ -106,12 +106,8 @@ export default class Element extends Component {
                         <span className="categoryName">Description</span>
                         <span>: </span>{description}
                       </ListGroupItem>
-                    }
-                    <ListGroupItem className="listItem default">
-                      <span className="categoryName">Description</span>
-                      <span>: </span>{description}
-                    </ListGroupItem>
                   </ListGroup>
+                  
                   {this.toggleEditButton(id, category)}
                 </Card>
               )));
@@ -119,6 +115,7 @@ export default class Element extends Component {
           }
         }
       </Query>
+    </div>
     );
   }
 }
