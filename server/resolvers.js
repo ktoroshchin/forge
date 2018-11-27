@@ -51,7 +51,7 @@ module.exports = {
       map.set(input)
       return map.save()
     },
-    createNewMarker: async (root, { category, world_id, name, population, government, description }) => {
+    createNewMarker: async (root, { category, world_id, name, population, government, description, commerce, defences }) => {
       const marker = await db.marker.build({
         id: uuid(),
         category,
@@ -59,7 +59,9 @@ module.exports = {
         name,
         population,
         government,
-        description
+        description,
+        commerce,
+        defences
       })
       return marker.save()
     },

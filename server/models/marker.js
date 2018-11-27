@@ -38,6 +38,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     population: DataTypes.INTEGER,
     government: DataTypes.STRING,
+    commerce: DataTypes.STRING,
+    defences: DataTypes.STRING,
     description: DataTypes.TEXT,
     created_at: DataTypes.DATE,
     updated_at: DataTypes.DATE
