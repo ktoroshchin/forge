@@ -94,7 +94,6 @@ export default class ShowMarkers extends Component {
                         <Button
                           color="info"
                           size="sm"
-                          className="col-xs-12 col-sm-6 col-md-4"
                           onClick={() => {this.toggleModal(id, name)}}
                         >
                           More Details
@@ -108,7 +107,6 @@ export default class ShowMarkers extends Component {
                               <Button
                                 color="danger"
                                 size="sm"
-                                className="col-xs-12 col-sm-6 col-md-4"
                                 onClick={() => {this.handleMutationSubmit(postMutation)}}
                               >
                                 Delete
