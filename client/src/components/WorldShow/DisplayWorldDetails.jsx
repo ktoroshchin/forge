@@ -139,10 +139,7 @@ export default class DisplayWorldDetails extends Component {
       <Container className="custom-container">
         <Container>
           <div className="display-worldname custom-row header" >
-            <div className="navbar-arrow pointer" onClick={this.sideBarToggle}>
-              {!this.state.sidebarOpen && <i className="fas fa-arrow-right fa-2x"></i>}
-              {this.state.sidebarOpen && <i className="fas fa-arrow-left fa-2x"></i>}
-            </div>
+            <Button className="navbar-arrow pointer" color="secondary" onClick={this.sideBarToggle}>Menu</Button>
             <h1 className="pointer" onClick={this.handleRefresh}>{this.getWorldName(findWorld)}</h1>
           </div>
            { this.state.value !== "search" &&
