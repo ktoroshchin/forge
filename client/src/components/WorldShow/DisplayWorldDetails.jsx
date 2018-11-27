@@ -191,12 +191,18 @@ export default class DisplayWorldDetails extends Component {
             }
             {(this.state.value !== '') &&
               <div className="col-md-12 col-lg-12 col-xl-12">
+                {this.state.value !== 'search' &&
+                  <div>
+                    <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
+                    <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />
+                    </div>
+                }
                 {this.state.value === 'search' && <SearchElementList worldID={worldID} search={this.state.search}/> }
-                {this.state.value !== 'search' && <ElementInfo markerID={this.state.locationID} isUser={this.state.isUser} />}
               </div>
             }
             {this.state.clicked &&
               <div className="col-md-12 col-lg-12 col-xl-12">
+                <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
                 <ChooseCategoryToCreate worldID={worldID}/>
               </div>
             }
