@@ -15,7 +15,6 @@ export default function SearchElementList({ worldID, search }) {
   return (
     <div>
       <h1 className="header">Searching for "{search}"</h1>
-      <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
       <Query query={searchMarkers} variables={{ 'world_id': worldID, 'name': search }}>
         {
           ({ loading, error, data }) => {
@@ -24,7 +23,12 @@ export default function SearchElementList({ worldID, search }) {
             } else if (error) {
               return <div>Error</div>
             } else if (data.searchMarkers.length === 0) {
-                return <Jumbotron className="jumbotron default">No Elements Found</Jumbotron>
+                return (
+                  <div>
+                    <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
+                    <Jumbotron className="jumbotron default">No Elements Found</Jumbotron>
+                  </div>
+                  )
             } else {
               return (data.searchMarkers.map(({ id }) => (
                 <div key={id}>
