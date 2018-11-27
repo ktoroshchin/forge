@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import Cookies from 'universal-cookie';
-
+import { Container } from 'reactstrap';
 
 import NavbarMain from './components/NavBar/NavbarMain.jsx'
 import HomePage from './components/HomePage.jsx'
@@ -41,15 +41,17 @@ const App = () => {
       <Router>
         <div style={{height: "100%",}}>
           <NavbarMain cookies={cookies} deleteUser={deleteUser} />
-          <Route exact path="/" component={HomePage} />
-          <Route path="/all-worlds" render={() => <AllWorlds getUserID={getUserID} />} />
-          <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
-          <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
-          <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
-          <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
-          <Route path="/world-show" component={DisplayWorldDetails} />
-          <Route path="/edit-map" component={EditMap} />
-          <Route path="/search" component={SearchWorldList} />
+          <Container className="mainContainer p-0">
+            <Route exact path="/" component={HomePage} />
+            <Route path="/all-worlds" render={() => <AllWorlds getUserID={getUserID} />} />
+            <Route path="/login" render={() => <Login setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
+            <Route path="/register" render={() => <Register setUsername={setUsername} setUserID={setUserID} getUserID={getUserID} />} />
+            <Route path="/new-world" render={() => <CreateNewWorld getUserID={getUserID} />} />
+            <Route path="/my-worlds" render={() => <MyWorldList getUserID={getUserID} />} />
+            <Route path="/world-show" component={DisplayWorldDetails} />
+            <Route path="/edit-map" component={EditMap} />
+            <Route path="/search" component={SearchWorldList} />
+          </Container>
         </div>
       </Router>
     </ApolloProvider>
