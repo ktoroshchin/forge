@@ -22,8 +22,8 @@ Based on create-react-app
 ### Screenshots
 Homepage View
 
-!["Monitor-Homepage"](https://github.com/Levasseur-Sp/forge/blob/dev/docs/forge-monitor-view.mp4)
-!["Responsive-Homepage"](https://github.com/Levasseur-Sp/forge/blob/dev/docs/forge-responsive-view.mp4)
+!["Monitor-Homepage"](http://sendvid.com/m359xxz5)
+!["Responsive-Homepage"](http://sendvid.com/edskwqfj)
 
 ### Collaborators
 [Shawn-Philippe](https://github.com/Levasseur-Sp)
