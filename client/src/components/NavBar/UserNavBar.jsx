@@ -16,7 +16,7 @@ export default function UserNavBar({ username, deleteUser }) {
           Show My Worlds
         </DropdownItem>
         <DropdownItem divider />
-        <DropdownItem tag={Link} to="/login" onClick={deleteUser}>
+        <DropdownItem onClick={deleteUser} tag={Link} to="/login">
           Logout
         </DropdownItem>
       </DropdownMenu>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Jumbotron } from 'reactstrap'
+import { Jumbotron, Button } from 'reactstrap'
 
 import Element from './ElementInfo'
 
@@ -23,7 +23,12 @@ export default function SearchElementList({ worldID, search }) {
             } else if (error) {
               return <div>Error</div>
             } else if (data.searchMarkers.length === 0) {
-                return <Jumbotron className="jumbotron default">No Elements Found</Jumbotron>
+                return (
+                  <div>
+                    <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
+                    <Jumbotron className="jumbotron default">No Elements Found</Jumbotron>
+                  </div>
+                  )
             } else {
               return (data.searchMarkers.map(({ id }) => (
                 <div key={id}>

@@ -31,8 +31,9 @@ export default class CreateNewWorld extends Component {
     }
   }
 
-  setRedirect = () => {
+  setRedirect = (id) => {
     this.setState({
+      world_id: id,
       redirect: true
     })
   }
@@ -40,7 +41,9 @@ export default class CreateNewWorld extends Component {
   renderRedirect = () => {
     if (this.state.redirect) {
       window.location.reload();
-      return <Redirect to='/my-worlds' />
+      return <Redirect to={{pathname: "/world-show",
+        state: {worldID: this.state.world_id, creatorID: this.state.creator_id}}}
+      />
     }
   }
 
@@ -51,10 +54,10 @@ export default class CreateNewWorld extends Component {
   handleMutationSubmit = (postMutation) => {
     return postMutation()
       .then((data)=>{
-        this.setRedirect();
+        this.setRedirect(data.data.createNewWorld.id);
       })
       .catch((error) => {
-        alert("Please fill in required fields")
+       alert("Please fill in required fields")
       })
   }
 
@@ -65,6 +68,7 @@ export default class CreateNewWorld extends Component {
         mutation ($name: String!, $description: String, $creator_id: ID!){
           createNewWorld(name: $name, description: $description, creator_id: $creator_id) {
             id
+            creator_id
           }
         }`
       return (
@@ -107,7 +111,7 @@ export default class CreateNewWorld extends Component {
               </Form>
             }
             </Mutation>
-            {this.renderRedirect()}
+          {this.renderRedirect()}
           </Card>
         </Container>
       )

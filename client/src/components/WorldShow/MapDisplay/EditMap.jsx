@@ -141,7 +141,7 @@ export default class EditMap extends Component {
         }`;
     return (
       <Container className="custom-container">
-        <h1 className="header">All Worlds</h1>
+        <h1 className="header">Edit World Map</h1>
         <div className="custom-row">
           <Query query={findMap}>
             {

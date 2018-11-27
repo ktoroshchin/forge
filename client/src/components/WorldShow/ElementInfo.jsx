@@ -58,6 +58,8 @@ export default class Element extends Component {
         }
       }`;
     return (
+      <div>
+        <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
         <Query query={findElement}>
           {
             ({ loading, error, data }) => {
@@ -98,6 +100,7 @@ export default class Element extends Component {
             }
           }
         </Query>
+      </div>
     );
   }
 }
