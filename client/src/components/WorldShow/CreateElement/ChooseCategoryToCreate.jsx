@@ -30,19 +30,19 @@ export default class ChooseCategoryToCreate extends Component {
           <Card body style={cardStyle} className="text-center default">
             <CardTitle>City</CardTitle>
             <Button color="primary" onClick={this.toggleModal} value={"City"} >
-              Create New
+              Create
             </Button>
           </Card>
           <Card body style={cardStyle} className="text-center default">
             <CardTitle>Town</CardTitle>
             <Button color="primary" onClick={this.toggleModal} value={"Town"} >
-              Create New
+              Create
             </Button>
           </Card>
           <Card body style={cardStyle} className="text-center default">
             <CardTitle>Location</CardTitle>
             <Button color="primary" onClick={this.toggleModal} value={"Location"} >
-              Create New
+              Create
             </Button>
           </Card>
         </CardDeck>
@@ -50,13 +50,13 @@ export default class ChooseCategoryToCreate extends Component {
           <Card body style={cardStyle} className="text-center default">
             <CardTitle>People of Importance</CardTitle>
             <Button color="primary" disabled>
-              Create New
+              Create
             </Button>
           </Card>
           <Card body style={cardStyle} className="text-center default">
             <CardTitle>Place of Importance</CardTitle>
             <Button color="primary" disabled>
-              Create New
+              Create
             </Button>
           </Card>
         </CardDeck>
