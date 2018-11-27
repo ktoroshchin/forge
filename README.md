@@ -20,16 +20,12 @@ Based on create-react-app
 12. Visit `localhost:3000` in your browser
 
 ### Screenshots
-Homepage View
+Responsive Homepage View
 
-!["Monitor-Homepage"](http://sendvid.com/m359xxz5)
-!["Responsive-Homepage"](http://sendvid.com/edskwqfj)
+<a href="https://imgur.com/XTBzFoH"><img width="20%" height="20%" border="0" src="https://i.imgur.com/XTBzFoH.gif" title="source: imgur.com" /></a>
 
 ### Collaborators
-[Shawn-Philippe](https://github.com/Levasseur-Sp)
-
-[David](https://github.com/Sonchucks)
-
-[Konstantin](https://github.com/ktoroshchin)
-
-[Zachary](https://github.com/zacharylee97)
+- [Shawn-Philippe](https://github.com/Levasseur-Sp)
+- [David](https://github.com/Sonchucks)
+- [Konstantin](https://github.com/ktoroshchin)
+- [Zachary](https://github.com/zacharylee97)
