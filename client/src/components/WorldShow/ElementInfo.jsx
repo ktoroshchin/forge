@@ -55,35 +55,56 @@ export default class Element extends Component {
           population
           government
           description
+          commerce
+          defences
         }
       }`;
     return (
-      <Query query={findElement}>
-        {
-          ({ loading, error, data }) => {
-            if (loading) {
-              return <div>Fetching</div>
-            } else if (error) {
-              return <div>Error</div>
-            } else {
-              return (data.findMarkers.map(({ id, name, category, population, government, description }) => (
-                <Card body key={id}>
-                  <ListGroup>
-                    <ListGroupItem className="listItem default">
-                      <span className="categoryName">Name</span>
-                      <span>: </span>
-                      {name}
-                    </ListGroupItem>
-                    {category !== "Location" &&
-                      <ListGroupItem className="listItem">
-                        <span className="categoryName">Population</span>
-                        <span>: </span>{population}
+      <div>
+        <Button onClick={()=>{window.location.reload()}} color="secondary" style={{margin: '1em',}}>Back</Button>
+        <Query query={findElement}>
+          {
+            ({ loading, error, data }) => {
+              if (loading) {
+                return <div>Fetching</div>
+              } else if (error) {
+                return <div>Error</div>
+              } else {
+                return (data.findMarkers.map(({ id, name, category, population, government, description, commerce, defences }) => (
+                  <Card body key={id}>
+                    <ListGroup>
+                      <ListGroupItem className="listItem default">
+                        <span className="categoryName">Name</span>
+                        <span>: </span>
+                        {name}
                       </ListGroupItem>
-                    }
-                    {category !== "Location" &&
-                      <ListGroupItem className="listItem">
-                        <span className="categoryName">Government</span>
-                        <span>: </span>{government}
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Population</span>
+                          <span>: </span>{population}
+                        </ListGroupItem>
+                      }
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Government</span>
+                          <span>: </span>{government}
+                        </ListGroupItem>
+                      }
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Commerce</span>
+                          <span>: </span>{commerce}
+                        </ListGroupItem>
+                      }
+                      {category !== "Location" &&
+                        <ListGroupItem className="listItem">
+                          <span className="categoryName">Defences</span>
+                          <span>: </span>{defences}
+                        </ListGroupItem>
+                      }
+                      <ListGroupItem className="listItem default">
+                        <span className="categoryName">Description</span>
+                        <span>: </span>{description}
                       </ListGroupItem>
                     }
                     <ListGroupItem className="listItem default">

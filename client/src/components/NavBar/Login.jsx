@@ -65,11 +65,11 @@ export default class Login extends Component {
       }`;
     if (!getUserID()) {
       return (
-        <Container>
+        <Container className="custom-container">
           <h1 className="my-4 text-center">LOGIN</h1>
           <Card
             body
-            style={{
+             style={{
               backgroundColor: '#D3D3D3',
               borderColor: '#D3D3D3'
             }}

@@ -14,6 +14,8 @@ export default class EditElementForm extends Component {
       population: this.props.population,
       government: this.props.government,
       description: this.props.description,
+      commerce: this.props.commerce,
+      defences: this.props.defences,
       deleteModal: false
     }
   }
@@ -39,6 +41,25 @@ export default class EditElementForm extends Component {
       this.setState({government: event.target.value});
     }
   }
+
+  handleCommerceChange = (event) => {
+    if (event.target.value.trim() === "") {
+      this.setState({commerce: null});
+    } else {
+      this.setState({commerce: event.target.value});
+    }
+  }
+
+  handleDefencesChange = (event) => {
+    if (event.target.value.trim() === "") {
+      this.setState({defences: null});
+    } else {
+      this.setState({defences: event.target.value});
+    }
+  }
+
+
+
   handleDescriptionChange = (event) => {
     if (event.target.value.trim() === "") {
       this.setState({description: null});
@@ -65,7 +86,7 @@ export default class EditElementForm extends Component {
   }
 
   render = () => {
-    const { name, category, population, government, description } = this.state;
+    const { name, category, population, government, description, commerce, defences } = this.state;
     const { id } = this.props;
     const POST_MUTATION = gql`
       mutation(
@@ -73,13 +94,17 @@ export default class EditElementForm extends Component {
         $name: String!,
         $population: Int,
         $government: String,
-        $description: String
+        $description: String,
+        $commerce: String,
+        $defences: String
         ){editMarkerInfo(
           id: $id,
           name: $name,
           population: $population,
           government: $government,
-          description: $description
+          description: $description,
+          commerce: $commerce,
+          defences: $defences
           ){
           id
         }
@@ -103,6 +128,18 @@ export default class EditElementForm extends Component {
                   <Input value={this.state.government}onChange={this.handleGovernmentChange} type="text" name="government" />
                 </div>
               }
+              {this.state.commerce !== false &&
+                <div>
+                  <Label>Commerce (optional)</Label>
+                  <Input value={this.state.commerce}onChange={this.handleCommerceChange} type="text" name="commerce" />
+                </div>
+              }
+              {this.state.defences !== false &&
+                <div>
+                  <Label>Defences (optional)</Label>
+                  <Input value={this.state.defences}onChange={this.handleDefencesChange} type="text" name="defences" />
+                </div>
+              }
               <Label>Description (optional)</Label>
               <Input value={this.state.description}onChange={this.handleDescriptionChange} type="textarea" name="description" />
             </FormGroup>
@@ -122,6 +159,8 @@ export default class EditElementForm extends Component {
               name,
               "population": null,
               "government": null,
+              "commerce": null,
+              "defences": null,
               description }}>
             {(postMutation) =>
               <Button
@@ -142,6 +181,8 @@ export default class EditElementForm extends Component {
               name,
               population,
               government,
+              commerce,
+              defences,
               description }}>
             {(postMutation) =>
               <Button

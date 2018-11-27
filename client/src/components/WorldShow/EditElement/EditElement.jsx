@@ -14,6 +14,8 @@ export default function EditElement({markerID}) {
         population
         description
         government
+        commerce
+        defences
       }
     }`
   return (
@@ -25,7 +27,7 @@ export default function EditElement({markerID}) {
         } else if (error) {
           return <div>Error</div>
         } else {
-          return (data.findMarkers.map(({ id, name, category, population, description, government }) => {
+          return (data.findMarkers.map(({ id, name, category, population, description, government, defences, commerce }) => {
             if (category === "Location") {
               return (
                 <EditElementForm
@@ -36,6 +38,8 @@ export default function EditElement({markerID}) {
                   population={false}
                   government={false}
                   description={description}
+                  commerce={false}
+                  defences={false}
                 />
               )
             } else {
@@ -48,6 +52,8 @@ export default function EditElement({markerID}) {
                   population={population}
                   government={government}
                   description={description}
+                  commerce={commerce}
+                  defences={defences}
                 />
               )
             }
