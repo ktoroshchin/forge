@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Jumbotron, Button } from 'reactstrap'
 
-import Element from './ElementInfo'
+import ElementInfo from './ElementInfo'
 
 export default function SearchElementList({ worldID, search }) {
   const searchMarkers = gql`
@@ -33,7 +33,7 @@ export default function SearchElementList({ worldID, search }) {
               return (data.searchMarkers.map(({ id }) => (
 
                 <div key={id}>
-                  <Element markerID={id} />
+                  <ElementInfo markerID={id} />
                   <br />
                 </div>
               )));

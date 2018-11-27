@@ -5,7 +5,7 @@ import gql from 'graphql-tag';
 
 import EditElement from './EditElement/EditElement'
 
-export default class Element extends Component {
+export default class ElementInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
