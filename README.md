@@ -23,7 +23,7 @@ Responsive Homepage View
 <a href="https://imgur.com/XTBzFoH"><img width="20%" height="20%" border="0" src="https://i.imgur.com/XTBzFoH.gif" title="source: imgur.com" /></a>
 
 ### Collaborators
-- [Shawn-Philippe](https://github.com/Levasseur-Sp)
-- [David](https://github.com/Sonchucks)
-- [Konstantin](https://github.com/ktoroshchin)
-- [Zachary](https://github.com/zacharylee97)
+- [Shawn-Philippe Levasseur](https://github.com/Levasseur-Sp)
+- [David Son](https://github.com/Sonchucks)
+- [Konstantin Toroshchin](https://github.com/ktoroshchin)
+- [Zachary Lee](https://github.com/zacharylee97)
