@@ -16,9 +16,9 @@ module.exports = {
         population: 12000,
         government: 'Noocracy',
         description: 'Many tribes of wood elves, eons ago, decided the best course of action for survival \
-                      would be to band together into a common clan to better fend off the blights of The Great Forest of June.',
-        commerce: '',
-        defences: ''
+                      would be to band together into a common clan to better fend off the blights of The Great Forest of June. Their biggest strength is the apothecaries/alchemists of the tribes',
+        commerce: 'The Potions that they make are very potent in magic and sale for a good profit',
+        defences: 'Chaos wolves, in honor of their pacts with the elves of Jeena, protect the city alongside the rangers. Together they act as a powerful scout unit which can be seen as a devastating force'
       }, {
         id: uuid(),
         map_id: '40bd9d12-875d-4d85-9541-3af4631573c5',
@@ -27,12 +27,12 @@ module.exports = {
         longitude: 2101.5,
         latitude: 1238.5390625,
         name: 'Wolfrest',
-        description: 'A kingdom build on iron and blood. They have two twins sisters as their leaders. \
-                      They have the titles of \'Warrior Queens\'. They are hated by their citizens.',
+        description: 'A kingdom build on iron and blood for centuries with twin sisters as their leaders. \
+                      They have the titles of \'Warrior Queens\' and are hated by their citizens due to their extreme fanatical view of war and destruction.',
         government: 'Aristocraty',
-        population: 185778,
-        commerce: '',
-        defences: ''
+        population: 185000,
+        commerce: 'They own the biggest reservoirs of materials and precious gems. They exchange them for favors or anything that could help the kingdom',
+        defences: 'They have the biggest army in all of Vilmus. Their main warriors are the Queens but also their personal guards which consist of one Adult Black Dragon and 3 towering North Onis'
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -44,8 +44,8 @@ module.exports = {
         description: 'A kingdom built under the Barren Wilds. The ceiling of sand is supported by the three arch-wizards of the city',
         government: 'Confederation',
         population: 24000,
-        commerce: '',
-        defences: ''
+        commerce: 'The rare minerals they uncover and the materials they salvage from underground monsters they kill',
+        defences: 'The three arch-wizards alongside the Alfs, a sub-species of kenku, who are over 7 ft. tall and are stronger than most goliaths'
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -57,8 +57,8 @@ module.exports = {
         description: 'Desolate plains to the west of civilization. No logical being live in those desert-like plains.',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -70,8 +70,8 @@ module.exports = {
         description: 'A forest filled with dangerous beasts and various forms of blights.',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -81,11 +81,11 @@ module.exports = {
         latitude: 1265.5625,
         name: 'Piho',
         description: 'A booming human religious town. It is home to the Church of Piety, a racist religious \
-                      order which indoctrinates it\'s followers by making them kill a non-human to join.',
+                      order which indoctrinates it\'s followers by making them kill a non-human to fully join it\'s ranks.',
         population: 4600,
         government: 'Theocracy',
-        commerce: '',
-        defences: ''
+        commerce: 'Farming and the holy aid they bring(only to humans)',
+        defences: 'They have a lot of \'Liberators\', who are the clerics of the church. They follow a tyrannical, chaotic god that promises power in exchange for a weekly murder'
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -94,12 +94,11 @@ module.exports = {
         longitude: 2170.75,
         latitude: 1211.466796875,
         name: 'Bol',
-        description: 'A coastal fishing town east of Wolfrest. It\'s main source of money is \
-                      the fish they salt and export to the City.',
+        description: 'A coastal fishing town east of Wolfrest.',
         population: 1080,
         government: 'Aristocracy',
-        commerce: '',
-        defences: ''
+        commerce: 'The fish they salt and export to the City',
+        defences: 'They have a small force from Wolfrest patroling the town'
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -113,8 +112,8 @@ module.exports = {
                       quest to liberate the citizens of Wolfrest.',
         population: 350,
         government: 'Kraterocracy',
-        commerce: '',
-        defences: ''
+        commerce: 'They survive by making small expeditions to other dimensions to salvage and sell materials and equipment',
+        defences: 'Their leaders are an ex North Oni personal Royal guard of Wolfrest, two wizards who are able to conjure the greatest of angels and an enchantress Pixie who can shapeshift.'
       }, {
         id: '1ecc79d9-dd03-44f5-a2b2-08689c553342',
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -126,8 +125,8 @@ module.exports = {
         description: 'A town up in the mountain range of Houi. They live primarily off of Rocky birds.',
         population: 1200,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: 'They don\'t trade with others as they live secluded from any other towns/cities',
+        defences: 'The mountains provide a natural defence line but they also have warriors and a Shaman prince who can control the elements.'
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -139,8 +138,8 @@ module.exports = {
         description: 'It longs the whole north perimeter of the continent. The north side is littered with the unknown',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -152,8 +151,8 @@ module.exports = {
         description: 'Said to be home to a fey entity, people often steer clear of this lake by fear of the forces of nature',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -165,8 +164,8 @@ module.exports = {
         description: 'There is a myth that during the war of the ages, an ancient dragon got it\'s head chopped off and droppend in this ocean',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       }, {
         id: uuid(),
         world_id: '2fd0df5b-5623-497a-bb21-3d5d9144f618',
@@ -178,8 +177,8 @@ module.exports = {
         description: 'Mountain with deep tunnels of ancient dwarven civilizations',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       },
       // YMIR
       {
@@ -193,8 +192,8 @@ module.exports = {
         description: 'North America\'s remnants. The city is located in an intricate system of tunnels with few expeditions sent to the surface',
         population: 450000,
         government: 'Autocracy',
-        commerce: '',
-        defences: ''
+        commerce: 'Everyone gets the same things as everyone. If you don\'t work, you\'re not worth feeding. Either people work simple jobs or people go out to the surface to try and find a solution',
+        defences: 'A few thousand guards patrol the entries and the outside. A small special force which strength is the outside world.'
       }, {
         id: uuid(),
         world_id: '9a967301-3467-4197-9e5e-99769f4ba13b',
@@ -206,8 +205,8 @@ module.exports = {
         description: 'After the french nuclear reactor exploded due to a terrorist attack back in the year 2409, the whole of Europe has become a radiaded wasteland.',
         population: null,
         government: null,
-        commerce: '',
-        defences: ''
+        commerce: null,
+        defences: null
       }, {
         id: uuid(),
         world_id: '9a967301-3467-4197-9e5e-99769f4ba13b',
@@ -219,8 +218,8 @@ module.exports = {
         description: 'Multiple scientists live there trying to rid Ymir of its new glacial age.',
         population: 130,
         government: 'Democrary',
-        commerce: '',
-        defences: ''
+        commerce: 'They recieve money from every person living on the planet to continue their research',
+        defences: 'Multiple railgun turrets posted outside the location providing defence to the scientists inside'
       },
       // El'Karath
       {
