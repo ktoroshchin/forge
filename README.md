@@ -1,10 +1,8 @@
 # The Forge
 
-A user-friendly web application for Game Masters and Authors to organize their world creation in a consice way.
+A user-friendly web application based on create-react-app for Game Masters and Authors to organize their world creation in a concise way.
 
 ## Setup
-
-Based on create-react-app
 
 1. Clone this repo
 2. Create a Postgres database with any appropriate name
@@ -19,7 +17,7 @@ Based on create-react-app
 11. Open up the apollo-client: `yarn start`
 12. Visit `localhost:3000` in your browser
 
-### Screenshots
+### Screenshot
 Responsive Homepage View
 
 <a href="https://imgur.com/XTBzFoH"><img width="20%" height="20%" border="0" src="https://i.imgur.com/XTBzFoH.gif" title="source: imgur.com" /></a>
