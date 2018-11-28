@@ -146,7 +146,7 @@ export default class AddNewElement extends Component {
                         type="text"
                         name="commerce"
                       />
-                    <Label for="defences">Defence (optional)</Label>
+                    <Label for="defences">Defences (optional)</Label>
                       <Input
                         onChange={this.handleDefences}
                         type="text"
