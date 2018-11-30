@@ -22,6 +22,17 @@ Responsive Homepage View
 
 <a href="https://imgur.com/XTBzFoH"><img width="20%" height="20%" border="0" src="https://i.imgur.com/XTBzFoH.gif" title="source: imgur.com" /></a>
 
+### Tech Stack
+- React
+- Node.js
+- Apollo
+- Leaflet
+- SASS
+- Bootstrap
+- GraphQL
+- Sequelize
+- PostgresQL
+
 ### Collaborators
 - [Shawn-Philippe Levasseur](https://github.com/Levasseur-Sp)
 - [David Son](https://github.com/Sonchucks)
